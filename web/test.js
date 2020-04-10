@@ -81,9 +81,12 @@ function animate() {
     renderer.setAnimationLoop(render);
 }
 function render() {
-    var t = new Date().getTime();    
+    var t = new Date().getTime();
 
 
+
+
+    renderer.render(scene, camera);
 }
 
  
