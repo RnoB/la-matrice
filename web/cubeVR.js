@@ -17,6 +17,22 @@ function connect()
     ws = new WebSocket('wss://matricematrice.xyz:6785'); 
 }
 
+function messageJSON()
+{
+      var msg = {
+    action: "minus",
+    text: "fuck",
+    id:   234235,
+    date: Date.now()
+  };
+
+  // Send the msg object as a JSON-formatted string.
+  ws.onopen =  function(event){ws.send(JSON.stringify(msg))};
+  
+  
+  // Blank the text input element, ready to receive the next line of text from the user.
+  //document.getElementById("text").value = "";
+}
 function setup()
 {
     scene = new THREE.Scene();
@@ -32,7 +48,8 @@ function setup()
 
     document.body.appendChild(VRButton.createButton(renderer));
     connect();
-    ws.onopen =  function(event){ws.send([10,2,3]); }
+    //ws.onopen =  function(event){ws.send([10,2,3]); }
+    messageJSON();
     ws.onmessage = function (event) {console.log(event.data);}
 }
 
