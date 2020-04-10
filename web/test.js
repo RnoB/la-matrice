@@ -80,12 +80,11 @@ function animate() {
 }
 function render() {
     var t = new Date().getTime();
-    ws.onmessage = function (event) {console.log(event.data);}
 
 
 
 
-    renderer.render(scene, camera);
+   renderer.render(scene, camera);
 }
 
  

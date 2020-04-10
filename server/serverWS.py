@@ -30,7 +30,7 @@ async def register(websocket):
 async def send():
     message = await players[-1].recv()
     print(message)
-    await asyncio.wait([player.send("message") for player in players])
+    await [player.send("message") for player in players]
 
 async def manager(websocket, path):
     print("ws : "+str(websocket))
