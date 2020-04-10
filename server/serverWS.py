@@ -42,8 +42,7 @@ async def manager(websocket, path):
     print(1)
     await send()
     print(2)
-    await send()
-    print(3)
+    await unregister(websocket)
 
 
 
