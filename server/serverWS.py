@@ -22,7 +22,7 @@ def getLocalIP():
     return localIP
 
 async def register(websocket):
-    players.add(websocket)
+    players.append(websocket)
     await asyncio.wait([player.send("message") for player in players])
 
 async def manager(websocket, path):
