@@ -4,6 +4,7 @@ import pathlib
 import ssl
 import websockets
 import socket
+import logging
 
 homeFolder = "/home/ubuntu/"
 certFolder = "cert/"
@@ -12,7 +13,9 @@ players = []
 
 
 
-
+logger = logging.getLogger('websockets')
+logger.setLevel(logging.INFO)
+logger.addHandler(logging.StreamHandler())
 
 def getLocalIP():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -33,7 +36,9 @@ async def unregister(websocket):
 async def send():
     message = await players[-1].recv()
     print(message)
-    await players[-1].send("message")
+    while True:
+        for player in players;
+        await players[-1].send("message")
 
 async def manager(websocket, path):
     print("ws : "+str(websocket))
