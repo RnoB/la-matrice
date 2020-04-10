@@ -14,9 +14,9 @@ players = []
 
 
 
-logger = logging.getLogger('websockets')
-logger.setLevel(logging.INFO)
-logger.addHandler(logging.StreamHandler())
+#logger = logging.getLogger('websockets')
+#logger.setLevel(logging.INFO)
+#logger.addHandler(logging.StreamHandler())
 
 def getLocalIP():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
