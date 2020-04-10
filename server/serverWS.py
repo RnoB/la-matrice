@@ -18,8 +18,7 @@ async def hello(websocket, path):
     print(f"> {greeting}")
 
 ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-localhost_pem = pathlib.Path(__file__).with_name(homeFolder+certFolder+"cert.pem")
-ssl_context.load_cert_chain(localhost_pem)
+ssl_context.load_cert_chain(homeFolder+certFolder+"cert.pem")
 
 start_server = websockets.serve(
     hello, "localhost", 6785, ssl=ssl_context
