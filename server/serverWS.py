@@ -30,7 +30,7 @@ async def register(websocket):
 async def send():
     message = await players[-1].recv()
     print(message)
-    await player.send("message")
+    await players[-1].send("message")
 
 async def manager(websocket, path):
     print("ws : "+str(websocket))
