@@ -38,7 +38,9 @@ async def manager(websocket, path):
     await register(websocket)
     print(1)
     await send()
+    print(2)
     await send()
+    print(3)
 
 
 
