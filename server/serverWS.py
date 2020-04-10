@@ -26,6 +26,8 @@ async def register(websocket):
     await asyncio.wait([player.send("message") for player in players])
 
 async def manager(websocket, path):
+    print("ws : "+str(websocket))
+    print("pa : "+str(path))
     await register(websocket)
 
 
