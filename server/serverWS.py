@@ -11,7 +11,7 @@ certFolder = "cert/"
 s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 s.connect(('8.8.8.8', 1))  # connect() for UDP doesn't send packets
 serverIP = s.getsockname()[0]
-s.
+s.close()
 async def hello(websocket, path):
     name = await websocket.recv()
     print(f"< {name}")
