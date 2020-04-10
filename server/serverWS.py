@@ -5,7 +5,7 @@ import ssl
 import websockets
 
 homeFolder = "/home/ubuntu/"
-certFolder = "letsencrypt/live/www.matricematrice.xyz/"
+certFolder = "cert/"
 
 
 async def hello(websocket, path):
