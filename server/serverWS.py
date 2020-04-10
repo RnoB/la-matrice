@@ -21,6 +21,9 @@ def getLocalIP():
     s.close()
     return localIP
 
+
+
+
 async def register(websocket):
     players.append(websocket)
     message = await players[-1].recv()
@@ -44,8 +47,9 @@ def main():
     )
 
     asyncio.get_event_loop().run_until_complete(start_server)
-    asyncio.get_event_loop().run_forever()
     print(1)
+    asyncio.get_event_loop().run_forever()
+
 
 
 
