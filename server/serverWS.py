@@ -8,21 +8,24 @@ import socket
 homeFolder = "/home/ubuntu/"
 certFolder = "cert/"
 
+players = []
+
+
+
+
+
 def getLocalIP():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.connect(('8.8.8.8', 1))  # connect() for UDP doesn't send packets
     localIP = s.getsockname()[0]
     s.close()
     return localIP
+async def register:
+    players.add(websocket)
+    await asyncio.wait([player.send("message") for player in players])
 
-async def hello(websocket, path):
-    name = await websocket.recv()
-    print(f"< {name}")
-
-    greeting = f"Hello {name}!"
-
-    await websocket.send(greeting)
-    print(f"> {greeting}")
+async def manager(websocket, path):
+    register(websocket)
 
 
 
@@ -32,11 +35,12 @@ def main():
     ssl_context.load_cert_chain(homeFolder+certFolder+"cert.pem",keyfile=homeFolder+certFolder+"privkey.pem")
 
     start_server = websockets.serve(
-        hello, getLocalIP(), 6785, ssl=ssl_context
+        manager, getLocalIP(), 6785, ssl=ssl_context
     )
 
     asyncio.get_event_loop().run_until_complete(start_server)
     asyncio.get_event_loop().run_forever()
+    print(1)
 
 
 
