@@ -64,7 +64,7 @@ function testNetwork()
     messageJSON();
     ws.onmessage = function (event) {console.log(event.data);}
 }
-
+testNetwork();
 
 
 
