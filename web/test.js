@@ -17,8 +17,6 @@ var startTime = startDate.getTime()
 
 function connect()
 {
-
-
     ws = new WebSocket('wss://matricematrice.xyz:6785'); 
 }
 
@@ -84,7 +82,7 @@ function render() {
     var t = new Date().getTime();
 
 
-
+    console.log(w.readyState)
 
     renderer.render(scene, camera);
 }
