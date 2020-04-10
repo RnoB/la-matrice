@@ -37,7 +37,7 @@ async def send():
     message = await players[-1].recv()
     print(message)
     while True:
-        for player in players;
+        for player in players:
         await players[-1].send("message")
 
 async def manager(websocket, path):
