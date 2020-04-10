@@ -82,7 +82,7 @@ function render() {
     var t = new Date().getTime();
 
 
-    console.log(ws.readyState)
+
 
     renderer.render(scene, camera);
 }
