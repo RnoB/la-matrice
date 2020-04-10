@@ -36,6 +36,7 @@ async def manager(websocket, path):
     print("ws : "+str(websocket))
     print("pa : "+str(path))
     await register(websocket)
+    print(1)
     await send()
     await send()
 
@@ -51,7 +52,6 @@ def main():
     )
 
     asyncio.get_event_loop().run_until_complete(start_server)
-    print(1)
     asyncio.get_event_loop().run_forever()
 
 
