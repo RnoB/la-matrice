@@ -8,7 +8,14 @@ var camera;
 var renderer = null;
 var polyfill = new WebXRPolyfill();
 
+var ws;
 
+function connect()
+{
+
+
+    ws = new WebSocket('wss://matricematrice.xyz:6785'); 
+}
 
 function setup()
 {
@@ -24,8 +31,9 @@ function setup()
 
 
     document.body.appendChild(VRButton.createButton(renderer));
-
-
+    connect();
+    ws.onopen =  function(event){ws.send([10,2,3]); }
+    ws.onmessage = function (event) {console.log(event.data);}
 }
 
 setup();
