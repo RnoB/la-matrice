@@ -8,7 +8,7 @@ import socket
 homeFolder = "/home/ubuntu/"
 certFolder = "cert/"
 
-players = []
+players = set()
 
 
 
