@@ -20,7 +20,8 @@ def getLocalIP():
     localIP = s.getsockname()[0]
     s.close()
     return localIP
-async def register:
+
+async def register(websocket):
     players.add(websocket)
     await asyncio.wait([player.send("message") for player in players])
 
