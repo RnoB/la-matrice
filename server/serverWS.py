@@ -8,7 +8,7 @@ import socket
 homeFolder = "/home/ubuntu/"
 certFolder = "cert/"
 
-players = []
+players = set()
 
 
 
@@ -25,7 +25,10 @@ def getLocalIP():
 
 
 async def register(websocket):
-    players.append(websocket)
+    players.add(websocket)
+
+async def unregister(websocket):
+    players.remove(websocket)
 
 async def send():
     message = await players[-1].recv()
