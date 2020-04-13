@@ -16,7 +16,7 @@ certFolder = "cert/"
 players = []
 playersPosition = []
 playersRotation = []
-playerId = 0
+playerIds = []
 playerNumber = 0
 
 #logger = logging.getLogger('websockets')
@@ -35,15 +35,14 @@ def getLocalIP():
 
 async def register(websocket):
     global playerNumber
-    global playerId
+    global playerIds
     playerNumber+=1
-    playerId+=1
     for player in players:
         await player.send("new player")
                 
     players.append(websocket)
-    print(dir(websocket))
-    world = json.dumps({'world' : 1, 'objects' : (2,3),'id' : playerId})
+    playerIds.append(websocket.ws_handler)
+    world = json.dumps({'world' : 1, 'objects' : (2,3),'id' : playerIds[-1],'playerIds' : playerIds})
     await players[-1].send(json.dumps(world))
 
 
