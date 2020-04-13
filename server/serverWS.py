@@ -54,11 +54,12 @@ async def manager(websocket, path):
     print("ws : "+str(websocket))
     print("pa : "+str(path))
     await register(websocket)
-    time.sleep(100)
-    #print(1)
-    #await send()
-
-    #await unregister(websocket)
+    try:
+        async for message in websocket:
+            print(message)
+            await send()
+    finally:
+        await unregister(websocket)
 
 
 
