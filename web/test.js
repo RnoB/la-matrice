@@ -28,6 +28,7 @@ function connect()
 function receiver(msg)
 {
     var data = JSON.parse(msg);
+    console.log(msg);
     console.log(data);
     console.log(data.id);
     if('world' in data)
