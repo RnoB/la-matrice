@@ -44,7 +44,7 @@ function receiver(msg)
     }
     else
     {
-        idx = listPlayers.findIndex(x => x, id == data.id);
+        var idx = listPlayers.findIndex(x => x, id == data.id);
         listPlayers[idx].position = data.position;
         listPlayers[idx].rotation = data.rotation;
     }
