@@ -22,14 +22,35 @@ var listPlayers = [];
 
 var frame = 0
 
-            var geometry = new THREE.BoxGeometry();
+var geometry = new THREE.BoxGeometry();
 
-            //var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-            var material = new THREE.MeshStandardMaterial();
+//var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+var material = new THREE.MeshStandardMaterial();
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
+
+
+function setup()
+{
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xff0000);
+
+    camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.01, 10000);
+
+    renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.xr.enabled = true;
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+
+    document.body.appendChild(VRButton.createButton(renderer));
+
+}
+setup();
+
+
 function connect()
 {
     ws = new WebSocket('wss://matricematrice.xyz:6785'); 
@@ -80,6 +101,7 @@ function receiver(msg)
         }
     }
 }
+
 async function sender()
 {
     while(true)
@@ -94,24 +116,7 @@ async function sender()
     }
 }
 
-function setup()
-{
-    scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xff0000);
 
-    camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.01, 10000);
-
-    renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.xr.enabled = true;
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-
-    document.body.appendChild(VRButton.createButton(renderer));
-
-}
-
-setup();
 
 function setUpWorld()
 {
@@ -179,7 +184,6 @@ function render() {
             player.mesh.position.set(player.position.x,player.position.y,player.position.z);
             player.mesh.rotation.set(player.rotation.x,player.rotation.y,player.rotation.z);
 
-            console.log(player.mesh);
         }
     }
     
