@@ -7,6 +7,8 @@ import socket
 import logging
 import time
 import json
+import threading
+
 
 homeFolder = "/home/ubuntu/"
 certFolder = "cert/"
@@ -50,7 +52,7 @@ async def send():
     
     while True:
         for player in players:
-            await players[-1].send(str(player))
+            await players[-1].send("oneUp")
             time.sleep(.1)
 
 async def manager(websocket, path):
