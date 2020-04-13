@@ -45,7 +45,6 @@ function receiver(msg)
         {
 
 
-            console.log(player);
             var geometry = new THREE.BoxGeometry();
 
             //var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
@@ -60,6 +59,7 @@ function receiver(msg)
     }
     else if('newPlayer' in data)
     {
+            console.log(player);
             var geometry = new THREE.BoxGeometry();
 
             //var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
