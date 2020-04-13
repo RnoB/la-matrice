@@ -33,7 +33,11 @@ async function sender()
 {
     while(true)
     {
-        ws.send(id.toString());
+        var msg = {
+            id: id,
+            position: camera.position,
+        };
+        ws.send(JSON.stringify(msg));
         await sleep(2000);
     }
 }
@@ -92,7 +96,7 @@ function animate() {
 function render() {
     var t = new Date().getTime();
 
-    console.log('frame');
+    
     
 
    renderer.render(scene, camera);

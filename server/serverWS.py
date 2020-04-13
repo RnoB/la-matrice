@@ -51,8 +51,10 @@ async def register(websocket):
 
 
 
-async def unregister(websocket):
+async def unregister(idPlayer,websocket):
     players.remove(websocket)
+    playerIds.remove(idPlayer)
+    playerNumber -= 1
 
 async def send(message):
     #message = await players[-1].recv()
@@ -64,13 +66,13 @@ async def send(message):
 async def manager(websocket, path):
     print("ws : "+str(websocket))
     print("pa : "+str(path))
-    id = await register(websocket)
+    idPlayer = await register(websocket)
     try:
         async for message in websocket:
             print(message)
-            await send(id)
+            await send(idPlayer)
     finally:
-        await unregister(websocket)
+        await unregister(idPlayer,websocket)
         print("unregistered")
 
 
