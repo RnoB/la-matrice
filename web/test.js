@@ -56,7 +56,7 @@ setup();
 function testNetwork()
 {
     connect();
-    ws.onmessage = function (event) {receiver(data);}
+    ws.onmessage = function (event) {receiver(event.data);}
     //ws.onopen =  function(event){ws.send([10,2,3]); }
     
 }
