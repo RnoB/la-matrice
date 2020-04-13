@@ -39,14 +39,14 @@ function connect()
 function receiver(msg)
 {
     var data = JSON.parse(msg);
-    console.log(data);
+
     if('world' in data)
     {
         id = data.id;
-        console.log(data.playerIds);
+
         for (const player of data.playerIds)
         {
-            console.log(player);
+
 
      
             
@@ -69,8 +69,6 @@ function receiver(msg)
     else
     {
         var idx = listPlayers.findIndex(x => x.id == data.id);
-        console.log(idx);
-        console.log(listPlayers);
         if (idx>-1)
         {
             listPlayers[idx].position = data.position;
