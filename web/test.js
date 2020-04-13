@@ -169,8 +169,8 @@ function render() {
     var t = new Date().getTime();
     for (var player of listPlayers)
     {
-        player.mesh.position = player.position;
-        player.mesh.rotation = player.rotation;
+        player.mesh.position.set(player.position);
+        player.mesh.rotation.set(player.rotation);
         console.log(player.mesh.position);
     }
     
