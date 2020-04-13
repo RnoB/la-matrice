@@ -45,6 +45,7 @@ function receiver(msg)
         {
 
 
+            console.log(player);
             var geometry = new THREE.BoxGeometry();
 
             //var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
