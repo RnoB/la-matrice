@@ -31,13 +31,16 @@ def getLocalIP():
 
 
 async def register(websocket):
+     
     for player in players:
-        await players[-1].send(str(websocket))
-        
+        await player.send("new player")
+                
     players.append(websocket)
 
     world = json.dumps({'world' : 1, 'objects' : (2,3)})
     await players[-1].send(json.dumps(world))
+
+
 
 async def unregister(websocket):
     players.remove(websocket)
@@ -60,6 +63,7 @@ async def manager(websocket, path):
             await send()
     finally:
         await unregister(websocket)
+        print(unregistered)
 
 
 
