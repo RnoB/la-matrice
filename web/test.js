@@ -45,7 +45,7 @@ function receiver(msg)
     else
     {
         var idx = listPlayers.findIndex(x => x.id == data.id);
-        if (idx>-1)
+        if (idx)
         {
             listPlayers[idx].position = data.position;
             listPlayers[idx].rotation = data.rotation;
