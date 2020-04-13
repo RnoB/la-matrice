@@ -169,6 +169,8 @@ function render() {
     var t = new Date().getTime();
     for (var player of listPlayers)
     {
+        console.log(player.id)
+        console.log(id)
         if (player.id != id);
         {
             player.mesh.position.set(player.position.x,player.position.y,player.position.z);
