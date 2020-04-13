@@ -64,7 +64,7 @@ async def send(message):
 async def manager(websocket, path):
     print("ws : "+str(websocket))
     print("pa : "+str(path))
-    await id = register(websocket)
+    id = await register(websocket)
     try:
         async for message in websocket:
             print(message)
