@@ -171,7 +171,9 @@ function render() {
     {
         player.mesh.position.set(player.position.x,player.position.y,player.position.z);
         player.mesh.rotation.set(player.rotation.x,player.rotation.y,player.rotation.z);
+        console.log(player);
         console.log(player.mesh.position);
+
     }
     
     
