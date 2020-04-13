@@ -18,7 +18,7 @@ var id = Math.random();
 
 var connected = false;
 
-var listPlayers = [];
+var listPlayers = {};
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
