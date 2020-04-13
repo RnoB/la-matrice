@@ -75,8 +75,6 @@ function receiver(msg)
         {
             listPlayers[idx].position = data.position;
             listPlayers[idx].rotation = data.rotation;
-            listPlayers[idx].mesh.position = data.position;
-            listPlayers[idx].mesh.rotation = data.rotation;
         }
     }
 }
@@ -133,9 +131,9 @@ function onDocumentKeyDown(event) {
     var keyCode = event.which;
 
     if (keyCode == 87) {
-        camera.position.z += ySpeed;
+        camera.position.y += ySpeed;
     } else if (keyCode == 83) {
-        camera.position.z -= ySpeed;
+        camera.position.y -= ySpeed;
     } else if (keyCode == 65) {
         camera.position.x -= xSpeed;
     } else if (keyCode == 68) {
