@@ -32,6 +32,7 @@ function connect()
 function receiver(msg)
 {
     var data = JSON.parse(msg);
+    console.log(data);
     if('world' in data)
     {
         id = data.id;
