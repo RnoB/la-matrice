@@ -42,7 +42,7 @@ function receiver(msg)
 
     if('world' in data)
     {
-        id = Math.trunc(data.id);
+        id = data.id;
 
         for (const player of data.playerIds)
         {
@@ -50,7 +50,7 @@ function receiver(msg)
 
      
             
-            listPlayers.push({"id" : Math.trunc(player),
+            listPlayers.push({"id" : player,
             "position" : {"x":0,"y":0,"z":0},
             "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
             "mesh" : new THREE.Mesh(geometry, material)});
@@ -60,7 +60,7 @@ function receiver(msg)
     }
     else if('newPlayer' in data)
     {
-            listPlayers.push({"id" : Math.trunc(data.newPlayer),
+            listPlayers.push({"id" : data.newPlayer,
             "position" : {"x":0,"y":0,"z":0},
             "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
             "mesh" : new THREE.Mesh(geometry, material)});
@@ -171,7 +171,7 @@ function render() {
     {
         console.log(player.id)
         console.log(id)
-        if (player.id !== id);
+        if (player.id != id)
         {
             player.mesh.position.set(player.position.x,player.position.y,player.position.z);
             player.mesh.rotation.set(player.rotation.x,player.rotation.y,player.rotation.z);
