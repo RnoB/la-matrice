@@ -60,7 +60,9 @@ async def manager(websocket, path):
     print("pa : "+str(path))
     await register(websocket)
     try:
-        await send()
+        async for message in websocket:
+            print(message)
+            await send()
     finally:
         await unregister(websocket)
         print("unregistered")
