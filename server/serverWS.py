@@ -63,7 +63,7 @@ async def manager(websocket, path):
             await send()
     finally:
         await unregister(websocket)
-        print(unregistered)
+        print("unregistered")
 
 
 
