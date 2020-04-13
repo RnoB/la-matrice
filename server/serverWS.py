@@ -41,7 +41,7 @@ async def register(websocket):
     playerNumber+=1
     playerId+=1
     for player in players:
-        await player.send("new player")
+        await player.send( json.dumps({'newPlayer' : playerId}))
                 
     players.append(websocket)
     playerIds.append(playerId)
