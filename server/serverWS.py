@@ -6,6 +6,7 @@ import websockets
 import socket
 import logging
 import time
+import json
 
 homeFolder = "/home/ubuntu/"
 certFolder = "cert/"
