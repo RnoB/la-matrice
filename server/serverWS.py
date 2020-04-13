@@ -45,7 +45,7 @@ async def register(websocket):
                 
     players.append(websocket)
     playerIds.append(playerId)
-    world = json.loads({"world" : 1, "objects" : 2,"id" : playerId,"playerIds" : 2})
+    world = json.dumps({"world" : 1, "objects" : 2,"id" : playerId,"playerIds" : 2}).replace('\\"','\"')
     print(world)
     await players[-1].send(json.dumps(world))
     return playerId
