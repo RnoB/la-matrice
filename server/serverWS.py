@@ -16,7 +16,8 @@ certFolder = "cert/"
 players = []
 playersPosition = []
 playersRotation = []
-
+playerId = 0
+playerNumber = °
 
 #logger = logging.getLogger('websockets')
 #logger.setLevel(logging.INFO)
@@ -33,13 +34,14 @@ def getLocalIP():
 
 
 async def register(websocket):
-     
+    playerNumber+=1
+    playerId+=1
     for player in players:
         await player.send("new player")
                 
     players.append(websocket)
-
-    world = json.dumps({'world' : 1, 'objects' : (2,3)})
+    print(dir(websocket))
+    world = json.dumps({'world' : 1, 'objects' : (2,3),'id' : playerId})
     await players[-1].send(json.dumps(world))
 
 
@@ -47,7 +49,7 @@ async def register(websocket):
 async def unregister(websocket):
     players.remove(websocket)
 
-async def send(message):
+async def send(websocket,message):
     #message = await players[-1].recv()
     
     for player in players:
@@ -61,7 +63,7 @@ async def manager(websocket, path):
     try:
         async for message in websocket:
             print(message)
-            await send(message)
+            await send(websocket,message)
     finally:
         await unregister(websocket)
         print("unregistered")
