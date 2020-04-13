@@ -24,6 +24,10 @@ function receiver(data)
 {
   console.log(data);
 }
+function sender()
+{
+  ws.send('wesh');
+}
 function messageJSON()
 {
     var msg = {
@@ -57,7 +61,7 @@ function testNetwork()
 {
     connect();
     ws.onmessage = function (event) {receiver(event.data);}
-    //ws.onopen =  function(event){ws.send([10,2,3]); }
+    ws.onopen =  function(event){sender(); }
     
 }
 testNetwork();
