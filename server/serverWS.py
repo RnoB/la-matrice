@@ -34,6 +34,8 @@ def getLocalIP():
 
 
 async def register(websocket):
+    global playerNumber
+    global playerId
     playerNumber+=1
     playerId+=1
     for player in players:
