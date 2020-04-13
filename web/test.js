@@ -169,11 +169,13 @@ function render() {
     var t = new Date().getTime();
     for (var player of listPlayers)
     {
-        player.mesh.position.set(player.position.x,player.position.y,player.position.z);
-        player.mesh.rotation.set(player.rotation.x,player.rotation.y,player.rotation.z);
-        console.log(player);
-        console.log(player.mesh.position);
-
+        if player.id != id;
+        {
+            player.mesh.position.set(player.position.x,player.position.y,player.position.z);
+            player.mesh.rotation.set(player.rotation.x,player.rotation.y,player.rotation.z);
+            console.log(player);
+            console.log(player.mesh.position);
+        }
     }
     
     
