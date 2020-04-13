@@ -22,12 +22,14 @@ function connect()
 
 function receiver(data)
 {
-  console.log(data);
+    console.log(data);
 }
 function sender()
 {
-  while(true):
-    ws.send('wesh');
+    while(true)
+    {
+        ws.send('wesh');
+    }
 }
 function messageJSON()
 {
