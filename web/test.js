@@ -67,7 +67,7 @@ function receiver(msg)
             "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
             "mesh" : new THREE.Mesh(geometry, material)});
             scene.add(listPlayers[listPlayers.length-1].mesh);
-            console.log(lisPlayers[listPlayers.length-1].mesh)
+            console.log(listPlayers[listPlayers.length-1].mesh)
     }
     else
     {
