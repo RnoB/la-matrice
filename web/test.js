@@ -27,7 +27,7 @@ function connect()
 
 function receiver(data)
 {
-    console.log(data);
+    console.log(JSON.Parse(data));
 }
 async function sender()
 {
@@ -42,16 +42,7 @@ async function sender()
         await sleep(2000);
     }
 }
-function messageJSON()
-{
-    var msg = {
-    action: "minus",
-    text: "fuck",
-    id:   234235,
-    date: Date.now()
-  };
-  ws.onopen =  function(event){ws.send(JSON.stringify(msg))};
-}
+
 function setup()
 {
     scene = new THREE.Scene();
