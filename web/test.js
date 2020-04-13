@@ -29,7 +29,7 @@ function receiver(msg)
 {
     var data = JSON.parse(msg);
     console.log(data);
-    console.log(typeof data):
+    console.log(typeof data);
     if('world' in data)
     {
         id = data.id;
