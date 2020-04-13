@@ -33,7 +33,7 @@ async function sender()
 {
     while(true)
     {
-        ws.send(str(id));
+        ws.send(id.toString());
         await sleep(2000);
     }
 }
