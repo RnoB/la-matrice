@@ -27,7 +27,7 @@ function connect()
 
 function receiver(data)
 {
-    console.log(JSON.Parse(data));
+    console.log(JSON.parse(data));
 }
 async function sender()
 {
