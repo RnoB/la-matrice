@@ -52,7 +52,7 @@ async def send():
     
     for player in players:
         await players[-1].send("oneUp")
-        time.sleep(.1)
+        
 
 async def manager(websocket, path):
     print("ws : "+str(websocket))

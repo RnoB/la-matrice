@@ -14,6 +14,9 @@ var ws;
 var startDate = new Date();
 var startTime = startDate.getTime()
 
+var id = Math.random();
+
+
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -30,7 +33,7 @@ async function sender()
 {
     while(true)
     {
-        ws.send('wesh');
+        ws.send(str(id));
         await sleep(2000);
     }
 }
