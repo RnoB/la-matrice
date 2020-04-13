@@ -25,9 +25,14 @@ function connect()
     ws = new WebSocket('wss://matricematrice.xyz:6785'); 
 }
 
-function receiver(data)
+function receiver(msg)
 {
-    console.log(JSON.parse(data));
+    data = JSON.parse(msg);
+    console.log(data);
+    if('world'in data)
+    {
+        id = data['world'];
+    }
 }
 async function sender()
 {
