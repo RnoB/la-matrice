@@ -38,6 +38,7 @@ async def register(websocket):
     global playerNumber
     global playerIds
     global playerId
+    global players
     playerNumber+=1
     playerId+=1
     for player in players:
@@ -52,6 +53,9 @@ async def register(websocket):
 
 
 async def unregister(idPlayer,websocket):
+    global players
+    global playerNumber
+    global playerIds
     players.remove(websocket)
     playerIds.remove(idPlayer)
     playerNumber -= 1
