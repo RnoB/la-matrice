@@ -48,7 +48,7 @@ function receiver(msg)
         {
             console.log(player);
 
-            var cube = new THREE.Mesh(geometry, material);
+            var cube = ;
             
             listPlayers.push({"id" : player,
             "position" : {"x":0,"y":0,"z":0},
@@ -61,11 +61,11 @@ function receiver(msg)
     else if('newPlayer' in data)
     {
             var cube = new THREE.Mesh(geometry, material);
-            scene.add(cube);
             listPlayers.push({"id" : data.newPlayer,
             "position" : {"x":0,"y":0,"z":0},
             "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
             "mesh" : cube});
+            scene.add(listPlayers[listPlayers.length-1].mesh);
     }
     else
     {
