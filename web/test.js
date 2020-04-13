@@ -29,9 +29,9 @@ function receiver(msg)
 {
     var data = JSON.parse(msg);
     console.log(data);
-    if('world' in data)
+    if(data.world)
     {
-        id = data['world'];
+        id = data.id;
     }
 }
 async function sender()
