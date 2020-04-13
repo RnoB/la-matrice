@@ -62,7 +62,7 @@ function testNetwork()
 {
     connect();
     ws.onmessage = function (event) {receiver(event.data);}
-    //ws.onopen =  function(event){sender(); }
+    ws.onopen =  function(event){sender(); }
     
 }
 testNetwork();
