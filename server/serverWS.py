@@ -51,7 +51,7 @@ async def send():
     #message = await players[-1].recv()
     
     for player in players:
-        await players[-1].send("oneUp")
+        await player.send("oneUp")
         
 
 async def manager(websocket, path):
