@@ -55,6 +55,7 @@ function receiver(msg)
             "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
             "mesh" : new THREE.Mesh(geometry, material)});
             scene.add(listPlayers[listPlayers.length-1].mesh);
+            console.log(listPlayers[listPlayers.length-1].mesh);
         }
         setUpWorld();
     }
@@ -67,7 +68,7 @@ function receiver(msg)
             "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
             "mesh" : new THREE.Mesh(geometry, material)});
             scene.add(listPlayers[listPlayers.length-1].mesh);
-            console.log(listPlayers[listPlayers.length-1].mesh)
+            console.log(listPlayers[listPlayers.length-1].mesh);
     }
     else
     {
@@ -178,6 +179,7 @@ function render() {
             player.mesh.position.set(player.position.x,player.position.y,player.position.z);
             player.mesh.rotation.set(player.rotation.x,player.rotation.y,player.rotation.z);
 
+            console.log(player.mesh);
         }
     }
     
