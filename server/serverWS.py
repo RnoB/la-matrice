@@ -54,6 +54,7 @@ async def manager(websocket, path):
     print("ws : "+str(websocket))
     print("pa : "+str(path))
     await register(websocket)
+    time.sleep(100)
     #print(1)
     #await send()
 
