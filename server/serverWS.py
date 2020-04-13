@@ -47,7 +47,7 @@ async def register(websocket):
 async def unregister(websocket):
     players.remove(websocket)
 
-async def send():
+async def send(message):
     #message = await players[-1].recv()
     
     for player in players:
