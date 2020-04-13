@@ -36,7 +36,7 @@ function receiver(msg)
     if('world' in data)
     {
         id = data.id;
-        console.log(playerIds);
+        console.log(data.playerIds);
         foreach (player in data.playerIds)
         {
             console.log(player);
