@@ -131,6 +131,7 @@ var ySpeed = 0.0001;
 document.addEventListener("keydown", onDocumentKeyDown, false);
 function onDocumentKeyDown(event) {
     var keyCode = event.which;
+    print("key Down");
     if (keyCode == 87) {
         camera.position.y += ySpeed;
     } else if (keyCode == 83) {
