@@ -46,7 +46,8 @@ function receiver(msg)
     else
     {
         var idx = listPlayers.findIndex(x => x.id == data.id);
-        console.log(idx)
+        console.log(idx);
+        console.log(listPlayers);
         if (idx)
         {
             listPlayers[idx].position = data.position;
