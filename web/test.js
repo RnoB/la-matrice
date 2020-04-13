@@ -75,6 +75,8 @@ function receiver(msg)
         {
             listPlayers[idx].position = data.position;
             listPlayers[idx].rotation = data.rotation;
+            listPlayers[idx].cube.position = data.position;
+            listPlayers[idx].cube.rotation = data.rotation;
         }
     }
 }
