@@ -51,7 +51,7 @@ async def send():
     #message = await players[-1].recv()
     
     for player in players:
-        await player.send("oneUp")
+        await player.send(message)
         
 
 async def manager(websocket, path):
@@ -61,7 +61,7 @@ async def manager(websocket, path):
     try:
         async for message in websocket:
             print(message)
-            await send()
+            await send(message)
     finally:
         await unregister(websocket)
         print("unregistered")
