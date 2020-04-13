@@ -1,6 +1,6 @@
 import "./js/three.min.js";
 import { VRButton } from './js/webxr/VRButton.js';
-
+import time;
 //import { WebXRButton } from './js/webxr/webxr-button.js';
 
 var scene;
