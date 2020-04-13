@@ -55,6 +55,7 @@ function receiver(msg)
             "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
             "mesh" : cube});
         }
+        setUpWorld();
     }
     else if('newPlayer' in data)
     {
@@ -109,6 +110,16 @@ function setup()
 }
 
 setup();
+
+function setUpWorld()
+{
+    var light = new THREE.PointLight(0x00ff00, 1, 1000);
+    light.position.set(50, 50, 50);
+    var light2 = new THREE.PointLight(0x00ff, 1, 1000);
+    light2.position.set(0, 50, 50);
+    scene.add(light2);
+    scene.add(light);
+}
 
 function testNetwork()
 {
