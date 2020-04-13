@@ -33,7 +33,7 @@ def getLocalIP():
 async def register(websocket):
     players.append(websocket)
 
-    world = json.dumps({'world' : 1, objects : (2,3)})
+    world = json.dumps({'world' : 1, 'objects' : (2,3)})
     players[-1].send(json.dumps(world))
 
 async def unregister(websocket):
