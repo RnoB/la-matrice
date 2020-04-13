@@ -36,8 +36,10 @@ function receiver(msg)
     if('world' in data)
     {
         id = data.id;
+        console.log(playerIds);
         foreach (player in data.playerIds)
         {
+            console.log(player);
             listPlayers.push({"id" : player,
             "position" : {"x":0,"y":0,"z":0},
             "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"}});
@@ -54,7 +56,7 @@ function receiver(msg)
         var idx = listPlayers.findIndex(x => x.id == data.id);
         console.log(idx);
         console.log(listPlayers);
-        if (idx)
+        if (idx>-1)
         {
             listPlayers[idx].position = data.position;
             listPlayers[idx].rotation = data.rotation;
