@@ -1,6 +1,6 @@
 import "./js/three.min.js";
 import { VRButton } from './js/webxr/VRButton.js';
-import time;
+
 //import { WebXRButton } from './js/webxr/webxr-button.js';
 
 var scene;
@@ -14,7 +14,9 @@ var ws;
 var startDate = new Date();
 var startTime = startDate.getTime()
 
-
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 function connect()
 {
     ws = new WebSocket('wss://matricematrice.xyz:6785'); 
@@ -29,7 +31,7 @@ async function sender()
     while(true)
     {
         ws.send('wesh');
-        await new Promise(r => setTimeout(r, 2000));
+        await sleep(2000);
     }
 }
 function messageJSON()
