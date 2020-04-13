@@ -115,6 +115,7 @@ setup();
 
 function setUpWorld()
 {
+    console.log("Setting up World")
     var light = new THREE.PointLight(0x00ff00, 1, 1000);
     light.position.set(50, 50, 50);
     var light2 = new THREE.PointLight(0x00ff, 1, 1000);
@@ -122,6 +123,26 @@ function setUpWorld()
     scene.add(light2);
     scene.add(light);
 }
+
+
+var xSpeed = 0.0001;
+var ySpeed = 0.0001;
+
+document.addEventListener("keydown", onDocumentKeyDown, false);
+function onDocumentKeyDown(event) {
+    var keyCode = event.which;
+    if (keyCode == 87) {
+        camera.position.y += ySpeed;
+    } else if (keyCode == 83) {
+        camera.position.y -= ySpeed;
+    } else if (keyCode == 65) {
+        camera.position.x -= xSpeed;
+    } else if (keyCode == 68) {
+        camera.position.x += xSpeed;
+    } else if (keyCode == 32) {
+        camera.position.set(0, 0, 0);
+    }
+};
 
 function testNetwork()
 {
