@@ -45,7 +45,7 @@ async def send():
     while True:
         for player in players:
             await players[-1].send(str(player))
-            time.sleep(2)
+            time.sleep(.1)
 
 async def manager(websocket, path):
     print("ws : "+str(websocket))

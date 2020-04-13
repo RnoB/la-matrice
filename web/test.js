@@ -80,7 +80,7 @@ function render() {
     var t = new Date().getTime();
 
 
-
+ws.onopen =  function(event){ws.send([10,2,3]); }
 
    renderer.render(scene, camera);
 }
