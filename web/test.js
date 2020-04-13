@@ -36,6 +36,12 @@ function receiver(msg)
     if('world' in data)
     {
         id = data.id;
+        foreach (player in data.playerIds)
+        {
+            listPlayers.push({"id" : player,
+            "position" : {"x":0,"y":0,"z":0},
+            "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"}});
+        }
     }
     else if('newPlayer' in data)
     {
