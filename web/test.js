@@ -16,6 +16,9 @@ var startTime = startDate.getTime()
 
 var id = Math.random();
 
+var connected = false;
+
+var listPlayers = [];
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -23,17 +26,27 @@ function sleep(ms) {
 function connect()
 {
     ws = new WebSocket('wss://matricematrice.xyz:6785'); 
+    connected = true;
 }
 
 function receiver(msg)
 {
     var data = JSON.parse(msg);
-    console.log(msg);
-    console.log(data);
-    console.log(data.id);
     if('world' in data)
     {
         id = data.id;
+    }
+    else if('newPlayer' in data)
+    {
+        listPlayers.push({"id" : newPlayer,
+            "position" : {"x":0,"y":0,"z":0},
+            "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"}});
+    }
+    else
+    {
+        idx = listPlayers.findIndex(x => x, id == data.id);
+        listPlayers[idx].position = data.position;
+        listPlayers[idx].rotation = data.rotation;
     }
 }
 async function sender()
