@@ -17,6 +17,7 @@ players = []
 playersPosition = []
 playersRotation = []
 playerIds = []
+playerId = 0
 playerNumber = 0
 
 #logger = logging.getLogger('websockets')
@@ -36,36 +37,38 @@ def getLocalIP():
 async def register(websocket):
     global playerNumber
     global playerIds
+    global playerId
     playerNumber+=1
+    playerId+=1
     for player in players:
         await player.send("new player")
                 
     players.append(websocket)
-    playerIds.append(websocket.ws_handler)
-    print(playerIds)
-    world = json.dumps({'world' : 1, 'objects' : (2,3),'id' : playerIds[-1],'playerIds' : playerIds})
+    playerIds.append(playerId)
+    world = json.dumps({'world' : 1, 'objects' : (2,3),'id' : playerId,'playerIds' : playerIds})
     await players[-1].send(json.dumps(world))
+    return playerId
 
 
 
 async def unregister(websocket):
     players.remove(websocket)
 
-async def send(websocket,message):
+async def send(message):
     #message = await players[-1].recv()
     
     for player in players:
-        await player.send(message)
+        await player.send(str(message))
         
 
 async def manager(websocket, path):
     print("ws : "+str(websocket))
     print("pa : "+str(path))
-    await register(websocket)
+    await id = register(websocket)
     try:
         async for message in websocket:
             print(message)
-            await send(websocket,message)
+            await send(id)
     finally:
         await unregister(websocket)
         print("unregistered")
