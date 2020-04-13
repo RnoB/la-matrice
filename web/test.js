@@ -64,7 +64,7 @@ function testNetwork()
 {
     connect();
     ws.onmessage = function (event) {receiver(event.data);}
-    ws.onopen =  function(event){sender(); }
+    //ws.onopen =  function(event){sender(); }
     
 }
 testNetwork();
@@ -87,7 +87,7 @@ function render() {
     var t = new Date().getTime();
 
     console.log('frame');
-    ws.send([10,2,3]); 
+    
 
    renderer.render(scene, camera);
 }
