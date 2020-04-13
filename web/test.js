@@ -45,10 +45,11 @@ function receiver(msg)
     else
     {
         var idx = listPlayers.findIndex(x => x, id == data.id);
-        console.log(idx);
-        console.log(data.id);
-        listPlayers[idx].position = data.position;
-        listPlayers[idx].rotation = data.rotation;
+        if (idx>-1)
+        {
+            listPlayers[idx].position = data.position;
+            listPlayers[idx].rotation = data.rotation;
+        }
     }
 }
 async function sender()
