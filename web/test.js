@@ -36,6 +36,7 @@ async function sender()
         var msg = {
             id: id,
             position: camera.position,
+            rotation: camera.rotation
         };
         ws.send(JSON.stringify(msg));
         await sleep(2000);
