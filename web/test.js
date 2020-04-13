@@ -22,7 +22,7 @@ function connect()
 
 function receiver(data)
 {
-  console.log(data):
+  console.log(data);
 }
 function messageJSON()
 {
@@ -58,7 +58,7 @@ function testNetwork()
     connect();
     ws.onmessage = function (event) {receiver(data);}
     //ws.onopen =  function(event){ws.send([10,2,3]); }
-    messageJSON();
+    
 }
 testNetwork();
 
