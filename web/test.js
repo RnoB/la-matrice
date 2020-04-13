@@ -20,6 +20,10 @@ function connect()
     ws = new WebSocket('wss://matricematrice.xyz:6785'); 
 }
 
+function receiver(data)
+{
+  console.log(data):
+}
 function messageJSON()
 {
     var msg = {
@@ -52,9 +56,9 @@ setup();
 function testNetwork()
 {
     connect();
+    ws.onmessage = function (event) {receiver(data);}
     //ws.onopen =  function(event){ws.send([10,2,3]); }
     messageJSON();
-    ws.onmessage = function (event) {console.log(event.data);}
 }
 testNetwork();
 
