@@ -79,7 +79,7 @@ function animate() {
 function render() {
     var t = new Date().getTime();
 
-
+    print('frame')
     ws.onopen =  function(event){ws.send([10,2,3]); }
 
    renderer.render(scene, camera);
