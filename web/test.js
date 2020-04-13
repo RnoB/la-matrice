@@ -163,18 +163,16 @@ testNetwork();
 //setup();
 
 function animate() {
+    renderer.setAnimationLoop(render);    
+}
+function render() {
+    var t = new Date().getTime();
     for (player of listPlayers)
     {
         player.mesh.position = player.position;
         player.mesh.rotation = player.rotation;
         console.log(player.mesh.position);
     }
-    renderer.setAnimationLoop(render);
-    
-}
-function render() {
-    var t = new Date().getTime();
-
     
     
 
