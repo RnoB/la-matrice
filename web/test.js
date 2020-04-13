@@ -20,6 +20,13 @@ var connected = false;
 
 var listPlayers = [];
 
+
+var geometry = new THREE.BoxGeometry();
+
+            //var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+var material = new THREE.MeshStandardMaterial();
+
+
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -40,16 +47,23 @@ function receiver(msg)
         for (const player of data.playerIds)
         {
             console.log(player);
+
+            var cube = new THREE.Mesh(geometry, material);
+            scene.add(cube);
             listPlayers.push({"id" : player,
             "position" : {"x":0,"y":0,"z":0},
-            "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"}});
+            "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
+            "mesh" : cube});
         }
     }
     else if('newPlayer' in data)
     {
-        listPlayers.push({"id" : data.newPlayer,
+            var cube = new THREE.Mesh(geometry, material);
+            scene.add(cube);
+            listPlayers.push({"id" : data.newPlayer,
             "position" : {"x":0,"y":0,"z":0},
-            "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"}});
+            "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
+            "mesh" : cube});
     }
     else
     {
