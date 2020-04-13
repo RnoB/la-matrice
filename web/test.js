@@ -24,12 +24,12 @@ function receiver(data)
 {
     console.log(data);
 }
-function sender()
+async function sender()
 {
     while(true)
     {
         ws.send('wesh');
-        time.sleep(1);
+        await new Promise(r => setTimeout(r, 2000));
     }
 }
 function messageJSON()
