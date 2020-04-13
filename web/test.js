@@ -167,7 +167,7 @@ function animate() {
 }
 function render() {
     var t = new Date().getTime();
-    for (player of listPlayers)
+    for (var player of listPlayers)
     {
         player.mesh.position = player.position;
         player.mesh.rotation = player.rotation;
