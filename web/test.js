@@ -46,6 +46,7 @@ function receiver(msg)
     {
         var idx = listPlayers.findIndex(x => x, id == data.id);
         console.log(idx);
+        console.log(data.id);
         listPlayers[idx].position = data.position;
         listPlayers[idx].rotation = data.rotation;
     }
