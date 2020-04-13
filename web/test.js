@@ -133,9 +133,9 @@ function onDocumentKeyDown(event) {
     var keyCode = event.which;
 
     if (keyCode == 87) {
-        camera.position.y += ySpeed;
+        camera.position.z += ySpeed;
     } else if (keyCode == 83) {
-        camera.position.y -= ySpeed;
+        camera.position.z -= ySpeed;
     } else if (keyCode == 65) {
         camera.position.x -= xSpeed;
     } else if (keyCode == 68) {
@@ -167,7 +167,13 @@ testNetwork();
 //setup();
 
 function animate() {
+    for (player of listPlayers)
+    {
+        player.mesh.position = player.position;
+        player.mesh.rotation = player.rotation;
+    }
     renderer.setAnimationLoop(render);
+    
 }
 function render() {
     var t = new Date().getTime();
