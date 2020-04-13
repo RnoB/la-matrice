@@ -29,6 +29,7 @@ function sender()
     while(true)
     {
         ws.send('wesh');
+        time.sleep(1);
     }
 }
 function messageJSON()
