@@ -37,7 +37,7 @@ function receiver(msg)
     {
         id = data.id;
         console.log(data.playerIds);
-        foreach (player in data.playerIds)
+        for each (player in data.playerIds)
         {
             console.log(player);
             listPlayers.push({"id" : player,
