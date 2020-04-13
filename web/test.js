@@ -75,8 +75,8 @@ function receiver(msg)
         {
             listPlayers[idx].position = data.position;
             listPlayers[idx].rotation = data.rotation;
-            listPlayers[idx].cube.position = data.position;
-            listPlayers[idx].cube.rotation = data.rotation;
+            listPlayers[idx].mesh.position = data.position;
+            listPlayers[idx].mesh.rotation = data.rotation;
         }
     }
 }
@@ -125,8 +125,8 @@ function setUpWorld()
 }
 
 
-var xSpeed = 0.0001;
-var ySpeed = 0.0001;
+var xSpeed = 0.1;
+var ySpeed = 0.1;
 
 document.addEventListener("keydown", onDocumentKeyDown, false);
 function onDocumentKeyDown(event) {
