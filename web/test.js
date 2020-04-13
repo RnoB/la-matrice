@@ -49,11 +49,12 @@ function receiver(msg)
             console.log(player);
 
             var cube = new THREE.Mesh(geometry, material);
-            scene.add(cube);
+            
             listPlayers.push({"id" : player,
             "position" : {"x":0,"y":0,"z":0},
             "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
             "mesh" : cube});
+            scene.add(listPlayers[listPlayers.length-1].mesh);
         }
         setUpWorld();
     }
@@ -131,9 +132,9 @@ function onDocumentKeyDown(event) {
     var keyCode = event.which;
 
     if (keyCode == 87) {
-        camera.position.y += ySpeed;
+        camera.position.z += ySpeed;
     } else if (keyCode == 83) {
-        camera.position.y -= ySpeed;
+        camera.position.z -= ySpeed;
     } else if (keyCode == 65) {
         camera.position.x -= xSpeed;
     } else if (keyCode == 68) {
@@ -141,7 +142,7 @@ function onDocumentKeyDown(event) {
     } else if (keyCode == 32) {
         camera.position.set(0, 0, 0);
     }
-    console.log(camera.position);
+    
 };
 
 function testNetwork()
@@ -169,6 +170,7 @@ function animate() {
     {
         player.mesh.position = player.position;
         player.mesh.rotation = player.rotation;
+        console.log(player.mesh.position);
     }
     renderer.setAnimationLoop(render);
     
