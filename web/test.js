@@ -26,7 +26,7 @@ function receiver(data)
 }
 function sender()
 {
-  while true:
+  while(true):
     ws.send('wesh');
 }
 function messageJSON()
