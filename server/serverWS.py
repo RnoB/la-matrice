@@ -17,7 +17,7 @@ players = []
 playersPosition = []
 playersRotation = []
 playerId = 0
-playerNumber = °
+playerNumber = 0
 
 #logger = logging.getLogger('websockets')
 #logger.setLevel(logging.INFO)
