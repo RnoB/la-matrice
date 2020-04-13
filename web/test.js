@@ -48,7 +48,7 @@ function receiver(msg)
         {
 
 
-            console.log(player);
+
 
             listPlayers.push({"id" : player,
             "position" : {"x":0,"y":0,"z":0},
@@ -60,7 +60,7 @@ function receiver(msg)
     }
     else if('newPlayer' in data)
     {
-            console.log(player);
+
 
             listPlayers.push({"id" : data.newPlayer,
             "position" : {"x":0,"y":0,"z":0},
