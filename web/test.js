@@ -22,19 +22,13 @@ function connect()
 
 function messageJSON()
 {
-      var msg = {
+    var msg = {
     action: "minus",
     text: "fuck",
     id:   234235,
     date: Date.now()
   };
-
-  // Send the msg object as a JSON-formatted string.
   ws.onopen =  function(event){ws.send(JSON.stringify(msg))};
-  
-  
-  // Blank the text input element, ready to receive the next line of text from the user.
-  //document.getElementById("text").value = "";
 }
 function setup()
 {
