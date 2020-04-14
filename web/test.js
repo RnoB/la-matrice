@@ -62,6 +62,7 @@ function setup()
     document.body.appendChild(VRButton.createButton(renderer));
     scene.add(plane);
     console.log(plane);
+    plane.rotateX(Math.PI/2.0);
 
 }
 setup();
