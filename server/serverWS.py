@@ -56,8 +56,12 @@ async def unregister(idPlayer,websocket):
     global players
     global playerNumber
     global playerIds
-
-    players.remove(websocket)
+    register = True
+    while register:
+        try:
+            players.remove(websocket)
+        except:
+            pass
     playerIds.remove(idPlayer)
     playerNumber -= 1
     for player in players:
@@ -68,7 +72,10 @@ async def send(websocket,message):
     
     for player in players:
         if player is not websocket:
-            await player.send(str(message))
+            try:
+                await player.send(str(message))
+            except:
+                pass
         
 
 async def manager(websocket, path):
