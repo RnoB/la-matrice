@@ -77,13 +77,12 @@ function receiver(msg)
 
 
 
-            listObjects.push(new THREE.Mesh(geometry, material))
             listPlayers.push({"id" : player,
             "position" : {"x":0,"y":0,"z":0},
             "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
-            "mesh" : listObjects[listObjects.length-1]});
-            scene.add(listObjects[listObjects.length-1]);
-            scene.add(new THREE.Mesh(geometry, material));
+            "mesh" : new THREE.Mesh(geometry, material)});
+            
+            scene.add(listPlayers[listPlayers.length-1].mesh);
             //scene.add(listPlayers[listPlayers.length-1].mesh);
             //listNew.push(player);
             //console.log(listPlayers[listPlayers.length-1].mesh);
@@ -93,14 +92,13 @@ function receiver(msg)
     else if('newPlayer' in data)
     {
 
-            listObjects.push(new THREE.Mesh(geometry, material))
             listPlayers.push({"id" : data.newPlayer,
             "position" : {"x":0,"y":0,"z":0},
             "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
-            "mesh" : listObjects[listObjects.length-1]});
-            scene.add(listObjects[listObjects.length-1]);
+            "mesh" : new THREE.Mesh(geometry, material)});
+            //scene.add(listObjects[listObjects.length-1]);
             //scene.add(new THREE.Mesh(geometry, material));
-            //scene.add(listPlayers[listPlayers.length-1].mesh);
+            scene.add(listPlayers[listPlayers.length-1].mesh);
             //console.log(listPlayers[listPlayers.length-1].mesh);
             //scene.add(listPlayers[listPlayers.length-1].mesh);
             //listNew.push(data.newPlayer);
@@ -214,7 +212,7 @@ function render() {
         if (player.id !== id)
         {
             player.mesh.position.set(player.position.x,player.position.y,player.position.z);
-            //player.mesh.rotation.set(player.rotation.x,player.rotation.y,player.rotation.z);
+            //player.mesh.rotation.set(player.rotation._x,player.rotation._y,player.rotation._z);
 
         }
     }
