@@ -160,6 +160,7 @@ function setup()
         sun )
 
 var controls = new THREE.PointerLockControls( camera, document.body );
+control.lock = true;
 }
 
 
