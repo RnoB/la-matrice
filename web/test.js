@@ -203,7 +203,7 @@ function render() {
         {
             player.mesh.position.set(player.position.x,player.position.y,player.position.z);
             player.mesh.rotation.set(player.rotation._x,player.rotation._y,player.rotation._z,player.rotation._w);
-            if(frame%1000 == 0)
+            if(frame%200 == 0)
             {
                 console.log(player.rotation);
                 console.log(player.mesh.rotation);
