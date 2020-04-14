@@ -208,7 +208,7 @@ function receiver(msg)
     }    
     else if('remPlayer' in data)
     {
-s
+
             var idx = listPlayers.findIndex(x => x.id == data.remPlayer);
 
             if (idx>-1)
