@@ -81,8 +81,7 @@ function receiver(msg)
             "position" : {"x":0,"y":0,"z":0},
             "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
             "mesh" : new THREE.Mesh(geometry, material)});
-            console.log(listPlayers[listPlayers.length-1]);
-            listPlayers[listPlayers.length-1].scale.set(.3,.3,.3);
+            listPlayers[listPlayers.length-1].mesh.scale.set(.3,.3,.3);
             
             scene.add(listPlayers[listPlayers.length-1].mesh);
         }
@@ -95,7 +94,7 @@ function receiver(msg)
             "position" : {"x":0,"y":0,"z":0},
             "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
             "mesh" : new THREE.Mesh(geometry, material)});
-            listPlayers[listPlayers.length-1].scale.set(.3,.3,.3);
+            listPlayers[listPlayers.length-1].mesh.scale.set(.3,.3,.3);
             scene.add(listPlayers[listPlayers.length-1].mesh);
     }
     else
