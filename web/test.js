@@ -115,7 +115,7 @@ async function sender()
         
     while(true)
     {
-        camera.children[0].getWorldDirection( direction );
+        camera.children[0].getWorldPosition( direction );
         var msg = {
             id: id,
             position: direction,
