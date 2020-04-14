@@ -106,7 +106,7 @@ function receiver(msg)
 
             listPlayers[idx].position = data.position;
             listPlayers[idx].rotation = data.rotation;
-            console.log(data.rotation);
+
         }
     }
 }
@@ -203,7 +203,7 @@ function render() {
         {
             player.mesh.position.set(player.position.x,player.position.y,player.position.z);
             player.mesh.rotation.set(player.rotation._x,player.rotation._y,player.rotation._z,player.rotation._w);
-            if(frame%100 == 0)
+            if(frame%1000 == 0)
             {
                 console.log(player.rotation);
                 console.log(player.mesh.rotation);
