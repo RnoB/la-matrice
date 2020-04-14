@@ -26,7 +26,7 @@ var geometry = new THREE.BoxGeometry();
 
 //var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 var material = new THREE.MeshStandardMaterial();
-
+var cameraBox = new THREE.Mesh(geometry, material);
 
 
 function sleep(ms) {
@@ -40,7 +40,9 @@ function setup()
     scene.background = new THREE.Color(0xff0000);
 
     camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.01, 10000);
-
+    
+    cameraBox.visible = false;
+    camera.add(cameraBox);
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.xr.enabled = true;
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -108,11 +110,14 @@ function receiver(msg)
 
 async function sender()
 {
+    var direction = new THREE.Vector3();
+        
     while(true)
     {
+        camerabox.getWorldDirection( direction );
         var msg = {
             id: id,
-            position: camera.position,
+            position: direction,
             rotation: camera.rotation
         };
         ws.send(JSON.stringify(msg));
