@@ -46,19 +46,9 @@ console.log(plane.rotation);
 plane.rotateX(-Math.PI/2.0);
 console.log(plane.rotation);
 
-var simuTime = 0;
+var simuTime;
 
-function initSky(turbidity = 10,
-        rayleigh = 2,
-        mieCoefficient = 0.005,
-        mieDirectionalG = 0.8,
-        luminance = 1,
-        inclination = 0.49, // elevation / inclination
-        azimuth = 0.25, // Facing front,
-        colorR = 0, // Facing front,
-        colorG = 0, // Facing front,
-        colorB = 0, // Facing front,
-        sun =  ! true) {
+function initSky() {
 
     // Add Sky
     sky = new Sky();
@@ -76,36 +66,66 @@ function initSky(turbidity = 10,
 
     /// GUI
 
-
+    var effectController = {
+        turbidity: 10,
+        rayleigh: 2,
+        mieCoefficient: 0.005,
+        mieDirectionalG: 0.8,
+        luminance: 1,
+        inclination: 0.49, // elevation / inclination
+        azimuth: 0.25, // Facing front,
+        colorR: 0, // Facing front,
+        colorG: 0, // Facing front,
+        colorB: 0, // Facing front,
+        sun: ! true
+    };
 
     var distance = 400000;
 
-    var uniforms = sky.material.uniforms;
-    uniforms[ "turbidity" ].value = turbidity;
-    uniforms[ "rayleigh" ].value = rayleigh;
-    uniforms[ "mieCoefficient" ].value = mieCoefficient;
-    uniforms[ "mieDirectionalG" ].value = mieDirectionalG;
-    uniforms[ "luminance" ].value = luminance;
-    uniforms[ "colorR" ].value = colorR;
-    uniforms[ "colorG" ].value = colorG;
-    uniforms[ "colorB" ].value = colorB;
+   function guiChanged() {
 
-    var theta = Math.PI * ( inclination - 0.5 );
-    var phi = 2 * Math.PI * ( azimuth - 0.5 );
+        var uniforms = sky.material.uniforms;
+        uniforms[ "turbidity" ].value = effectController.turbidity;
+        uniforms[ "rayleigh" ].value = effectController.rayleigh;
+        uniforms[ "mieCoefficient" ].value = effectController.mieCoefficient;
+        uniforms[ "mieDirectionalG" ].value = effectController.mieDirectionalG;
+        uniforms[ "luminance" ].value = effectController.luminance;
+        uniforms[ "colorR" ].value = effectController.colorR;
+        uniforms[ "colorG" ].value = effectController.colorG;
+        uniforms[ "colorB" ].value = effectController.colorB;
 
-    sunSphere.position.x = distance * Math.cos( phi );
-    sunSphere.position.y = distance * Math.sin( phi ) * Math.sin( theta );
-    sunSphere.position.z = distance * Math.sin( phi ) * Math.cos( theta );
+        var theta = Math.PI * ( effectController.inclination - 0.5 );
+        var phi = 2 * Math.PI * ( effectController.azimuth - 0.5 );
 
-    sunSphere.visible = sun;
+        sunSphere.position.x = distance * Math.cos( phi );
+        sunSphere.position.y = distance * Math.sin( phi ) * Math.sin( theta );
+        sunSphere.position.z = distance * Math.sin( phi ) * Math.cos( theta );
 
-    uniforms[ "sunPosition" ].value.copy( sunSphere.position );
+        sunSphere.visible = effectController.sun;
 
-
-
-
+        uniforms[ "sunPosition" ].value.copy( sunSphere.position );
 
 
+
+
+
+    }
+
+    var gui = new GUI();
+
+    gui.add( effectController, "turbidity", 1.0, 20.0, 0.1 ).onChange( guiChanged );
+    gui.add( effectController, "rayleigh", 0.0, 4, 0.001 ).onChange( guiChanged );
+    gui.add( effectController, "mieCoefficient", 0.0, 0.1, 0.001 ).onChange( guiChanged );
+    gui.add( effectController, "mieDirectionalG", 0.0, 1, 0.001 ).onChange( guiChanged );
+    gui.add( effectController, "luminance", 0.0, 2 ).onChange( guiChanged );
+    gui.add( effectController, "inclination", 0, 1, 0.0001 ).onChange( guiChanged );
+    gui.add( effectController, "azimuth", 0, 1, 0.0001 ).onChange( guiChanged );
+    gui.add( effectController, "sun" ).onChange( guiChanged );
+    gui.add( effectController, "colorR", 0, 5, 0.001 ).onChange( guiChanged );
+    gui.add( effectController, "colorG", 0, 5, 0.001 ).onChange( guiChanged );
+    gui.add( effectController, "colorB", 0, 5, 0.001 ).onChange( guiChanged );
+
+    guiChanged();
 
 }
 
