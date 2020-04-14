@@ -200,7 +200,7 @@ function render() {
         if (player.id !== id)
         {
             player.mesh.position.set(player.position.x,player.position.y,player.position.z);
-            //player.mesh.rotation.set(player.rotation._x,player.rotation._y,player.rotation._z);
+            player.mesh.rotation.set(player.rotation._x,player.rotation._y,player.rotation._z,player.rotation._w);
 
         }
     }
