@@ -125,7 +125,7 @@ async function sender()
             rotation: camera.rotation
         };
         ws.send(JSON.stringify(msg));
-        await sleep(2000);
+        await sleep(10);
     }
 }
 
@@ -189,11 +189,7 @@ function animate() {
 }
 function render() {
     var t = new Date().getTime();
-    if (frame%100==0 && listPlayers.length>0)
-    {
-    console.log(listPlayers[0].mesh);
-    console.log(scene);
-    }
+
     // for (var newId of listNew)
     // {
     //     console.log("add new object to scene")
