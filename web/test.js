@@ -32,7 +32,8 @@ var geometryPlane = new THREE.PlaneGeometry( 200, 200, 8,8 );
 var materialPlane = new THREE.MeshBasicMaterial( {color: 0xffff00} );
 var plane = new THREE.Mesh( geometryPlane, materialPlane );
     console.log(plane);
-    plane.rotation._x = Math.PI / 2; 
+    plane.rotationX(Math.PI / 2); 
+    plane.UpdateLatrixWorld();
 
 
 
