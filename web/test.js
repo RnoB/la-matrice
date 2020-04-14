@@ -200,7 +200,7 @@ function render() {
 
         if (player.id !== id)
         {
-            player.mesh.position.set(player.position.x,player.position.y,player.position.z);
+            player.mesh.position.set(player.position);
             player.mesh.rotation = player.rotation;
 
         }
