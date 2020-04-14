@@ -105,7 +105,7 @@ function receiver(msg)
         {
 
             listPlayers[idx].mesh.position.set(data.position);
-            listPlayers[idx].mesh.rotation = data.rotation;
+            listPlayers[idx].mesh.rotation.set(data.rotation);
             console.log(listPlayers[idx]);
         }
     }
@@ -141,7 +141,7 @@ function setUpWorld()
     light2.position.set(0, 50, 50);
     scene.add(light2);
     scene.add(light);
-}
+}s
 
 
 var xSpeed = 0.1;
