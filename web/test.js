@@ -80,7 +80,7 @@ function receiver(msg)
             listPlayers.push({"id" : player,
             "position" : {"x":0,"y":0,"z":0},
             "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
-            "mesh" : []});
+            "mesh" : new THREE.Mesh(geometry, material)});
             scene.add(new THREE.Mesh(geometry, material));
             //scene.add(listPlayers[listPlayers.length-1].mesh);
             //listNew.push(player);
@@ -191,7 +191,7 @@ function render() {
     var t = new Date().getTime();
     if (frame%100==0 && listPlayers.length>0)
     {
-    console.log(listPlayers[0].mesh);
+    console.log(listPlayers[0].mesh.position);
     }
     // for (var newId of listNew)
     // {
