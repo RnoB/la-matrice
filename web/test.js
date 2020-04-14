@@ -144,7 +144,7 @@ function setup()
 
     document.body.appendChild(VRButton.createButton(renderer));
     scene.add(plane);
-
+    initSky();
 
 
 }
