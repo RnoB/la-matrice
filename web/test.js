@@ -189,7 +189,10 @@ function animate() {
 }
 function render() {
     var t = new Date().getTime();
-
+    if (frame%100==0 and listPLayers)
+    {
+    console.log(listPlayers[0].mesh);
+    }
     // for (var newId of listNew)
     // {
     //     console.log("add new object to scene")
