@@ -4,9 +4,9 @@ import { VRButton } from './js/webxr/VRButton.js';
 
 import { GUI } from './jsm/libs/dat.gui.module.js';
 
-import './js/controls/PointerLockControls.js';
+import { Sky } from './jsm/objects/Sky.js';
 
-import 
+import './js/controls/PointerLockControls'
 var camera, controls, scene, renderer;
 
 var sky, sunSphere;
@@ -159,7 +159,7 @@ function setup()
         colorB, // Facing front,
         sun )
 
-    var controls = new PointerLockControls( camera, document.body );
+var controls = new PointerLockControls( camera, document.body );
 }
 
 
