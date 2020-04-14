@@ -104,7 +104,7 @@ function receiver(msg)
         if (idx>-1)
         {
 
-            listPlayers[idx].mesh.position.set(data.position.x,data.position.y,data.position.z);
+            listPlayers[idx].mesh.position.set(data.position);
             listPlayers[idx].mesh.rotation = data.rotation;
             console.log(listPlayers[idx]);
         }
@@ -200,8 +200,8 @@ function render() {
 
         if (player.id !== id)
         {
-            player.mesh.position.set(player.position.x,player.position.y,player.position.z);
-            player.mesh.rotation = player.rotation;
+            player.mesh.position.set(player.position);
+            player.mesh.rotation.set(player.rotation);
 
         }
     }
