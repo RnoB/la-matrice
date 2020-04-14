@@ -141,7 +141,7 @@ function setUpWorld()
     light2.position.set(0, 50, 50);
     scene.add(light2);
     scene.add(light);
-}s
+}
 
 
 var xSpeed = 0.1;
