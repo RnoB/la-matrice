@@ -120,7 +120,7 @@ async function sender()
     {
         camera.children[0].getWorldPosition( direction );
         camera.children[0].getWorldQuaternion( rotation );
-        console.log(rotation)
+
         var msg = {
             id: id,
             position: direction,
@@ -203,6 +203,8 @@ function render() {
         {
             player.mesh.position.set(player.position.x,player.position.y,player.position.z);
             player.mesh.rotation.set(player.rotation._x,player.rotation._y,player.rotation._z,player.rotation._w);
+            console.log(player.rotation);
+            console.log(player.mesh.rotation);
 
         }
     }
