@@ -103,7 +103,8 @@ function receiver(msg)
         var idx = listPlayers.findIndex(x => x.id == data.id);
         if (idx>-1)
         {
-            listPlayers[idx].mesh.position = data.position;
+
+            listPlayers[idx].mesh.position.set(data.position);
             listPlayers[idx].mesh.rotation = data.rotation;
             console.log(listPlayers[idx]);
         }
