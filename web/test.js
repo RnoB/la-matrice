@@ -135,17 +135,17 @@ function setup()
     scene.add(plane);
 
 
-    turbidity = 10;
-    rayleigh = 2;
-    mieCoefficient = 0.005;
-    mieDirectionalG = 0.8;
-    luminance = 1;
-    inclination = 0.49; // elevation / inclination
-    azimuth = 0.25; // Facing front;
-    colorR = 5; // Facing front;
-    colorG = 0.098; // Facing front;
-    colorB = 4.81; // Facing front;
-    sun =  ! true;
+    var turbidity = 10;
+    var rayleigh = 2;
+    var mieCoefficient = 0.005;
+    var mieDirectionalG = 0.8;
+    var luminance = 1;
+    var inclination = 0.49; // elevation / inclination
+    var azimuth = 0.25; // Facing front;
+    var colorR = 5; // Facing front;
+    var colorG = 0.098; // Facing front;
+    var colorB = 4.81; // Facing front;
+    var sun =  ! true;
 
     initSky(turbidity,rayleigh,
         mieCoefficient,
