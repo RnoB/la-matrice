@@ -31,7 +31,7 @@ var cameraBox = new THREE.Mesh(geometry, material);
 var geometryPlane = new THREE.PlaneGeometry( 200, 200, 8,8 );
 var materialPlane = new THREE.MeshBasicMaterial( {color: 0xffff00} );
 var plane = new THREE.Mesh( geometryPlane, materialPlane );
-plane.rotateX(90);
+plane.mesh.rotateZ(90);
 
 
 
@@ -59,6 +59,7 @@ function setup()
 
     document.body.appendChild(VRButton.createButton(renderer));
     scene.add(plane);
+    console.log(plane);
 
 }
 setup();
