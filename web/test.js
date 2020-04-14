@@ -79,7 +79,7 @@ function initSky() {
 
     var distance = 400000;
 
-/*    function guiChanged() {
+   function guiChanged() {
 
         var uniforms = sky.material.uniforms;
         uniforms[ "turbidity" ].value = effectController.turbidity;
@@ -99,8 +99,8 @@ function initSky() {
 
         uniforms[ "sunPosition" ].value.copy( sunSphere.position );
 
-        renderer.render( scene, camera );
-        initSky();
+
+
 
 
     }
@@ -116,7 +116,7 @@ function initSky() {
     gui.add( effectController, "azimuth", 0, 1, 0.0001 ).onChange( guiChanged );
     gui.add( effectController, "sun" ).onChange( guiChanged );
 
-    guiChanged();*/
+    guiChanged();
 
 }
 
