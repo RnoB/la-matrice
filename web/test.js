@@ -181,15 +181,15 @@ function animate() {
 }
 function render() {
     var t = new Date().getTime();
-    if (listNew)
+
+    for (var new of listNew)
     {
-        for (var new of listNew)
-        {
-            var idx = listPlayers.findIndex(x => x.id == new);
-            scene.add(listPlayers[idx].mesh);
-        }
-        listNew = [];
+        var idx = listPlayers.findIndex(x => x.id == new);
+        scene.add(listPlayers[idx].mesh);
+        listNew.shift();
     }
+
+
 
     for (var player of listPlayers)
     {
