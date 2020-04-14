@@ -133,16 +133,30 @@ function setup()
 
     document.body.appendChild(VRButton.createButton(renderer));
     scene.add(plane);
-    initSky(turbidity = 10,
-        rayleigh = 2,
-        mieCoefficient = 0.005,
-        mieDirectionalG = 0.8,
-        luminance = 1,
-        inclination = 0.49, // elevation / inclination
-        azimuth = 0.25, // Facing front,
-        colorR = 5, // Facing front,
-        colorG = 0.098, // Facing front,
-        colorB = 4.812, )
+
+
+    turbidity = 10;
+    rayleigh = 2;
+    mieCoefficient = 0.005;
+    mieDirectionalG = 0.8;
+    luminance = 1;
+    inclination = 0.49; // elevation / inclination
+    azimuth = 0.25; // Facing front;
+    colorR = 5; // Facing front;
+    colorG = 0.098; // Facing front;
+    colorB = 4.81; // Facing front;
+    sun =  ! true;
+
+    initSky(turbidity,rayleigh,
+        mieCoefficient,
+        mieDirectionalG ,
+        luminance,
+        inclination , // elevation / inclination
+        azimuth , // Facing front,
+        colorR , // Facing front,
+        colorG , // Facing front,
+        colorB, // Facing front,
+        sun )
 
 
 }
