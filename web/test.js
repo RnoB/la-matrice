@@ -34,7 +34,7 @@ var plane = new THREE.Mesh( geometryPlane, materialPlane );
 console.log(plane.rotation);
 
 
-plane.rotateZ(-Math.PI/2.0);
+plane.rotateX(-Math.PI/2.0);
 console.log(plane.rotation);
 
 
