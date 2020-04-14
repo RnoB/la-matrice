@@ -1,4 +1,4 @@
-import "./js/three.js";
+import "./js/three.min.js";
 import { VRButton } from './js/webxr/VRButton.js';
 
 
