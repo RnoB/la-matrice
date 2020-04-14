@@ -60,6 +60,9 @@ function connect()
     connected = true;
 }
 
+
+
+
 function receiver(msg)
 {
     var data = JSON.parse(msg);
@@ -92,8 +95,10 @@ function receiver(msg)
             listPlayers.push({"id" : data.newPlayer,
             "position" : {"x":0,"y":0,"z":0},
             "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
-            "mesh" : []});
+            "mesh" : });
+
             scene.add(new THREE.Mesh(geometry, material));
+            console.log(listPlayers[listPlayers.length-1].mesh);
             //scene.add(listPlayers[listPlayers.length-1].mesh);
             //listNew.push(data.newPlayer);
             //console.log(listPlayers[listPlayers.length-1].mesh);
