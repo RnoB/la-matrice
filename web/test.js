@@ -19,6 +19,7 @@ var id = Math.random();
 var connected = false;
 
 var listPlayers = [];
+var listNew = [];
 
 var frame = 0
 
@@ -26,6 +27,8 @@ var geometry = new THREE.BoxGeometry();
 
 //var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
 var material = new THREE.MeshStandardMaterial();
+
+
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -75,7 +78,8 @@ function receiver(msg)
             "position" : {"x":0,"y":0,"z":0},
             "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
             "mesh" : new THREE.Mesh(geometry, material)});
-            scene.add(listPlayers[listPlayers.length-1].mesh);
+            //scene.add(listPlayers[listPlayers.length-1].mesh);
+            listNew.push(player);
             console.log(listPlayers[listPlayers.length-1].mesh);
         }
         setUpWorld();
@@ -88,7 +92,8 @@ function receiver(msg)
             "position" : {"x":0,"y":0,"z":0},
             "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
             "mesh" : new THREE.Mesh(geometry, material)});
-            scene.add(listPlayers[listPlayers.length-1].mesh);
+            //scene.add(listPlayers[listPlayers.length-1].mesh);
+            listNew.push(player);
             console.log(listPlayers[listPlayers.length-1].mesh);
     }
     else
@@ -176,6 +181,16 @@ function animate() {
 }
 function render() {
     var t = new Date().getTime();
+    if (listNew)
+    {
+        for (var new of listNew)
+        {
+            var idx = listPlayers.findIndex(x => x.id == new);
+            scene.add(listPlayers[idx].mesh);
+        }
+        listNew = [];
+    }
+
     for (var player of listPlayers)
     {
 
