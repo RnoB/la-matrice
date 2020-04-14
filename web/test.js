@@ -187,7 +187,7 @@ function render() {
         console.log("add new object to scene")
         var idx = listPlayers.findIndex(x => x.id == newId);
         var meshPlayer = new THREE.Mesh(geometry, material); 
-        listPlayers[idx].mesh = meshPlayer;
+        //listPlayers[idx].mesh = meshPlayer;
         scene.add(meshPlayer);
         listNew.shift();
     }
