@@ -208,12 +208,12 @@ function receiver(msg)
     }    
     else if('remPlayer' in data)
     {
-            
+            console.log(data.oldPlayer);
+            console.log(listPlayers);
             var idx = listPlayers.findIndex(x => x.id == data.oldPlayer);
             if (idx>-1)
             {
                 console.log(listPlayers[idx].mesh);
-                console.log(listPlayers);
                 console.log(scene);
                 scene.remove(listPlayers[idx].mesh);
                 console.log(scene);
