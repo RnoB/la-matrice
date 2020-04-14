@@ -95,7 +95,7 @@ function receiver(msg)
             listPlayers.push({"id" : data.newPlayer,
             "position" : {"x":0,"y":0,"z":0},
             "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
-            "mesh" : });
+            "mesh" : new THREE.Mesh(geometry, material)});
 
             scene.add(new THREE.Mesh(geometry, material));
             console.log(listPlayers[listPlayers.length-1].mesh);
