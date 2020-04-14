@@ -58,7 +58,7 @@ function initSky() {
     // Add Sun Helper
     sunSphere = new THREE.Mesh(
         new THREE.SphereBufferGeometry( 20000, 16, 8 ),
-        new THREE.MeshBasicMaterial( { color: 0xff0000 } )
+        new THREE.MeshBasicMaterial( { color: 0xffffff } )
     );
     sunSphere.position.y = - 700000;
     sunSphere.visible = false;
@@ -122,7 +122,7 @@ function initSky() {
     gui.add( effectController, "azimuth", 0, 1, 0.0001 ).onChange( guiChanged );
     gui.add( effectController, "sun" ).onChange( guiChanged );
     gui.add( effectController, "colorR", -1, 1, 0.001 ).onChange( guiChanged );
-    gui.add( effectController, "colorG", -1, 1, 0.001 ).onChange( guiChanged );
+    gui.add( effectController, "color2", -1, 1, 0.001 ).onChange( guiChanged );
     gui.add( effectController, "colorB", -1, 1, 0.001 ).onChange( guiChanged );
 
     guiChanged();
