@@ -122,8 +122,8 @@ function initSky() {
     gui.add( effectController, "azimuth", 0, 1, 0.0001 ).onChange( guiChanged );
     gui.add( effectController, "sun" ).onChange( guiChanged );
     gui.add( effectController, "colorR", 0.0, 1, 0.001 ).onChange( guiChanged );
-    gui.add( effectController, "colorG", 0.0, 1, 0.001 ).onChange( guiChanged );
-    gui.add( effectController, "colorB", 0.0, 1, 0.001 ).onChange( guiChanged );
+    //gui.add( effectController, "colorG", 0.0, 1, 0.001 ).onChange( guiChanged );
+    //gui.add( effectController, "colorB", 0.0, 1, 0.001 ).onChange( guiChanged );
 
     guiChanged();
 
