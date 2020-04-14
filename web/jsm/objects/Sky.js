@@ -170,7 +170,7 @@ Sky.SkyShader = {
 		'const float E = 0.02;',
 		'const float F = 0.30;',
 
-		'const float whiteScale = 1.0748724675633854;', // 1.0 / Uncharted2Tonemap(1000.0)
+		'const float whiteScale = 10;',//1.0748724675633854;', // 1.0 / Uncharted2Tonemap(1000.0)
 
 		'vec3 Uncharted2Tonemap( vec3 x ) {',
 		'	return ( ( x * ( A * x + C * B ) + D * E ) / ( x * ( A * x + B ) + D * F ) ) - E / F;',
