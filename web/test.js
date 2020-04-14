@@ -118,7 +118,7 @@ function sleep(ms) {
 function setup()
 {
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xff0000);
+    scene.background = new THREE.Color(0x000000);
 
     camera = new THREE.PerspectiveCamera(90, window.innerWidth / window.innerHeight, 0.01, 10000);
     
@@ -244,9 +244,9 @@ async function sender()
 function setUpWorld()
 {
     console.log("Setting up World")
-    var light = new THREE.PointLight(0x00ff00, 1, 1000);
+    var light = new THREE.PointLight(0xab0000, 1, 1000);
     light.position.set(50, 50, 50);
-    var light2 = new THREE.PointLight(0x00ff, 1, 1000);
+    var light2 = new THREE.PointLight(0x00cc, 1, 1000);
     light2.position.set(0, 50, 50);
     scene.add(light2);
     scene.add(light);
