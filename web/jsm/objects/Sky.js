@@ -14,32 +14,27 @@
  * Three.js integration by zz85 http://twitter.com/blurspline
 */
 
-import {
-	BackSide,
-	BoxBufferGeometry,
-	Mesh,
-	ShaderMaterial,
-	UniformsUtils,
-	Vector3
-} from "../../js/three.module.js";
+
+
+import "../../js/three.min.js";
 
 var Sky = function () {
 
 	var shader = Sky.SkyShader;
 
-	var material = new ShaderMaterial( {
+	var material = new THREE.ShaderMaterial( {
 		fragmentShader: shader.fragmentShader,
 		vertexShader: shader.vertexShader,
-		uniforms: UniformsUtils.clone( shader.uniforms ),
-		side: BackSide,
+		uniforms: THREE.UniformsUtils.clone( shader.uniforms ),
+		side: THREE.BackSide,
 		depthWrite: false
 	} );
 
-	Mesh.call( this, new BoxBufferGeometry( 1, 1, 1 ), material );
+	THREE.Mesh.call( this, new THREE.BoxBufferGeometry( 1, 1, 1 ), material );
 
 };
 
-Sky.prototype = Object.create( Mesh.prototype );
+Sky.prototype = Object.create( THREE.Mesh.prototype );
 
 Sky.SkyShader = {
 
@@ -49,8 +44,8 @@ Sky.SkyShader = {
 		"rayleigh": { value: 1 },
 		"mieCoefficient": { value: 0.005 },
 		"mieDirectionalG": { value: 0.8 },
-		"sunPosition": { value: new Vector3() },
-		"up": { value: new Vector3( 0, 1, 0 ) }
+		"sunPosition": { value: new THREE.Vector3() },
+		"up": { value: new THREE.Vector3( 0, 1, 0 ) }
 	},
 
 	vertexShader: [
