@@ -55,7 +55,7 @@ function setup()
     
     cameraBox.visible = false;
     camera.add(cameraBox);
-
+    camera.position.y = 1.5
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.xr.enabled = true;
     renderer.setSize(window.innerWidth, window.innerHeight);
