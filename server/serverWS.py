@@ -60,6 +60,7 @@ async def unregister(idPlayer,websocket):
     while register:
         try:
             players.remove(websocket)
+            register = False
         except:
             pass
     playerIds.remove(idPlayer)
