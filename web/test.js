@@ -176,7 +176,7 @@ function connect()
 function receiver(msg)
 {
     var data = JSON.parse(msg);
-    console.log(data);
+    
     if('world' in data)
     {
         id = data.id;
@@ -208,15 +208,18 @@ function receiver(msg)
     }    
     else if('remPlayer' in data)
     {
-            console.log(data);
+            
             var idx = listPlayers.findIndex(x => x.id == data.oldPlayer);
             if (idx>-1)
             {
-
-                listPlayers[idx].position = data.position;
-                listPlayers[idx].rotation = data.rotation;
+                console.log(listPlayers[idx].mesh);
+                console.log(listPlayers);
+                console.log(scene);
                 scene.remove(listPlayers[idx].mesh);
+                console.log(scene);
                 listPlayers.splice(idx);
+                console.log(listPlayers);
+
             }
 
 
