@@ -90,9 +90,9 @@ function initSky() {
         uniforms[ "mieCoefficient" ].value = effectController.mieCoefficient;
         uniforms[ "mieDirectionalG" ].value = effectController.mieDirectionalG;
         uniforms[ "luminance" ].value = effectController.luminance;
-        uniforms[ "colorR" ].value = effectController.luminance;
-        uniforms[ "colorG" ].value = effectController.luminance;
-        uniforms[ "colorB" ].value = effectController.luminance;
+        uniforms[ "colorR" ].value = effectController.colorR;
+        uniforms[ "colorG" ].value = effectController.colorG;
+        uniforms[ "colorB" ].value = effectController.colorB;
 
         var theta = Math.PI * ( effectController.inclination - 0.5 );
         var phi = 2 * Math.PI * ( effectController.azimuth - 0.5 );
