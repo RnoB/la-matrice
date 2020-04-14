@@ -159,7 +159,7 @@ function setup()
         colorB, // Facing front,
         sun )
 
-var controls = new PointerLockControls( camera, document.body );
+var controls = new THREE.PointerLockControls( camera, document.body );
 }
 
 
