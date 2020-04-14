@@ -170,7 +170,7 @@ Sky.SkyShader = {
 		'const float E = 0.02;',
 		'const float F = 0.30;',
 
-		'const float whiteScale = 10;',//1.0748724675633854;', // 1.0 / Uncharted2Tonemap(1000.0)
+		'const float whiteScale = 1.0748724675633854;', // 1.0 / Uncharted2Tonemap(1000.0)
 
 		'vec3 Uncharted2Tonemap( vec3 x ) {',
 		'	return ( ( x * ( A * x + C * B ) + D * E ) / ( x * ( A * x + B ) + D * F ) ) - E / F;',
@@ -213,7 +213,7 @@ Sky.SkyShader = {
 		'	float sundisk = smoothstep( sunAngularDiameterCos, sunAngularDiameterCos + 0.00002, cosTheta );',
 		'	L0 += ( vSunE * 19000.0 * Fex ) * sundisk;',
 
-		'	vec3 texColor = ( Lin + L0 ) * 0.04 + vec3( 0.0, 0.0003, 0.00075 );',
+		'	vec3 texColor = ( Lin + L0 ) * 0.04 + vec3( 1.0, 0.0003, 0.00075 );',
 
 		'	vec3 curr = Uncharted2Tonemap( ( log2( 2.0 / pow( luminance, 4.0 ) ) ) * texColor );',
 		'	vec3 color = curr * whiteScale;',
