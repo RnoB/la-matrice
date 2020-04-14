@@ -206,7 +206,7 @@ function receiver(msg)
             listPlayers[listPlayers.length-1].mesh.scale.set(.3,.3,.3);
             scene.add(listPlayers[listPlayers.length-1].mesh);
     }    
-    else if('oldPlayer' in data)
+    else if('remPlayer' in data)
     {
             console.log(data);
             var idx = listPlayers.findIndex(x => x.id == data.oldPlayer);
