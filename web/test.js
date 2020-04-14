@@ -246,7 +246,7 @@ function setUpWorld()
     console.log("Setting up World")
     var light = new THREE.PointLight(0xab0000, 1, 1000);
     light.position.set(50, 50, 50);
-    var light2 = new THREE.PointLight(0x00cc, 1, 1000);
+    var light2 = new THREE.PointLight(0x00ff, 1, 1000);
     light2.position.set(0, 50, 50);
     scene.add(light2);
     scene.add(light);
