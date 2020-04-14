@@ -79,11 +79,9 @@ function receiver(msg)
             "position" : {"x":0,"y":0,"z":0},
             "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
             "mesh" : new THREE.Mesh(geometry, material)});
+            listPlayers[listPlayers.length-1].scale.set(.3,.3,.3);
             
             scene.add(listPlayers[listPlayers.length-1].mesh);
-            //scene.add(listPlayers[listPlayers.length-1].mesh);
-            //listNew.push(player);
-            //console.log(listPlayers[listPlayers.length-1].mesh);
         }
         setUpWorld();
     }
@@ -94,13 +92,8 @@ function receiver(msg)
             "position" : {"x":0,"y":0,"z":0},
             "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
             "mesh" : new THREE.Mesh(geometry, material)});
-            //scene.add(listObjects[listObjects.length-1]);
-            //scene.add(new THREE.Mesh(geometry, material));
+            listPlayers[listPlayers.length-1].scale.set(.3,.3,.3);
             scene.add(listPlayers[listPlayers.length-1].mesh);
-            //console.log(listPlayers[listPlayers.length-1].mesh);
-            //scene.add(listPlayers[listPlayers.length-1].mesh);
-            //listNew.push(data.newPlayer);
-            //console.log(listPlayers[listPlayers.length-1].mesh);
     }
     else
     {
@@ -188,15 +181,7 @@ function animate() {
 function render() {
     var t = new Date().getTime();
 
-    // for (var newId of listNew)
-    // {
-    //     console.log("add new object to scene")
-    //     var idx = listPlayers.findIndex(x => x.id == newId);
-    //     //var meshPlayer = new THREE.Mesh(geometry, material); 
-    //     listPlayers[idx].mesh = meshPlayer;
-    //     scene.add(listPlayers[idx].mesh);
-    //     listNew.shift();
-    // }
+
 
 
 
