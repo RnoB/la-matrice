@@ -3,7 +3,7 @@ import { VRButton } from './js/webxr/VRButton.js';
 
 
 import { GUI } from './jsm/libs/dat.gui.module.js';
-import { OrbitControls } from './jsm/controls/OrbitControls.js';
+
 import { Sky } from './jsm/objects/Sky.js';
 
 var camera, controls, scene, renderer;
