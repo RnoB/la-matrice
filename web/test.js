@@ -93,7 +93,7 @@ function receiver(msg)
             "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
             "mesh" : new THREE.Mesh(geometry, material)});
             //scene.add(listPlayers[listPlayers.length-1].mesh);
-            listNew.push(player);
+            listNew.push(newPlayer);
             console.log(listPlayers[listPlayers.length-1].mesh);
     }
     else
@@ -184,6 +184,7 @@ function render() {
 
     for (var newId of listNew)
     {
+        console.log("add new object to scene")
         var idx = listPlayers.findIndex(x => x.id == newId);
         scene.add(listPlayers[idx].mesh);
         listNew.shift();
