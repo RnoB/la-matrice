@@ -105,7 +105,7 @@ function receiver(msg)
         {
 
             listPlayers[idx].position = data.position;
-            listPlayers.rotation = data.position;
+            listPlayers[idx].rotation = data.rotation;
 
         }
     }
