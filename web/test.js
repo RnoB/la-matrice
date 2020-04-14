@@ -28,6 +28,13 @@ var geometry = new THREE.BoxGeometry();
 var material = new THREE.MeshStandardMaterial();
 var cameraBox = new THREE.Mesh(geometry, material);
 
+var geometryPlane = new THREE.PlaneGeometry( 200, 200, 8,8 );
+var materialPlane = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+var plane = new THREE.Mesh( geometryPlane, materialPlane );
+plane.rotateZ(90);
+
+
+
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -51,6 +58,7 @@ function setup()
 
 
     document.body.appendChild(VRButton.createButton(renderer));
+    scene.add(plane);
 
 }
 setup();
@@ -60,6 +68,7 @@ function connect()
 {
     ws = new WebSocket('wss://matricematrice.xyz:6785'); 
     connected = true;
+    console.log(connected);
 }
 
 
@@ -203,11 +212,7 @@ function render() {
         {
             player.mesh.position.set(player.position.x,player.position.y,player.position.z);
             player.mesh.quaternion.set(player.rotation._x,player.rotation._y,player.rotation._z,player.rotation._w);
-            if(frame%200 == 0)
-            {
-                console.log(player.rotation);
-                console.log(player.mesh.rotation);
-            }
+            
         }
     }
     
