@@ -58,7 +58,7 @@ function initSky() {
     // Add Sun Helper
     sunSphere = new THREE.Mesh(
         new THREE.SphereBufferGeometry( 20000, 16, 8 ),
-        new THREE.MeshBasicMaterial( { color: 0xffff00 } )
+        new THREE.MeshBasicMaterial( { color: 0xff0000 } )
     );
     sunSphere.position.y = - 700000;
     sunSphere.visible = false;
