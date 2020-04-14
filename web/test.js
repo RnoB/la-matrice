@@ -214,7 +214,7 @@ function render() {
         if (player.id !== id)
         {
             player.mesh.position.set(player.position.x,player.position.y,player.position.z);
-            player.mesh.rotation.set(player.rotation.x,player.rotation.y,player.rotation.z);
+            //player.mesh.rotation.set(player.rotation.x,player.rotation.y,player.rotation.z);
 
         }
     }
