@@ -104,7 +104,8 @@ function receiver(msg)
         if (idx>-1)
         {
             listPlayers[idx].position = data.position;
-            //listPlayers[idx].rotation = data.rotation;
+            listPlayers[idx].rotation = data.rotation;
+            console.log(listPlayers[idx]);
         }
     }
 }
