@@ -171,7 +171,7 @@ testNetwork();
 
 
 
-
+var meshPlayer = new THREE.Mesh(geometry, material);
 
 
 //setup();
@@ -188,7 +188,7 @@ function render() {
         var idx = listPlayers.findIndex(x => x.id == newId);
         //var meshPlayer = new THREE.Mesh(geometry, material); 
         listPlayers[idx].mesh = new THREE.Mesh(geometry, material);
-        scene.add(listPlayers[idx].mesh);
+        scene.add(meshPlayer);
         listNew.shift();
     }
 
