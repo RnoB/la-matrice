@@ -120,6 +120,7 @@ async function sender()
     {
         camera.children[0].getWorldPosition( direction );
         camera.children[0].getWorldQuaternion( rotation );
+        console.log(rotation)
         var msg = {
             id: id,
             position: direction,
