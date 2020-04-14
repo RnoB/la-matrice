@@ -43,6 +43,7 @@ function setup()
     
     cameraBox.visible = false;
     camera.add(cameraBox);
+    console.log(camera);
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.xr.enabled = true;
     renderer.setSize(window.innerWidth, window.innerHeight);
