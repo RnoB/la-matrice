@@ -74,6 +74,9 @@ function initSky() {
         luminance: 1,
         inclination: 0.49, // elevation / inclination
         azimuth: 0.25, // Facing front,
+        colorR: 0, // Facing front,
+        colorR: 0, // Facing front,
+        colorB: 0, // Facing front,
         sun: ! true
     };
 
@@ -87,6 +90,9 @@ function initSky() {
         uniforms[ "mieCoefficient" ].value = effectController.mieCoefficient;
         uniforms[ "mieDirectionalG" ].value = effectController.mieDirectionalG;
         uniforms[ "luminance" ].value = effectController.luminance;
+        uniforms[ "colorR" ].value = effectController.luminance;
+        uniforms[ "colorG" ].value = effectController.luminance;
+        uniforms[ "colorB" ].value = effectController.luminance;
 
         var theta = Math.PI * ( effectController.inclination - 0.5 );
         var phi = 2 * Math.PI * ( effectController.azimuth - 0.5 );
@@ -115,6 +121,9 @@ function initSky() {
     gui.add( effectController, "inclination", 0, 1, 0.0001 ).onChange( guiChanged );
     gui.add( effectController, "azimuth", 0, 1, 0.0001 ).onChange( guiChanged );
     gui.add( effectController, "sun" ).onChange( guiChanged );
+    gui.add( effectController, "colorR", 0.0, 1, 0.001 ).onChange( guiChanged );
+    gui.add( effectController, "colorG", 0.0, 1, 0.001 ).onChange( guiChanged );
+    gui.add( effectController, "colorB", 0.0, 1, 0.001 ).onChange( guiChanged );
 
     guiChanged();
 
