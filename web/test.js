@@ -31,6 +31,7 @@ var cameraBox = new THREE.Mesh(geometry, material);
 var geometryPlane = new THREE.PlaneGeometry( 200, 200, 8,8 );
 var materialPlane = new THREE.MeshBasicMaterial( {color: 0xffff00} );
 var plane = new THREE.Mesh( geometryPlane, materialPlane );
+    console.log(plane);
 
 
 
@@ -69,7 +70,7 @@ function connect()
 {
     ws = new WebSocket('wss://matricematrice.xyz:6785'); 
     connected = true;
-    console.log(connected);
+
 }
 
 
