@@ -77,7 +77,7 @@ function receiver(msg)
             listPlayers.push({"id" : player,
             "position" : {"x":0,"y":0,"z":0},
             "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
-            "mesh" : new THREE.Mesh(geometry, material)});
+            "mesh" : []});
             //scene.add(listPlayers[listPlayers.length-1].mesh);
             listNew.push(player);
             console.log(listPlayers[listPlayers.length-1].mesh);
@@ -91,7 +91,7 @@ function receiver(msg)
             listPlayers.push({"id" : data.newPlayer,
             "position" : {"x":0,"y":0,"z":0},
             "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
-            "mesh" : new THREE.Mesh(geometry, material)});
+            "mesh" : []});
             //scene.add(listPlayers[listPlayers.length-1].mesh);
             listNew.push(data.newPlayer);
             console.log(listPlayers[listPlayers.length-1].mesh);
@@ -186,7 +186,9 @@ function render() {
     {
         console.log("add new object to scene")
         var idx = listPlayers.findIndex(x => x.id == newId);
-        scene.add(new THREE.Mesh(geometry, material));
+        var meshPlayer = new THREE.Mesh(geometry, material); 
+        listPlayers[idx].mesh = meshPlayer;
+        scene.add(meshPlayer);
         listNew.shift();
     }
 
