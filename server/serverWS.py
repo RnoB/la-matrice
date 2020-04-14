@@ -56,9 +56,12 @@ async def unregister(idPlayer,websocket):
     global players
     global playerNumber
     global playerIds
+
     players.remove(websocket)
     playerIds.remove(idPlayer)
     playerNumber -= 1
+    for player in players:
+        await player.send( json.dumps({'remPlayer' : idPlayer }))
 
 async def send(websocket,message):
     #message = await players[-1].recv()

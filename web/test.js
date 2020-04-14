@@ -205,6 +205,22 @@ function receiver(msg)
             "mesh" : new THREE.Mesh(geometry, material)});
             listPlayers[listPlayers.length-1].mesh.scale.set(.3,.3,.3);
             scene.add(listPlayers[listPlayers.length-1].mesh);
+    }    
+    else if('oldPlayer' in data)
+    {
+
+            var idx = listPlayers.findIndex(x => x.id == data.oldPlayer);
+            if (idx>-1)
+            {
+
+                listPlayers[idx].position = data.position;
+                listPlayers[idx].rotation = data.rotation;
+                scene.remove(listPlayers[idx].mesh);
+                listPlayers.splice(idx);
+            }
+
+
+            
     }
     else
     {
