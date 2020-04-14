@@ -75,7 +75,7 @@ function initSky() {
         inclination: 0.49, // elevation / inclination
         azimuth: 0.25, // Facing front,
         colorR: 0, // Facing front,
-        colorR: 0, // Facing front,
+        colorG: 0, // Facing front,
         colorB: 0, // Facing front,
         sun: ! true
     };
@@ -122,6 +122,7 @@ function initSky() {
     gui.add( effectController, "azimuth", 0, 1, 0.0001 ).onChange( guiChanged );
     gui.add( effectController, "sun" ).onChange( guiChanged );
     gui.add( effectController, "colorR", -1, 1, 0.001 ).onChange( guiChanged );
+    gui.add( effectController, "colorG", -1, 1, 0.001 ).onChange( guiChanged );
     gui.add( effectController, "colorB", -1, 1, 0.001 ).onChange( guiChanged );
 
     guiChanged();
