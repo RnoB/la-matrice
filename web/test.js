@@ -105,7 +105,7 @@ function receiver(msg)
         {
 
             listPlayers[idx].mesh.position.set(data.position.x,data.position.y,data.position.z);
-            listPlayers[idx].mesh.rotation.set(data.position._x,data.position._y,data.position._z,data.position._w);
+            //listPlayers[idx].mesh.rotation.set(data.position._x,data.position._y,data.position._z,data.position._w);
             console.log(listPlayers[idx]);
         }
     }
@@ -201,7 +201,7 @@ function render() {
         if (player.id !== id)
         {
             player.mesh.position.set(player.position.x,player.position.y,player.position.z);
-            player.mesh.rotation.set(player.position._x,player.position._y,player.position._z,player.position._w);
+            //player.mesh.rotation.set(player.position._x,player.position._y,player.position._z,player.position._w);
 
         }
     }
