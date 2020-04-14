@@ -106,7 +106,7 @@ function receiver(msg)
 
             listPlayers[idx].mesh.position.set(data.position.x,data.position.y,data.position.z);
             //listPlayers[idx].mesh.rotation.set(data.position._x,data.position._y,data.position._z,data.position._w);
-            console.log(listPlayers[idx]);
+            console.log(listPlayers[idx].mesh);
         }
     }
 }
