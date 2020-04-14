@@ -213,12 +213,11 @@ function receiver(msg)
 
             if (idx>-1)
             {
-                console.log(listPlayers[idx].mesh);
-                console.log(scene);
+
                 scene.remove(listPlayers[idx].mesh);
-                console.log(scene);
+
                 listPlayers.splice(idx);
-                console.log(listPlayers);
+
 
             }
 
