@@ -74,7 +74,7 @@ async def manager(websocket, path):
     idPlayer = await register(websocket)
     try:
         async for message in websocket:
-            #print(message)
+            print(message)
             await send(websocket,message)
     finally:
         await unregister(idPlayer,websocket)

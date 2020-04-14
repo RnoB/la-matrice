@@ -19,8 +19,6 @@ var id = Math.random();
 var connected = false;
 
 var listPlayers = [];
-var listNew = [];
-var listObjects = [];
 
 var frame = 0
 
