@@ -21,7 +21,7 @@ import {
 	ShaderMaterial,
 	UniformsUtils,
 	Vector3
-} from "../../../build/three.module.js";
+} from "./js/three.js";
 
 var Sky = function () {
 
