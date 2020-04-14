@@ -104,7 +104,7 @@ function receiver(msg)
         if (idx>-1)
         {
 
-            listPlayers[idx].position = data.position.x;
+            listPlayers[idx].position = data.position;
             listPlayers.rotation = data.position;
 
         }
