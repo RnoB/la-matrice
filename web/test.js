@@ -114,7 +114,7 @@ async function sender()
         
     while(true)
     {
-        camerabox.getWorldDirection( direction );
+        cameraBox.getWorldDirection( direction );
         var msg = {
             id: id,
             position: direction,
