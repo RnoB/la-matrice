@@ -115,7 +115,7 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-
+var controls
 function setup()
 {
     scene = new THREE.Scene();
@@ -159,7 +159,7 @@ function setup()
         colorB, // Facing front,
         sun )
 
-var controls = new THREE.PointerLockControls( camera, document.body );
+controls = new THREE.PointerLockControls( camera, document.body );
 controls.lock = true;
 }
 
