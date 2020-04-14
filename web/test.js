@@ -6,7 +6,7 @@ import { GUI } from './jsm/libs/dat.gui.module.js';
 
 import { Sky } from './jsm/objects/Sky.js';
 
-import './js/controls/PointerLockControls'
+import './js/controls/PointerLockControl.js'
 var camera, controls, scene, renderer;
 
 var sky, sunSphere;
