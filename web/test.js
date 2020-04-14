@@ -189,7 +189,7 @@ function animate() {
 }
 function render() {
     var t = new Date().getTime();
-    if (frame%100==0 and listPLayers)
+    if (frame%100==0 && listPLayers)
     {
     console.log(listPlayers[0].mesh);
     }
