@@ -182,9 +182,9 @@ function animate() {
 function render() {
     var t = new Date().getTime();
 
-    for (var new of listNew)
+    for (var newId of listNew)
     {
-        var idx = listPlayers.findIndex(x => x.id == new);
+        var idx = listPlayers.findIndex(x => x.id == newId);
         scene.add(listPlayers[idx].mesh);
         listNew.shift();
     }
