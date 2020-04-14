@@ -112,14 +112,16 @@ function receiver(msg)
 async function sender()
 {
     var direction = new THREE.Vector3();
+    var rotation = new THREE.Quaternion();
         
     while(true)
     {
         camera.children[0].getWorldPosition( direction );
+        camera.children[0].getWorldQuaternion( rotation );
         var msg = {
             id: id,
             position: direction,
-            rotation: camera.rotation
+            rotation: rotation
         };
         ws.send(JSON.stringify(msg));
         await sleep(10);
