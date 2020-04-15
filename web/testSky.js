@@ -76,7 +76,8 @@ function initSky() {
         colorR: 0, // Facing front,
         colorG: 0, // Facing front,
         colorB: 0, // Facing front,
-        sun: ! true
+        sun: ! true,
+        color: "#ffffff"
     };
 
     var distance = 400000;
@@ -123,6 +124,7 @@ function initSky() {
     gui.add( effectController, "colorR", 0, 5, 0.001 ).onChange( guiChanged );
     gui.add( effectController, "colorG", 0, 5, 0.001 ).onChange( guiChanged );
     gui.add( effectController, "colorB", 0, 5, 0.001 ).onChange( guiChanged );
+    gui.addColor(effectController,"color").onChange( guiChanged );
 
     guiChanged();
 
