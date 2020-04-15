@@ -101,6 +101,7 @@ function initSky() {
         uniforms[ "mieDirectionalG" ].value = effectController.mieDirectionalG;
         uniforms[ "luminance" ].value = effectController.luminance;
         var colorSky = returnRGB(effectController.colorSky);
+        console.log(colorSky);
         uniforms[ "colorR" ].value = colorSky.r;
         uniforms[ "colorG" ].value = colorSky.g;
         uniforms[ "colorB" ].value = colorSky.b;
