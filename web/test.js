@@ -196,16 +196,27 @@ function receiver(msg)
         console.log(data)
         id = data.id;
 
-        for (const player of data.playerIds)
+        for (const player of data)
         {
 
 
-
-            listPlayers.push({"id" : player,
-            "position" : {"x":0,"y":0,"z":0},
-            "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
+            var playerInfo = {"id" : player.playerIds,
+            "position" : new THREE.Vector3(),
+            "rotation" : new THREE.Quaternion(),
             "mesh" : new THREE.Mesh(geometry, material),
-            });
+            "controllers" : data.controllers};
+            
+            for (let k = 0; k < controllers.length; ++k) 
+            {
+                var controllerMesh = new THREE.Mesh( geometry, material );
+                controllerMesh.scale.set(.01,.1,.1);
+                playerInfo["controller"+k.toString()+"Position"] = controllers[k].position;
+                playerInfo["controller"+k.toString()+"Rotation"] = controllers[k].quaternion;
+                playerInfo["controller"+k.toString()+"Mesh"] = controllerMesh;
+                scene.add(controllerMesh);
+            }
+            
+            listPlayers.push(playerInfo);
             listPlayers[listPlayers.length-1].mesh.scale.set(.3,.3,.3);
             
             scene.add(listPlayers[listPlayers.length-1].mesh);
@@ -215,12 +226,28 @@ function receiver(msg)
     else if('newPlayer' in data)
     {
 
-            listPlayers.push({"id" : data.newPlayer,
-            "position" : {"x":0,"y":0,"z":0},
-            "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
-            "mesh" : new THREE.Mesh(geometry, material)});
+            playerInfo = {"id" : data.newPlayer,
+            "position" : new THREE.Vector3(),
+            "rotation" : new THREE.Quaternion(),
+            "mesh" : new THREE.Mesh(geometry, material),
+            "controllers" : data.controllers};
+
+            for (let k = 0; k < data.controllers; ++k) 
+            {
+                var controllerMesh = new THREE.Mesh( geometry, material );
+                controllerMesh.scale.set(.01,.1,.1);
+                playerInfo["controller"+k.toString()+"Position"] = controllers[k].position;
+                playerinfo["controller"+k.toString()+"Rotation"] = controllers[k].quaternion;
+                playerInfo["controller"+k.toString()+"Mesh"] = controllerMesh;
+                scene.add(controllerMesh);
+            }
+
+            listPlayers.push(playerInfo);
             listPlayers[listPlayers.length-1].mesh.scale.set(.3,.3,.3);
             scene.add(listPlayers[listPlayers.length-1].mesh);
+
+
+
     }    
     else if('remPlayer' in data)
     {
@@ -248,6 +275,14 @@ function receiver(msg)
 
             listPlayers[idx].position = data.position;
             listPlayers[idx].rotation = data.rotation;
+            for (let k = 0; k < controllers.length; ++k) 
+            {
+                var controllerMesh = new THREE.Mesh( geometry, material );
+                controllerMesh.scale.set(.01,.1,.1);
+                listPlayers[idx]["controller"+k.toString()+"Position"] = data["controller"+k.toString()+"Position";
+                listPlayers[idx]["controller"+k.toString()+"Rotation"] = data["controller"+k.toString()+"Rotation"];
+                scene.add(controllerMesh);
+            }
 
         }
     }
