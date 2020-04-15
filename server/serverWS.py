@@ -41,7 +41,8 @@ async def register(websocket):
     global players
     playerNumber+=1
     playerId+=1
-    playerData = await websocket.rev()
+    playerData = await websocket.recv()
+    print(playerData)
     playerInfo = json.loads(playerData)
     controllersN = playerInfo["controllers"]
 
