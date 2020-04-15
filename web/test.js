@@ -258,7 +258,10 @@ function receiver(msg)
             {
 
                 scene.remove(listPlayers[idx].mesh);
-
+                for (let k = 0; k < listPlayers[idx].controllers; ++k) 
+                {
+                    scene.remove(listPlayers[idx]["controller"+k.toString()+"Mesh"]);
+                }
                 listPlayers.splice(idx);
 
 
