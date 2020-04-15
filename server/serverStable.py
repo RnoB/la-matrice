@@ -44,15 +44,15 @@ async def register(websocket):
     for player in players:
         try:
             await player.send( json.dumps({'newPlayer' : playerId,'type' : 0 }))
-        pass:
-            except        
+        except:
+            pass        
     players.append(websocket)
     world = json.dumps({"world" : 1, "objects" : [2,3],"id" : playerId,"playerIds" : playerIds})
     playerIds.append(playerId)
     try:
         await players[-1].send(world)
-    pass:
-    except
+    except:
+        pass
     return playerId
 
 
