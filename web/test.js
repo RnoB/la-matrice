@@ -275,7 +275,7 @@ function receiver(msg)
 
             listPlayers[idx].position = data.position;
             listPlayers[idx].rotation = data.rotation;
-            for (let k = 0; k < controllers.length; ++k) 
+            for (let k = 0; k < listPlayers[idx].controllers; ++k) 
             {
                 var controllerMesh = new THREE.Mesh( geometry, material );
                 controllerMesh.scale.set(.01,.1,.1);
