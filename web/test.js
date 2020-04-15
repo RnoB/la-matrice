@@ -402,7 +402,7 @@ function render() {
                                                                     player["controller"+k.toString()+"Rotation"]._w);
 
             }
-            console.log(player);
+            
             
         }
     }
