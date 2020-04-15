@@ -266,6 +266,12 @@ async function sender()
             position: direction,
             rotation: rotation
         };
+        for (let k = 0; k < controllers.length; ++k) 
+        {
+            msg["controller"+k.toString()+"Position"] = controllers[k].position;
+            msg["controller"+k.toString()+"Rotation"] = controllers[k].rotation;
+            
+        }
         ws.send(JSON.stringify(msg));
         await sleep(10);
     }
