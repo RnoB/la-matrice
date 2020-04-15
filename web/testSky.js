@@ -167,6 +167,7 @@ function setUpWorld()
     light2.position.set(0, 50, 50);
     scene.add(light2);
     scene.add(light);
+    initSky();
 }
 
 
