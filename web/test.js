@@ -167,7 +167,7 @@ function setup()
     for (let i = 0; i < 2; ++i) {
         const controller = renderer.xr.getController(i);
         var controllerMesh = new THREE.Mesh( geometry, material );
-        controllerMesh.mesh.scale.set(.1,.1,.01);
+        controllerMesh.scale.set(.1,.1,.01);
         controller.add( controllerMesh);
         scene.add(controller);
         controllers.push(controller);
