@@ -1,5 +1,5 @@
 import "./js/three.min.js";
-import { VRButton } from './js/webxr/VRButton.js';
+
 
 
 import { GUI } from './jsm/libs/dat.gui.module.js';
@@ -15,7 +15,6 @@ var sky, sunSphere;
 var scene;
 var camera;
 var renderer = null;
-var polyfill = new WebXRPolyfill();
 
 var ws;
 
@@ -151,91 +150,12 @@ function setup()
     document.body.appendChild(renderer.domElement);
 
 
-    document.body.appendChild(VRButton.createButton(renderer));
+
     scene.add(plane);
     initSky();
 
 
 }
-
-
-
-function connect()
-{
-    ws = new WebSocket('wss://matricematrice.xyz:6785'); 
-    connected = true;
-
-}
-
-
-
-
-function receiver(msg)
-{
-    var data = JSON.parse(msg);
-
-    if('world' in data)
-    {
-        id = data.id;
-
-        for (const player of data.playerIds)
-        {
-
-
-
-            listPlayers.push({"id" : player,
-            "position" : {"x":0,"y":0,"z":0},
-            "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
-            "mesh" : new THREE.Mesh(geometry, material)});
-            listPlayers[listPlayers.length-1].mesh.scale.set(.3,.3,.3);
-            
-            scene.add(listPlayers[listPlayers.length-1].mesh);
-        }
-        setUpWorld();
-    }
-    else if('newPlayer' in data)
-    {
-
-            listPlayers.push({"id" : data.newPlayer,
-            "position" : {"x":0,"y":0,"z":0},
-            "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
-            "mesh" : new THREE.Mesh(geometry, material)});
-            listPlayers[listPlayers.length-1].mesh.scale.set(.3,.3,.3);
-            scene.add(listPlayers[listPlayers.length-1].mesh);
-    }
-    else
-    {
-        var idx = listPlayers.findIndex(x => x.id == data.id);
-        if (idx>-1)
-        {
-
-            listPlayers[idx].position = data.position;
-            listPlayers[idx].rotation = data.rotation;
-
-        }
-    }
-}
-
-async function sender()
-{
-    var direction = new THREE.Vector3();
-    var rotation = new THREE.Quaternion();
-        
-    while(true)
-    {
-        camera.children[0].getWorldPosition( direction );
-        camera.children[0].getWorldQuaternion( rotation );
-
-        var msg = {
-            id: id,
-            position: direction,
-            rotation: rotation
-        };
-        ws.send(JSON.stringify(msg));
-        await sleep(10);
-    }
-}
-
 
 
 function setUpWorld()
@@ -270,16 +190,6 @@ function onDocumentKeyDown(event) {
     }
     
 };
-
-function network()
-{
-    connect();
-    ws.onmessage = function (event) {receiver(event.data);}
-    ws.onopen =  function(event){sender(); }
-    
-}
-
-
 
 
 
