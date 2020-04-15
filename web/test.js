@@ -159,8 +159,10 @@ function setup()
         colorB, // Facing front,
         sun )
 
-controls = new THREE.PointerLockControls( camera, document.body );
-controls.lock = true;
+    controls = new THREE.PointerLockControls( camera, document.body );
+    controls.lock = true;
+    const controller = renderer.xr.getController(i);
+    scene.add(controller);
 }
 
 

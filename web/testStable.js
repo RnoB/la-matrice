@@ -281,14 +281,18 @@ function onDocumentKeyDown(event) {
     var keyCode = event.which;
 
     if (keyCode == 87) {
-        camera.position.z += ySpeed;
-    } else if (keyCode == 83) {
         camera.position.z -= ySpeed;
-    } else if (keyCode == 65) {
+    }
+    if (keyCode == 83) {
+        camera.position.z += ySpeed;
+    }
+    if (keyCode == 65) {
         camera.position.x -= xSpeed;
-    } else if (keyCode == 68) {
+    }
+    if (keyCode == 68) {
         camera.position.x += xSpeed;
-    } else if (keyCode == 32) {
+    }
+    if (keyCode == 32) {
         camera.position.set(0, 0, 0);
     }
     
