@@ -100,7 +100,7 @@ function initSky() {
         uniforms[ "mieCoefficient" ].value = effectController.mieCoefficient;
         uniforms[ "mieDirectionalG" ].value = effectController.mieDirectionalG;
         uniforms[ "luminance" ].value = effectController.luminance;
-        [r,g,b] = returnRGB(effectcontroller.colorSky);
+        [r,g,b] = returnRGB(effectController.colorSky);
         uniforms[ "colorR" ].value = r;
         uniforms[ "colorG" ].value = g;
         uniforms[ "colorB" ].value = b;
