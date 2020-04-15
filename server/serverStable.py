@@ -42,12 +42,17 @@ async def register(websocket):
     playerNumber+=1
     playerId+=1
     for player in players:
-        await player.send( json.dumps({'newPlayer' : playerId,'type' : 0 }))
-                
+        try:
+            await player.send( json.dumps({'newPlayer' : playerId,'type' : 0 }))
+        pass:
+            except        
     players.append(websocket)
     world = json.dumps({"world" : 1, "objects" : [2,3],"id" : playerId,"playerIds" : playerIds})
     playerIds.append(playerId)
-    await players[-1].send(world)
+    try:
+        await players[-1].send(world)
+    pass:
+    except
     return playerId
 
 
@@ -66,7 +71,10 @@ async def unregister(idPlayer,websocket):
     playerIds.remove(idPlayer)
     playerNumber -= 1
     for player in players:
-        await player.send( json.dumps({'remPlayer' : idPlayer }))
+        try:
+            await player.send( json.dumps({'remPlayer' : idPlayer }))
+        except:
+            pass
 
 async def send(websocket,message):
     #message = await players[-1].recv()
