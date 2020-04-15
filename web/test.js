@@ -204,7 +204,7 @@ function receiver(msg)
             "position" : new THREE.Vector3(),
             "rotation" : new THREE.Quaternion(),
             "mesh" : new THREE.Mesh(geometry, material),
-            "controllers" : data.controllers};
+            "controllers" : data.playerControllers[j]};
             
             for (let k = 0; k < data.playerControllers[j]; ++k) 
             {
