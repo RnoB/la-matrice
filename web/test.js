@@ -196,22 +196,22 @@ function receiver(msg)
         console.log(data)
         id = data.id;
 
-        for (const player of data)
+        for (let j = 0; j < data[j].playerIds.length; ++k) 
         {
 
 
-            var playerInfo = {"id" : player.playerIds,
+            var playerInfo = {"id" : data[j].playerIds,
             "position" : new THREE.Vector3(),
             "rotation" : new THREE.Quaternion(),
             "mesh" : new THREE.Mesh(geometry, material),
             "controllers" : data.controllers};
             
-            for (let k = 0; k < controllers.length; ++k) 
+            for (let k = 0; k < data[j].controllers; ++k) 
             {
                 var controllerMesh = new THREE.Mesh( geometry, material );
                 controllerMesh.scale.set(.01,.1,.1);
-                playerInfo["controller"+k.toString()+"Position"] = controllers[k].position;
-                playerInfo["controller"+k.toString()+"Rotation"] = controllers[k].quaternion;
+                playerInfo["controller"+k.toString()+"Position"] = new THREE.Vector3();
+                playerInfo["controller"+k.toString()+"Rotation"] = new THREE.Quaternion();
                 playerInfo["controller"+k.toString()+"Mesh"] = controllerMesh;
                 scene.add(controllerMesh);
             }
@@ -236,8 +236,8 @@ function receiver(msg)
             {
                 var controllerMesh = new THREE.Mesh( geometry, material );
                 controllerMesh.scale.set(.01,.1,.1);
-                playerInfo["controller"+k.toString()+"Position"] = controllers[k].position;
-                playerinfo["controller"+k.toString()+"Rotation"] = controllers[k].quaternion;
+                playerInfo["controller"+k.toString()+"Position"] = new THREE.Vector3();
+                playerinfo["controller"+k.toString()+"Rotation"] = new THREE.Quaternion();
                 playerInfo["controller"+k.toString()+"Mesh"] = controllerMesh;
                 scene.add(controllerMesh);
             }
