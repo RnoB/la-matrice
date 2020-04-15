@@ -161,8 +161,11 @@ function setup()
 
     controls = new THREE.PointerLockControls( camera, document.body );
     controls.lock = true;
-    const controller = renderer.xr.getController(i);
-    scene.add(controller);
+    controllers = [];
+    for (let i = 0; i < 2; ++i) {
+      const controller = renderer.xr.getController(i);
+      scene.add(controller);
+    }
 }
 
 
