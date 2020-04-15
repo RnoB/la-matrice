@@ -396,10 +396,10 @@ function render() {
                 player["controller"+k.toString()+"Mesh"].position.set(player["controller"+k.toString()+"Position"].x,
                                                                     player["controller"+k.toString()+"Position"].y,
                                                                     player["controller"+k.toString()+"Position"].z,);
-                player["controller"+k.toString()+"Mesh"].quaternion.set(data["controller"+k.toString()+"Rotation"]._x,
-                                                                    data["controller"+k.toString()+"Rotation"]._y,
-                                                                    data["controller"+k.toString()+"Rotation"]._z,
-                                                                    data["controller"+k.toString()+"Rotation"]._w);
+                player["controller"+k.toString()+"Mesh"].quaternion.set(player["controller"+k.toString()+"Rotation"]._x,
+                                                                    player["controller"+k.toString()+"Rotation"]._y,
+                                                                    player["controller"+k.toString()+"Rotation"]._z,
+                                                                    player["controller"+k.toString()+"Rotation"]._w);
 
             }
             console.log(player);
