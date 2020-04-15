@@ -279,7 +279,7 @@ function receiver(msg)
             {
                 var controllerMesh = new THREE.Mesh( geometry, material );
                 controllerMesh.scale.set(.01,.1,.1);
-                listPlayers[idx]["controller"+k.toString()+"Position"] = data["controller"+k.toString()+"Position";
+                listPlayers[idx]["controller"+k.toString()+"Position"] = data["controller"+k.toString()+"Position"];
                 listPlayers[idx]["controller"+k.toString()+"Rotation"] = data["controller"+k.toString()+"Rotation"];
                 scene.add(controllerMesh);
             }
