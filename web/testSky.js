@@ -100,10 +100,10 @@ function initSky() {
         uniforms[ "mieCoefficient" ].value = effectController.mieCoefficient;
         uniforms[ "mieDirectionalG" ].value = effectController.mieDirectionalG;
         uniforms[ "luminance" ].value = effectController.luminance;
-        [r,g,b] = returnRGB(effectController.colorSky);
-        uniforms[ "colorR" ].value = r;
-        uniforms[ "colorG" ].value = g;
-        uniforms[ "colorB" ].value = b;
+        var colorSky = returnRGB(effectController.colorSky);
+        uniforms[ "colorR" ].value = colorSky.r;
+        uniforms[ "colorG" ].value = colorSky.g;
+        uniforms[ "colorB" ].value = colorSky.b;
 
         var theta = Math.PI * ( effectController.inclination - 0.5 );
         var phi = 2 * Math.PI * ( effectController.azimuth - 0.5 );
