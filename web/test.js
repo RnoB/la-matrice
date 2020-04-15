@@ -258,7 +258,7 @@ async function sender()
     var rotation = new THREE.Quaternion();
     
     var msg = {
-        contollers: controllers.length
+        controllers: controllers.length
     };
     ws.send(JSON.stringify(msg));
     while(true)
