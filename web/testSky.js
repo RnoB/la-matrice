@@ -199,7 +199,7 @@ function onDocumentKeyDown(event) {
 
 
 
-//setup();
+setUpWorld();
 
 function animate() {
     renderer.setAnimationLoop(render);    
