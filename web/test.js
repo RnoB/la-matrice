@@ -203,7 +203,8 @@ function receiver(msg)
             listPlayers.push({"id" : player,
             "position" : {"x":0,"y":0,"z":0},
             "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
-            "mesh" : new THREE.Mesh(geometry, material)});
+            "mesh" : new THREE.Mesh(geometry, material),
+            });
             listPlayers[listPlayers.length-1].mesh.scale.set(.3,.3,.3);
             
             scene.add(listPlayers[listPlayers.length-1].mesh);
