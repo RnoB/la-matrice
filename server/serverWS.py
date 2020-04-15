@@ -44,7 +44,7 @@ async def register(websocket):
     playerData = await websocket.recv()
     print(playerData)
     playerInfo = json.loads(playerData)
-    print(playerInfo)
+
     controllersN = playerInfo["controllers"]
 
     for player in players:
@@ -52,7 +52,7 @@ async def register(websocket):
                 
     players.append(websocket)
     world = json.dumps({"world" : 1, "objects" : [2,3],"id" : playerId,"playerIds" : playerIds})
-    playerIds.append((playerId,controllers))
+    playerIds.append((playerId,controllersN))
     await players[-1].send(world)
     return playerId
 
