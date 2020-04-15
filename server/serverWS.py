@@ -52,7 +52,7 @@ async def register(websocket):
     controllersN = playerInfo["controllers"]
 
     for player in players:
-        try;
+        try:
             await player.send( json.dumps({'newPlayer' : playerId,'type' : 0 ,'controllers':controllersN}))
         except:
             pass
