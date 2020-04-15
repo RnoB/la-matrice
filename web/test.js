@@ -256,7 +256,11 @@ async function sender()
 {
     var direction = new THREE.Vector3();
     var rotation = new THREE.Quaternion();
-        
+    
+    var msg = {
+        contollers: controllers.length
+    };
+
     while(true)
     {
         camera.children[0].getWorldPosition( direction );
