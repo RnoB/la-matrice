@@ -48,9 +48,7 @@ console.log(plane.rotation);
 var simuTime;
 
 function returnRGB(hex){
-    console.log(hex);
-    var hex = Math.floor( hex );
-    console.log(hex);
+
     var r = ( hex >> 16 & 255 ) / 255;
     var g = ( hex >> 8 & 255 ) / 255;
     var b = ( hex & 255 ) / 255;
