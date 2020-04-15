@@ -229,5 +229,4 @@ function render() {
 
 
 setup();
-network();
 animate();
