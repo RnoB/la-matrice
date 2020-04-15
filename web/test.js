@@ -206,7 +206,7 @@ function receiver(msg)
             "mesh" : new THREE.Mesh(geometry, material),
             "controllers" : data.controllers};
             
-            for (let k = 0; k < data.controllers[j]; ++k) 
+            for (let k = 0; k < data.playerControllers[j]; ++k) 
             {
                 var controllerMesh = new THREE.Mesh( geometry, material );
                 controllerMesh.scale.set(.01,.1,.1);
