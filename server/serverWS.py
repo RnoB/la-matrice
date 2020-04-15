@@ -17,6 +17,7 @@ players = []
 playersPosition = []
 playersRotation = []
 playerIds = []
+playerControllers = []
 playerId = 0
 playerNumber = 0
 
@@ -51,8 +52,9 @@ async def register(websocket):
         await player.send( json.dumps({'newPlayer' : playerId,'type' : 0 ,'controllers':controllersN}))
                 
     players.append(websocket)
-    world = json.dumps({"world" : 1, "objects" : [2,3],"id" : playerId,"playerIds" : playerIds})
-    playerIds.append((playerId,controllersN))
+    world = json.dumps({"world" : 1, "objects" : [2,3],"id" : playerId,"playerIds" : playerIds,"playerControllers" : playerControllers})
+    playerIds.append(playerId)
+    playerControllers.append(controllersN)
     await players[-1].send(world)
     return playerId
 
@@ -69,8 +71,8 @@ async def unregister(idPlayer,websocket):
             register = False
         except:
             pass
-    for k in range(0,2):
-        playerIds.remove((idPlayer,k))
+    del playerControllers[playerIds.index(idPlayer)]
+    playerIds.remove(idPlayer)
     playerNumber -= 1
     for player in players:
         await player.send( json.dumps({'remPlayer' : idPlayer }))
