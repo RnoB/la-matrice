@@ -152,7 +152,6 @@ function setup()
 
 
     scene.add(plane);
-    initSky();
 
 
 }
@@ -200,7 +199,6 @@ function onDocumentKeyDown(event) {
 
 
 
-setUpWorld();
 
 function animate() {
     renderer.setAnimationLoop(render);    
@@ -230,4 +228,5 @@ function render() {
 
 
 setup();
+setUpWorld();
 animate();
