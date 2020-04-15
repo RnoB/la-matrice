@@ -47,6 +47,16 @@ console.log(plane.rotation);
 
 var simuTime;
 
+function returnRGB(hex){
+    console.log(hex);
+    var hex = Math.floor( hex );
+    var r = ( hex >> 16 & 255 ) / 255;
+    var g = ( hex >> 8 & 255 ) / 255;
+    var b = ( hex & 255 ) / 255;
+    
+    return [r,g,b];
+}
+
 function initSky() {
 
     // Add Sky
@@ -77,7 +87,7 @@ function initSky() {
         colorG: 0, // Facing front,
         colorB: 0, // Facing front,
         sun: ! true,
-        color: "#ffffff"
+        colorSky: "#ffffff"
     };
 
     var distance = 400000;
@@ -90,9 +100,10 @@ function initSky() {
         uniforms[ "mieCoefficient" ].value = effectController.mieCoefficient;
         uniforms[ "mieDirectionalG" ].value = effectController.mieDirectionalG;
         uniforms[ "luminance" ].value = effectController.luminance;
-        uniforms[ "colorR" ].value = effectController.colorR;
-        uniforms[ "colorG" ].value = effectController.colorG;
-        uniforms[ "colorB" ].value = effectController.colorB;
+        [r,g,b] = returnRGB(effectcontroller.colorSky);
+        uniforms[ "colorR" ].value = r;
+        uniforms[ "colorG" ].value = g;
+        uniforms[ "colorB" ].value = b;
 
         var theta = Math.PI * ( effectController.inclination - 0.5 );
         var phi = 2 * Math.PI * ( effectController.azimuth - 0.5 );
@@ -124,7 +135,7 @@ function initSky() {
     gui.add( effectController, "colorR", 0, 5, 0.001 ).onChange( guiChanged );
     gui.add( effectController, "colorG", 0, 5, 0.001 ).onChange( guiChanged );
     gui.add( effectController, "colorB", 0, 5, 0.001 ).onChange( guiChanged );
-    gui.addColor(effectController,"color").onChange( guiChanged );
+    gui.addColor(effectController,"colorSky").onChange( guiChanged );
 
     guiChanged();
 
