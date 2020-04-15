@@ -92,7 +92,7 @@ function initSky() {
         uniforms[ "mieCoefficient" ].value = effectController.mieCoefficient;
         uniforms[ "mieDirectionalG" ].value = effectController.mieDirectionalG;
         uniforms[ "luminance" ].value = effectController.luminance;
-        var colorSky = new THREE.color(effectController.colorSky);
+        var colorSky = new THREE.Color(effectController.colorSky);
         console.log(colorSky);
         uniforms[ "colorR" ].value = colorSky.r;
         uniforms[ "colorG" ].value = colorSky.g;
