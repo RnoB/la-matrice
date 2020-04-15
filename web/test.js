@@ -260,7 +260,7 @@ async function sender()
     var msg = {
         contollers: controllers.length
     };
-
+    ws.send(JSON.stringify(msg));
     while(true)
     {
         camera.children[0].getWorldPosition( direction );
