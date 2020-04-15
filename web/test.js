@@ -196,17 +196,17 @@ function receiver(msg)
         console.log(data)
         id = data.id;
 
-        for (let j = 0; j < data[j].playerIds.length; ++k) 
+        for (let j = 0; j < data.playerIds.length; ++k) 
         {
 
 
-            var playerInfo = {"id" : data[j].playerIds,
+            var playerInfo = {"id" : data.playerIds[j],
             "position" : new THREE.Vector3(),
             "rotation" : new THREE.Quaternion(),
             "mesh" : new THREE.Mesh(geometry, material),
             "controllers" : data.controllers};
             
-            for (let k = 0; k < data[j].controllers; ++k) 
+            for (let k = 0; k < data.controllers[j]; ++k) 
             {
                 var controllerMesh = new THREE.Mesh( geometry, material );
                 controllerMesh.scale.set(.01,.1,.1);
