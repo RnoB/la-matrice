@@ -49,6 +49,9 @@ console.log(plane.rotation);
 
 var simuTime = 0;
 
+
+var controllers = [];
+
 function initSky(turbidity = 10,
         rayleigh = 2,
         mieCoefficient = 0.005,
@@ -161,11 +164,11 @@ function setup()
 
     controls = new THREE.PointerLockControls( camera, document.body );
     controls.lock = true;
-    controllers = [];
     for (let i = 0; i < 2; ++i) {
-      const controller = renderer.xr.getController(i);
-      scene.add(controller);
-      console.log(controller);
+        const controller = renderer.xr.getController(i);
+        scene.add(controller);
+        controller.push(controller);
+
     }
 }
 
@@ -341,9 +344,9 @@ function render() {
         }
     }
     
-    
-   renderer.render(scene, camera);
-   frame++;
+    console.log(controllers[0].position);
+    renderer.render(scene, camera);
+    frame++;
 }
 
 
