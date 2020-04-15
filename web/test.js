@@ -165,6 +165,7 @@ function setup()
     for (let i = 0; i < 2; ++i) {
       const controller = renderer.xr.getController(i);
       scene.add(controller);
+      console.log(controller);
     }
 }
 
