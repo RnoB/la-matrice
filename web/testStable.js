@@ -41,11 +41,11 @@ var cameraBox = new THREE.Mesh(geometry, material);
 var geometryPlane = new THREE.PlaneGeometry( 200, 200, 8,8 );
 var materialPlane = new THREE.MeshStandardMaterial( {color: 0xff00ff} );
 var plane = new THREE.Mesh( geometryPlane, materialPlane );
-console.log(plane.rotation);
+
 
 
 plane.rotateX(-Math.PI/2.0);
-console.log(plane.rotation);
+
 
 var simuTime = 0;
 
@@ -178,7 +178,7 @@ function connect()
 function receiver(msg)
 {
     var data = JSON.parse(msg);
-    console.log(data);
+
     if('world' in data)
     {
         id = data.id;
