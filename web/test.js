@@ -166,6 +166,9 @@ function setup()
     controls.lock = true;
     for (let i = 0; i < 2; ++i) {
         const controller = renderer.xr.getController(i);
+        var controllerMesh = new THREE.Mesh( geometry, material );
+        controller.mesh.mesh.scale.set(.1,.1,.01);
+        controller.add( controllerMesh);
         scene.add(controller);
         controllers.push(controller);
 
@@ -344,7 +347,7 @@ function render() {
         }
     }
     
-    console.log(controllers[0].position);
+    
     renderer.render(scene, camera);
     frame++;
 }
