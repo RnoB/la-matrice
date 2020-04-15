@@ -193,7 +193,7 @@ function receiver(msg)
     
     if('world' in data)
     {
-        print(data)
+        console.log(data)
         id = data.id;
 
         for (const player of data.playerIds)
