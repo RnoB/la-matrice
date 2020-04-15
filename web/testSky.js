@@ -47,14 +47,7 @@ console.log(plane.rotation);
 
 var simuTime;
 
-function returnRGB(hex){
 
-    var r = ( hex >> 16 & 255 ) / 255;
-    var g = ( hex >> 8 & 255 ) / 255;
-    var b = ( hex & 255 ) / 255;
-    console.log([r,g,b]);
-    return [r,g,b];
-}
 
 function initSky() {
 
@@ -99,7 +92,7 @@ function initSky() {
         uniforms[ "mieCoefficient" ].value = effectController.mieCoefficient;
         uniforms[ "mieDirectionalG" ].value = effectController.mieDirectionalG;
         uniforms[ "luminance" ].value = effectController.luminance;
-        var colorSky = returnRGB(effectController.colorSky);
+        var colorSky = new THREE.color(effectController.colorSky);
         console.log(colorSky);
         uniforms[ "colorR" ].value = colorSky.r;
         uniforms[ "colorG" ].value = colorSky.g;
