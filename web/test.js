@@ -364,28 +364,28 @@ async function sender()
     {   
 
         var msgArray = new ArrayBuffer(1+4+28*(1+controllers.length));
-        var msgView = new DataView()
+        var msgView = new DataView(msgArray);
         camera.children[0].getWorldPosition( direction );
         camera.children[0].getWorldQuaternion( rotation );
         msgView.setUint8(0, networkCode['playerPosition']);
         msgView.setInt32(1, id,true);
-        msgView.setFloat32(5, position.x, true)
-        msgView.setFloat32(9, position.y, true)
-        msgView.setFloat32(13, position.z, true)
-        msgView.setFloat32(17, rotation._x, true)
-        msgView.setFloat32(21, rotation._y, true)
-        msgView.setFloat32(25, rotation._z, true)
-        msgView.setFloat32(29, rotation._w, true)
+        msgView.setFloat32(5, position.x, true);
+        msgView.setFloat32(9, position.y, true);
+        msgView.setFloat32(13, position.z, true);
+        msgView.setFloat32(17, rotation._x, true);
+        msgView.setFloat32(21, rotation._y, true);
+        msgView.setFloat32(25, rotation._z, true);
+        msgView.setFloat32(29, rotation._w, true);
 
         for (let k = 0; k < controllers.length; ++k) 
         {
-            msgView.setFloat32(33+k*28, controllers[k].position.x, true)
-            msgView.setFloat32(37+k*28, controllers[k].position.y, true)
-            msgView.setFloat32(41+k*28, controllers[k].position.z, true)
-            msgView.setFloat32(45+k*28, controllers[k].quaternion._x, true)
-            msgView.setFloat32(49+k*28, controllers[k].quaternion._y, true)
-            msgView.setFloat32(53+k*28, controllers[k].quaternion._z, true)
-            msgView.setFloat32(57+k*28, controllers[k].quaternion._w, true)
+            msgView.setFloat32(33+k*28, controllers[k].position.x, true);
+            msgView.setFloat32(37+k*28, controllers[k].position.y, true);
+            msgView.setFloat32(41+k*28, controllers[k].position.z, true);
+            msgView.setFloat32(45+k*28, controllers[k].quaternion._x, true);
+            msgView.setFloat32(49+k*28, controllers[k].quaternion._y, true);
+            msgView.setFloat32(53+k*28, controllers[k].quaternion._z, true);
+            msgView.setFloat32(57+k*28, controllers[k].quaternion._w, true);
             
         }
         ws.send(msgArray.buffer);
