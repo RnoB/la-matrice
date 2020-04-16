@@ -75,6 +75,7 @@ async def register(websocket):
                 pass
                     
         players.append(websocket)
+        dataWorld = []
         dataWorld.append(struct.pack('Bi', networkCode['world'],playerId))
         
         for k in range(0,len(playerIds)):
