@@ -363,7 +363,9 @@ async function sender()
     while(true)
     {   
 
-        var msgArray = new ArrayBuffer(1+4+28*(1+controllers.length));
+        //var msgArray = new ArrayBuffer(1+4+28*(1+controllers.length));
+        var msgArray = new ArrayBuffer(1+4+12*(1+controllers.length));
+        
         var msgView = new DataView(msgArray);
         camera.children[0].getWorldPosition( direction );
         camera.children[0].getWorldQuaternion( rotation );
@@ -372,11 +374,11 @@ async function sender()
         msgView.setFloat32(5, direction.x, true);
         msgView.setFloat32(9, direction.y, true);
         msgView.setFloat32(13, direction.z, true);
-        msgView.setFloat32(17, rotation._x, true);
+/*        msgView.setFloat32(17, rotation._x, true);
         msgView.setFloat32(21, rotation._y, true);
         msgView.setFloat32(25, rotation._z, true);
         msgView.setFloat32(29, rotation._w, true);
-
+*/
         for (let k = 0; k < controllers.length; ++k) 
         {
             msgView.setFloat32(33+k*28, controllers[k].position.x, true);
@@ -388,7 +390,7 @@ async function sender()
             msgView.setFloat32(57+k*28, controllers[k].quaternion._w, true);
             
         }
-        console.log(msgView.buffer);
+        
         ws.send(new Uint8Array(msgArray));
         await sleep(10);
     }
