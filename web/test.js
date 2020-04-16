@@ -55,7 +55,7 @@ var controllers = [];
 
 
 
-function getNetworkCodes()
+function getNetworkCode()
 {
 
     var networkCodePath = "./networkCode.csv";
