@@ -8,11 +8,14 @@ import logging
 import time
 import json
 import threading
-import networkCode
 import struct
+import csv
 
 homeFolder = "/home/ubuntu/"
+networkCodePath = "../web/data/networkCode.csv"
 certFolder = "cert/"
+
+networkCode = []
 
 players = []
 playersPosition = []
@@ -25,6 +28,13 @@ playerNumber = 0
 #logger = logging.getLogger('websockets')
 #logger.setLevel(logging.INFO)
 #logger.addHandler(logging.StreamHandler())
+
+
+with open(networkCodePath, mode='r') as infile:
+    reader = csv.reader(infile)
+    networkCode = {rows[0]:rows[1] for rows in reader}
+    print networkCode
+
 
 def getLocalIP():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
