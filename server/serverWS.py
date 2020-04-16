@@ -48,10 +48,11 @@ async def register(websocket):
     except:
         pass
     print(playerData)
-    print(struct.unpack('BB',playerData))
+    playerInfo = struct.unpack('BB',playerData)
     playerInfo = json.loads(playerData)
-
-    controllersN = playerInfo["controllers"]
+    if playerInfo[0] == 10:
+        controllersN = playerInfo[1]
+        print(controllersN)
 
     for player in players:
         try:
