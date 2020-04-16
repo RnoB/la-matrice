@@ -237,7 +237,7 @@ function connect()
 
 function receiver(msg)
 {
-
+    console.log(msg);
     var data = new DataView(msg);
 
     var code = data.getUint8(0,true);
