@@ -369,9 +369,9 @@ async function sender()
         camera.children[0].getWorldQuaternion( rotation );
         msgView.setUint8(0, networkCode['playerPosition']);
         msgView.setInt32(1, id,true);
-        msgView.setFloat32(5, position.x, true);
-        msgView.setFloat32(9, position.y, true);
-        msgView.setFloat32(13, position.z, true);
+        msgView.setFloat32(5, direction.x, true);
+        msgView.setFloat32(9, direction.y, true);
+        msgView.setFloat32(13, direction.z, true);
         msgView.setFloat32(17, rotation._x, true);
         msgView.setFloat32(21, rotation._y, true);
         msgView.setFloat32(25, rotation._z, true);
