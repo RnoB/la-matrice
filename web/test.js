@@ -313,8 +313,7 @@ function receiver(msg)
             "rotation" : new THREE.Quaternion(),
             "mesh" : new THREE.Mesh(geometry, material),
             "controllers" : contrlers};
-            console.log(playerInfo);
-            console.log(scene);
+
             for (let k = 0; k < contrlers; ++k) 
             {
                 var controllerMesh = new THREE.Mesh( geometry, material );
@@ -328,8 +327,7 @@ function receiver(msg)
             listPlayers.push(playerInfo);
             listPlayers[listPlayers.length-1].mesh.scale.set(.3,.3,.3);
             scene.add(listPlayers[listPlayers.length-1].mesh);
-            console.log(playerInfo);
-            console.log(scene);
+
             break;
         case networkCode["removePlayer"]:
             remPlayer = data.getInt32(1,true);
@@ -419,7 +417,7 @@ var ySpeed = 0.1;
 document.addEventListener("keydown", onDocumentKeyDown, false);
 function onDocumentKeyDown(event) {
     var keyCode = event.which;
-
+    console.log(camera.position);
     if (keyCode == 87) {
         camera.position.z += ySpeed;
     } 
