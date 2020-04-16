@@ -328,7 +328,7 @@ function receiver(msg)
             scene.add(listPlayers[listPlayers.length-1].mesh);
             console.log(playerInfo);
             break;
-        case networkCode["removePlayer"]
+        case networkCode["removePlayer"]:
             remPlayer = data.getInt32(1,true);
             var idx = listPlayers.findIndex(x => x.id == data.remPlayer);
 
