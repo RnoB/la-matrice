@@ -41,11 +41,11 @@ var cameraBox = new THREE.Mesh(geometry, material);
 var geometryPlane = new THREE.PlaneGeometry( 200, 200, 8,8 );
 var materialPlane = new THREE.MeshStandardMaterial( {color: 0xff00ff} );
 var plane = new THREE.Mesh( geometryPlane, materialPlane );
-console.log(plane.rotation);
+
 
 
 plane.rotateX(-Math.PI/2.0);
-console.log(plane.rotation);
+
 
 var simuTime = 0;
 
@@ -237,11 +237,11 @@ function connect()
 
 function receiver(msg)
 {
-    console.log(msg);
+
     var data = new DataView(msg);
 
     var code = data.getUint8(0,true);
-    console.log("code : "+code.toString());
+
 
 
 
@@ -328,6 +328,7 @@ function receiver(msg)
             listPlayers[listPlayers.length-1].mesh.scale.set(.3,.3,.3);
             scene.add(listPlayers[listPlayers.length-1].mesh);
             console.log(playerInfo);
+            console.log(scene);
             break;
         case networkCode["removePlayer"]:
             remPlayer = data.getInt32(1,true);
