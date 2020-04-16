@@ -1,10 +1,10 @@
 
 
-homeFolder = "/home/ubuntu/";
-networkCodePath = homeFolder+"la-matrice/web/data/networkCode.csv";
+var homeFolder = "/home/ubuntu/";
+var networkCodePath = homeFolder+"la-matrice/web/data/networkCode.csv";
 
 (function () {
-  var fileInput = document.querySelector('#file');
+  var fileInput = document.querySelector(networkCodePath);
   var reader = new FileReader ();
   fileInput.addEventListener('change', readCSVFile);
   reader.addEventListener('loadend', processData);
