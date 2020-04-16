@@ -33,7 +33,7 @@ playerNumber = 0
 with open(networkCodePath, mode='r') as infile:
     reader = csv.reader(infile)
     networkCode = {rows[0]:rows[1] for rows in reader}
-    print networkCode
+    print(networkCode)
 
 
 def getLocalIP():
