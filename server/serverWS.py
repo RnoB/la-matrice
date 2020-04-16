@@ -84,10 +84,9 @@ async def register(websocket):
         playerIds.append(playerId)
         playersPosition.append({"id" : playerId,"controllers" : controllers,"position" : (0,0,0),"rotation" : (0,0,0)})
         
-        try:
-            await players[-1].send(dataWorld)
-        except:
-            print("fuck")
+        
+        await players[-1].send(dataWorld)
+
         return playerId
 
 
