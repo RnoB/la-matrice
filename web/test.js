@@ -210,7 +210,7 @@ function setup()
 
     controls = new THREE.PointerLockControls( camera, document.body );
     controls.lock = true;
-    for (let i = 0; i < -1; ++i) {
+    for (let i = 0; i < 2; ++i) {
         const controller = renderer.xr.getController(i);
         var controllerMesh = new THREE.Mesh( geometry, material );
         controllerMesh.scale.set(.01,.1,.1);
