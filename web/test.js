@@ -388,8 +388,8 @@ async function sender()
             msgView.setFloat32(57+k*28, controllers[k].quaternion._w, true);
             
         }
-        ws.send(msgView.buffer);
         console.log(msgView.buffer);
+        ws.send(msgView.buffer);
         await sleep(10);
     }
 }
