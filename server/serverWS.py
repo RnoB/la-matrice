@@ -12,7 +12,7 @@ import struct
 import csv
 
 homeFolder = "/home/ubuntu/"
-networkCodePath = homeFolder+"la-matrice/web/data/networkCode.csv"
+networkCodePath = homeFolder+"la-matrice/web/js/network/networkCode.csv"
 certFolder = "cert/"
 
 networkCode = []
