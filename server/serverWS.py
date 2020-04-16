@@ -143,21 +143,21 @@ def storePosition(code,idPlayer,message):
 
     message = struct.pack('B', networkCode['objectPosition'])
     message += struct.pack('<i', idPlayer)
-    message += struct.pack('<fff',playersPosition[playerIds.index(idPlayer)]['position'][0],\
-                                    playersPosition[playerIds.index(idPlayer)]['position'][1],\
-                                    playersPosition[playerIds.index(idPlayer)]['position'][2])
-    message += struct.pack('<ffff',playersPosition[playerIds.index(idPlayer)]['rotation'][0],\
-                                    playersPosition[playerIds.index(idPlayer)]['rotation'][1],\
-                                    playersPosition[playerIds.index(idPlayer)]['rotation'][2],\
-                                    playersPosition[playerIds.index(idPlayer)]['rotation'][3])
+    message += struct.pack('<fff',playersPosition[playerIds.index(idPlayer)][0],\
+                                    playersPosition[playerIds.index(idPlayer)][1],\
+                                    playersPosition[playerIds.index(idPlayer)][2])
+    message += struct.pack('<ffff',playersPosition[playerIds.index(idPlayer)][0],\
+                                    playersPosition[playerIds.index(idPlayer)][1],\
+                                    playersPosition[playerIds.index(idPlayer)][2],\
+                                    playersPosition[playerIds.index(idPlayer)][3])
     for k in range(0,playersPosition[playerIds.index(idPlayer)]['controllers']):
-        message += struct.pack('<fff',playersPosition["posC"+str(k)]['position'][0],\
-                                        playersPosition["posC"+str(k)]['position'][1],\
-                                        playersPosition["posC"+str(k)]['position'][2])
-        message += struct.pack('<ffff',playersPosition["rotC"+str(k)]['rotation'][0],\
-                                        playersPosition["rotC"+str(k)]['rotation'][1],\
-                                        playersPosition["rotC"+str(k)]['rotation'][2],\
-                                        playersPosition["rotC"+str(k)]['rotation'][3])
+        message += struct.pack('<fff',playersPosition["posC"+str(k)][0],\
+                                        playersPosition["posC"+str(k)][1],\
+                                        playersPosition["posC"+str(k)][2])
+        message += struct.pack('<ffff',playersPosition["rotC"+str(k)][0],\
+                                        playersPosition["rotC"+str(k)][1],\
+                                        playersPosition["rotC"+str(k)][2],\
+                                        playersPosition["rotC"+str(k)][3])
     return message
 
 
