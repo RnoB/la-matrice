@@ -64,13 +64,13 @@ async def register(websocket):
 
 
         for player in playersSocket:
-            try:
-                dataWorld = struct.pack('<BiiB', networkCode['newPlayer'],0, playerId,controllers)
-                
-                print(dataWorld);
-                await player.send( dataWorld)
-            except:
-                pass
+        
+            dataWorld = struct.pack('<BiiB', networkCode['newPlayer'],0, playerId,controllers)
+            
+            print(dataWorld);
+            await player.send( dataWorld)
+        
+            
                     
         playersSocket.append(websocket)
         dataWorld = struct.pack('B', networkCode['world'])
