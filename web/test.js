@@ -58,7 +58,7 @@ var controllers = [];
 function getNetworkCode()
 {
 
-    var networkCodePath = "./networkCode.csv";
+    var networkCodePath = "./js/network/networkCode.csv";
     var data;
     fetch(networkCodePath)
       .then(response => response.text())
