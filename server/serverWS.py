@@ -67,7 +67,7 @@ async def register(websocket):
 
         for player in players:
             try:
-                dataWorld = struct.pack('BiiB', networkCode['newPlayer'],0, playerId,controllers)
+                dataWorld = struct.pack('>BiiB', networkCode['newPlayer'],0, playerId,controllers)
                 
                 print(dataWorld);
                 await player.send( dataWorld)
@@ -79,7 +79,7 @@ async def register(websocket):
         dataWorld += struct.pack('>i',playerId)
         print(dataWorld)
         for k in range(0,len(playerIds)):
-            dataWorld += struct.pack('ii', playerIds[k],playerControllers[k])
+            dataWorld += struct.pack('>ii', playerIds[k],playerControllers[k])
         print(dataWorld)
         #world = json.dumps({"world" : 1, "objects" : [2,3],"id" : playerId,"playerIds" : playerIds,"playerControllers" : playerControllers})
         playerIds.append(playerId)
