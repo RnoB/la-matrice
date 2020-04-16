@@ -2,12 +2,12 @@
 
 
 var networkCodePath = "./networkCode.csv";
+var data;
+fetch(networkCodePath)
+  .then(response => response.text())
+  .then(text => data = text);
 
-text = fetch(networkCodePath)
-//  .then(response => response.text())
-//  .then(text => console.log(text));
-
-print(text);
+print(data);
 var elems = {};
 for (var i = 0; i < result.length; i++)
 {
