@@ -395,7 +395,7 @@ async function sender()
             
         }
         
-        ws.send();
+        ws.send(msgArray.buffer);
         await sleep(10);
     }
 }
