@@ -3,7 +3,7 @@
 
 var networkCodePath = "./networkCode.csv";
 
-fetch('file.txt')
+fetch(networkCodePath)
   .then(response => response.text())
   .then(text => console.log(text));
 
