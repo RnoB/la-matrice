@@ -331,8 +331,8 @@ function receiver(msg)
 
             break;
         case networkCode["removePlayer"]:
-            remPlayer = data.getInt32(1,true);
-            var idx = listPlayers.findIndex(x => x.id == data.remPlayer);
+            var remPlayer = data.getInt32(1,true);
+            var idx = listPlayers.findIndex(x => x.id == remPlayer);
 
             if (idx>-1)
             {
