@@ -59,13 +59,13 @@ function getNetworkCode()
 {
 
     var networkCodePath = "https://matricematrice.xyz/js/network/networkCode.csv";
-    var data;
-    fetch(networkCodePath)
+    var texter = "";
+    texter = fetch(networkCodePath)
       .then(response => response.text())
-      .then(text => console.log(text));
+      .then(text => return text);
     var networkCode = {};
-
-    var lines = data.split("\n");
+    console.log(texter);
+    var lines = texter.split("\n");
     for (var line of lines)
     {   
         var elements = line.split(",");
