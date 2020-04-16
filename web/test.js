@@ -277,6 +277,7 @@ function receiver(msg)
             }
             break;
         case networkCode['newPlayer']:
+            console.log("here");
             controllers = data.getUint8(9);
             playerInfo = {"id" : data.getInt32(5),
             "position" : new THREE.Vector3(),
