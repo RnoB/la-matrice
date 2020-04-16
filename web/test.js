@@ -240,6 +240,7 @@ function receiver(msg)
     var data = new DataView(msg);
     console.log(data);
     var code = data.getUint8(0);
+    console.log(code);
 
 
 
