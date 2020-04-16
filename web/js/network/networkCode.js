@@ -1,7 +1,7 @@
 
 
 
-var networkCodePath = homeFolder+"./networkCode.csv";
+var networkCodePath = "./networkCode.csv";
 
 fetch('file.txt')
   .then(response => response.text())
