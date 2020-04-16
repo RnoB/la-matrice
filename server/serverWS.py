@@ -127,7 +127,7 @@ async def send(websocket,message):
         
 
 def storePosition(message):
-    print(len(message))
+    print(message)
 
 
 async def manager(websocket, path):
