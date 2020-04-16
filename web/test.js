@@ -237,8 +237,9 @@ function connect()
 function receiver(msg)
 {
     console.log(msg);
-    console.log(msg[0]);
-    var data = JSON.parse(msg);
+    var view = new DataView(msg);
+    console.log(view);
+    console.log(view[0]);
     
     if('world' in data)
     {
