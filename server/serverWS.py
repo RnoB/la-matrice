@@ -137,7 +137,7 @@ def storePosition(code,idPlayer,message):
     print(struct.unpack('<fffffff',message[1:29]))
     playersPosition[playerIds.index(idPlayer)]['position'] = struct.unpack('<fff',message[1:13])
     playersPosition[playerIds.index(idPlayer)]['rotation'] = struct.unpack('<ffff',message[13:29])
-    for k in range(0,playersPosition[playerIds.index(idPlayer)].controllers):
+    for k in range(0,playersPosition[playerIds.index(idPlayer)]['controllers']):
         playersPosition[playerIds.index(idPlayer)]["posC"+str(k)] = struct.unpack('<fff',message[29+k*28:41+k*28])
         playersPosition[playerIds.index(idPlayer)]["rotC"+str(k)] = struct.unpack('<ffff',message[41+k*28:57+k*28])
     pass
