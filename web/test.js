@@ -250,6 +250,7 @@ function receiver(msg)
             id = data.getInt32(1);
 
             var Nplayers = (data.byteLength-5)/5.0;
+            console.log(Nplayers);
             for (let j = 0; j < Nplayers; ++j) 
             {
 
