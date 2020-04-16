@@ -364,14 +364,14 @@ async function sender()
     {   
 
         //var msgArray = new ArrayBuffer(1+4+28*(1+controllers.length));
-        var msgArray = new ArrayBuffer(1+4+0*(1+controllers.length));
+        var msgArray = new ArrayBuffer(1+0*(1+controllers.length));
         
         var msgView = new DataView(msgArray);
         camera.children[0].getWorldPosition( direction );
         camera.children[0].getWorldQuaternion( rotation );
         msgView.setUint8(0, networkCode['playerPosition']);
-        msgView.setInt32(1, id,true);
-/*        msgView.setFloat32(5, direction.x, true);
+/*        msgView.setInt32(1, id,true);
+        msgView.setFloat32(5, direction.x, true);
         msgView.setFloat32(9, direction.y, true);
         msgView.setFloat32(13, direction.z, true);
         msgView.setFloat32(17, rotation._x, true);
