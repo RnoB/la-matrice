@@ -281,10 +281,10 @@ function receiver(msg)
             id = data.getInt32(1,true);
 
             var Nplayers = (data.byteLength-5)/5.0;
-
+            console.log(Nplayers);
             for (let j = 0; j < Nplayers; ++j) 
             {
-                console.log(5*(1+j)+4*j)
+
                 var contrlers = data.getUint8(5*(1+j)+4*j,true);
                 var playerInfo = {"id" : data.getInt32(5*(1+j),true),
                 "position" : new THREE.Vector3(),
