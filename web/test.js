@@ -180,6 +180,7 @@ function setup()
 function connect()
 {
     ws = new WebSocket('wss://matricematrice.xyz:6785'); 
+    ws.binaryType = "arraybuffer";
     connected = true;
 
 }
@@ -295,11 +296,11 @@ async function sender()
 {
     var direction = new THREE.Vector3();
     var rotation = new THREE.Quaternion();
+    var msg = new Uint8Array(2);
+    msg[0] = 10;
+    msg[1] = controllers.length;
     
-    var msg = {
-        controllers: controllers.length
-    };
-    ws.send(JSON.stringify(msg));
+    ws.send(msg.buffer);
     while(true)
     {
         camera.children[0].getWorldPosition( direction );
