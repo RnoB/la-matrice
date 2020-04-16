@@ -237,13 +237,46 @@ function connect()
 function receiver(msg)
 {
 
-    var view = new DataView(msg);
+    var data = new DataView(msg);
     console.log(view);
+    code = view.getUint8(0);
+
 
     console.log(view.getUint8(0));
     console.log(view.getUint16(1));
     console.log(view.getInt32(1));
-    
+    switch(code)
+    {
+        case networkCode['world'];
+        id = data.getInt32(1);
+
+        var Nplayers = (data.byteLength-5)/5.0;
+        for (let j = 0; j < Nplayers; ++j) 
+        {
+
+
+            var playerInfo = {"id" : data.getInt32(5*(1+Nplayers)),
+            "position" : new THREE.Vector3(),
+            "rotation" : new THREE.Quaternion(),
+            "mesh" : new THREE.Mesh(geometry, material),
+            "controllers" : data.getUInt8(5*(1+Nplayers)+4)};
+            
+            for (let k = 0; k < data.playerControllers[j]; ++k) 
+            {
+                var controllerMesh = new THREE.Mesh( geometry, material );
+                controllerMesh.scale.set(.01,.1,.1);
+                playerInfo["controller"+k.toString()+"Position"] = new THREE.Vector3();
+                playerInfo["controller"+k.toString()+"Rotation"] = new THREE.Quaternion();
+                playerInfo["controller"+k.toString()+"Mesh"] = controllerMesh;
+                scene.add(controllerMesh);
+            }
+            
+            listPlayers.push(playerInfo);
+            listPlayers[listPlayers.length-1].mesh.scale.set(.3,.3,.3);
+            
+            scene.add(listPlayers[listPlayers.length-1].mesh);
+        }
+    }
     if('world' in data)
     {
         console.log(data)

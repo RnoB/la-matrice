@@ -79,7 +79,8 @@ async def register(websocket):
         dataWorld += struct.pack('>i',playerId)
         print(dataWorld)
         for k in range(0,len(playerIds)):
-            dataWorld += struct.pack('>ii', playerIds[k],playerControllers[k])
+            dataWorld += struct.pack('>i', playerIds[k])
+            dataWorld += struct.pack('B', playerControllers[k])
         print(dataWorld)
         #world = json.dumps({"world" : 1, "objects" : [2,3],"id" : playerId,"playerIds" : playerIds,"playerControllers" : playerControllers})
         playerIds.append(playerId)
