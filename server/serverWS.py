@@ -32,7 +32,7 @@ playerNumber = 0
 
 with open(networkCodePath, mode='r') as infile:
     reader = csv.reader(infile)
-    networkCode = {rows[0]:rows[1] for rows in reader}
+    networkCode = {rows[0]:int(rows[1]) for rows in reader}
     print(networkCode)
 
 
@@ -60,7 +60,7 @@ async def register(websocket):
     print(playerData)
     playerInfo = struct.unpack('BB',playerData)
     
-    print(playerInfo)
+    print(playerInfo[0])
     if playerInfo[0] == networkCode['connect']:
         controllersN = playerInfo[1]
         print(controllersN)
