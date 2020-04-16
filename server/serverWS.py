@@ -127,10 +127,10 @@ async def send(websocket,message):
         
 
 def storePosition(message):
-    
+    print(struct.unpack(">B",message[0]))
+    print(struct.unpack(">B",message[1]))
 
 
-    struct.unpack
     
 
 
@@ -140,7 +140,6 @@ async def manager(websocket, path):
     idPlayer = await register(websocket)
     try:
         async for message in websocket:
-            print(message)
             playerId = storePosition(message)
             await send(websocket,message)
     finally:
