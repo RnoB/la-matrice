@@ -243,7 +243,7 @@ function receiver(msg)
     var code = data.getUint8(0,true);
 
 
-
+    console.log(msg);
     console.log(code);
     switch(code)
     {
