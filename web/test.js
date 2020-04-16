@@ -330,7 +330,7 @@ async function sender()
     var direction = new THREE.Vector3();
     var rotation = new THREE.Quaternion();
     var msg = new Uint8Array(2);
-    msg[0] = 10;
+    msg[0] = networkCode["connect"];
     msg[1] = controllers.length;
     
     ws.send(msg.buffer);
