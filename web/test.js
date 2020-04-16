@@ -242,7 +242,7 @@ function receiver(msg)
 
     var code = data.getUint8(0,true);
     console.log("code : "+code.toString());
-    console.log(code === networkCode['world'])
+
 
 
     switch(code)
@@ -277,7 +277,7 @@ function receiver(msg)
 
             }
         case networkCode['world']:
-            id = data.getInt32(1,false);
+            id = data.getInt32(1,true);
             
             var Nplayers = (data.byteLength-5)/5.0;
 
