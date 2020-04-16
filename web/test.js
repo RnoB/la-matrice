@@ -276,13 +276,14 @@ function receiver(msg)
             }
             break;
         case networkCode['newPlayer']:
+            controllers = data.getUint8(9);
             playerInfo = {"id" : data.getInt32(5),
             "position" : new THREE.Vector3(),
             "rotation" : new THREE.Quaternion(),
             "mesh" : new THREE.Mesh(geometry, material),
-            "controllers" : data.getUint8(8)};
+            "controllers" : controllers};
 
-            for (let k = 0; k < data.controllers; ++k) 
+            for (let k = 0; k < controllers; ++k) 
             {
                 var controllerMesh = new THREE.Mesh( geometry, material );
                 controllerMesh.scale.set(.01,.1,.1);
