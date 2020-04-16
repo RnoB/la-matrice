@@ -67,7 +67,11 @@ async def register(websocket):
 
         for player in players:
             try:
-                await player.send( json.dumps({'newPlayer' : playerId,'type' : 0 ,'controllers':controllersN}))
+                dataWorld = struct.pack('Bi', networkCode['world'],0)
+                for k in range(0, len(playerId))
+                    dataWorld += struct.pack('iB', playerId[k],controllers[k])
+                print(dataWorld);
+                await player.send( dataWorld)
             except:
                 pass
                     

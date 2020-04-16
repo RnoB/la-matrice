@@ -95,7 +95,7 @@ function getNetworkCode()
 }
 
 var networkCode = getNetworkCode();
-console.log(networkCode);
+
 
 
 function initSky(turbidity = 10,
@@ -236,6 +236,7 @@ function connect()
 
 function receiver(msg)
 {
+    console.log(msg);
     var data = JSON.parse(msg);
     
     if('world' in data)
