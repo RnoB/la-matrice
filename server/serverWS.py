@@ -118,7 +118,7 @@ async def unregister(idPlayer,websocket):
 async def send(websocket,message):
 
     
-    for player in players:
+    for player in playersSocket:
         if player is not websocket:
             try:
                 await player.send(str(message))
