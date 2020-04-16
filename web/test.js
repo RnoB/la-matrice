@@ -277,7 +277,6 @@ function receiver(msg)
             }
             break;
         case networkCode['newPlayer']:
-            console.log("here");
             controllers = data.getUint8(9);
             playerInfo = {"id" : data.getInt32(5),
             "position" : new THREE.Vector3(),
@@ -298,7 +297,7 @@ function receiver(msg)
             listPlayers.push(playerInfo);
             listPlayers[listPlayers.length-1].mesh.scale.set(.3,.3,.3);
             scene.add(listPlayers[listPlayers.length-1].mesh);
-            console.log()
+            console.log(playerInfo);
             break;
 
     }
