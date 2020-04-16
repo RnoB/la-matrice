@@ -4,4 +4,4 @@ world,20
 newPlayer,21
 removePlayer,22
 playerPosition,30
-playersPosition,31
+objectPosition,31
