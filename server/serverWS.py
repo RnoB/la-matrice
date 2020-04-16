@@ -9,6 +9,7 @@ import time
 import json
 import threading
 import networkCode
+import struct
 
 homeFolder = "/home/ubuntu/"
 certFolder = "cert/"
@@ -47,6 +48,7 @@ async def register(websocket):
     except:
         pass
     print(playerData)
+    print(struct.unpack('ii',playerData))
     playerInfo = json.loads(playerData)
 
     controllersN = playerInfo["controllers"]
