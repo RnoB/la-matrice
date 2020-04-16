@@ -62,7 +62,7 @@ function getNetworkCode()
     var data;
     fetch(networkCodePath)
       .then(response => response.text())
-      .then(text => data = text);
+      .then(text => console.log(text));
     var networkCode = {};
 
     var lines = data.split("\n");
