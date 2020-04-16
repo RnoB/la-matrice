@@ -247,7 +247,7 @@ function receiver(msg)
     console.log(view.getInt32(1));
     switch(code)
     {
-        case networkCode['world'];
+        case networkCode['world']:
             id = data.getInt32(1);
 
             var Nplayers = (data.byteLength-5)/5.0;
