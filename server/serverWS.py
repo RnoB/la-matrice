@@ -144,8 +144,8 @@ def storePosition(code,idPlayer,message):
     message = struct.pack('B', networkCode['objectPosition'])
     message += struct.pack('<i', idPlayer)
     message += struct.pack('<fff',playersPosition[playerIds.index(idPlayer)]['position'][0],\
-                            '<fff',playersPosition[playerIds.index(idPlayer)]['position'][1],\
-                            '<fff',playersPosition[playerIds.index(idPlayer)]['position'][2])
+                                    playersPosition[playerIds.index(idPlayer)]['position'][1],\
+                                    playersPosition[playerIds.index(idPlayer)]['position'][2])
     message += struct.pack('<ffff',playersPosition[playerIds.index(idPlayer)]['rotation'][0],\
                                     playersPosition[playerIds.index(idPlayer)]['rotation'][1],\
                                     playersPosition[playerIds.index(idPlayer)]['rotation'][2],\
