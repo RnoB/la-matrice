@@ -219,6 +219,7 @@ function setup()
         controllers.push(controller);
 
     }
+    setUpWorld()
 }
 
 
@@ -372,6 +373,8 @@ async function sender()
         msgView.setUint8(0, networkCode['playerPosition']);
 
         msgView.setInt32(1, id,true);
+
+
         msgView.setFloat32(5, direction.x, true);
         msgView.setFloat32(9, direction.y, true);
         msgView.setFloat32(13, direction.z, true);
@@ -392,7 +395,7 @@ async function sender()
             
         }
         
-        ws.send(new Uint8Array(msgArray).buffer);
+        ws.send();
         await sleep(10);
     }
 }
