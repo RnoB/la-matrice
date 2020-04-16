@@ -277,6 +277,7 @@ function receiver(msg)
                 }
 
             }
+            break;
         case networkCode['world']:
             id = data.getInt32(1,true);
 
