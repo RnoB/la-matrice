@@ -140,7 +140,15 @@ def storePosition(code,idPlayer,message):
     for k in range(0,playersPosition[playerIds.index(idPlayer)]['controllers']):
         playersPosition[playerIds.index(idPlayer)]["posC"+str(k)] = struct.unpack('<fff',message[29+k*28:41+k*28])
         playersPosition[playerIds.index(idPlayer)]["rotC"+str(k)] = struct.unpack('<ffff',message[41+k*28:57+k*28])
-    pass
+
+    message = struct.pack('B', networkCode['objectPosition'])
+    message += struct.pack('<i', idPlayer)
+    message += struct.pack('<fff',playersPosition[playerIds.index(idPlayer)]['position'])
+    message += struct.pack('<ffff',playersPosition[playerIds.index(idPlayer)]['rotation'])
+    for k in range(0,playersPosition[playerIds.index(idPlayer)]['controllers']):
+        message += struct.pack('<fff',playersPosition["posC"+str(k)]['position'])
+        message += struct.pack('<ffff',playersPosition["rotC"+str(k)]['rotation'])
+    return message
 
 
     
