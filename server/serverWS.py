@@ -127,8 +127,9 @@ async def send(websocket,message):
                 pass
         
 
-def storePosition(code,message):
+def storePosition(code,idPlayer,message):
     print(len(message))
+    print(playersPosition[playerIds.index(idPlayer)])
     print(struct.unpack('<iiiiiii',message[1:29]))
     pass
 
@@ -145,7 +146,7 @@ async def manager(websocket, path):
             code = message[0]
             print("code : "+str(code))
             if code == networkCode['playerPosition']:
-                storePosition(code,message)
+                storePosition(code,idPlayer,message)
             await send(websocket,message)
     finally:
         await unregister(idPlayer,websocket)
