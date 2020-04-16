@@ -82,7 +82,7 @@ async def register(websocket):
 
         #world = json.dumps({"world" : 1, "objects" : [2,3],"id" : playerId,"playerIds" : playerIds,"playerControllers" : playerControllers})
         playerIds.append(playerId)
-        playersPosition.append({"id" : playerId,"controllers" : controllers,"position" : (0,0,0),"rotation" : (0,0,0)})
+        playersPosition.append({"id" : playerId,"controllers" : controllers,"position" : (0,0,0),"rotation" : (0,0,0,0)})
         
         try:
             await playersSocket[-1].send(dataWorld)
@@ -130,7 +130,7 @@ async def send(websocket,message):
 def storePosition(code,idPlayer,message):
     print(len(message))
     print(playersPosition[playerIds.index(idPlayer)])
-    print(struct.unpack('<iiiiiii',message[1:29]))
+    print(struct.unpack('>iiiiiii',message[1:29]))
     pass
 
 
