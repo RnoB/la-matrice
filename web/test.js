@@ -242,7 +242,7 @@ function receiver(msg)
 
     var code = data.getUint8(0,true);
     console.log("code : "+code.toString());
-
+    console.log(code === networkCode['world'])
 
 
     switch(code)
