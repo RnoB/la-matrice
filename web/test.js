@@ -244,14 +244,14 @@ function receiver(msg)
 
 
 
-    console.log(code);
+
     switch(code)
     {
 
 
         case networkCode['objectPosition']:
             var objectId = data.getInt32(1,true);
-            console.log(objectId);
+
             var idx = listPlayers.findIndex(x => x.id == objectId);
             if (idx>-1)
             {
