@@ -144,7 +144,7 @@ async def manager(websocket, path):
         async for message in websocket:
             code = message[0]
             print("code : "+str(code))
-            if code == networkCode['playerPosition']
+            if code == networkCode['playerPosition']:
                 storePosition(code,message)
             await send(websocket,message)
     finally:
