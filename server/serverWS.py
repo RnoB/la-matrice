@@ -131,8 +131,7 @@ def storePosition(message):
     print(message)
     print(type(message))
     print(message[0])
-    print(struct.unpack('B',message[0:1]))
-    print(struct.unpack('<i',message[1:5]))
+    print(struct.unpack('<Bi',message[0:5]))
     pass
 
 
