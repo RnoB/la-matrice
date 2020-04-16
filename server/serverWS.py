@@ -6,7 +6,6 @@ import websockets
 import socket
 import logging
 import time
-import json
 import threading
 import struct
 import csv
