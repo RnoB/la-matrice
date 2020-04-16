@@ -125,7 +125,7 @@ async def send(websocket,message):
     for player in playersSocket:
         if player is not websocket:
             try:
-                await player.send(str(message))
+                await player.send(message)
             except:
                 pass
         
