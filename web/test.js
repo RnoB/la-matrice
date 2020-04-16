@@ -266,13 +266,13 @@ function receiver(msg)
                 for (let k = 0; k < listPlayers[idx].controllers; ++k) 
                 {
                     
-                    listPlayers[idx]["controller"+k.toString()+"Position"] = new THREE.Vector3(data.getFloat32(33+28*j,true),
-                                                                                        data.getFloat32(37+28*j,true),
-                                                                                        data.getFloat32(41+28*j,true));
-                    listPlayers[idx]["controller"+k.toString()+"Rotation"] = new THREE.Quaternion(data.getFloat32(45+28*j,true),
-                                                                                            data.getFloat32(49+28*j,true),
-                                                                                            data.getFloat32(53+28*j,true),
-                                                                                            data.getFloat32(57+28*j,true));
+                    listPlayers[idx]["controller"+k.toString()+"Position"] = new THREE.Vector3(data.getFloat32(33+28*k,true),
+                                                                                        data.getFloat32(37+28*k,true),
+                                                                                        data.getFloat32(41+28*k,true));
+                    listPlayers[idx]["controller"+k.toString()+"Rotation"] = new THREE.Quaternion(data.getFloat32(45+28*k,true),
+                                                                                            data.getFloat32(49+28*k,true),
+                                                                                            data.getFloat32(53+28*k,true),
+                                                                                            data.getFloat32(57+28*k,true));
                     
                 }
 
