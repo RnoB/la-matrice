@@ -389,7 +389,7 @@ async function sender()
             
         }
         console.log(msgView.buffer);
-        ws.send(msgView.buffer);
+        ws.send(new Uint8Array(msgArray));
         await sleep(10);
     }
 }
