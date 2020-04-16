@@ -59,10 +59,11 @@ function getNetworkCode()
 {
 
     var networkCodePath = "./js/network/networkCode.csv";
-    var texter = "";
-    texter = fetch(networkCodePath)
-      .then(response => response.text())
-      .then(text => console.log(text));
+    //var texter = "";
+    let texter = await fetch(networkCodePath);
+    print(texter.text())
+      //.then(response => response.text())
+      //.then(text => console.log(text));
     var networkCode = {};
     console.log(texter);
     var lines = texter.split("\n");
