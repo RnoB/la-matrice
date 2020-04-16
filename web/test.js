@@ -313,7 +313,8 @@ function receiver(msg)
             "rotation" : new THREE.Quaternion(),
             "mesh" : new THREE.Mesh(geometry, material),
             "controllers" : contrlers};
-
+            console.log(playerInfo);
+            console.log(scene);
             for (let k = 0; k < contrlers; ++k) 
             {
                 var controllerMesh = new THREE.Mesh( geometry, material );
