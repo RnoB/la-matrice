@@ -13,9 +13,9 @@ for (var line of lines)
 {	
 	var elements = line.split(",");
 
-	if(!(elements[0].length ===0));
+	if(elements[0].length !==0)
 	{
-		console.log(!(elements[0].length ===0));
+		console.log(!(elements[0].length !==0));
 		console.log(elements[0]);
     	networkCode[elements[0]] = parseInt(elements[1]);
 	}

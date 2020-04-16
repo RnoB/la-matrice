@@ -52,6 +52,39 @@ var simuTime = 0;
 
 var controllers = [];
 
+
+var networkCode = getNetworkCode();
+console.log(networkCode);
+
+function getNetworkCodes()
+{
+
+    var networkCodePath = "./networkCode.csv";
+    var data;
+    fetch(networkCodePath)
+      .then(response => response.text())
+      .then(text => data = text);
+    var networkCode = {};
+
+    var lines = data.split("\n");
+    for (var line of lines)
+    {   
+        var elements = line.split(",");
+
+        if(elements[0].length !==0)
+        {
+
+            networkCode[elements[0]] = parseInt(elements[1]);
+        }
+
+    }
+    return networkCode
+
+}
+
+
+
+
 function initSky(turbidity = 10,
         rayleigh = 2,
         mieCoefficient = 0.005,
@@ -415,7 +448,6 @@ function render() {
     renderer.render(scene, camera);
     frame++;
 }
-
 
 setup();
 network();
