@@ -242,9 +242,7 @@ function receiver(msg)
     var code = data.getUint8(0);
 
 
-    console.log(data.getUint8(0));
-    console.log(data.getUint16(1));
-    console.log(data.getInt32(1));
+
     switch(code)
     {
         case networkCode['world']:
@@ -277,7 +275,7 @@ function receiver(msg)
                 scene.add(listPlayers[listPlayers.length-1].mesh);
             }
             break;
-        case newPlayer:
+        case networkCode['newPlayer']:
             playerInfo = {"id" : data.getInt32(5),
             "position" : new THREE.Vector3(),
             "rotation" : new THREE.Quaternion(),
@@ -297,7 +295,8 @@ function receiver(msg)
             listPlayers.push(playerInfo);
             listPlayers[listPlayers.length-1].mesh.scale.set(.3,.3,.3);
             scene.add(listPlayers[listPlayers.length-1].mesh);
-
+            console.log()
+            break;
 
     }
     if('world' in data)
