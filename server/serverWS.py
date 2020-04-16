@@ -49,7 +49,7 @@ async def register(websocket):
         pass
     print(playerData)
     playerInfo = struct.unpack('BB',playerData)
-    playerInfo = json.loads(playerData)
+    
     print(playerInfo)
     if playerInfo[0] == 10:
         controllersN = playerInfo[1]
