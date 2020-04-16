@@ -280,7 +280,7 @@ function receiver(msg)
             "position" : new THREE.Vector3(),
             "rotation" : new THREE.Quaternion(),
             "mesh" : new THREE.Mesh(geometry, material),
-            "controllers" : data.getUInt8(8)};
+            "controllers" : data.getUint8(8)};
 
             for (let k = 0; k < data.controllers; ++k) 
             {
