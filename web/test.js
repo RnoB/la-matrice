@@ -283,7 +283,7 @@ function receiver(msg)
 
             for (let j = 0; j < Nplayers; ++j) 
             {
-                contrlers = data.getUint8(5*(1+j)+4,true);
+                var contrlers = data.getUint8(5*(1+j)+4,true);
                 var playerInfo = {"id" : data.getInt32(5*(1+j)),
                 "position" : new THREE.Vector3(),
                 "rotation" : new THREE.Quaternion(),
@@ -307,7 +307,7 @@ function receiver(msg)
             }
             break;
         case networkCode['newPlayer']:
-            contrlers = data.getUint8(9,true);
+            var contrlers = data.getUint8(9,true);
             playerInfo = {"id" : data.getInt32(5,true),
             "position" : new THREE.Vector3(),
             "rotation" : new THREE.Quaternion(),
