@@ -48,7 +48,7 @@ async def register(websocket):
     except:
         pass
     print(playerData)
-    print(struct.unpack('ii',playerData))
+    print(struct.unpack('BB',playerData))
     playerInfo = json.loads(playerData)
 
     controllersN = playerInfo["controllers"]
