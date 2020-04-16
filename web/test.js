@@ -58,7 +58,7 @@ var controllers = [];
 function getNetworkCode()
 {
 
-    var networkCodePath = "./js/network/networkCode.csv";
+    var networkCodePath = "https://matricematrice.xyz/js/network/networkCode.csv";
     var data;
     fetch(networkCodePath)
       .then(response => response.text())
