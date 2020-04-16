@@ -92,7 +92,9 @@ async def register(websocket):
 
 
 async def unregister(idPlayer,websocket):
-    global players
+    global playersSocket
+    global playersPosition
+    global playersId
     global playerNumber
     global playerIds
     register = True
@@ -102,7 +104,7 @@ async def unregister(idPlayer,websocket):
             register = False
         except:
             pass
-    del playerControllers[playerIds.index(idPlayer)]
+    del playersPosition[playerIds.index(idPlayer)]
     playerIds.remove(idPlayer)
     playerNumber -= 1
     for player in playersSocket:
