@@ -2,4 +2,6 @@ connect,10
 disconnect,11
 world,20
 newPlayer,21
-remPlayer,22
+removePlayer,22
+playerPosition,30
+playersPosition,31

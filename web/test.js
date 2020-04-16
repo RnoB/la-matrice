@@ -246,6 +246,35 @@ function receiver(msg)
 
     switch(code)
     {
+
+
+        case networkCase['ObjectPosition']:
+            objectId = data.getInt32(1,true);
+            var idx = listPlayers.findIndex(x => x.id == objectId);
+            if (idx>-1)
+            {
+
+                listPlayers[idx].position = new Vector3(data.getFloat(5),
+                                                        data.getFloat(9),
+                                                        data.getFloat(13));
+                listPlayers[idx].rotation = new Quaternion(data.getFloat(17),
+                                                            data.getFloat(21),
+                                                            data.getFloat(25),
+                                                            data.getFloat(29));
+                for (let k = 0; k < listPlayers[idx].controllers; ++k) 
+                {
+                    
+                    listPlayers[idx]["controller"+k.toString()+"Position"] = new Vector3(data.getFloat(33+28*j),
+                                                                                        data.getFloat(37+28*j),
+                                                                                        data.getFloat(41+28*j));
+                    listPlayers[idx]["controller"+k.toString()+"Rotation"] = new Quaternion(data.getFloat(45+28*j),
+                                                                                            data.getFloat(49+28*j),
+                                                                                            data.getFloat(53+28*j),
+                                                                                            data.getFloat(57+28*j));
+                    
+                }
+
+            }
         case networkCode['world']:
             id = data.getInt32(1,true);
 
@@ -299,6 +328,24 @@ function receiver(msg)
             scene.add(listPlayers[listPlayers.length-1].mesh);
             console.log(playerInfo);
             break;
+        case networkCode["removePlayer"]
+            remPlayer = data.getInt32(1,true);
+            var idx = listPlayers.findIndex(x => x.id == data.remPlayer);
+
+            if (idx>-1)
+            {
+
+                scene.remove(listPlayers[idx].mesh);
+                for (let k = 0; k < listPlayers[idx].controllers; ++k) 
+                {
+                    scene.remove(listPlayers[idx]["controller"+k.toString()+"Mesh"]);
+                }
+                listPlayers.splice(idx);
+
+
+            }
+
+
 
     }
     if('world' in data)

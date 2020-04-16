@@ -17,11 +17,9 @@ certFolder = "cert/"
 
 networkCode = []
 
-players = []
+playersSocket = []
 playersPosition = []
-playersRotation = []
 playerIds = []
-playerControllers = []
 playerId = 0
 playerNumber = 0
 
@@ -65,7 +63,7 @@ async def register(websocket):
         controllers = playerInfo[1]
 
 
-        for player in players:
+        for player in playersSocket:
             try:
                 dataWorld = struct.pack('<BiiB', networkCode['newPlayer'],0, playerId,controllers)
                 
@@ -74,7 +72,7 @@ async def register(websocket):
             except:
                 pass
                     
-        players.append(websocket)
+        playersSocket.append(websocket)
         dataWorld = struct.pack('B', networkCode['world'])
         dataWorld += struct.pack('>i',playerId)
         print(dataWorld)
@@ -84,7 +82,7 @@ async def register(websocket):
         print(dataWorld)
         #world = json.dumps({"world" : 1, "objects" : [2,3],"id" : playerId,"playerIds" : playerIds,"playerControllers" : playerControllers})
         playerIds.append(playerId)
-        playerControllers.append(controllers)
+        playersPosition.append({"id" : playerId,"controllers" : controllers,"position" : (0,0,0),"rotation" : (0,0,0)})
         try:
             await players[-1].send(dataWorld)
         except:
@@ -100,21 +98,23 @@ async def unregister(idPlayer,websocket):
     register = True
     while register:
         try:
-            players.remove(websocket)
+            playersSocket.remove(websocket)
             register = False
         except:
             pass
     del playerControllers[playerIds.index(idPlayer)]
     playerIds.remove(idPlayer)
     playerNumber -= 1
-    for player in players:
+    for player in playersSocket:
         try:
-            await player.send( json.dumps({'remPlayer' : idPlayer }))
+            remPlayer = struct.pack('B', networkCode['removePlayer'])
+            remPlayer += struct.pack('>i',idPlayer)
+            await player.send(remPlayer)
         except:
             pass
 
 async def send(websocket,message):
-    #message = await players[-1].recv()
+
     
     for player in players:
         if player is not websocket:
@@ -124,13 +124,17 @@ async def send(websocket,message):
                 pass
         
 
+def storePosition(message):
+    print(len(message))
+
+
 async def manager(websocket, path):
     print("ws : "+str(websocket))
     print("pa : "+str(path))
     idPlayer = await register(websocket)
     try:
         async for message in websocket:
-            
+            playerId = storePosition(message)
             await send(websocket,message)
     finally:
         await unregister(idPlayer,websocket)
