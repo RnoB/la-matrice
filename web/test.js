@@ -256,23 +256,23 @@ function receiver(msg)
             if (idx>-1)
             {
 
-                listPlayers[idx].position = new THREE.Vector3(data.getFloat(5,true),
-                                                        data.getFloat(9,true),
-                                                        data.getFloat(13,true));
-                listPlayers[idx].rotation = new THREE.Quaternion(data.getFloat(17,true),
-                                                            data.getFloat(21,true),
-                                                            data.getFloat(25,true),
-                                                            data.getFloat(29,true));
+                listPlayers[idx].position = new THREE.Vector3(data.getFloat32(5,true),
+                                                        data.getFloat32(9,true),
+                                                        data.getFloat32(13,true));
+                listPlayers[idx].rotation = new THREE.Quaternion(data.getFloat32(17,true),
+                                                            data.getFloat32(21,true),
+                                                            data.getFloat32(25,true),
+                                                            data.getFloat32(29,true));
                 for (let k = 0; k < listPlayers[idx].controllers; ++k) 
                 {
                     
-                    listPlayers[idx]["controller"+k.toString()+"Position"] = new THREE.Vector3(data.getFloat(33+28*j,true),
-                                                                                        data.getFloat(37+28*j,true),
-                                                                                        data.getFloat(41+28*j,true));
-                    listPlayers[idx]["controller"+k.toString()+"Rotation"] = new THREE.Quaternion(data.getFloat(45+28*j,true),
-                                                                                            data.getFloat(49+28*j,true),
-                                                                                            data.getFloat(53+28*j,true),
-                                                                                            data.getFloat(57+28*j,true));
+                    listPlayers[idx]["controller"+k.toString()+"Position"] = new THREE.Vector3(data.getFloat32(33+28*j,true),
+                                                                                        data.getFloat32(37+28*j,true),
+                                                                                        data.getFloat32(41+28*j,true));
+                    listPlayers[idx]["controller"+k.toString()+"Rotation"] = new THREE.Quaternion(data.getFloat32(45+28*j,true),
+                                                                                            data.getFloat32(49+28*j,true),
+                                                                                            data.getFloat32(53+28*j,true),
+                                                                                            data.getFloat32(57+28*j,true));
                     
                 }
 
