@@ -244,7 +244,7 @@ function receiver(msg)
 
 
 
-
+    console.log(msg);
     switch(code)
     {
 
@@ -282,7 +282,7 @@ function receiver(msg)
             id = data.getInt32(1,true);
 
             var Nplayers = (data.byteLength-5)/5.0;
-            console.log(Nplayers);
+
             for (let j = 0; j < Nplayers; ++j) 
             {
 
