@@ -53,8 +53,7 @@ var simuTime = 0;
 var controllers = [];
 
 
-var networkCode = getNetworkCode();
-console.log(networkCode);
+
 
 function getNetworkCodes()
 {
@@ -82,7 +81,8 @@ function getNetworkCodes()
 
 }
 
-
+var networkCode = getNetworkCode();
+console.log(networkCode);
 
 
 function initSky(turbidity = 10,
