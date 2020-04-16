@@ -52,21 +52,32 @@ var simuTime = 0;
 
 var controllers = [];
 
-
+var networkCode;
 
 
 function getNetworkCode()
 {
+    var allText
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", networkCodePath, false);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+                allText = rawFile.responseText;
+                
+            }
+        }
+    }
+    rawFile.send(null);
 
-    var networkCodePath = "./js/network/networkCode.csv";
-    //var texter = "";
-    var texter = fetch(networkCodePath);
-    print(texter.text())
-      //.then(response => response.text())
-      //.then(text => console.log(text));
+
+
     var networkCode = {};
-    console.log(texter);
-    var lines = texter.split("\n");
+
+    var lines = allText.split("\n");
     for (var line of lines)
     {   
         var elements = line.split(",");
@@ -78,6 +89,7 @@ function getNetworkCode()
         }
 
     }
+
     return networkCode
 
 }
