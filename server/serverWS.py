@@ -80,7 +80,7 @@ async def register(websocket):
             dataWorld += struct.pack('ii', playerIds[k],playerControllers[k])
         #world = json.dumps({"world" : 1, "objects" : [2,3],"id" : playerId,"playerIds" : playerIds,"playerControllers" : playerControllers})
         playerIds.append(playerId)
-        playerControllers.append(controllersN)
+        playerControllers.append(controllers)
         try:
             await players[-1].send(dataWorld)
         except:
