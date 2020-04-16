@@ -238,13 +238,13 @@ function receiver(msg)
 {
 
     var data = new DataView(msg);
-    console.log(view);
-    code = view.getUint8(0);
+    console.log(data);
+    code = data.getUint8(0);
 
 
-    console.log(view.getUint8(0));
-    console.log(view.getUint16(1));
-    console.log(view.getInt32(1));
+    console.log(data.getUint8(0));
+    console.log(data.getUint16(1));
+    console.log(data.getInt32(1));
     switch(code)
     {
         case networkCode['world']:
