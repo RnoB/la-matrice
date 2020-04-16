@@ -58,7 +58,7 @@ async def register(websocket):
     print(playerData)
     playerInfo = struct.unpack('BB',playerData)
     
-
+    print(playerInfo)
     if playerInfo[0] == networkCode['connect']:
         controllers = playerInfo[1]
 
@@ -83,6 +83,7 @@ async def register(websocket):
         #world = json.dumps({"world" : 1, "objects" : [2,3],"id" : playerId,"playerIds" : playerIds,"playerControllers" : playerControllers})
         playerIds.append(playerId)
         playersPosition.append({"id" : playerId,"controllers" : controllers,"position" : (0,0,0),"rotation" : (0,0,0)})
+        print("h")
         try:
             await players[-1].send(dataWorld)
         except:
