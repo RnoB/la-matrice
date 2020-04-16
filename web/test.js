@@ -58,11 +58,11 @@ var controllers = [];
 function getNetworkCode()
 {
 
-    var networkCodePath = "https://matricematrice.xyz/js/network/networkCode.csv";
+    var networkCodePath = "./js/network/networkCode.csv";
     var texter = "";
     texter = fetch(networkCodePath)
       .then(response => response.text())
-      .then(text => return text);
+      .then(text => console.log(text));
     var networkCode = {};
     console.log(texter);
     var lines = texter.split("\n");
