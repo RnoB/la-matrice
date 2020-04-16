@@ -128,8 +128,8 @@ async def send(websocket,message):
         
 
 def storePosition(code,idPlayer,message):
-    #print(len(message))
-    #print(playersPosition[playerIds.index(idPlayer)])
+    print(len(message))
+    print(playersPosition[playerIds.index(idPlayer)])
     #print(struct.unpack('<iiiiiii',message[1:29]))
     pass
 
