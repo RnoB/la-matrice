@@ -284,12 +284,13 @@ function receiver(msg)
             for (let j = 0; j < Nplayers; ++j) 
             {
                 var contrlers = data.getUint8(5*(1+j)+4,true);
-                var playerInfo = {"id" : data.getInt32(5*(1+j)),
+                var playerInfo = {"id" : data.getInt32(5*(1+j),true),
                 "position" : new THREE.Vector3(),
                 "rotation" : new THREE.Quaternion(),
                 "mesh" : new THREE.Mesh(geometry, material),
                 "controllers" : contrlers};
-                
+                console.log(contrlers)
+                console.log(playerInfo)
                 for (let k = 0; k < contrlers; ++k) 
                 {
                     var controllerMesh = new THREE.Mesh( geometry, material );
