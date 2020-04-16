@@ -60,27 +60,29 @@ async def register(websocket):
     print(playerData)
     playerInfo = struct.unpack('BB',playerData)
     
-    print(playerInfo[0])
+
     if playerInfo[0] == networkCode['connect']:
-        controllersN = playerInfo[1]
-        print(controllersN)
+        controllers = playerInfo[1]
+
 
         for player in players:
             try:
-                dataWorld = struct.pack('Bi', networkCode['world'],0)
-                for k in range(0, len(playerId)):
-                    dataWorld += struct.pack('iB', playerId[k],controllers[k])
+                dataWorld = struct.pack('BiiB', networkCode['newPlayer'],0, playerId,controllers)
+                
                 print(dataWorld);
                 await player.send( dataWorld)
             except:
                 pass
                     
         players.append(websocket)
-        world = json.dumps({"world" : 1, "objects" : [2,3],"id" : playerId,"playerIds" : playerIds,"playerControllers" : playerControllers})
+        dataWorld = struct.pack('Bi', networkCode['world'],playerId)
+        for k in range(0,playerIds):
+            dataWorld += struct.pack('ii', playerIds[k],playerControllers[k])
+        #world = json.dumps({"world" : 1, "objects" : [2,3],"id" : playerId,"playerIds" : playerIds,"playerControllers" : playerControllers})
         playerIds.append(playerId)
         playerControllers.append(controllersN)
         try:
-            await players[-1].send(world)
+            await players[-1].send(dataWorld)
         except:
             pass
         return playerId
