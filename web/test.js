@@ -210,7 +210,7 @@ function setup()
 
     controls = new THREE.PointerLockControls( camera, document.body );
     controls.lock = true;
-    for (let i = 0; i < 2; ++i) {
+    for (let i = 0; i < -1; ++i) {
         const controller = renderer.xr.getController(i);
         var controllerMesh = new THREE.Mesh( geometry, material );
         controllerMesh.scale.set(.01,.1,.1);
@@ -282,14 +282,14 @@ function receiver(msg)
 
             for (let j = 0; j < Nplayers; ++j) 
             {
-                controllers = data.getUint8(5*(1+j)+4,true);
+                contrlers = data.getUint8(5*(1+j)+4,true);
                 var playerInfo = {"id" : data.getInt32(5*(1+j)),
                 "position" : new THREE.Vector3(),
                 "rotation" : new THREE.Quaternion(),
                 "mesh" : new THREE.Mesh(geometry, material),
-                "controllers" : controllers};
+                "controllers" : contrlers};
                 
-                for (let k = 0; k < controllers; ++k) 
+                for (let k = 0; k < contrlers; ++k) 
                 {
                     var controllerMesh = new THREE.Mesh( geometry, material );
                     controllerMesh.scale.set(.01,.1,.1);
@@ -306,14 +306,14 @@ function receiver(msg)
             }
             break;
         case networkCode['newPlayer']:
-            controllers = data.getUint8(9,true);
+            contrlers = data.getUint8(9,true);
             playerInfo = {"id" : data.getInt32(5,true),
             "position" : new THREE.Vector3(),
             "rotation" : new THREE.Quaternion(),
             "mesh" : new THREE.Mesh(geometry, material),
-            "controllers" : controllers};
+            "controllers" : contrlers};
 
-            for (let k = 0; k < controllers; ++k) 
+            for (let k = 0; k < contrlers; ++k) 
             {
                 var controllerMesh = new THREE.Mesh( geometry, material );
                 controllerMesh.scale.set(.01,.1,.1);
