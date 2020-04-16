@@ -61,7 +61,7 @@ async def register(websocket):
     playerInfo = struct.unpack('BB',playerData)
     
     print(playerInfo)
-    if playerInfo[0] == 10:
+    if playerInfo[0] == networkCode['connect']:
         controllersN = playerInfo[1]
         print(controllersN)
 
