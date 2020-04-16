@@ -392,7 +392,7 @@ async function sender()
             
         }
         
-        ws.send(new Uint8Array(msgArray));
+        ws.send(new Uint8Array(msgArray).buffer);
         await sleep(10);
     }
 }
