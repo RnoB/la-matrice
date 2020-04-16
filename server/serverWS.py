@@ -157,7 +157,7 @@ def storePosition(code,idPlayer,message):
                                         player["posC"+str(k)][2])
         message += struct.pack('<ffff',player["rotC"+str(k)][0],\
                                         player["rotC"+str(k)][1],\
-                                        players["rotC"+str(k)][2],\
+                                        player["rotC"+str(k)][2],\
                                         players["rotC"+str(k)][3])
     return message
 
