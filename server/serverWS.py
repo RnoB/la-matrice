@@ -172,9 +172,9 @@ async def manager(websocket, path):
         async for message in websocket:
             code = message[0]
             #print("code : "+str(code))
-            if code == networkCode['objectPosition']:
-                storePosition(code,idPlayer,message)
-            await send(websocket,message)
+            if code == networkCode['playerPosition']:
+                messageSend = storePosition(code,idPlayer,message)
+            await send(websocket,messageSend)
     finally:
         await unregister(idPlayer,websocket)
         print("unregistered")
