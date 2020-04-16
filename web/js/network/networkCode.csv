@@ -2,3 +2,4 @@ connect,10
 disconnect,11
 world,20
 newPlayer,21
+remPlayer,22

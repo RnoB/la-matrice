@@ -239,7 +239,7 @@ function receiver(msg)
 
     var data = new DataView(msg);
     console.log(data);
-    var code = data.getUint8(0);
+    var code = data.getUint8(0,true);
     console.log(code);
 
 
@@ -247,13 +247,13 @@ function receiver(msg)
     switch(code)
     {
         case networkCode['world']:
-            id = data.getInt32(1);
+            id = data.getInt32(1,true);
 
             var Nplayers = (data.byteLength-5)/5.0;
 
             for (let j = 0; j < Nplayers; ++j) 
             {
-                controllers = data.getUint8(5*(1+j)+4);
+                controllers = data.getUint8(5*(1+j)+4,true);
                 var playerInfo = {"id" : data.getInt32(5*(1+j)),
                 "position" : new THREE.Vector3(),
                 "rotation" : new THREE.Quaternion(),
@@ -277,8 +277,8 @@ function receiver(msg)
             }
             break;
         case networkCode['newPlayer']:
-            controllers = data.getUint8(9);
-            playerInfo = {"id" : data.getInt32(5),
+            controllers = data.getUint8(9,true);
+            playerInfo = {"id" : data.getInt32(5,true),
             "position" : new THREE.Vector3(),
             "rotation" : new THREE.Quaternion(),
             "mesh" : new THREE.Mesh(geometry, material),
