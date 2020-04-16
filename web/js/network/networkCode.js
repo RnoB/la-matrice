@@ -7,7 +7,7 @@ fetch(networkCodePath)
   .then(response => response.text())
   .then(text => data = text);
 
-print(data);
+console.log(data);
 var elems = {};
 for (var i = 0; i < result.length; i++)
 {
