@@ -251,7 +251,7 @@ function receiver(msg)
 
         case networkCode['objectPosition']:
             var objectId = data.getInt32(1,true);
-            console.log(idPlayer);
+            console.log(objectId);
             var idx = listPlayers.findIndex(x => x.id == objectId);
             if (idx>-1)
             {
