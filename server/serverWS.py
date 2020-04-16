@@ -82,7 +82,11 @@ async def register(websocket):
 
         #world = json.dumps({"world" : 1, "objects" : [2,3],"id" : playerId,"playerIds" : playerIds,"playerControllers" : playerControllers})
         playerIds.append(playerId)
-        playersPosition.append({"id" : playerId,"controllers" : controllers,"position" : (0,0,0),"rotation" : (0,0,0,0)})
+        playerdict = {"id" : playerId,"controllers" : controllers,"position" : (0,0,0),"rotation" : (0,0,0,0)}
+        for k in range(0,controllers):
+            playerDict["posC"+str(k)] = (0,0,0)
+            playerDict["rotC"+str(k)] = (0,0,0,0)
+        playersPosition.append(playerDict)
         
         try:
             await playersSocket[-1].send(dataWorld)
@@ -131,6 +135,11 @@ def storePosition(code,idPlayer,message):
     print(len(message))
     print(playersPosition[playerIds.index(idPlayer)])
     print(struct.unpack('<fffffff',message[1:29]))
+    playersPosition[playerIds.index(idPlayer)].position = struct.unpack('<fff',message[1:13])
+    playersPosition[playerIds.index(idPlayer)].rotation = struct.unpack('<ffff',message[13:29])
+    for k in range(0,playersPosition[playerIds.index(idPlayer)].controllers):
+        playersPosition[playerIds.index(idPlayer)]["posC"+str(k)] = struct.unpack('<fff',message[29+k*28:41+k*28])
+        playersPosition[playerIds.index(idPlayer)]["rotC"+str(k)] = struct.unpack('<ffff',message[41+k*28:57+k*28])
     pass
 
 
