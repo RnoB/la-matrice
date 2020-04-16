@@ -1,7 +1,7 @@
 
 
-var homeFolder = "/home/ubuntu/";
-var networkCodePath = homeFolder+"la-matrice/web/data/networkCode.csv";
+
+var networkCodePath = homeFolder+"./networkCode.csv";
 
 fetch('file.txt')
   .then(response => response.text())
