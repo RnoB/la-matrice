@@ -250,16 +250,15 @@ function receiver(msg)
             id = data.getInt32(1);
 
             var Nplayers = (data.byteLength-5)/5.0;
-            console.log(Nplayers);
+
             for (let j = 0; j < Nplayers; ++j) 
             {
 
-
-                var playerInfo = {"id" : data.getInt32(5*(1+Nplayers)),
+                var playerInfo = {"id" : data.getInt32(5*(1+j)),
                 "position" : new THREE.Vector3(),
                 "rotation" : new THREE.Quaternion(),
                 "mesh" : new THREE.Mesh(geometry, material),
-                "controllers" : data.getUint8(5*(1+Nplayers)+4)};
+                "controllers" : data.getUint8(5*(1+j)+4)};
                 
                 for (let k = 0; k < data.playerControllers[j]; ++k) 
                 {
