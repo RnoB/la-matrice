@@ -276,9 +276,7 @@ function receiver(msg)
 
             }
         case networkCode['world']:
-            id = data.getInt32(1,true);
-            console.log(id);
-            console.log(data.getInt32(1,true));
+            id = data.getInt32(5,true);
             var Nplayers = (data.byteLength-5)/5.0;
 
             for (let j = 0; j < Nplayers; ++j) 
