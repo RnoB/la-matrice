@@ -236,11 +236,11 @@ function connect()
 
 function receiver(msg)
 {
-    console.log(msg);
+
     var data = new DataView(msg);
-    console.log(data);
+
     var code = data.getUint8(0,true);
-    console.log(code);
+    console.log("code : "+code.toString());
 
 
 
