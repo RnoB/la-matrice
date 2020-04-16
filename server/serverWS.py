@@ -129,6 +129,7 @@ async def send(websocket,message):
 
 def storePosition(message):
     print(message)
+    print(type(message))
     print(message[0])
     print(struct.unpack('<i',message[1]))
     pass
