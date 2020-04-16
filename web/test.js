@@ -237,7 +237,7 @@ function connect()
 function receiver(msg)
 {
     console.log(msg);
-    var view = new DataView(msg);
+    var view = new Uint8Array(msg);
     console.log(view);
     console.log(view[0]);
     
