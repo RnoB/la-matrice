@@ -370,6 +370,7 @@ async function sender()
         camera.children[0].getWorldPosition( direction );
         camera.children[0].getWorldQuaternion( rotation );
         msgView.setUint8(0, networkCode['playerPosition']);
+        console.log(id)
         msgView.setInt32(1, id,true);
         msgView.setFloat32(5, direction.x, true);
         msgView.setFloat32(9, direction.y, true);
