@@ -240,6 +240,8 @@ function receiver(msg)
     var view = new Uint8Array(msg);
     console.log(view);
     console.log(view[0]);
+    var view = new DataView(msg);
+    console.log(view);
     console.log(view.getInt16(1));
     
     if('world' in data)
