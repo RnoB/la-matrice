@@ -241,7 +241,7 @@ function receiver(msg)
     console.log(view);
 
     console.log(view.getUint8(0));
-    console.log(view.getUint8(1));
+    console.log(view.getUint16(1));
     console.log(view.getInt32(1));
     
     if('world' in data)
