@@ -278,7 +278,7 @@ function receiver(msg)
             }
         case networkCode['world']:
             id = data.getInt32(1,true);
-            
+            console.log(id);
             var Nplayers = (data.byteLength-5)/5.0;
 
             for (let j = 0; j < Nplayers; ++j) 
@@ -289,8 +289,7 @@ function receiver(msg)
                 "rotation" : new THREE.Quaternion(),
                 "mesh" : new THREE.Mesh(geometry, material),
                 "controllers" : contrlers};
-                console.log(contrlers)
-                console.log(playerInfo)
+
                 for (let k = 0; k < contrlers; ++k) 
                 {
                     var controllerMesh = new THREE.Mesh( geometry, material );
