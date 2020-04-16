@@ -59,7 +59,7 @@ function getNetworkCode()
 {
     var allText
     var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", networkCodePath, false);
+    rawFile.open("GET", "./js/network/networkCode.csv", false);
     rawFile.onreadystatechange = function ()
     {
         if(rawFile.readyState === 4)
