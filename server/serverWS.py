@@ -21,7 +21,7 @@ playersPosition = []
 playerIds = []
 playerId = 0
 playerNumber = 0
-
+nextPlayer = 0
 #logger = logging.getLogger('websockets')
 #logger.setLevel(logging.INFO)
 #logger.addHandler(logging.StreamHandler())
@@ -169,6 +169,7 @@ def storePosition(code,idPlayer,message):
 
 
 async def manager(websocket, path):
+    global nextPlayer
     print("ws : "+str(websocket))
     print("pa : "+str(path))
     idPlayer = await register(websocket)
@@ -185,12 +186,13 @@ async def manager(websocket, path):
             code = message[0]
             
             #print("code : "+str(code))
-            if code == networkCode['playerPosition'] and sendMessage:
+            if code == networkCode['playerPosition'] and sendMessage and nextPlayer = playerIds[nextPlayer]:
                 messageSend = storePosition(code,idPlayer,message)
                 t1=time.time()
                 print("id : "+str(idPlayer)+" t :"+str(1/(t1-t0)))
                 t0=t1
                 await send(websocket,messageSend)
+                nexplayer = (nextPlayer%playerNumber)
     finally:
         await unregister(idPlayer,websocket)
         print("unregistered")
