@@ -68,9 +68,9 @@ async def register(websocket):
             
             print(dataWorld);
             try:
-            	await player.send( dataWorld)
+                await player.send( dataWorld)
             except:
-            	pass
+                pass
         
             
                     
@@ -172,12 +172,12 @@ async def manager(websocket, path):
     print("ws : "+str(websocket))
     print("pa : "+str(path))
     idPlayer = await register(websocket)
-    t0=time.time
+    t0=time.time()
     try:
         async for message in websocket:
-        	t1=time.time()
-        	print("id : "+str(idPlayer)+" t :"+str(t1-t0))
-        	t0=t1
+            t1=time.time()
+            print("id : "+str(idPlayer)+" t :"+str(t1-t0))
+            t0=t1
             code = message[0]
             print(idPlayer)
             #print("code : "+str(code))
