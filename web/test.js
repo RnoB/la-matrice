@@ -292,7 +292,7 @@ function receiver(msg)
             for (let j = 0; j < Nplayers; ++j) 
             {
 
-                var contrlers = data.getUint8(5*(1+j)+4*j,true);
+                var contrlers = data.getUint8(5*(2+j)-1,true);
                 var playerInfo = {"id" : data.getInt32(5*(1+j),true),
                 "position" : new THREE.Vector3(),
                 "rotation" : new THREE.Quaternion(),
