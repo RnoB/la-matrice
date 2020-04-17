@@ -431,7 +431,7 @@ document.body.addEventListener('keyup', keyReleased);
 var keyMap = {};
 function keyPressed(e)
 {
-    console.log(e);
+
     keyMap[e.key] = 'keydown';
     
     e.preventDefault();
@@ -439,7 +439,7 @@ function keyPressed(e)
 
 function keyReleased(e)
 {
-    console.log(e);
+    
   delete keyMap[e.key];
   e.preventDefault();
 
@@ -464,7 +464,7 @@ var speed = .1;
 function inputPlayer()
 {
 
-
+	console.log(keyMap);
     for (var key in keyMap)
     {
         switch(key)
