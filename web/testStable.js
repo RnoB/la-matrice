@@ -24,7 +24,7 @@ var ws;
 var startDate = new Date();
 var startTime = startDate.getTime()
 
-var id = -1;
+var id = Math.random();
 
 var connected = false;
 
@@ -48,55 +48,6 @@ plane.rotateX(-Math.PI/2.0);
 
 
 var simuTime = 0;
-
-
-var controllers = [];
-
-var networkCode;
-
-
-function getNetworkCode()
-{
-    var allText
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", "./js/network/networkCode.csv", false);
-    rawFile.onreadystatechange = function ()
-    {
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status == 0)
-            {
-                allText = rawFile.responseText;
-                
-            }
-        }
-    }
-    rawFile.send(null);
-
-
-
-    var networkCode = {};
-
-    var lines = allText.split("\n");
-    for (var line of lines)
-    {   
-        var elements = line.split(",");
-
-        if(elements[0].length !==0)
-        {
-
-            networkCode[elements[0]] = parseInt(elements[1]);
-        }
-
-    }
-
-    return networkCode
-
-}
-
-var networkCode = getNetworkCode();
-
-
 
 function initSky(turbidity = 10,
         rayleigh = 2,
@@ -208,18 +159,8 @@ function setup()
         colorB, // Facing front,
         sun )
 
-    controls = new THREE.PointerLockControls( camera, document.body );
-    controls.lock = true;
-    for (let i = 0; i < 2; ++i) {
-        const controller = renderer.xr.getController(i);
-        var controllerMesh = new THREE.Mesh( geometry, material );
-        controllerMesh.scale.set(.01,.1,.1);
-        controller.add( controllerMesh);
-        scene.add(controller);
-        controllers.push(controller);
-
-    }
-    setUpWorld()
+controls = new THREE.PointerLockControls( camera, document.body );
+controls.lock = true;
 }
 
 
@@ -227,7 +168,6 @@ function setup()
 function connect()
 {
     ws = new WebSocket('wss://matricematrice.xyz:6799'); 
-    ws.binaryType = "arraybuffer";
     connected = true;
 
 }
@@ -237,164 +177,84 @@ function connect()
 
 function receiver(msg)
 {
+    var data = JSON.parse(msg);
 
-    var data = new DataView(msg);
+    if('world' in data)
+    {
+        id = data.id;
 
-    var code = data.getUint8(0,true);
+        for (const player of data.playerIds)
+        {
 
 
 
-    switch(code)
+            listPlayers.push({"id" : player,
+            "position" : {"x":0,"y":0,"z":0},
+            "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
+            "mesh" : new THREE.Mesh(geometry, material)});
+            listPlayers[listPlayers.length-1].mesh.scale.set(.3,.3,.3);
+            
+            scene.add(listPlayers[listPlayers.length-1].mesh);
+        }
+        setUpWorld();
+    }
+    else if('newPlayer' in data)
     {
 
-
-        case networkCode['objectPosition']:
-            var objectId = data.getInt32(1,true);
-
-            var idx = listPlayers.findIndex(x => x.id == objectId);
-            if (idx>-1)
-            {
-
-                listPlayers[idx].position = new THREE.Vector3(data.getFloat32(5,true),
-                                                        data.getFloat32(9,true),
-                                                        data.getFloat32(13,true));
-                listPlayers[idx].rotation = new THREE.Quaternion(data.getFloat32(17,true),
-                                                            data.getFloat32(21,true),
-                                                            data.getFloat32(25,true),
-                                                            data.getFloat32(29,true));
-                for (let k = 0; k < listPlayers[idx].controllers; ++k) 
-                {
-                    
-                    listPlayers[idx]["controller"+k.toString()+"Position"] = new THREE.Vector3(data.getFloat32(33+28*k,true),
-                                                                                        data.getFloat32(37+28*k,true),
-                                                                                        data.getFloat32(41+28*k,true));
-                    listPlayers[idx]["controller"+k.toString()+"Rotation"] = new THREE.Quaternion(data.getFloat32(45+28*k,true),
-                                                                                            data.getFloat32(49+28*k,true),
-                                                                                            data.getFloat32(53+28*k,true),
-                                                                                            data.getFloat32(57+28*k,true));
-                    
-                }
-
-            }
-            break;
-        case networkCode['world']:
-            id = data.getInt32(1,true);
-
-            var Nplayers = (data.byteLength-5)/5.0;
-
-            for (let j = 0; j < Nplayers; ++j) 
-            {
-
-                var contrlers = data.getUint8(5*(1+j)+4*j,true);
-                var playerInfo = {"id" : data.getInt32(5*(1+j),true),
-                "position" : new THREE.Vector3(),
-                "rotation" : new THREE.Quaternion(),
-                "mesh" : new THREE.Mesh(geometry, material),
-                "controllers" : contrlers};
-
-                for (let k = 0; k < contrlers; ++k) 
-                {
-                    var controllerMesh = new THREE.Mesh( geometry, material );
-                    controllerMesh.scale.set(.01,.1,.1);
-                    playerInfo["controller"+k.toString()+"Position"] = new THREE.Vector3();
-                    playerInfo["controller"+k.toString()+"Rotation"] = new THREE.Quaternion();
-                    playerInfo["controller"+k.toString()+"Mesh"] = controllerMesh;
-                    scene.add(controllerMesh);
-                }
-                
-                listPlayers.push(playerInfo);
-                listPlayers[listPlayers.length-1].mesh.scale.set(.3,.3,.3);
-                
-                scene.add(listPlayers[listPlayers.length-1].mesh);
-            }
-            break;
-        case networkCode['newPlayer']:
-            var contrlers = data.getUint8(9,true);
-            playerInfo = {"id" : data.getInt32(5,true),
-            "position" : new THREE.Vector3(),
-            "rotation" : new THREE.Quaternion(),
-            "mesh" : new THREE.Mesh(geometry, material),
-            "controllers" : contrlers};
-
-            for (let k = 0; k < contrlers; ++k) 
-            {
-                var controllerMesh = new THREE.Mesh( geometry, material );
-                controllerMesh.scale.set(.01,.1,.1);
-                playerInfo["controller"+k.toString()+"Position"] = new THREE.Vector3();
-                playerInfo["controller"+k.toString()+"Rotation"] = new THREE.Quaternion();
-                playerInfo["controller"+k.toString()+"Mesh"] = controllerMesh;
-                scene.add(controllerMesh);
-            }
-
-            listPlayers.push(playerInfo);
+            listPlayers.push({"id" : data.newPlayer,
+            "position" : {"x":0,"y":0,"z":0},
+            "rotation" : {"_x":0,"_y":0,"_z":0,"_order":"XYZ"},
+            "mesh" : new THREE.Mesh(geometry, material)});
             listPlayers[listPlayers.length-1].mesh.scale.set(.3,.3,.3);
             scene.add(listPlayers[listPlayers.length-1].mesh);
+    }    
+    else if('remPlayer' in data)
+    {
 
-            break;
-        case networkCode["removePlayer"]:
-            var remPlayer = data.getInt32(1,true);
-            var idx = listPlayers.findIndex(x => x.id == remPlayer);
+            var idx = listPlayers.findIndex(x => x.id == data.remPlayer);
 
             if (idx>-1)
             {
 
                 scene.remove(listPlayers[idx].mesh);
-                for (let k = 0; k < listPlayers[idx].controllers; ++k) 
-                {
-                    scene.remove(listPlayers[idx]["controller"+k.toString()+"Mesh"]);
-                }
+
                 listPlayers.splice(idx);
 
 
             }
 
 
-
+            
     }
+    else
+    {
+        var idx = listPlayers.findIndex(x => x.id == data.id);
+        if (idx>-1)
+        {
 
+            listPlayers[idx].position = data.position;
+            listPlayers[idx].rotation = data.rotation;
+
+        }
+    }
 }
 
 async function sender()
 {
     var direction = new THREE.Vector3();
     var rotation = new THREE.Quaternion();
-    var msg = new Uint8Array(2);
-    msg[0] = networkCode["connect"];
-    msg[1] = controllers.length;
-    
-    ws.send(msg.buffer);
-    while(true)
-    {   
-
-        var msgArray = new ArrayBuffer(1+28*(1+controllers.length));
-        //var msgArray = new ArrayBuffer(1+0*(1+controllers.length));
         
-        var msgView = new DataView(msgArray);
+    while(true)
+    {
         camera.children[0].getWorldPosition( direction );
         camera.children[0].getWorldQuaternion( rotation );
-        msgView.setUint8(0, networkCode['playerPosition']);
 
-        msgView.setFloat32(1, direction.x, true);
-        msgView.setFloat32(5, direction.y, true);
-        msgView.setFloat32(9, direction.z, true);
-        msgView.setFloat32(13, rotation._x, true);
-        msgView.setFloat32(17, rotation._y, true);
-        msgView.setFloat32(21, rotation._z, true);
-        msgView.setFloat32(25, rotation._w, true);
-
-        for (let k = 0; k < controllers.length; ++k) 
-        {
-            msgView.setFloat32(29+k*28, controllers[k].position.x, true);
-            msgView.setFloat32(33+k*28, controllers[k].position.y, true);
-            msgView.setFloat32(37+k*28, controllers[k].position.z, true);
-            msgView.setFloat32(41+k*28, controllers[k].quaternion._x, true);
-            msgView.setFloat32(45+k*28, controllers[k].quaternion._y, true);
-            msgView.setFloat32(49+k*28, controllers[k].quaternion._z, true);
-            msgView.setFloat32(53+k*28, controllers[k].quaternion._w, true);
-            
-        }
-        
-        ws.send(msgView.buffer);
+        var msg = {
+            id: id,
+            position: direction,
+            rotation: rotation
+        };
+        ws.send(JSON.stringify(msg));
         await sleep(10);
     }
 }
@@ -419,16 +279,16 @@ var ySpeed = 0.1;
 document.addEventListener("keydown", onDocumentKeyDown, false);
 function onDocumentKeyDown(event) {
     var keyCode = event.which;
-    console.log(camera.position);
+
     if (keyCode == 87) {
-        camera.position.z += ySpeed;
-    } 
-    if (keyCode == 83) {
         camera.position.z -= ySpeed;
-    }  
+    }
+    if (keyCode == 83) {
+        camera.position.z += ySpeed;
+    }
     if (keyCode == 65) {
         camera.position.x -= xSpeed;
-    } 
+    }
     if (keyCode == 68) {
         camera.position.x += xSpeed;
     }
@@ -473,30 +333,17 @@ function render() {
 
         if (player.id !== id)
         {
-            //console.log(player.mesh.position);
             player.mesh.position.set(player.position.x,player.position.y,player.position.z);
             player.mesh.quaternion.set(player.rotation._x,player.rotation._y,player.rotation._z,player.rotation._w);
-            for (let k = 0; k < player.controllers; ++k) 
-            {
-
-                player["controller"+k.toString()+"Mesh"].position.set(player["controller"+k.toString()+"Position"].x,
-                                                                    player["controller"+k.toString()+"Position"].y,
-                                                                    player["controller"+k.toString()+"Position"].z,);
-                player["controller"+k.toString()+"Mesh"].quaternion.set(player["controller"+k.toString()+"Rotation"]._x,
-                                                                    player["controller"+k.toString()+"Rotation"]._y,
-                                                                    player["controller"+k.toString()+"Rotation"]._z,
-                                                                    player["controller"+k.toString()+"Rotation"]._w);
-
-            }
-            
             
         }
     }
     
     
-    renderer.render(scene, camera);
-    frame++;
+   renderer.render(scene, camera);
+   frame++;
 }
+
 
 setup();
 network();
