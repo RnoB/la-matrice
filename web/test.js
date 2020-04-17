@@ -426,27 +426,25 @@ function setUpWorld()
 var xSpeed = 0.1;
 var ySpeed = 0.1;
 
-document.addEventListener("keydown", onDocumentKeyDown, false);
-function onDocumentKeyDown(event) {
-    var keyCode = event.which;
-    console.log(camera.position);
-    if (keyCode == 87) {
-        camera.position.z += ySpeed;
-    } 
-    if (keyCode == 83) {
-        camera.position.z -= ySpeed;
-    }  
-    if (keyCode == 65) {
-        camera.position.x -= xSpeed;
-    } 
-    if (keyCode == 68) {
-        camera.position.x += xSpeed;
-    }
-    if (keyCode == 32) {
-        camera.position.set(0, 0, 0);
-    }
-    
-};
+document.body.addEventListener('keydown', keyPressed);
+function keyPressed(e){
+  switch(e.key) {
+    case 'ArrowUp':
+        mesh.rotateX(-0.1);
+        break;
+    case 'ArrowDown':
+        mesh.rotateX(0.1);
+        break;
+    case 'ArrowLeft':
+        mesh.rotateY(-0.1);
+        break;
+    case 'ArrowRight':
+        mesh.rotateY(0.1);
+        break;
+  }
+  e.preventDefault();
+
+}
 
 function network()
 {
