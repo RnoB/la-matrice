@@ -101,7 +101,7 @@ async def register(websocket):
 async def unregister(idPlayer,websocket):
     global playersSocket
     global playersPosition
-    global playersId
+    global playersIds
     global playerNumber
     global playerIds
     register = True
@@ -184,7 +184,9 @@ async def manager(websocket, path):
                 
             
             code = message[0]
-            #print("code : "+str(code))
+            print("code : "+str(code))
+
+            print(playerIds)
             if code == networkCode['playerPosition'] and sendMessage and idPlayer == playerIds[nextPlayer]:
                 messageSend = storePosition(code,idPlayer,message)
                 t1=time.time()
