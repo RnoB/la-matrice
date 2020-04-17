@@ -25,16 +25,6 @@ pcs = set()
 
 
 
-async def index(request):
-    content = open(os.path.join(ROOT, "index.html"), "r").read()
-    return web.Response(content_type="text/html", text=content)
-
-
-async def javascript(request):
-    content = open(os.path.join(ROOT, "client.js"), "r").read()
-    return web.Response(content_type="application/javascript", text=content)
-
-
 async def offer(request):
     params = await request.json()
     offer = RTCSessionDescription(sdp=params["sdp"], type=params["type"])
@@ -49,11 +39,7 @@ async def offer(request):
     log_info("Created for %s", request.remote)
 
     # prepare local media
-    player = MediaPlayer(os.path.join(ROOT, "demo-instruct.wav"))
-    if args.write_audio:
-        recorder = MediaRecorder(args.write_audio)
-    else:
-        recorder = MediaBlackhole()
+
 
     @pc.on("datachannel")
     def on_datachannel(channel):
@@ -87,7 +73,7 @@ async def offer(request):
 
     # handle offer
     await pc.setRemoteDescription(offer)
-    await recorder.start()
+
 
     # send answer
     answer = await pc.createAnswer()
@@ -111,17 +97,13 @@ async def on_shutdown(app):
 if __name__ == "__main__":
 
 
-    if args.verbose:
-        logging.basicConfig(level=logging.DEBUG)
-    else:
-        logging.basicConfig(level=logging.INFO)
+
+    logging.basicConfig(level=logging.DEBUG)
+    
 
 
     ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
     ssl_context.load_cert_chain(homeFolder+certFolder+"cert.pem",keyfile=homeFolder+certFolder+"privkey.pem")
     app = web.Application()
     app.on_shutdown.append(on_shutdown)
-    app.router.add_get("/", index)
-    app.router.add_get("/client.js", javascript)
-    app.router.add_post("/offer", offer)
     web.run_app(app, access_log=None, port=9989, ssl_context=ssl_context)
