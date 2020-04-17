@@ -463,7 +463,7 @@ function network()
 var speed = .1;
 function inputPlayer()
 {
-    if (keyMap.keys(obj).length>0)
+    if (Object.keys(keyMap).length>0)
     {
         for (key of keyMap)
         {
