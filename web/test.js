@@ -440,7 +440,7 @@ function keyPressed(e)
 function keyReleased(e)
 {
     console.log(e);
-  del keyMap[e.key];
+  delete keyMap[e.key];
   e.preventDefault();
 
 }
