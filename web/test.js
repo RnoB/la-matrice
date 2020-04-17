@@ -474,7 +474,7 @@ function render() {
 
 
 
-
+    console.log(keyMap);
     for (var player of listPlayers)
     {
 
