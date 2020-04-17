@@ -196,7 +196,7 @@ def main():
     ssl_context.load_cert_chain(homeFolder+certFolder+"cert.pem",keyfile=homeFolder+certFolder+"privkey.pem")
 
     start_server = websockets.serve(
-        manager, getLocalIP(), 6785, ssl=ssl_context,max_queue=1
+        manager, getLocalIP(), 6785, ssl=ssl_context,max_queue=1000
     )
 
     asyncio.get_event_loop().run_until_complete(start_server)
