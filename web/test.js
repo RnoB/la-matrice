@@ -427,22 +427,18 @@ var xSpeed = 0.1;
 var ySpeed = 0.1;
 
 document.body.addEventListener('keydown', keyPressed);
+document.body.addEventListener('keyup', keyReleased);
+var keyMap {};
 function keyPressed(e){
     console.log(e);
-  switch(e.key) {
-    case 'ArrowUp':
-        camera.rotateX(-0.1);
-        break;
-    case 'ArrowDown':
-        camera.rotateX(0.1);
-        break;
-    case 'ArrowLeft':
-        camera.rotateY(-0.1);
-        break;
-    case 'ArrowRight':
-        camera.rotateY(0.1);
-        break;
-  }
+    keyMap[e.key] = 'keydown';
+    
+    e.preventDefault();
+}
+
+function keyReleased(e){
+    console.log(e);
+  del keyMap[e.key];
   e.preventDefault();
 
 }
