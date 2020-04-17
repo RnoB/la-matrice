@@ -402,7 +402,7 @@ async function sender()
         }
         
         ws.send(msgView.buffer);
-        await sleep(1000);
+        await sleep(500);
     }
 }
 
