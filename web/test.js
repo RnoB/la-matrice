@@ -464,7 +464,7 @@ var speed = .1;
 function inputPlayer()
 {
 
-	console.log(keyMap);
+
     for (var key in keyMap)
     {
         switch(key)
@@ -478,7 +478,7 @@ function inputPlayer()
             case "ArrowLeft":
             camera.position.x += speed;
             break;
-            case "Arrowright":
+            case "ArrowRight":
             camera.position.x -= speed;
             break;
             case "z":
