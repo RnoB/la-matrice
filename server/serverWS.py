@@ -177,12 +177,14 @@ async def manager(websocket, path):
     try:
         async for message in websocket:
             checkingMessages = True
+            t1=time.time()
+            print("id : "+str(idPlayer)+" t :"+str(1/(t1-t0)))
+            t0=t1
             while checkingMessages :
+                print(len(websocket.messages) == 0)
                 if len(websocket.messages) == 0:
                     checkingMessages = False
-                t1=time.time()
-                print("id : "+str(idPlayer)+" t :"+str(1/(t1-t0)))
-                t0=t1
+
                 code = message[0]
                 
                 #print("code : "+str(code))
