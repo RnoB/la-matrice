@@ -430,20 +430,20 @@ document.body.addEventListener('keydown', keyPressed);
 function keyPressed(e){
   switch(e.key) {
     case 'ArrowUp':
-        mesh.rotateX(-0.1);
+        camera.rotateX(-0.1);
         break;
     case 'ArrowDown':
-        mesh.rotateX(0.1);
+        camera.rotateX(0.1);
         break;
     case 'ArrowLeft':
-        mesh.rotateY(-0.1);
+        camera.rotateY(-0.1);
         break;
     case 'ArrowRight':
-        mesh.rotateY(0.1);
+        camera.rotateY(0.1);
         break;
   }
   e.preventDefault();
-
+  render();
 }
 
 function network()
