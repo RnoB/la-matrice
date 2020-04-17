@@ -176,15 +176,15 @@ async def manager(websocket, path):
 
     try:
         async for message in websocket:
-            print(message in websocket)
-            t1=time.time()
-            print("id : "+str(idPlayer)+" t :"+str(1/(t1-t0)))
-            t0=t1
-            code = message[0]
-            print(idPlayer)
-            #print("code : "+str(code))
-            if code == networkCode['playerPosition']:
-                messageSend = storePosition(code,idPlayer,message)
+            while((message in websocket)>1)
+                t1=time.time()
+                print("id : "+str(idPlayer)+" t :"+str(1/(t1-t0)))
+                t0=t1
+                code = message[0]
+                print(idPlayer)
+                #print("code : "+str(code))
+                if code == networkCode['playerPosition']:
+                    messageSend = storePosition(code,idPlayer,message)
             await send(websocket,messageSend)
     finally:
         await unregister(idPlayer,websocket)
