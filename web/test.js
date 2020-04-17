@@ -370,6 +370,7 @@ async function sender()
     msg[1] = controllers.length;
     
     ws.send(msg.buffer);
+    var t1 = new Date().getTime();
     while(true)
     {   
 
@@ -402,7 +403,9 @@ async function sender()
         }
         
         ws.send(msgView.buffer);
-        await sleep(500);
+        var t2 = new Date().getTime();
+        await sleep(500-(t2-t1));
+        t1=t2;
     }
 }
 
