@@ -15,9 +15,8 @@ function createPeerConnection() {
         sdpSemantics: 'unified-plan'
     };
 
-    if (document.getElementById('use-stun').checked) {
-        config.iceServers = [{urls: ['stun:matricematrice.xyz:9989']}];
-    }
+    config.iceServers = [{urls: ['stun:matricematrice.xyz:9989']}];
+    
 
     pc = new RTCPeerConnection(config);
 
@@ -38,12 +37,7 @@ function createPeerConnection() {
     signalingLog.textContent = pc.signalingState;
 
     // connect audio / video
-    pc.addEventListener('track', function(evt) {
-        if (evt.track.kind == 'video')
-            document.getElementById('video').srcObject = evt.streams[0];
-        else
-            document.getElementById('audio').srcObject = evt.streams[0];
-    });
+
 
     return pc;
 }
@@ -70,22 +64,14 @@ function negotiate() {
         var offer = pc.localDescription;
         var codec;
 
-        codec = document.getElementById('audio-codec').value;
-        if (codec !== 'default') {
-            offer.sdp = sdpFilterCodec('audio', codec, offer.sdp);
-        }
 
-        codec = document.getElementById('video-codec').value;
-        if (codec !== 'default') {
-            offer.sdp = sdpFilterCodec('video', codec, offer.sdp);
-        }
 
-        document.getElementById('offer-sdp').textContent = offer.sdp;
+
         return fetch('/offer', {
             body: JSON.stringify({
                 sdp: offer.sdp,
                 type: offer.type,
-                video_transform: document.getElementById('video-transform').value
+                video_transform: false
             }),
             headers: {
                 'Content-Type': 'application/json'
@@ -95,7 +81,7 @@ function negotiate() {
     }).then(function(response) {
         return response.json();
     }).then(function(answer) {
-        document.getElementById('answer-sdp').textContent = answer.sdp;
+        
         return pc.setRemoteDescription(answer);
     }).catch(function(e) {
         alert(e);
@@ -103,7 +89,7 @@ function negotiate() {
 }
 
 function start() {
-    document.getElementById('start').style.display = 'none';
+
 
     pc = createPeerConnection();
 
@@ -118,10 +104,10 @@ function start() {
         }
     }
 
-    if (document.getElementById('use-datachannel').checked) {
-        var parameters = JSON.parse(document.getElementById('datachannel-parameters').value);
 
-        dc = pc.createDataChannel('chat', parameters);
+
+
+        dc = pc.createDataChannel('chat', "");
         dc.onclose = function() {
             clearInterval(dcInterval);
             dataChannelLog.textContent += '- close\n';
@@ -142,47 +128,27 @@ function start() {
                 dataChannelLog.textContent += ' RTT ' + elapsed_ms + ' ms\n';
             }
         };
-    }
+    
 
     var constraints = {
-        audio: document.getElementById('use-audio').checked,
+        audio: false,
         video: false
     };
 
-    if (document.getElementById('use-video').checked) {
-        var resolution = document.getElementById('video-resolution').value;
-        if (resolution) {
-            resolution = resolution.split('x');
-            constraints.video = {
-                width: parseInt(resolution[0], 0),
-                height: parseInt(resolution[1], 0)
-            };
-        } else {
+
             constraints.video = true;
-        }
-    }
 
-    if (constraints.audio || constraints.video) {
-        if (constraints.video) {
-            document.getElementById('media').style.display = 'block';
-        }
-        navigator.mediaDevices.getUserMedia(constraints).then(function(stream) {
-            stream.getTracks().forEach(function(track) {
-                pc.addTrack(track, stream);
-            });
-            return negotiate();
-        }, function(err) {
-            alert('Could not acquire media: ' + err);
-        });
-    } else {
+
+
+
         negotiate();
-    }
+    
 
-    document.getElementById('stop').style.display = 'inline-block';
+  
 }
 
 function stop() {
-    document.getElementById('stop').style.display = 'none';
+
 
     // close data channel
     if (dc) {
