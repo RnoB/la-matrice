@@ -118,7 +118,7 @@ async def unregister(idPlayer,websocket):
         try:
             remPlayer = struct.pack('B', networkCode['removePlayer'])
             remPlayer += struct.pack('<i',idPlayer)
-            
+
             await player.send(remPlayer)
         except:
             pass
@@ -175,6 +175,7 @@ async def manager(websocket, path):
     try:
         async for message in websocket:
             code = message[0]
+            print(idPlayer)
             #print("code : "+str(code))
             if code == networkCode['playerPosition']:
                 messageSend = storePosition(code,idPlayer,message)
