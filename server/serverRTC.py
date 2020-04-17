@@ -7,6 +7,9 @@ import ssl
 import uuid
 
 
+homeFolder = "/home/ubuntu/"
+networkCodePath = homeFolder+"la-matrice/web/js/network/networkCode.csv"
+certFolder = "cert/"
 from aiohttp import web
 
 
