@@ -178,15 +178,12 @@ async def manager(websocket, path):
 
     try:
         async for message in websocket:
-            if len(websocket.messages) == 0:
-                sendMessage = True
-            else:
-                sendMessage = False
+
                 
             
             code = message[0]
 
-            if code == networkCode['playerPosition'] and sendMessage and idPlayer == playerIds[nextPlayer] and playerNumber>0:
+            if code == networkCode['playerPosition'] and len(websocket.messages) == 0 and idPlayer == playerIds[nextPlayer] and playerNumber>0:
                 messageSend = storePosition(code,idPlayer,message)
                 t1=time.time()
                 print("id : "+str(idPlayer)+" t :"+str(1/(t1-t0)))
