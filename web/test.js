@@ -428,6 +428,7 @@ var ySpeed = 0.1;
 
 document.body.addEventListener('keydown', keyPressed);
 function keyPressed(e){
+    console.log(e);
   switch(e.key) {
     case 'ArrowUp':
         camera.rotateX(-0.1);
@@ -443,7 +444,7 @@ function keyPressed(e){
         break;
   }
   e.preventDefault();
-  render();
+
 }
 
 function network()
