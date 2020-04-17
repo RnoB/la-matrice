@@ -195,7 +195,7 @@ async def manager(websocket, path):
                     tSend = time.time()
             except:
                 nextPlayer = ((nextPlayer+1)%playerNumber)
-            if time.time()-tSend>.1:
+            if time.time()-tSend>0.05:
                 nextPlayer = ((nextPlayer+1)%playerNumber)
                 
     finally:
