@@ -234,15 +234,15 @@ function connect()
 
 
 
-var tOld = new Date().getTime();
+var tOld = new Array(12).fill(0);
+var tNew = new Array(12).fill(0);
+
 function receiver(msg)
 {   
     var data = new DataView(msg);
 
     var code = data.getUint8(0,true);
-    var tNew = new Date().getTime();
-    console.log("code : "+code.toString()+" t : "+(1000.0/(tNew-tOld)).toString());
-    tOld = tNew;
+    var t1 = new Date().getTime();
 
 
 
@@ -252,7 +252,10 @@ function receiver(msg)
 
         case networkCode['objectPosition']:
             var objectId = data.getInt32(1,true);
-            console.log("id : "+objectId.toString());
+            tNew[objectId] = t1
+            console.log("code : "+code.toString()+" id : "+objectId.toString()+" t : "+(1000.0/(tNew[objectId]-tOld[objectId])).toString());
+            tOld[objectId] = tNew[objectId];
+            console.log();
 
             var idx = listPlayers.findIndex(x => x.id == objectId);
             if (idx>-1)
