@@ -280,7 +280,7 @@ function receiver(msg)
                                                                                             data.getFloat32(57+28*k,true));
                     
                 }
-                console.log(listPlayers[idx]);
+
 
             }
             break;
