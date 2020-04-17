@@ -398,7 +398,7 @@ async function sender()
         }
         
         ws.send(msgView.buffer);
-        await sleep(10);
+        await sleep(100);
     }
 }
 
