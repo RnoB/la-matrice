@@ -238,7 +238,7 @@ var tOld = new Date().getTime();
 function receiver(msg)
 {   
     var tNew = new Date().getTime();
-    console.log(tNew-tOld);
+    console.log("t : "+(1000.0/(tNew-tOld)).toString());
     tOld = tNew;
     var data = new DataView(msg);
 
