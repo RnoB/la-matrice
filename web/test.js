@@ -404,7 +404,7 @@ async function sender()
         
         ws.send(msgView.buffer);
         var t2 = new Date().getTime();
-        await sleep(50);
+        await sleep(10);
         t1=t2;
     }
 }
