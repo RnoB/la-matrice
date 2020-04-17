@@ -9,7 +9,7 @@ import time
 import threading
 import struct
 import csv
-
+import time
 homeFolder = "/home/ubuntu/"
 networkCodePath = homeFolder+"la-matrice/web/js/network/networkCode.csv"
 certFolder = "cert/"
@@ -172,8 +172,12 @@ async def manager(websocket, path):
     print("ws : "+str(websocket))
     print("pa : "+str(path))
     idPlayer = await register(websocket)
+    t0=time.time
     try:
         async for message in websocket:
+        	t1=time.time()
+        	print("id : "+str(idPlayer)+" t :"+str(t1-t0))
+        	t0=t1
             code = message[0]
             print(idPlayer)
             #print("code : "+str(code))
