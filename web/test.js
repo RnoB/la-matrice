@@ -428,15 +428,17 @@ var ySpeed = 0.1;
 
 document.body.addEventListener('keydown', keyPressed);
 document.body.addEventListener('keyup', keyReleased);
-var keyMap {};
-function keyPressed(e){
+var keyMap = {};
+function keyPressed(e)
+{
     console.log(e);
     keyMap[e.key] = 'keydown';
     
     e.preventDefault();
 }
 
-function keyReleased(e){
+function keyReleased(e)
+{
     console.log(e);
   del keyMap[e.key];
   e.preventDefault();
