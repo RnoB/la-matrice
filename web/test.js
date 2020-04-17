@@ -234,10 +234,12 @@ function connect()
 
 
 
-
+var tOld = new Date().getTime();
 function receiver(msg)
-{
-
+{   
+    var tNew = new Date().getTime();
+    console.log(tNew-tOld);
+    tOld = tNew;
     var data = new DataView(msg);
 
     var code = data.getUint8(0,true);
