@@ -464,6 +464,7 @@ var speed = .1;
 function inputPlayer()
 {
 
+
     for (key in keyMap)
     {
         switch(key)
