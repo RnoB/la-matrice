@@ -173,6 +173,7 @@ async def manager(websocket, path):
     print("pa : "+str(path))
     idPlayer = await register(websocket)
     t0=time.time()
+    dir(websocket)
     try:
         async for message in websocket:
             t1=time.time()
