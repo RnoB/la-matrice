@@ -88,13 +88,13 @@ async def register(websocket):
             playerDict["posC"+str(k)] = (0,0,0)
             playerDict["rotC"+str(k)] = (0,0,0,0)
         playersPosition.append(playerDict)
+        playerNumber+=1
         
         try:
             await playersSocket[-1].send(dataWorld)
         except:
             pass
         return playerId
-    playerNumber+=1
 
 
 
