@@ -237,12 +237,12 @@ function connect()
 var tOld = new Date().getTime();
 function receiver(msg)
 {   
-    var tNew = new Date().getTime();
-    console.log("t : "+(1000.0/(tNew-tOld)).toString());
-    tOld = tNew;
     var data = new DataView(msg);
 
     var code = data.getUint8(0,true);
+    var tNew = new Date().getTime();
+    console.log("code : "+code.toString()+" t : "+(1000.0/(tNew-tOld)).toString());
+    tOld = tNew;
 
 
 
