@@ -92,7 +92,7 @@ function start() {
 
 
 
-        dc = pc.createDataChannel('chat', "");
+        dc = pc.createDataChannel('chat');
         dc.onclose = function() {
             clearInterval(dcInterval);
             dataChannelLog.textContent += '- close\n';
