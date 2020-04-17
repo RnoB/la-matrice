@@ -67,7 +67,10 @@ async def register(websocket):
             dataWorld = struct.pack('<BiiB', networkCode['newPlayer'],0, playerId,controllers)
             
             print(dataWorld);
-            await player.send( dataWorld)
+            try:
+            	await player.send( dataWorld)
+            except:
+            	pass
         
             
                     
@@ -115,6 +118,7 @@ async def unregister(idPlayer,websocket):
         try:
             remPlayer = struct.pack('B', networkCode['removePlayer'])
             remPlayer += struct.pack('<i',idPlayer)
+            
             await player.send(remPlayer)
         except:
             pass
