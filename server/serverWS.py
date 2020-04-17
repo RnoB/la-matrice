@@ -182,6 +182,7 @@ async def manager(websocket, path):
             t0=t1
             while checkingMessages :
                 print(len(websocket.messages) == 0)
+                print(len(websocket.messages))
                 if len(websocket.messages) == 0:
                     checkingMessages = False
 
