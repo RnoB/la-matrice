@@ -177,7 +177,7 @@ async def manager(websocket, path):
     try:
         async for message in websocket:
             if True :
-                print(type(message in websocket))
+                print(message in websocket)
                 t1=time.time()
                 print("id : "+str(idPlayer)+" t :"+str(1/(t1-t0)))
                 t0=t1
