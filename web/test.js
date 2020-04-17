@@ -465,7 +465,7 @@ function inputPlayer()
 {
 
 
-    for (key in keyMap)
+    for (var key in keyMap)
     {
         switch(key)
         {
