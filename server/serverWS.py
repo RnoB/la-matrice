@@ -194,7 +194,7 @@ async def manager(websocket, path):
                 print("id : "+str(idPlayer)+" t :"+str(1/(t1-t0)))
                 t0=t1
                 await send(websocket,messageSend)
-                nexplayer = ((nextPlayer+1)%playerNumber)
+                nextplayer = ((nextPlayer+1)%playerNumber)
     finally:
         await unregister(idPlayer,websocket)
         print("unregistered")
