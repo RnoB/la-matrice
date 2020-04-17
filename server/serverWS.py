@@ -22,6 +22,8 @@ playerIds = []
 playerId = 0
 playerNumber = 0
 nextPlayer = 0
+
+t0 = time.time()
 #logger = logging.getLogger('websockets')
 #logger.setLevel(logging.INFO)
 #logger.addHandler(logging.StreamHandler())
@@ -174,7 +176,7 @@ async def manager(websocket, path):
     print("ws : "+str(websocket))
     print("pa : "+str(path))
     idPlayer = await register(websocket)
-    t0=time.time()
+    tSend=time.time()
 
     try:
         async for message in websocket:
@@ -191,6 +193,10 @@ async def manager(websocket, path):
                 #t0=t1
                 await send(websocket,messageSend)
                 nextPlayer = ((nextPlayer+1)%playerNumber)
+                tSend = time.time()
+            if time.time()-tSend>.2:
+                nextPlayer = ((nextPlayer+1)%playerNumber)
+                
     finally:
         await unregister(idPlayer,websocket)
         print("unregistered")
