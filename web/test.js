@@ -463,41 +463,40 @@ function network()
 var speed = .1;
 function inputPlayer()
 {
-    if (Object.keys(keyMap).length>0)
+
+    for (key in keyMap)
     {
-        for (key of keyMap)
+        switch(key)
         {
-            switch(key)
-            {
-                case "ArrowUp":
-                camera.position.y += speed;
-                break;
-                case "ArrowDown":
-                camera.position.y -= speed;
-                break;
-                case "ArrowLeft":
-                camera.position.x += speed;
-                break;
-                case "Arrowright":
-                camera.position.x -= speed;
-                break;
-                case "z":
-                case "w":
-                camera.position.z += speed;
-                break;
-                case "s":
-                camera.position.z -= speed;
-                break;
-                case "a":
-                case "q":
-                camera.rotateY( speed);
-                break;
-                case "d":
-                camera.rotateY(-speed);
-                break;
-            }
+            case "ArrowUp":
+            camera.position.y += speed;
+            break;
+            case "ArrowDown":
+            camera.position.y -= speed;
+            break;
+            case "ArrowLeft":
+            camera.position.x += speed;
+            break;
+            case "Arrowright":
+            camera.position.x -= speed;
+            break;
+            case "z":
+            case "w":
+            camera.position.z += speed;
+            break;
+            case "s":
+            camera.position.z -= speed;
+            break;
+            case "a":
+            case "q":
+            camera.rotateY( speed);
+            break;
+            case "d":
+            camera.rotateY(-speed);
+            break;
         }
     }
+
 }
 
 //setup();
