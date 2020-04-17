@@ -1,8 +1,8 @@
-// get DOM elements
-var dataChannelLog = document.getElementById('data-channel'),
-    iceConnectionLog = document.getElementById('ice-connection-state'),
-    iceGatheringLog = document.getElementById('ice-gathering-state'),
-    signalingLog = document.getElementById('signaling-state');
+
+
+
+
+
 
 // peer connection
 var pc = null;
@@ -16,7 +16,7 @@ function createPeerConnection() {
     };
 
     if (document.getElementById('use-stun').checked) {
-        config.iceServers = [{urls: ['stun:stun.l.google.com:19302']}];
+        config.iceServers = [{urls: ['stun:matricematrice.xyz:9989']}];
     }
 
     pc = new RTCPeerConnection(config);
