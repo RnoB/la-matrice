@@ -154,6 +154,7 @@ def storePosition(code,idPlayer,message):
                                     player['rotation'][1],\
                                     player['rotation'][2],\
                                     player['rotation'][3])
+    print(player['controllers'])
     for k in range(0,player['controllers']):
         message += struct.pack('<fff',player["posC"+str(k)][0],\
                                         player["posC"+str(k)][1],\
