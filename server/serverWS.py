@@ -48,7 +48,6 @@ async def register(websocket):
     global playerIds
     global playerId
     global players
-    playerNumber+=1
     playerId+=1
     try:
         playerData = await websocket.recv()
@@ -95,6 +94,7 @@ async def register(websocket):
         except:
             pass
         return playerId
+    playerNumber+=1
 
 
 
