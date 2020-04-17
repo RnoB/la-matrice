@@ -479,13 +479,15 @@ function inputPlayer()
             case "Arrowright":
             camera.position.x -= speed;
             break;
-            case "z" or "w":
+            case "z":
+            case "w":
             camera.position.z += speed;
             break;
             case "s":
             camera.position.z -= speed;
             break;
-            case "a" or "q":
+            case "a":
+            case "q":
             camera.rotateY( speed);
             break;
             case "d":
