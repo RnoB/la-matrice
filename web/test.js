@@ -460,8 +460,32 @@ function network()
 
 
 
-
-
+var speed = .1;
+function inputPlayer()
+{
+    for (key of keyMap)
+    {
+        switch(key)
+        {
+            case "ArrowUp":
+            camera.position.y += speed;
+            case "ArrowDown":
+            camera.position.y -= speed;
+            case "ArrowLeft":
+            camera.position.x += speed;
+            case "Arrowright":
+            camera.position.x -= speed;
+            case "z" or "w":
+            camera.position.z += speed;
+            case "s":
+            camera.position.z -= speed;
+            case "a" or "q":
+            camera.rotateY( speed);
+            case "d":
+            camera.rotateY(-speed);
+        }
+    }
+}
 
 //setup();
 
@@ -473,7 +497,7 @@ function render() {
 
 
 
-
+    inputPlayer()
 
     for (var player of listPlayers)
     {
