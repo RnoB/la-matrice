@@ -160,6 +160,7 @@ def storePosition(code,idPlayer,message):
         playersPosition[playerIds.index(idPlayer)]["rotC"+str(k)] = struct.unpack('<ffff',message[41+k*28:57+k*28])
 
     player = playersPosition[playerIds.index(idPlayer)]
+    print(player)
     message = struct.pack('B', networkCode['objectPosition'])
     message += struct.pack('<i', idPlayer)
     message += struct.pack('<fff',player['position'][0],\
