@@ -25,6 +25,7 @@ playerNumber = 0
 nextPlayer = 0
 playersPosition = []
 playersRotation = []
+playersList = []
 
 
 t0 = time.time()
@@ -101,6 +102,7 @@ async def register(websocket):
         for k in range(0,controllers):
             playerDict["posC"+str(k)] = (0,0,0)
             playerDict["rotC"+str(k)] = (0,0,0,0)
+        playersList.append(playerDict)
         playersPosition.append(playerDict["position"])
         playersRotation.append(playerDict["rotation"])
         playerNumber+=1
@@ -115,7 +117,7 @@ async def register(websocket):
 
 async def unregister(idPlayer,websocket):
     global playersSocket
-    global playersPosition
+    global playersList
     global playersIds
     global playerNumber
     global playerIds
@@ -126,7 +128,7 @@ async def unregister(idPlayer,websocket):
             register = False
         except:
             pass
-    del playersPosition[playerIds.index(idPlayer)]
+    del playersList[playerIds.index(idPlayer)]
     playerIds.remove(idPlayer)
     playerNumber -= 1
     for player in playersSocket:
@@ -150,17 +152,17 @@ async def send(websocket,message):
         
 
 def storePosition(code,idPlayer,message):
-    print(len(message))
+    #print(len(message))
     #print(playersPosition[playerIds.index(idPlayer)])
-    print(struct.unpack('<fffffff',message[1:29]))
-    playersDict[playerIds.index(idPlayer)]['position'] = struct.unpack('<fff',message[1:13])
-    playersDict[playerIds.index(idPlayer)]['rotation'] = struct.unpack('<ffff',message[13:29])
-    for k in range(0,playersPosition[playerIds.index(idPlayer)]['controllers']):
-        playersDict[playerIds.index(idPlayer)]["posC"+str(k)] = struct.unpack('<fff',message[29+k*28:41+k*28])
-        playersDict[playerIds.index(idPlayer)]["rotC"+str(k)] = struct.unpack('<ffff',message[41+k*28:57+k*28])
+    #print(struct.unpack('<fffffff',message[1:29]))
+    playersList[playerIds.index(idPlayer)]['position'] = struct.unpack('<fff',message[1:13])
+    playersList[playerIds.index(idPlayer)]['rotation'] = struct.unpack('<ffff',message[13:29])
+    for k in range(0,playersList[playerIds.index(idPlayer)]['controllers']):
+        playersList[playerIds.index(idPlayer)]["posC"+str(k)] = struct.unpack('<fff',message[29+k*28:41+k*28])
+        playersList[playerIds.index(idPlayer)]["rotC"+str(k)] = struct.unpack('<ffff',message[41+k*28:57+k*28])
 
-    player = playersPosition[playerIds.index(idPlayer)]
-    print(player)
+    player = playersList[playerIds.index(idPlayer)]
+
     message = struct.pack('B', networkCode['objectPosition'])
     message += struct.pack('<i', idPlayer)
     message += struct.pack('<fff',player['position'][0],\
@@ -179,7 +181,7 @@ def storePosition(code,idPlayer,message):
                                         player["rotC"+str(k)][1],\
                                         player["rotC"+str(k)][2],\
                                         player["rotC"+str(k)][3])
-    print(message)
+    #print(message)
     return message
 
 
