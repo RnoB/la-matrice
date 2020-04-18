@@ -33,6 +33,28 @@ t0 = time.time()
 #logger.setLevel(logging.INFO)
 #logger.addHandler(logging.StreamHandler())
 
+def euler_to_quaternion(roll, pitch, yaw):
+
+    qx = np.sin(roll/2) * np.cos(pitch/2) * np.cos(yaw/2) - np.cos(roll/2) * np.sin(pitch/2) * np.sin(yaw/2)
+    qy = np.cos(roll/2) * np.sin(pitch/2) * np.cos(yaw/2) + np.sin(roll/2) * np.cos(pitch/2) * np.sin(yaw/2)
+    qz = np.cos(roll/2) * np.cos(pitch/2) * np.sin(yaw/2) - np.sin(roll/2) * np.sin(pitch/2) * np.cos(yaw/2)
+    qw = np.cos(roll/2) * np.cos(pitch/2) * np.cos(yaw/2) + np.sin(roll/2) * np.sin(pitch/2) * np.sin(yaw/2)
+
+    return [qx, qy, qz, qw]
+
+def quaternion_to_euler(x, y, z, w):
+
+    t0 = +2.0 * (w * x + y * z)
+    t1 = +1.0 - 2.0 * (x * x + y * y)
+    roll = math.atan2(t0, t1)
+    t2 = +2.0 * (w * y - z * x)
+    t2 = +1.0 if t2 > +1.0 else t2
+    t2 = -1.0 if t2 < -1.0 else t2
+    pitch = math.asin(t2)
+    t3 = +2.0 * (w * z + x * y)
+    t4 = +1.0 - 2.0 * (y * y + z * z)
+    yaw = math.atan2(t3, t4)
+    return [yaw, pitch, roll]
 
 with open(networkCodePath, mode='r') as infile:
     reader = csv.reader(infile)
@@ -50,12 +72,19 @@ def getLocalIP():
 
 def initialPosition():
     if len(playersPosition)==0:
-        position = np.array([0,0,0])
+        position = np.array([0,1.5,0])
         rotation = np.array([0,0,0,1])
     else:
+        mn = np.mean(playersPosition,axis = 0)
 
-        position = np.array([0,0,0])
-        rotation = np.array([0,0,0,1])
+        dist = 1+np.random.rand()
+        theta = 2*np.pi*np.random.rand()
+        position = mn+[dist*np.cos(theta),-mn[1]+1.5,dist*np.sin(theta)]
+        theta = np.arctan2(position[0]-mn[0],position[2]-mn[2])
+
+        
+        rotation = euler_to_quaternion(0, theta, 0)
+
     return position, rotation
 
 async def register(websocket):
@@ -68,11 +97,12 @@ async def register(websocket):
         playerData = await websocket.recv()
     except:
         pass
-    print(playerData)
+
     playerInfo = struct.unpack('BB',playerData)
     
-    print(playerInfo)
+
     if playerInfo[0] == networkCode['connect']:
+        position0,rotation0 = initialPosition()
         controllers = playerInfo[1]
 
 
@@ -80,7 +110,7 @@ async def register(websocket):
         
             dataWorld = struct.pack('<BiiB', networkCode['newPlayer'],0, playerId,controllers)
             
-            print(dataWorld);
+
             try:
                 await player.send( dataWorld)
             except:
@@ -91,6 +121,8 @@ async def register(websocket):
         playersSocket.append(websocket)
         dataWorld = struct.pack('B', networkCode['world'])
         dataWorld += struct.pack('<i',playerId)
+        dataWorld += struct.pack('<fffffff',position0[0],position0[1],position0[2],\
+                                    rotation0[0],rotation0[1],rotation0[2],rotation0[3])
 
         for k in range(0,len(playerIds)):
             dataWorld += struct.pack('<i', playerIds[k])
@@ -98,13 +130,14 @@ async def register(websocket):
 
         #world = json.dumps({"world" : 1, "objects" : [2,3],"id" : playerId,"playerIds" : playerIds,"playerControllers" : playerControllers})
         playerIds.append(playerId)
-        playerDict = {"id" : playerId,"controllers" : controllers,"position" : (0,0,0),"rotation" : (0,0,0,0)}
+        playersPosition.append(position0)
+        playersRotation.append(rotation0)
+        playerDict = {"id" : playerId,"controllers" : controllers,"position" : playersPosition[-1],"rotation" : playersRotation[-1]}
         for k in range(0,controllers):
             playerDict["posC"+str(k)] = (0,0,0)
-            playerDict["rotC"+str(k)] = (0,0,0,0)
+            playerDict["rotC"+str(k)] = (0,0,0,1)
         playersList.append(playerDict)
-        playersPosition.append(playerDict["position"])
-        playersRotation.append(playerDict["rotation"])
+
         playerNumber+=1
         
         try:
@@ -128,7 +161,10 @@ async def unregister(idPlayer,websocket):
             register = False
         except:
             pass
-    del playersList[playerIds.index(idPlayer)]
+    idx = playerIds.index(idPlayer)
+    del playersList[idx]
+    del playersRotation[idx]
+    del playersPosition[idx]
     playerIds.remove(idPlayer)
     playerNumber -= 1
     for player in playersSocket:
@@ -153,15 +189,20 @@ async def send(websocket,message):
 
 def storePosition(code,idPlayer,message):
     #print(len(message))
+    idx = playerIds.index(idPlayer)
     #print(playersPosition[playerIds.index(idPlayer)])
     #print(struct.unpack('<fffffff',message[1:29]))
-    playersList[playerIds.index(idPlayer)]['position'] = struct.unpack('<fff',message[1:13])
-    playersList[playerIds.index(idPlayer)]['rotation'] = struct.unpack('<ffff',message[13:29])
-    for k in range(0,playersList[playerIds.index(idPlayer)]['controllers']):
-        playersList[playerIds.index(idPlayer)]["posC"+str(k)] = struct.unpack('<fff',message[29+k*28:41+k*28])
-        playersList[playerIds.index(idPlayer)]["rotC"+str(k)] = struct.unpack('<ffff',message[41+k*28:57+k*28])
 
-    player = playersList[playerIds.index(idPlayer)]
+    #print(playersList[idx]['position'])
+    playersList[idx]['position'] = struct.unpack('<fff',message[1:13])
+    playersList[idx]['rotation'] = struct.unpack('<ffff',message[13:29])
+    for k in range(0,playersList[idx]['controllers']):
+        playersList[idx]["posC"+str(k)] = struct.unpack('<fff',message[29+k*28:41+k*28])
+        playersList[idx]["rotC"+str(k)] = struct.unpack('<ffff',message[41+k*28:57+k*28])
+    playersPosition[idx] = playersList[idx]['position']
+    playersRotation[idx] = playersList[idx]['rotation']
+
+    player = playersList[idx]
 
     message = struct.pack('B', networkCode['objectPosition'])
     message += struct.pack('<i', idPlayer)
@@ -190,8 +231,7 @@ def storePosition(code,idPlayer,message):
 
 async def manager(websocket, path):
     global nextPlayer
-    print("ws : "+str(websocket))
-    print("pa : "+str(path))
+    print("--- New Player enters !! ---")
     idPlayer = await register(websocket)
     tSend=time.time()
 
