@@ -24,7 +24,7 @@ playerId = 0
 playerNumber = 0
 nextPlayer = 0
 playersPosition = []
-playersPosition = []
+playersRotation = []
 
 
 t0 = time.time()
