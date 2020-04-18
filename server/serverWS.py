@@ -103,7 +103,7 @@ async def register(websocket):
         playerDict = {"id" : playerId,"controllers" : controllers,"position" : playersPosition[-1],"rotation" : playersRotation[-1]}
         for k in range(0,controllers):
             playerDict["posC"+str(k)] = (0,0,0)
-            playerDict["rotC"+str(k)] = (0,0,0,0)
+            playerDict["rotC"+str(k)] = (0,0,0,1)
         playersList.append(playerDict)
 
         playerNumber+=1
@@ -155,15 +155,17 @@ async def send(websocket,message):
 def storePosition(code,idPlayer,message):
     #print(len(message))
     idx = playerIds.index(idPlayer)
-    
+    #print(playersPosition[playerIds.index(idPlayer)])
     #print(struct.unpack('<fffffff',message[1:29]))
-    playersPosition[idx] = struct.unpack('<fff',message[1:13])
-    print(playersList[idx]['position'])
-    #playersList[idx]['position'] = struct.unpack('<fff',message[1:13])
+    playersPosition[idx]
+    #print(playersList[idx]['position'])
+    playersList[idx]['position'] = struct.unpack('<fff',message[1:13])
     playersList[idx]['rotation'] = struct.unpack('<ffff',message[13:29])
     for k in range(0,playersList[idx]['controllers']):
         playersList[idx]["posC"+str(k)] = struct.unpack('<fff',message[29+k*28:41+k*28])
         playersList[idx]["rotC"+str(k)] = struct.unpack('<ffff',message[41+k*28:57+k*28])
+    playersPosition[idx] = playersList[idx]['position']
+    playersRotation[idx] = playersList[idx]['rotation']
 
     player = playersList[idx]
 
