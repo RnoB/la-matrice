@@ -471,7 +471,7 @@ function network()
 
 
 
-var speed = .1;
+var speed = .05;
 function inputPlayer()
 {
 
