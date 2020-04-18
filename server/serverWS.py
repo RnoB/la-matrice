@@ -150,7 +150,7 @@ async def send(websocket,message):
         
 
 def storePosition(code,idPlayer,message):
-    #print(len(message))
+    print(len(message))
     #print(playersPosition[playerIds.index(idPlayer)])
     print(struct.unpack('<fffffff',message[1:29]))
     playersPosition[playerIds.index(idPlayer)]['position'] = struct.unpack('<fff',message[1:13])
