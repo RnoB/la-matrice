@@ -57,7 +57,7 @@ def initialPosition():
         mn = np.mean(playersPosition,axis = 0)
         print(mn)
         print(np.random.rand(1,3))
-        position = mn+np.random.rand(1,3)
+        position = mn[0]+np.random.rand(1,3)[0]
         print(position)
         theta = np.arctan2(position[0]-mn[0],position[2]-mn[2])
         
