@@ -481,23 +481,23 @@ function inputPlayer()
         switch(key)
         {
             case "ArrowUp":
-            camera.position.y += speed;
+            camera.translateY(speed);
             break;
             case "ArrowDown":
-            camera.position.y -= speed;
+            camera.translateY(-speed);
             break;
             case "ArrowLeft":
-            camera.position.x += speed;
+            camera.translateX(speed);
             break;
             case "ArrowRight":
-            camera.position.x -= speed;
+            camera.translateX(-speed);
             break;
             case "z":
             case "w":
-            camera.position.z += speed;
+            camera.translateZ(+speed);
             break;
             case "s":
-            camera.position.z -= speed;
+            camera.translateZ(-speed);
             break;
             case "a":
             case "q":
