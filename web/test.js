@@ -287,7 +287,7 @@ function receiver(msg)
             }
             break;
         case networkCode['world']:
-        console.log(data.length);
+        console.log(data.byteLength);
             id = data.getInt32(1,true);
             camera.position.x = data.getFloat32(5,true);
             camera.position.y = data.getFloat32(9,true);
