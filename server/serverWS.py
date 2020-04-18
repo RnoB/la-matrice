@@ -53,6 +53,9 @@ def initialPosition():
         rotation = np.array([0,0,0,0])
     else:
 
+        position = np.array([0,0,0])
+        rotation = np.array([0,0,0,0])
+    return position, rotation
 
 async def register(websocket):
     global playerNumber
