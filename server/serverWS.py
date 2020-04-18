@@ -178,6 +178,7 @@ def storePosition(code,idPlayer,message):
                                         player["rotC"+str(k)][1],\
                                         player["rotC"+str(k)][2],\
                                         player["rotC"+str(k)][3])
+    print(message)
     return message
 
 
