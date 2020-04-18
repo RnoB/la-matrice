@@ -302,8 +302,8 @@ function receiver(msg)
             for (let j = 0; j < Nplayers; ++j) 
             {
 
-                var contrlers = data.getUint8(29+5*(2+j)-1,true);
-                var playerInfo = {"id" : data.getInt32(29+5*(1+j),true),
+                var contrlers = data.getUint8(28+5*(2+j)-1,true);
+                var playerInfo = {"id" : data.getInt32(28+5*(1+j),true),
                 "position" : new THREE.Vector3(),
                 "rotation" : new THREE.Quaternion(),
                 "mesh" : new THREE.Mesh(geometry, material),
