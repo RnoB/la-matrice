@@ -157,7 +157,7 @@ def storePosition(code,idPlayer,message):
     idx = playerIds.index(idPlayer)
     #print(playersPosition[playerIds.index(idPlayer)])
     #print(struct.unpack('<fffffff',message[1:29]))
-    playersPosition[idx]
+    print(playersPosition[idx])
     #print(playersList[idx]['position'])
     playersList[idx]['position'] = struct.unpack('<fff',message[1:13])
     playersList[idx]['rotation'] = struct.unpack('<ffff',message[13:29])
