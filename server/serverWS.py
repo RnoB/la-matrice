@@ -56,7 +56,7 @@ def initialPosition():
         mn = np.mean(playersPosition,axis = 0)
         dist = 1=random.rand()
         theta = 2*np.pi*random.rand()
-        position = mn+[dist*np.cos(theta),-mn[1]+1.5,dist*np.cos(theta)]s
+        position = mn+[dist*np.cos(theta),-mn[1]+1.5,dist*np.cos(theta)]
         theta = np.arctan2(position[2]-mn[2],position[0]-mn[0])
         
         rotation = np.array([0,theta,0,1])
