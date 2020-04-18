@@ -154,15 +154,18 @@ async def send(websocket,message):
 
 def storePosition(code,idPlayer,message):
     #print(len(message))
-    print(playersPosition[playerIds.index(idPlayer)])
+    idx = playerIds.index(idPlayer)
+    
     #print(struct.unpack('<fffffff',message[1:29]))
-    playersList[playerIds.index(idPlayer)]['position'] = struct.unpack('<fff',message[1:13])
-    playersList[playerIds.index(idPlayer)]['rotation'] = struct.unpack('<ffff',message[13:29])
-    for k in range(0,playersList[playerIds.index(idPlayer)]['controllers']):
-        playersList[playerIds.index(idPlayer)]["posC"+str(k)] = struct.unpack('<fff',message[29+k*28:41+k*28])
-        playersList[playerIds.index(idPlayer)]["rotC"+str(k)] = struct.unpack('<ffff',message[41+k*28:57+k*28])
+    playersPosition[idx] = struct.unpack('<fff',message[1:13])
+    print(playersList[idx]['position'])
+    #playersList[idx]['position'] = struct.unpack('<fff',message[1:13])
+    playersList[idx]['rotation'] = struct.unpack('<ffff',message[13:29])
+    for k in range(0,playersList[idx]['controllers']):
+        playersList[idx]["posC"+str(k)] = struct.unpack('<fff',message[29+k*28:41+k*28])
+        playersList[idx]["rotC"+str(k)] = struct.unpack('<ffff',message[41+k*28:57+k*28])
 
-    player = playersList[playerIds.index(idPlayer)]
+    player = playersList[idx]
 
     message = struct.pack('B', networkCode['objectPosition'])
     message += struct.pack('<i', idPlayer)
