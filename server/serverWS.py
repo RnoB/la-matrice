@@ -161,7 +161,10 @@ async def unregister(idPlayer,websocket):
             register = False
         except:
             pass
-    del playersList[playerIds.index(idPlayer)]
+    idx = playerIds.index(idPlayer)
+    del playersList[idx]
+    del playersRotation[idx]
+    del playersPosition[idx]
     playerIds.remove(idPlayer)
     playerNumber -= 1
     for player in playersSocket:
