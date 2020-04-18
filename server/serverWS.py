@@ -74,6 +74,7 @@ async def register(websocket):
     
     print(playerInfo)
     if playerInfo[0] == networkCode['connect']:
+        pos,rot = initialPosition()
         controllers = playerInfo[1]
 
 
