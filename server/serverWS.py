@@ -94,7 +94,7 @@ async def register(websocket):
         playersSocket.append(websocket)
         dataWorld = struct.pack('B', networkCode['world'])
         dataWorld += struct.pack('<i',playerId)
-        dataWorld += struct.pack('<iiiiiii',position0[0],position0[1],position0[2],\
+        dataWorld += struct.pack('<fffffff',position0[0],position0[1],position0[2],\
                                     rotation0[0],rotation0[1],rotation0[2],rotation0[3])
 
         for k in range(0,len(playerIds)):
