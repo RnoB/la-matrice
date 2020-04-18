@@ -9,7 +9,8 @@ import time
 import threading
 import struct
 import csv
-
+import time
+import numpy as np
 homeFolder = "/home/ubuntu/"
 networkCodePath = homeFolder+"la-matrice/web/js/network/networkCode.csv"
 certFolder = "cert/"
@@ -21,7 +22,13 @@ playersPosition = []
 playerIds = []
 playerId = 0
 playerNumber = 0
+nextPlayer = 0
+playersPosition = []
+playersRotation = []
+playersList = []
 
+
+t0 = time.time()
 #logger = logging.getLogger('websockets')
 #logger.setLevel(logging.INFO)
 #logger.addHandler(logging.StreamHandler())
@@ -41,14 +48,21 @@ def getLocalIP():
     return localIP
 
 
+def initialPosition():
+    if len(playersPosition)==0:
+        position = np.array([0,0,0])
+        rotation = np.array([0,0,0,1])
+    else:
 
+        position = np.array([0,0,0])
+        rotation = np.array([0,0,0,1])
+    return position, rotation
 
 async def register(websocket):
     global playerNumber
     global playerIds
     global playerId
     global players
-    playerNumber+=1
     playerId+=1
     try:
         playerData = await websocket.recv()
@@ -67,7 +81,10 @@ async def register(websocket):
             dataWorld = struct.pack('<BiiB', networkCode['newPlayer'],0, playerId,controllers)
             
             print(dataWorld);
-            await player.send( dataWorld)
+            try:
+                await player.send( dataWorld)
+            except:
+                pass
         
             
                     
@@ -85,7 +102,10 @@ async def register(websocket):
         for k in range(0,controllers):
             playerDict["posC"+str(k)] = (0,0,0)
             playerDict["rotC"+str(k)] = (0,0,0,0)
-        playersPosition.append(playerDict)
+        playersList.append(playerDict)
+        playersPosition.append(playerDict["position"])
+        playersRotation.append(playerDict["rotation"])
+        playerNumber+=1
         
         try:
             await playersSocket[-1].send(dataWorld)
@@ -97,8 +117,8 @@ async def register(websocket):
 
 async def unregister(idPlayer,websocket):
     global playersSocket
-    global playersPosition
-    global playersId
+    global playersList
+    global playersIds
     global playerNumber
     global playerIds
     register = True
@@ -108,13 +128,14 @@ async def unregister(idPlayer,websocket):
             register = False
         except:
             pass
-    del playersPosition[playerIds.index(idPlayer)]
+    del playersList[playerIds.index(idPlayer)]
     playerIds.remove(idPlayer)
     playerNumber -= 1
     for player in playersSocket:
         try:
             remPlayer = struct.pack('B', networkCode['removePlayer'])
             remPlayer += struct.pack('<i',idPlayer)
+
             await player.send(remPlayer)
         except:
             pass
@@ -134,13 +155,14 @@ def storePosition(code,idPlayer,message):
     #print(len(message))
     #print(playersPosition[playerIds.index(idPlayer)])
     #print(struct.unpack('<fffffff',message[1:29]))
-    playersPosition[playerIds.index(idPlayer)]['position'] = struct.unpack('<fff',message[1:13])
-    playersPosition[playerIds.index(idPlayer)]['rotation'] = struct.unpack('<ffff',message[13:29])
-    for k in range(0,playersPosition[playerIds.index(idPlayer)]['controllers']):
-        playersPosition[playerIds.index(idPlayer)]["posC"+str(k)] = struct.unpack('<fff',message[29+k*28:41+k*28])
-        playersPosition[playerIds.index(idPlayer)]["rotC"+str(k)] = struct.unpack('<ffff',message[41+k*28:57+k*28])
+    playersList[playerIds.index(idPlayer)]['position'] = struct.unpack('<fff',message[1:13])
+    playersList[playerIds.index(idPlayer)]['rotation'] = struct.unpack('<ffff',message[13:29])
+    for k in range(0,playersList[playerIds.index(idPlayer)]['controllers']):
+        playersList[playerIds.index(idPlayer)]["posC"+str(k)] = struct.unpack('<fff',message[29+k*28:41+k*28])
+        playersList[playerIds.index(idPlayer)]["rotC"+str(k)] = struct.unpack('<ffff',message[41+k*28:57+k*28])
 
-    player = playersPosition[playerIds.index(idPlayer)]
+    player = playersList[playerIds.index(idPlayer)]
+
     message = struct.pack('B', networkCode['objectPosition'])
     message += struct.pack('<i', idPlayer)
     message += struct.pack('<fff',player['position'][0],\
@@ -150,6 +172,7 @@ def storePosition(code,idPlayer,message):
                                     player['rotation'][1],\
                                     player['rotation'][2],\
                                     player['rotation'][3])
+
     for k in range(0,player['controllers']):
         message += struct.pack('<fff',player["posC"+str(k)][0],\
                                         player["posC"+str(k)][1],\
@@ -158,6 +181,7 @@ def storePosition(code,idPlayer,message):
                                         player["rotC"+str(k)][1],\
                                         player["rotC"+str(k)][2],\
                                         player["rotC"+str(k)][3])
+    #print(message)
     return message
 
 
@@ -165,16 +189,34 @@ def storePosition(code,idPlayer,message):
 
 
 async def manager(websocket, path):
+    global nextPlayer
     print("ws : "+str(websocket))
     print("pa : "+str(path))
     idPlayer = await register(websocket)
+    tSend=time.time()
+
     try:
         async for message in websocket:
+
+                
+            
             code = message[0]
-            #print("code : "+str(code))
-            if code == networkCode['playerPosition']:
-                messageSend = storePosition(code,idPlayer,message)
-            await send(websocket,messageSend)
+            #print(code)
+            try:
+                if code == networkCode['playerPosition'] and len(websocket.messages) == 0 and idPlayer == playerIds[nextPlayer] and playerNumber>0:
+                    messageSend = storePosition(code,idPlayer,message)
+                    #t1=time.time()
+                    #print("id : "+str(idPlayer)+" t :"+str(1/(t1-t0)))
+                    #t0=t1
+                    await send(websocket,messageSend)
+                    nextPlayer = ((nextPlayer+1)%playerNumber)
+                    tSend = time.time()
+            except Exception as e:
+                print(e)
+                nextPlayer = ((nextPlayer+1)%playerNumber)
+            if time.time()-tSend>0.05:
+                nextPlayer = ((nextPlayer+1)%playerNumber)
+                
     finally:
         await unregister(idPlayer,websocket)
         print("unregistered")
@@ -187,7 +229,7 @@ def main():
     ssl_context.load_cert_chain(homeFolder+certFolder+"cert.pem",keyfile=homeFolder+certFolder+"privkey.pem")
 
     start_server = websockets.serve(
-        manager, getLocalIP(), 6799, ssl=ssl_context
+        manager, getLocalIP(), 6799, ssl=ssl_context,max_queue = None
     )
 
     asyncio.get_event_loop().run_until_complete(start_server)
