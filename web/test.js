@@ -245,12 +245,12 @@ function receiver(msg)
     var t1 = new Date().getTime();
 
 
-    console.log(code);
-    console.log(len(msg));
+    //console.log(code);
     switch(code)
     {
 
-
+        console.log(msg.length);
+    
         case networkCode['objectPosition'] :
         case networkCode['playerPosition'] :
 
