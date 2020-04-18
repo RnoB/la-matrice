@@ -246,6 +246,7 @@ function receiver(msg)
 
 
     console.log(code);
+    console.log(len(msg));
     switch(code)
     {
 
