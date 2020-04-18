@@ -53,6 +53,7 @@ def initialPosition():
         position = np.array([0,0,0])
         rotation = np.array([0,0,0,1])
     else:
+        print(playersPosition)
         print(np.mean(playersPosition))
         position = np.array([0,0,0])
         rotation = np.array([0,0,0,1])
