@@ -78,7 +78,7 @@ def initialPosition():
         mn = np.mean(playersPosition,axis = 0)
         dist = 1+np.random.rand()
         theta = 2*np.pi*np.random.rand()
-        position = mn+[dist*np.cos(theta),-mn[1]+1.5,dist*np.cos(theta)]
+        position = mn+[dist*np.cos(theta),-mn[1]+1.5,dist*np.sin(theta)]
         theta = np.arctan2(position[2]-mn[2],position[0]-mn[0])
         
         rotation = euler_to_quaternion(0, theta, 0)
