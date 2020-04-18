@@ -197,11 +197,12 @@ async def manager(websocket, path):
                 
             
             code = message[0]
+            print(code)
             try:
                 if code == networkCode['playerPosition'] and len(websocket.messages) == 0 and idPlayer == playerIds[nextPlayer] and playerNumber>0:
                     messageSend = storePosition(code,idPlayer,message)
                     #t1=time.time()
-                    #print("id : "+str(idPlayer)+" t :"+str(1/(t1-t0)))
+                    print("id : "+str(idPlayer)+" t :"+str(1/(t1-t0)))
                     #t0=t1
                     await send(websocket,messageSend)
                     nextPlayer = ((nextPlayer+1)%playerNumber)
