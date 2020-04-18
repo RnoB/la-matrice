@@ -50,11 +50,11 @@ def getLocalIP():
 def initialPosition():
     if len(playersPosition)==0:
         position = np.array([0,0,0])
-        rotation = np.array([0,0,0,0])
+        rotation = np.array([0,0,0,1])
     else:
 
         position = np.array([0,0,0])
-        rotation = np.array([0,0,0,0])
+        rotation = np.array([0,0,0,1])
     return position, rotation
 
 async def register(websocket):

@@ -252,6 +252,7 @@ function receiver(msg)
 
         case networkCode['objectPosition'] :
         case networkCode['playerPosition'] :
+
             var objectId = data.getInt32(1,true);
             tNew[objectId] = t1
             //console.log("code : "+code.toString()+" id : "+objectId.toString()+" t : "+(1000.0/(tNew[objectId]-tOld[objectId])).toString());
@@ -281,7 +282,7 @@ function receiver(msg)
                     
                 }
 
-
+                console.log(listPlayers[idx]);
             }
             break;
         case networkCode['world']:
