@@ -174,7 +174,7 @@ function setup()
     
     cameraBox.visible = false;
     camera.add(cameraBox);
-    camera.position.y = 1.5
+
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.xr.enabled = true;
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -245,14 +245,15 @@ function receiver(msg)
     var t1 = new Date().getTime();
 
 
-
+    //console.log(code);
     switch(code)
     {
 
-
+    
         case networkCode['objectPosition'] :
         case networkCode['playerPosition'] :
 
+           
             var objectId = data.getInt32(1,true);
             tNew[objectId] = t1
             //console.log("code : "+code.toString()+" id : "+objectId.toString()+" t : "+(1000.0/(tNew[objectId]-tOld[objectId])).toString());
@@ -286,15 +287,24 @@ function receiver(msg)
             }
             break;
         case networkCode['world']:
+        console.log(data.byteLength);
             id = data.getInt32(1,true);
-
-            var Nplayers = (data.byteLength-5)/5.0;
+            camera.position.set(data.getFloat32(5,true),
+                                data.getFloat32(9,true),
+                                data.getFloat32(13,true));
+            camera.quaternion.set(data.getFloat32(17,true),
+                                    data.getFloat32(21,true),
+                                    data.getFloat32(25,true),
+                                    data.getFloat32(29,true));
+            console.log(camera.rotation);
+            console.log(camera.position);
+            var Nplayers = (data.byteLength-33)/5.0;
 
             for (let j = 0; j < Nplayers; ++j) 
             {
 
-                var contrlers = data.getUint8(5*(2+j)-1,true);
-                var playerInfo = {"id" : data.getInt32(5*(1+j),true),
+                var contrlers = data.getUint8(28+5*(2+j)-1,true);
+                var playerInfo = {"id" : data.getInt32(28+5*(1+j),true),
                 "position" : new THREE.Vector3(),
                 "rotation" : new THREE.Quaternion(),
                 "mesh" : new THREE.Mesh(geometry, material),
@@ -461,7 +471,7 @@ function network()
 
 
 
-var speed = .1;
+var speed = .05;
 function inputPlayer()
 {
 
@@ -471,30 +481,30 @@ function inputPlayer()
         switch(key)
         {
             case "ArrowUp":
-            camera.position.y += speed;
+            camera.translateY(speed);
             break;
             case "ArrowDown":
-            camera.position.y -= speed;
+            camera.translateY(-speed);
             break;
             case "ArrowLeft":
-            camera.position.x += speed;
+            camera.rotateY(speed);
             break;
             case "ArrowRight":
-            camera.position.x -= speed;
+            camera.rotateY(-speed);
             break;
             case "z":
             case "w":
-            camera.position.z += speed;
+            camera.translateZ(-speed);
             break;
             case "s":
-            camera.position.z -= speed;
+            camera.translateZ(+speed);
             break;
             case "a":
             case "q":
-            camera.rotateY( speed);
+            camera.translateX(-speed);
             break;
             case "d":
-            camera.rotateY(-speed);
+            camera.translateX(+speed);
             break;
         }
     }
