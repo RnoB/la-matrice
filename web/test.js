@@ -289,12 +289,12 @@ function receiver(msg)
         case networkCode['world']:
         console.log(data.byteLength);
             id = data.getInt32(1,true);
-            camera.position.set(data.getFloat32(5,true),\
-                                data.getFloat32(9,true),\
+            camera.position.set(data.getFloat32(5,true),
+                                data.getFloat32(9,true),
                                 data.getFloat32(13,true));
-            camera.quaternion.set(data.getFloat32(17,true),\
-                                    data.getFloat32(21,true),\
-                                    data.getFloat32(25,true),\
+            camera.quaternion.set(data.getFloat32(17,true),
+                                    data.getFloat32(21,true),
+                                    data.getFloat32(25,true),
                                     data.getFloat32(29,true));
             console.log(camera.rotation);
             console.log(camera.position);
