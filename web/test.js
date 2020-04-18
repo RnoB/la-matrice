@@ -253,7 +253,7 @@ function receiver(msg)
         case networkCode['objectPosition'] :
         case networkCode['playerPosition'] :
 
-           console.log(msg.length);
+           
             var objectId = data.getInt32(1,true);
             tNew[objectId] = t1
             //console.log("code : "+code.toString()+" id : "+objectId.toString()+" t : "+(1000.0/(tNew[objectId]-tOld[objectId])).toString());
@@ -287,6 +287,7 @@ function receiver(msg)
             }
             break;
         case networkCode['world']:
+        console.log(msg.length);
             id = data.getInt32(1,true);
             camera.position.x = data.getFloat32(5,true);
             camera.position.y = data.getFloat32(9,true);
