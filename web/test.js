@@ -297,7 +297,7 @@ function receiver(msg)
             camera.quaternion._z = data.getFloat32(25,true);
             camera.quaternion._w = data.getFloat32(29,true);
             console.log(camera.position);
-            var Nplayers = (data.byteLength-34)/5.0;
+            var Nplayers = (data.byteLength-33)/5.0;
 
             for (let j = 0; j < Nplayers; ++j) 
             {
