@@ -249,11 +249,11 @@ function receiver(msg)
     switch(code)
     {
 
-        console.log(msg.length);
     
         case networkCode['objectPosition'] :
         case networkCode['playerPosition'] :
 
+           console.log(msg.length);
             var objectId = data.getInt32(1,true);
             tNew[objectId] = t1
             //console.log("code : "+code.toString()+" id : "+objectId.toString()+" t : "+(1000.0/(tNew[objectId]-tOld[objectId])).toString());
