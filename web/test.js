@@ -501,10 +501,10 @@ function inputPlayer()
             break;
             case "a":
             case "q":
-            camera.translateX( speed);
+            camera.translateX(-speed);
             break;
             case "d":
-            camera.translateX(-speed);
+            camera.translateX(+speed);
             break;
         }
     }
