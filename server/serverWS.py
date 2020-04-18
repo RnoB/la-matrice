@@ -76,12 +76,12 @@ def initialPosition():
         rotation = np.array([0,0,0,1])
     else:
         mn = np.mean(playersPosition,axis = 0)
-        print(mn)
+
         dist = 1+np.random.rand()
         theta = 2*np.pi*np.random.rand()
         position = mn+[dist*np.cos(theta),-mn[1]+1.5,dist*np.sin(theta)]
         theta = np.arctan2(position[0]-mn[0],position[2]-mn[2])
-        print(theta)
+
         
         rotation = euler_to_quaternion(0, theta, 0)
 
@@ -97,10 +97,10 @@ async def register(websocket):
         playerData = await websocket.recv()
     except:
         pass
-    print(playerData)
+
     playerInfo = struct.unpack('BB',playerData)
     
-    print(playerInfo)
+
     if playerInfo[0] == networkCode['connect']:
         position0,rotation0 = initialPosition()
         controllers = playerInfo[1]
@@ -110,7 +110,7 @@ async def register(websocket):
         
             dataWorld = struct.pack('<BiiB', networkCode['newPlayer'],0, playerId,controllers)
             
-            print(dataWorld);
+
             try:
                 await player.send( dataWorld)
             except:
@@ -231,8 +231,7 @@ def storePosition(code,idPlayer,message):
 
 async def manager(websocket, path):
     global nextPlayer
-    print("ws : "+str(websocket))
-    print("pa : "+str(path))
+    print("--- New Player enters !! ---")
     idPlayer = await register(websocket)
     tSend=time.time()
 
