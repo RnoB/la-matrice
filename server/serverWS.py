@@ -10,6 +10,7 @@ import threading
 import struct
 import csv
 import time
+import numpy as np
 homeFolder = "/home/ubuntu/"
 networkCodePath = homeFolder+"la-matrice/web/js/network/networkCode.csv"
 certFolder = "cert/"
@@ -22,6 +23,9 @@ playerIds = []
 playerId = 0
 playerNumber = 0
 nextPlayer = 0
+playersPosition = []
+playersPosition = []
+
 
 t0 = time.time()
 #logger = logging.getLogger('websockets')
@@ -43,6 +47,11 @@ def getLocalIP():
     return localIP
 
 
+def initialPosition():
+    if len(playersPosition)==0:
+        position = np.array([0,0,0])
+        rotation = np.array([0,0,0,0])
+    else:
 
 
 async def register(websocket):
@@ -89,7 +98,8 @@ async def register(websocket):
         for k in range(0,controllers):
             playerDict["posC"+str(k)] = (0,0,0)
             playerDict["rotC"+str(k)] = (0,0,0,0)
-        playersPosition.append(playerDict)
+        playersPosition.append(playerDict["position"])
+        playersRotation.append(playerDict["rotation"])
         playerNumber+=1
         
         try:
