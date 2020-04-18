@@ -98,13 +98,14 @@ async def register(websocket):
 
         #world = json.dumps({"world" : 1, "objects" : [2,3],"id" : playerId,"playerIds" : playerIds,"playerControllers" : playerControllers})
         playerIds.append(playerId)
-        playerDict = {"id" : playerId,"controllers" : controllers,"position" : (0,0,0),"rotation" : (0,0,0,0)}
+        playersPosition.append((0,0,0))
+        playersRotation.append((0,0,0,1))
+        playerDict = {"id" : playerId,"controllers" : controllers,"position" : playersPosition[-1],"rotation" : playersRotation[-1]}
         for k in range(0,controllers):
             playerDict["posC"+str(k)] = (0,0,0)
             playerDict["rotC"+str(k)] = (0,0,0,0)
         playersList.append(playerDict)
-        playersPosition.append(playerDict["position"])
-        playersRotation.append(playerDict["rotation"])
+
         playerNumber+=1
         
         try:
