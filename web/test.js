@@ -487,24 +487,24 @@ function inputPlayer()
             camera.translateY(-speed);
             break;
             case "ArrowLeft":
-            camera.translateX(speed);
+            camera.rotateY(speed);
             break;
             case "ArrowRight":
-            camera.translateX(-speed);
+            camera.rotateY(-speed);
             break;
             case "z":
             case "w":
-            camera.translateZ(+speed);
+            camera.translateZ(-speed);
             break;
             case "s":
-            camera.translateZ(-speed);
+            camera.translateZ(+speed);
             break;
             case "a":
             case "q":
-            camera.rotateY( speed);
+            camera.translateX( speed);
             break;
             case "d":
-            camera.rotateY(-speed);
+            camera.translateX(-speed);
             break;
         }
     }
