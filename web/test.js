@@ -282,7 +282,7 @@ function receiver(msg)
                     
                 }
 
-                console.log(listPlayers[idx]);
+                console.log(listPlayers[idx].position);
             }
             break;
         case networkCode['world']:
