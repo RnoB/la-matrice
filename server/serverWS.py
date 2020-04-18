@@ -53,17 +53,12 @@ def initialPosition():
         position = np.array([0,1.5,0])
         rotation = np.array([0,0,0,1])
     else:
-        print(playersPosition)
         mn = np.mean(playersPosition,axis = 0)
-        print(mn)
-        print(np.random.rand(1,3))
         position = mn[0]+np.random.rand(1,3)[0]
-        print(position)
         theta = np.arctan2(position[0]-mn[0],position[2]-mn[2])
         
         rotation = np.array([0,theta,0,1])
-    print(position)
-    print(rotation)
+
     return position, rotation
 
 async def register(websocket):

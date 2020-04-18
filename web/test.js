@@ -174,7 +174,7 @@ function setup()
     
     cameraBox.visible = false;
     camera.add(cameraBox);
-    camera.position.y = 1.5
+
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.xr.enabled = true;
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -294,6 +294,7 @@ function receiver(msg)
             camera.quaternion._y = data.getFloat32(21,true);
             camera.quaternion._z = data.getFloat32(25,true);
             camera.quaternion._w = data.getFloat32(29,true);
+            console.log(camera.position);
             var Nplayers = (data.byteLength-34)/5.0;
 
             for (let j = 0; j < Nplayers; ++j) 
