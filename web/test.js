@@ -287,14 +287,20 @@ function receiver(msg)
             break;
         case networkCode['world']:
             id = data.getInt32(1,true);
-
-            var Nplayers = (data.byteLength-5)/5.0;
+            camera.position.x = data.getFloat32(5,true);
+            camera.position.y = data.getFloat32(9,true);
+            camera.position.z = data.getFloat32(13,true);
+            camera.quaternion._x = data.getFloat32(17,true);
+            camera.quaternion._y = data.getFloat32(21,true);
+            camera.quaternion._z = data.getFloat32(25,true);
+            camera.quaternion._w = data.getFloat32(29,true);
+            var Nplayers = (data.byteLength-34)/5.0;
 
             for (let j = 0; j < Nplayers; ++j) 
             {
 
-                var contrlers = data.getUint8(5*(2+j)-1,true);
-                var playerInfo = {"id" : data.getInt32(5*(1+j),true),
+                var contrlers = data.getUint8(29+5*(2+j)-1,true);
+                var playerInfo = {"id" : data.getInt32(29+5*(1+j),true),
                 "position" : new THREE.Vector3(),
                 "rotation" : new THREE.Quaternion(),
                 "mesh" : new THREE.Mesh(geometry, material),

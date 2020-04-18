@@ -50,13 +50,14 @@ def getLocalIP():
 
 def initialPosition():
     if len(playersPosition)==0:
-        position = np.array([0,0,0])
+        position = np.array([0,1.5,0])
         rotation = np.array([0,0,0,1])
     else:
         print(playersPosition)
-        print(np.mean(playersPosition))
-        position = np.array([0,0,0])
-        rotation = np.array([0,0,0,1])
+        mn = np.mean(playersPosition,axis = 0)
+        position = np.mean(playersPosition,axis = 0)+np.random.rand(3,1)
+        theta = np.arctan2(position[0]-mn[0],position[1]-mn[1])
+        rotation = np.array([0,theta,0,1])
     return position, rotation
 
 async def register(websocket):
@@ -93,6 +94,8 @@ async def register(websocket):
         playersSocket.append(websocket)
         dataWorld = struct.pack('B', networkCode['world'])
         dataWorld += struct.pack('<i',playerId)
+        dataWorld += struct.pack('<iiiiiii',position0[0],position0[1],position0[2],\
+                                    rotation0[0],rotation0[1],rotation0[2],rotation0[3])
 
         for k in range(0,len(playerIds)):
             dataWorld += struct.pack('<i', playerIds[k])
@@ -100,8 +103,8 @@ async def register(websocket):
 
         #world = json.dumps({"world" : 1, "objects" : [2,3],"id" : playerId,"playerIds" : playerIds,"playerControllers" : playerControllers})
         playerIds.append(playerId)
-        playersPosition.append((0,0,0))
-        playersRotation.append((0,0,0,1))
+        playersPosition.append(Position0)
+        playersRotation.append(Rotation0)
         playerDict = {"id" : playerId,"controllers" : controllers,"position" : playersPosition[-1],"rotation" : playersRotation[-1]}
         for k in range(0,controllers):
             playerDict["posC"+str(k)] = (0,0,0)
