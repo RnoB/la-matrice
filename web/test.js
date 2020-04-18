@@ -245,7 +245,7 @@ function receiver(msg)
     var t1 = new Date().getTime();
 
 
-
+    console.log(code);
     switch(code)
     {
 
