@@ -95,9 +95,6 @@ function initSky(turbidity = 10,
 
     var uniforms = sky.material.uniforms;
 
-    uniforms[ "colorR" ].value = colorR;
-    uniforms[ "colorG" ].value = colorG;
-    uniforms[ "colorB" ].value = colorB;
 
     var theta = Math.PI * ( inclination - 0.5 );
     var phi = 2 * Math.PI * ( azimuth - 0.5 );
