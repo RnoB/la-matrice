@@ -7,6 +7,9 @@ import { GUI } from './jsm/libs/dat.gui.module.js';
 import { Sky } from './jsm/objects/Sky.js';
 
 import './js/controls/PointerLockControls.js'
+
+import { networkCode,objectType } from "./js/network/networkCode.js"
+import "./js/controls/inputKey.js" 
 var camera, controls, scene, renderer;
 
 var sky, sunSphere;
@@ -53,50 +56,8 @@ var simuTime = 0;
 
 var controllers = [];
 
-var networkCode;
 
-
-function getNetworkCode()
-{
-    var allText
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", "./js/network/networkCode.csv", false);
-    rawFile.onreadystatechange = function ()
-    {
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status == 0)
-            {
-                allText = rawFile.responseText;
-                
-            }
-        }
-    }
-    rawFile.send(null);
-
-
-
-    var networkCode = {};
-
-    var lines = allText.split("\n");
-    for (var line of lines)
-    {   
-        var elements = line.split(",");
-
-        if(elements[0].length !==0)
-        {
-
-            networkCode[elements[0]] = parseInt(elements[1]);
-        }
-
-    }
-
-    return networkCode
-
-}
-
-var networkCode = getNetworkCode();
-
+var inputs = new InputKey();
 
 
 function initSky(turbidity = 10,
@@ -470,24 +431,7 @@ function setUpWorld()
 var xSpeed = 0.1;
 var ySpeed = 0.1;
 
-document.body.addEventListener('keydown', keyPressed);
-document.body.addEventListener('keyup', keyReleased);
-var keyMap = {};
-function keyPressed(e)
-{
 
-    keyMap[e.key] = 'keydown';
-    
-    e.preventDefault();
-}
-
-function keyReleased(e)
-{
-    
-  delete keyMap[e.key];
-  e.preventDefault();
-
-}
 
 function network()
 {
@@ -505,44 +449,7 @@ function network()
 
 
 var speed = .05;
-function inputPlayer()
-{
 
-
-    for (var key in keyMap)
-    {
-        switch(key)
-        {
-            case "ArrowUp":
-            camera.translateY(speed);
-            break;
-            case "ArrowDown":
-            camera.translateY(-speed);
-            break;
-            case "ArrowLeft":
-            camera.rotateY(speed);
-            break;
-            case "ArrowRight":
-            camera.rotateY(-speed);
-            break;
-            case "z":
-            case "w":
-            camera.translateZ(-speed);
-            break;
-            case "s":
-            camera.translateZ(+speed);
-            break;
-            case "a":
-            case "q":
-            camera.translateX(-speed);
-            break;
-            case "d":
-            camera.translateX(+speed);
-            break;
-        }
-    }
-
-}
 
 //setup();
 
@@ -554,7 +461,7 @@ function render() {
 
 
 
-    inputPlayer()
+    inputs.inputPlayer()
 
     for (var player of listPlayers)
     {

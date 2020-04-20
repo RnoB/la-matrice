@@ -1,25 +1,44 @@
 
 
 
-var networkCodePath = "./networkCode.csv";
-var data;
-fetch(networkCodePath)
-  .then(response => response.text())
-  .then(text => data = text);
-var networkCode = {};
-console.log(data);
-var lines = data.split("\n");
-for (var line of lines)
-{	
-	var elements = line.split(",");
+function getNetworkCode(path)
+{
+    var allText
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", path, false);
+    rawFile.onreadystatechange = function ()
+    {
+        if(rawFile.readyState === 4)
+        {
+            if(rawFile.status === 200 || rawFile.status == 0)
+            {
+                allText = rawFile.responseText;
+                
+            }
+        }
+    }
+    rawFile.send(null);
 
-	if(elements[0].length !==0)
-	{
-		console.log(!(elements[0].length !==0));
-		console.log(elements[0]);
-    	networkCode[elements[0]] = parseInt(elements[1]);
-	}
+
+
+    var networkCode = {};
+
+    var lines = allText.split("\n");
+    for (var line of lines)
+    {   
+        var elements = line.split(",");
+
+        if(elements[0].length !==0)
+        {
+
+            networkCode[elements[0]] = parseInt(elements[1]);
+        }
+
+    }
+
+    return networkCode
 
 }
-console.log(networkCode);
 
+var networkCode = getNetworkCode("./networkCode.csv");
+var objectsType = getNetworkCode("./objectType.csv");
