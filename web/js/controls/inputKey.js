@@ -18,13 +18,13 @@ export class InputKey
     }
     keyPressed(e)
     {
-        keyMap[e.key] = 'keydown';
+        this.keyMap[e.key] = 'keydown';
         e.preventDefault();
     }
 
     keyReleased(e)
     {   
-      delete keyMap[e.key];
+      delete this.keyMap[e.key];
       e.preventDefault();
     }
 
