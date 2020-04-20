@@ -461,7 +461,7 @@ function render() {
 
 
 
-    inputs.inputPlayer()
+    inputs.inputPlayer(camera);
 
     for (var player of listPlayers)
     {
