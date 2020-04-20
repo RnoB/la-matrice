@@ -179,7 +179,7 @@ def main():
     port = sys.argv[1]
     cert = sys.argv[2]
     key = sys.argv[3]
-    server = new Server(port = port,cert = cert,key = key)
+    server = Server(port = port,cert = cert,key = key)
 
 
 
