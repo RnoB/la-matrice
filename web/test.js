@@ -110,7 +110,6 @@ function initSky(turbidity = 10,
     sunSphere.position.y = distance * Math.sin( phi ) * Math.sin( theta );
     sunSphere.position.z = distance * Math.sin( phi ) * Math.cos( theta );
 
-    sunSphere.visible = false;
 
     uniforms[ "sunPosition" ].value.copy( sunSphere.position );
 
