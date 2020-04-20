@@ -1,14 +1,14 @@
 
+var keyMap;
 
 export class InputKey
 {
-    keyMap;
-    speed;
+
     constructor()
     {
-        document.body.addEventListener('keydown', this.keyPressed(this));
-        document.body.addEventListener('keyup', this.keyReleased(this));
-        this.keyMap = {};
+        document.body.addEventListener('keydown', this.keyPressed);
+        document.body.addEventListener('keyup', this.keyReleased);
+        keyMap = {};
         this.speed = .05;        
     }
 
@@ -20,13 +20,13 @@ export class InputKey
     }
     keyPressed(e)
     {
-        this.keyMap[e.key] = 'keydown';
+        keyMap[e.key] = 'keydown';
         e.preventDefault();
     }
 
     keyReleased(e)
     {   
-      delete this.keyMap[e.key];
+      delete keyMap[e.key];
       e.preventDefault();
     }
 
@@ -37,7 +37,7 @@ export class InputKey
     {
 
 
-        for (var key in this.keyMap)
+        for (var key in keyMap)
         {
             switch(key)
             {
