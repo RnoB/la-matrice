@@ -104,7 +104,7 @@ function initSky(turbidity = 10,
     sunSphere.position.z = distance * Math.sin( phi ) * Math.cos( theta );
 
 
-   //uniforms[ "sunPosition" ].value.copy( sunSphere.position );
+    uniforms[ "sunPosition" ].value.copy( sunSphere.position );
 
 
 
