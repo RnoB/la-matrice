@@ -77,7 +77,7 @@ def messagePosition(code,player):
                                         player["rotC"+str(k)][1],\
                                         player["rotC"+str(k)][2],\
                                         player["rotC"+str(k)][3])
-    #print(message)
+
     return message
 
 
@@ -97,7 +97,7 @@ def getNetworkCode():
     print(networkCode)
     return networkCode
 
-def getObjectType():
+def getObjectsType():
     with open(objectTypePath, mode='r') as infile:
         reader = csv.reader(infile)
         objectType = {rows[0]:int(rows[1]) for rows in reader}
