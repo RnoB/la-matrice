@@ -132,7 +132,7 @@ class Server:
                         player = tools.readPosition(message,player)
                         self.playersPosition[idx] = player['position']
                         self.playersRotation[idx] = player['rotation']
-                        messageSend = tools.messagePosition(code,player)
+                        messageSend = tools.messagePosition(networkCode['objectPosition'],player)
 
 
                         await self.send(websocket,messageSend)
