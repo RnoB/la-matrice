@@ -34,7 +34,7 @@ export class InitSky
     {
         console.log(scene);
         scene.add(this.sky);
-        scene.add(this.sun);
+        scene.add(this.sunSphere);
     }
 
     updateShader()
