@@ -54,7 +54,7 @@ class Server:
 
 
             for player in self.playersSocket:
-                dataWorld = struct.pack('<BiiB', networkCode['newPlayer'],objectsType["player"], playerId,controllers)
+                dataWorld = struct.pack('<BiiB', networkCode['newPlayer'],objectsType["player"], self.playerId,controllers)
                 try:
                     await player.send( dataWorld)
                 except Exception as e:
