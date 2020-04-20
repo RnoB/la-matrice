@@ -99,7 +99,9 @@ function initSky(turbidity = 10,
     uniforms[ "mieCoefficient" ].value = mieCoefficient;
     uniforms[ "mieDirectionalG" ].value = mieDirectionalG;
     uniforms[ "luminance" ].value = luminance;
-
+    uniforms[ "colorR" ].value = colorR;
+    uniforms[ "colorG" ].value = colorG;
+    uniforms[ "colorB" ].value = colorB;
 
 
 
