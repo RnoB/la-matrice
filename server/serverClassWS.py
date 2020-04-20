@@ -90,7 +90,7 @@ class Server:
         return self.playerId
 
 
-    async def unregister(idPlayer,websocket):
+    async def unregister(self,idPlayer,websocket):
         register = True
         while register:
             try:
