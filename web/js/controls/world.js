@@ -25,7 +25,7 @@ export class InitSky
             new THREE.MeshBasicMaterial( { color: 0xffffff } ));
         this.sunSphere.position.y = - 700000;
         this.sunSphere.visible = sun;
-
+        this.distance = 700000;
         this.updateShader();
     }
 
