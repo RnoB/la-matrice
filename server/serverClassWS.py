@@ -11,7 +11,7 @@ import struct
 import time
 import numpy as np
 import tools
-
+import traceback
 
 networkCode = tools.getNetworkCode()
 objecstType = tools.getObjectsType()
@@ -34,7 +34,7 @@ class Server:
                 try:
                     await player.send(message)
                 except Exception as e:
-                    print(e)
+                    print(traceback.format_exc())
 
 
     async def register(self,websocket):
@@ -43,7 +43,7 @@ class Server:
         try:
             playerData = await websocket.recv()
         except Exception as e:
-            print(e)
+            print(traceback.format_exc())
 
         playerInfo = struct.unpack('BB',playerData)
         
@@ -58,7 +58,7 @@ class Server:
                 try:
                     await player.send( dataWorld)
                 except Exception as e:
-                    print(e)
+                    print(traceback.format_exc())
             
                 
                         
@@ -86,7 +86,7 @@ class Server:
             try:
                 await self.playersSocket[-1].send(dataWorld)
             except Exception as e:
-                print(e)
+                print(traceback.format_exc())
         return self.playerId
 
 
@@ -97,7 +97,7 @@ class Server:
                 self.playersSocket.remove(websocket)
                 register = False
             except Exception as e:
-                print(e)
+                print(traceback.format_exc())
         idx = self.playerIds.index(idPlayer)
         del self.playersList[idx]
         del self.playersRotation[idx]
@@ -110,8 +110,8 @@ class Server:
                 remPlayer += struct.pack('<i',idPlayer)
 
                 await player.send(remPlayer)
-            except:
-                pass
+            except Exception as e:
+                print(traceback.format_exc())
 
 
     async def manager(self,websocket, path):
@@ -139,7 +139,7 @@ class Server:
                         self.nextPlayer = ((self.nextPlayer+1)%self.playerNumber)
                         tSend = time.time()
                 except Exception as e:
-                    print(e)
+                    print(traceback.format_exc())
                     self.nextPlayer = ((self.nextPlayer+1)%self.playerNumber)
                 if time.time()-tSend>0.05:
                     self.nextPlayer = ((self.nextPlayer+1)%self.playerNumber)
