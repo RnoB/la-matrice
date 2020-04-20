@@ -90,7 +90,8 @@ function setup()
 
 
     var sky = new InitSky();
-    sky.addToScene(scene);
+    scene.add(sky.sky);
+    scene.add(sky.sun);
 
     controls = new THREE.PointerLockControls( camera, document.body );
     controls.lock = true;
