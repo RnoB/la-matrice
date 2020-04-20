@@ -8,7 +8,6 @@ import logging
 import time
 import threading
 import struct
-import csv
 import time
 import numpy as np
 import tools
