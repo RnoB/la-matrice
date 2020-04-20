@@ -3,5 +3,7 @@ disconnect,11
 world,20
 newPlayer,21
 removePlayer,22
+newObject,23
+removeObject,24
 playerPosition,30
 objectPosition,31

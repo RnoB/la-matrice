@@ -18,7 +18,6 @@ certFolder = "cert/"
 networkCode = []
 
 playersSocket = []
-playersPosition = []
 playerIds = []
 playerId = 0
 playerNumber = 0
@@ -26,6 +25,9 @@ nextPlayer = 0
 playersPosition = []
 playersRotation = []
 playersList = []
+objectsPosition = []
+objectsRotation = []
+objectsList = []
 
 
 t0 = time.time()

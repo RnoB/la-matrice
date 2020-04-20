@@ -29,6 +29,7 @@ var id = -1;
 var connected = false;
 
 var listPlayers = [];
+var listObjects = [];
 
 var frame = 0
 
@@ -365,6 +366,38 @@ function receiver(msg)
 
 
             }
+        case networkCode['newObject']:
+            var contrlers = data.getUint8(9,true);
+            objectInfo = {"id" : data.getInt32(5,true),
+            "position" : new THREE.Vector3(),
+            "rotation" : new THREE.Quaternion(),
+            "mesh" : new THREE.Mesh(geometry, material),
+            "controllers" : 0};
+
+
+
+            listObjects.push(objectInfo);
+            listObjects[listObjects.length-1].mesh.scale.set(.3,.3,.3);
+            scene.add(listObjects[listObjects.length-1].mesh);
+
+            break;
+        case networkCode["removeObject"]:
+            var remObject = data.getInt32(1,true);
+            var idx = listObjects.findIndex(x => x.id == remObject);
+
+            if (idx>-1)
+            {
+
+                scene.remove(listObjects[idx].mesh);
+                for (let k = 0; k < listObjects[idx].controllers; ++k) 
+                {
+                    scene.remove(listObjects[idx]["controller"+k.toString()+"Mesh"]);
+                }
+                listObjects.splice(idx);
+
+
+            }
+
 
 
 
