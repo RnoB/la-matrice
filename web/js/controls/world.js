@@ -3,9 +3,9 @@ import { Sky } from '../../jsm/objects/Sky.js';
 export class InitSky
 {
 
-    constructor(turbidity=0,rayleigh=2,mieCoefficient = 0.005,
+    constructor(turbidity=10,rayleigh=2,mieCoefficient = 0.005,
         mieDirectionalG=0.8 ,luminance=1,inclination=0.49 ,azimuth=0.25 ,
-        colorR =5, colorG =0.098,colorB = 4.81, sun =!true)
+        colorR =5, colorG =0.098,colorB = 4.81, sun = false)
     {
         this.turbidity = turbidity;
         this.rayleigh = rayleigh;
