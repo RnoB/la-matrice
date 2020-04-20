@@ -6,14 +6,16 @@ import { GUI } from './jsm/libs/dat.gui.module.js';
 
 import { Sky } from './jsm/objects/Sky.js';
 
-import './js/controls/PointerLockControls.js'
+
 
 import { networkCode,objectsType } from "./js/network/networkCode.js"
 import {InputKey} from "./js/controls/inputKey.js" 
-import {InitSky} from "./js/controls/world.js" 
+import {InitSky,InitFloor} from "./js/controls/world.js" 
+
+
 var camera, controls, scene, renderer;
 
-var sky, sunSphere;
+var sky, floor;
 
 //import { WebXRButton } from './js/webxr/webxr-button.js';
 
@@ -43,13 +45,6 @@ var geometry = new THREE.BoxGeometry();
 var material = new THREE.MeshStandardMaterial();
 var cameraBox = new THREE.Mesh(geometry, material);
 
-var geometryPlane = new THREE.PlaneGeometry( 200, 200, 8,8 );
-var materialPlane = new THREE.MeshStandardMaterial( {color: 0xff00ff} );
-var plane = new THREE.Mesh( geometryPlane, materialPlane );
-
-
-
-plane.rotateX(-Math.PI/2.0);
 
 
 var simuTime = 0;
@@ -67,7 +62,7 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-var controls
+
 function setup()
 {
     scene = new THREE.Scene();
@@ -85,13 +80,14 @@ function setup()
 
 
     document.body.appendChild(VRButton.createButton(renderer));
-    scene.add(plane);
+
     
     sky = new InitSky();
-    sky.addToScene(scene);
+    sky.addToScene(scene);    
+    floor = new InitFloor();
+    floor.addToScene(scene);
     
-    controls = new THREE.PointerLockControls( camera, document.body );
-    controls.lock = true;
+
     for (let i = 0; i < 2; ++i) {
         const controller = renderer.xr.getController(i);
         var controllerMesh = new THREE.Mesh( geometry, material );

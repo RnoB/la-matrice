@@ -32,8 +32,7 @@ export class InitSky
 
     addToScene(scene)
     {
-        console.log(scene);
-        console.log(this.sky)
+
         scene.add(this.sky);
         scene.add(this.sunSphere);
     }
@@ -68,5 +67,25 @@ export class InitSky
 
 
 
+
+}
+
+export class InitFloor
+{
+    constructor()
+    {
+
+        this.geometryPlane = new THREE.PlaneGeometry( 200, 200, 8,8 );
+        this.materialPlane = new THREE.MeshStandardMaterial( {color: 0xffff00} );
+        this.plane = new THREE.Mesh( geometryPlane, materialPlane );
+
+
+        this.plane.rotateX(-Math.PI/2.0);
+    }
+    addToScene(scene)
+    {
+
+        scene.add(this.plane);
+    }
 
 }
