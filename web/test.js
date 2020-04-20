@@ -9,7 +9,7 @@ import { Sky } from './jsm/objects/Sky.js';
 import './js/controls/PointerLockControls.js'
 
 import { networkCode,objectsType } from "./js/network/networkCode.js"
-import "./js/controls/inputKey.js" 
+import {InputKey} from "./js/controls/inputKey.js" 
 var camera, controls, scene, renderer;
 
 var sky, sunSphere;
