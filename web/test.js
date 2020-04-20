@@ -81,12 +81,6 @@ function setup()
 
     document.body.appendChild(VRButton.createButton(renderer));
 
-    
-    sky = new InitSky();
-    sky.addToScene(scene);    
-    floor = new InitFloor();
-    floor.addToScene(scene);
-    
 
     for (let i = 0; i < 2; ++i) {
         const controller = renderer.xr.getController(i);
@@ -97,6 +91,9 @@ function setup()
         controllers.push(controller);
 
     }
+
+
+
     setUpWorld()
 }
 
@@ -335,12 +332,19 @@ async function sender()
 function setUpWorld()
 {
     console.log("Setting up World")
-    var light = new THREE.PointLight(0xab0000, 1, 1000);
+    var light = new THREE.DirectionalLight(0xab0000, 1, 1000);
     light.position.set(50, 50, 50);
+    light.castShadow = true;
     var light2 = new THREE.PointLight(0x00ff, 1, 1000);
     light2.position.set(0, 50, 50);
     scene.add(light2);
     scene.add(light);
+
+    sky = new InitSky();
+    sky.addToScene(scene);    
+    floor = new InitFloor();
+    floor.addToScene(scene);
+    
 }
 
 
