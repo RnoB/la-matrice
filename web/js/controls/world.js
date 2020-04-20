@@ -51,17 +51,18 @@ export class InitSky
         uniforms[ "colorG" ].value = this.colorG;
         uniforms[ "colorB" ].value = this.colorB;    
 
-        console.log(uniforms);
+        
         var theta = Math.PI * ( this.inclination - 0.5 );
         var phi = 2 * Math.PI * ( this.azimuth - 0.5 );
-        console.log(phi);
+
         this.sunSphere.position.x = this.distance * Math.cos( phi );
         this.sunSphere.position.y = this.distance * Math.sin( phi ) * Math.sin( theta );
         this.sunSphere.position.z = this.distance * Math.sin( phi ) * Math.cos( theta );
 
         this.sunSphere.visible = this.sun;
-
+        console.log(sunSphere.position);
         uniforms[ "sunPosition" ].value.copy( this.sunSphere.position );
+        console.log(uniforms);
     }
 
 
