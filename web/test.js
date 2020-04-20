@@ -4,12 +4,13 @@ import { VRButton } from './js/webxr/VRButton.js';
 
 import { GUI } from './jsm/libs/dat.gui.module.js';
 
-import { Sky } from './jsm/objects/Sky.js';
+//import { Sky } from './jsm/objects/Sky.js';
 
 import './js/controls/PointerLockControls.js'
 
 import { networkCode,objectsType } from "./js/network/networkCode.js"
 import {InputKey} from "./js/controls/inputKey.js" 
+import {Sky} from "./js/controls/world.js" 
 var camera, controls, scene, renderer;
 
 var sky, sunSphere;
@@ -60,66 +61,7 @@ var controllers = [];
 var inputs = new InputKey();
 
 
-function initSky(turbidity = 10,
-        rayleigh = 2,
-        mieCoefficient = 0.005,
-        mieDirectionalG = 0.8,
-        luminance = 1,
-        inclination = 0.49, // elevation / inclination
-        azimuth = 0.25, // Facing front,
-        colorR = 0, // Facing front,
-        colorG = 0, // Facing front,
-        colorB = 0, // Facing front,
-        sun =  ! true) {
 
-    // Add Sky
-    sky = new Sky();
-    sky.scale.setScalar( 450000 );
-    scene.add( sky );
-
-    // Add Sun Helper
-    sunSphere = new THREE.Mesh(
-        new THREE.SphereBufferGeometry( 20000, 16, 8 ),
-        new THREE.MeshBasicMaterial( { color: 0xffffff } )
-    );
-    sunSphere.position.y = - 700000;
-    sunSphere.visible = false;
-    scene.add( sunSphere );
-
-    /// GUI
-
-
-
-    var distance = 400000;
-
-    var uniforms = sky.material.uniforms;
-    uniforms[ "turbidity" ].value = turbidity;
-    uniforms[ "rayleigh" ].value = rayleigh;
-    uniforms[ "mieCoefficient" ].value = mieCoefficient;
-    uniforms[ "mieDirectionalG" ].value = mieDirectionalG;
-    uniforms[ "luminance" ].value = luminance;
-    uniforms[ "colorR" ].value = colorR;
-    uniforms[ "colorG" ].value = colorG;
-    uniforms[ "colorB" ].value = colorB;
-
-    var theta = Math.PI * ( inclination - 0.5 );
-    var phi = 2 * Math.PI * ( azimuth - 0.5 );
-
-    sunSphere.position.x = distance * Math.cos( phi );
-    sunSphere.position.y = distance * Math.sin( phi ) * Math.sin( theta );
-    sunSphere.position.z = distance * Math.sin( phi ) * Math.cos( theta );
-
-    sunSphere.visible = sun;
-
-    uniforms[ "sunPosition" ].value.copy( sunSphere.position );
-
-
-
-
-
-
-
-}
 
 
 function sleep(ms) {
@@ -145,8 +87,9 @@ function setup()
 
     document.body.appendChild(VRButton.createButton(renderer));
     scene.add(plane);
-
-
+    sky = new Sky();
+    sky.addToScene(sky);
+    /*
     var turbidity = 10;
     var rayleigh = 2;
     var mieCoefficient = 0.005;
@@ -169,7 +112,7 @@ function setup()
         colorG , // Facing front,
         colorB, // Facing front,
         sun )
-
+    */
     controls = new THREE.PointerLockControls( camera, document.body );
     controls.lock = true;
     for (let i = 0; i < 2; ++i) {
