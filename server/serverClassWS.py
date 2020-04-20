@@ -14,7 +14,7 @@ import tools
 import traceback
 
 networkCode = tools.getNetworkCode()
-objecstType = tools.getObjectsType()
+objectsType = tools.getObjectsType()
 
 
 
