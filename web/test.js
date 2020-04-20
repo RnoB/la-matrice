@@ -14,7 +14,7 @@ import {InputKey} from "./js/controls/inputKey.js"
 import {InitSky} from "./js/controls/world.js" 
 var camera, controls, scene, renderer;
 
-
+var sky;
 //import { WebXRButton } from './js/webxr/webxr-button.js';
 
 var scene;
@@ -88,10 +88,8 @@ function setup()
     document.body.appendChild(VRButton.createButton(renderer));
     scene.add(plane);
 
-    sky = new Sky();
-    sky.scale.setScalar( 450000 );
-    scene.add( sky );
-    var sky = new InitSky();
+
+    sky = new InitSky();
     sky.addToScene(scene);
 
     console.log(scene);
