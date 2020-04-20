@@ -103,6 +103,16 @@ function initSky(turbidity = 10,
     uniforms[ "colorG" ].value = colorG;
     uniforms[ "colorB" ].value = colorB;
 
+    var theta = Math.PI * ( inclination - 0.5 );
+    var phi = 2 * Math.PI * ( azimuth - 0.5 );
+
+    sunSphere.position.x = distance * Math.cos( phi );
+    sunSphere.position.y = distance * Math.sin( phi ) * Math.sin( theta );
+    sunSphere.position.z = distance * Math.sin( phi ) * Math.cos( theta );
+
+    sunSphere.visible = sun;
+
+
 
 
 
