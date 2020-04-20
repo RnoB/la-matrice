@@ -72,7 +72,7 @@ class Server:
                 dataWorld += struct.pack('<i', self.playerIds[k])
                 dataWorld += struct.pack('B', self.playersList[k]['controllers'])
 
-            self.playerIds.append(playerId)
+            self.playerIds.append(self.playerId)
             self.playersPosition.append(position0)
             self.playersRotation.append(rotation0)
             playerDict = {"id" : playerId,"controllers" : controllers,"position" : playersPosition[-1],"rotation" : playersRotation[-1]}
