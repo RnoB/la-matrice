@@ -4,25 +4,25 @@ class InputKey
 {
     constructor()
     {
-    document.body.addEventListener('keydown', keyPressed);
-    document.body.addEventListener('keyup', keyReleased);
+    document.body.addEventListener('keydown', this.keyPressed);
+    document.body.addEventListener('keyup', this.keyReleased);
     this.keyMap = {};
     this.speed = .05;        
     }
 
 
 
-    function setSpeed(newSpeed)
+    setSpeed(newSpeed)
     {
         this.speed = newSpeed;
     }
-    function keyPressed(e)
+    keyPressed(e)
     {
         keyMap[e.key] = 'keydown';
         e.preventDefault();
     }
 
-    function keyReleased(e)
+    keyReleased(e)
     {   
       delete keyMap[e.key];
       e.preventDefault();
@@ -31,7 +31,7 @@ class InputKey
 
 
 
-    function inputPlayer(object)
+    inputPlayer(object)
     {
 
 
