@@ -1,6 +1,6 @@
 import { Sky } from '../../jsm/objects/Sky.js';
 
-export class Sky
+export class InitSky
 {
 
     constructor(turbidity=0,rayleigh=2,mieCoefficient = 0.005,

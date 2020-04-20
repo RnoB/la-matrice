@@ -10,7 +10,7 @@ import './js/controls/PointerLockControls.js'
 
 import { networkCode,objectsType } from "./js/network/networkCode.js"
 import {InputKey} from "./js/controls/inputKey.js" 
-import {Sky} from "./js/controls/world.js" 
+import {InitSky} from "./js/controls/world.js" 
 var camera, controls, scene, renderer;
 
 var sky, sunSphere;
@@ -87,8 +87,8 @@ function setup()
 
     document.body.appendChild(VRButton.createButton(renderer));
     scene.add(plane);
-    sky = new Sky();
-    sky.addToScene(sky);
+    sky = new InitSky();
+    sky.addToScene(scene);
     /*
     var turbidity = 10;
     var rayleigh = 2;
