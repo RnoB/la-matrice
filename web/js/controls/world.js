@@ -40,7 +40,7 @@ export class InitSky
 
     updateShader()
     {
-
+        console.log("here");
         var uniforms = this.sky.material.uniforms;
         uniforms[ "turbidity" ].value = this.turbidity;
         uniforms[ "rayleigh" ].value = this.rayleigh;
