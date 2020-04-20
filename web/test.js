@@ -1,13 +1,6 @@
 import "./js/three.min.js";
 import { VRButton } from './js/webxr/VRButton.js';
 
-
-import { GUI } from './jsm/libs/dat.gui.module.js';
-
-import { Sky } from './jsm/objects/Sky.js';
-
-
-
 import { networkCode,objectsType } from "./js/network/networkCode.js"
 import {InputKey} from "./js/controls/inputKey.js" 
 import {InitSky,InitFloor} from "./js/controls/world.js" 
@@ -17,7 +10,6 @@ var camera, controls, scene, renderer;
 
 var sky, floor;
 
-//import { WebXRButton } from './js/webxr/webxr-button.js';
 
 var scene;
 var camera;
@@ -63,6 +55,35 @@ function sleep(ms) {
 }
 
 
+/* Setup World */
+function setUpWorld()
+{
+    console.log("Setting up World")
+    var light = new THREE.DirectionalLight(0xab0000, 1, 1000);
+    light.position.set(50, 50, 50);
+    light.castShadow = true;
+    var light2 = new THREE.PointLight(0x00ff, 1, 1000);
+    light2.position.set(0, 50, 50);
+    scene.add(light2);
+    scene.add(light);
+
+    sky = new InitSky();
+    sky.addToScene(scene);    
+    floor = new InitFloor();
+    floor.addToScene(scene);
+
+    for (let i = 0; i < 2; ++i) {
+        const controller = renderer.xr.getController(i);
+        var controllerMesh = new THREE.Mesh( geometry, material );
+        controllerMesh.scale.set(.01,.1,.1);
+        controller.add( controllerMesh);
+        scene.add(controller);
+        controllers.push(controller);
+
+    }
+    
+}
+
 function setup()
 {
     scene = new THREE.Scene();
@@ -81,23 +102,22 @@ function setup()
 
     document.body.appendChild(VRButton.createButton(renderer));
 
-
-    for (let i = 0; i < 2; ++i) {
-        const controller = renderer.xr.getController(i);
-        var controllerMesh = new THREE.Mesh( geometry, material );
-        controllerMesh.scale.set(.01,.1,.1);
-        controller.add( controllerMesh);
-        scene.add(controller);
-        controllers.push(controller);
-
-    }
-
-
-
     setUpWorld()
 }
 
 
+
+
+
+/* Network */
+
+function network()
+{
+    connect();
+    ws.onmessage = function (event) {receiver(event.data);}
+    ws.onopen =  function(event){sender(); }
+    
+}
 
 function connect()
 {
@@ -109,8 +129,6 @@ function connect()
 
 
 
-var tOld = new Array(12).fill(0);
-var tNew = new Array(12).fill(0);
 
 function receiver(msg)
 {   
@@ -130,10 +148,7 @@ function receiver(msg)
 
            
             var objectId = data.getInt32(1,true);
-            tNew[objectId] = t1
-            //console.log("code : "+code.toString()+" id : "+objectId.toString()+" t : "+(1000.0/(tNew[objectId]-tOld[objectId])).toString());
-            tOld[objectId] = tNew[objectId];
-            
+
             var idx = listPlayers.findIndex(x => x.id == objectId);
             if (idx>-1)
             {
@@ -329,51 +344,12 @@ async function sender()
 
 
 
-function setUpWorld()
-{
-    console.log("Setting up World")
-    var light = new THREE.DirectionalLight(0xab0000, 1, 1000);
-    light.position.set(50, 50, 50);
-    light.castShadow = true;
-    var light2 = new THREE.PointLight(0x00ff, 1, 1000);
-    light2.position.set(0, 50, 50);
-    scene.add(light2);
-    scene.add(light);
-
-    sky = new InitSky();
-    sky.addToScene(scene);    
-    floor = new InitFloor();
-    floor.addToScene(scene);
-    
-}
-
-
-
-
-
-function network()
-{
-    connect();
-    ws.onmessage = function (event) {receiver(event.data);}
-    ws.onopen =  function(event){sender(); }
-    
-}
-
-
-
-
-
-
-
-
-var speed = .05;
-
-
-//setup();
+/* rendering */
 
 function animate() {
     renderer.setAnimationLoop(render);    
 }
+
 function render() {
     var t = new Date().getTime();
 
@@ -411,6 +387,8 @@ function render() {
     frame++;
 }
 
+
+/*Program Start*/
 setup();
 network();
 animate();
