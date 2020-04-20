@@ -26,7 +26,7 @@ class Server:
 
 
 
-    async def send(websocket,message):
+    async def send(self,websocket,message):
 
         
         for player in self.playersSocket:
@@ -37,7 +37,7 @@ class Server:
                     print(e)
 
 
-    async def register(websocket):
+    async def register(self,websocket):
 
         self.playerId+=1
         try:
