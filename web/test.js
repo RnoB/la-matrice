@@ -94,7 +94,23 @@ function initSky(turbidity = 10,
     var distance = 400000;
 
     var uniforms = sky.material.uniforms;
+    uniforms[ "turbidity" ].value = turbidity;
+    uniforms[ "rayleigh" ].value = rayleigh;
+    uniforms[ "mieCoefficient" ].value = mieCoefficient;
+    uniforms[ "mieDirectionalG" ].value = mieDirectionalG;
+    uniforms[ "luminance" ].value = luminance;
+    uniforms[ "colorR" ].value = colorR;
+    uniforms[ "colorG" ].value = colorG;
+    uniforms[ "colorB" ].value = colorB;
 
+    var theta = Math.PI * ( inclination - 0.5 );
+    var phi = 2 * Math.PI * ( azimuth - 0.5 );
+
+    sunSphere.position.x = distance * Math.cos( phi );
+    sunSphere.position.y = distance * Math.sin( phi ) * Math.sin( theta );
+    sunSphere.position.z = distance * Math.sin( phi ) * Math.cos( theta );
+
+    sunSphere.visible = true;
 
     uniforms[ "sunPosition" ].value.copy( sunSphere.position );
 
