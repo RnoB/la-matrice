@@ -24,6 +24,12 @@ objectsType = tools.getObjectsType()
 
 class Server:
 
+    def addObject(self,objectType):
+        self.playerId+=1
+        dataWorld = struct.pack('B', networkCode['newObject'])
+        dataWorld += struct.pack('<ii',self.playerId,objectType)
+        dataWorld += struct.pack('<fffffff',position0[0],position0[1],position0[2],\
+                                    rotation0[0],rotation0[1],rotation0[2],rotation0[3])
 
 
     async def send(self,websocket,message):
