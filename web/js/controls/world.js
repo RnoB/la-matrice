@@ -1,4 +1,4 @@
-import { Sky } from 'Sky.js';
+import { Sky } from './Sky.js';
 
 export class InitSky
 {
