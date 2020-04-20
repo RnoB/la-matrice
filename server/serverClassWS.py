@@ -75,7 +75,7 @@ class Server:
             self.playerIds.append(self.playerId)
             self.playersPosition.append(position0)
             self.playersRotation.append(rotation0)
-            playerDict = {"id" : self.playerId,"controllers" : controllers,"position" : playersPosition[-1],"rotation" : playersRotation[-1]}
+            playerDict = {"id" : self.playerId,"controllers" : controllers,"position" : position0,"rotation" : rotation0}
             for k in range(0,controllers):
                 playerDict["posC"+str(k)] = (0,0,0)
                 playerDict["rotC"+str(k)] = (0,0,0,1)
