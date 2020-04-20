@@ -1,5 +1,11 @@
 import { Sky } from '../../jsm/objects/Sky.js';
 
+
+
+export function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export class InitSky
 {
 

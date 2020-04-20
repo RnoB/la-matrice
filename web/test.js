@@ -3,7 +3,7 @@ import { VRButton } from './js/webxr/VRButton.js';
 
 import { networkCode,objectsType } from "./js/network/networkCode.js"
 import {InputKey} from "./js/controls/inputKey.js" 
-import {InitSky,InitFloor} from "./js/controls/world.js" 
+import {sleep,InitSky,InitFloor} from "./js/controls/world.js" 
 
 
 var camera, controls, scene, renderer;
@@ -50,9 +50,7 @@ var inputs = new InputKey();
 
 
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+
 
 
 /* Setup World */
