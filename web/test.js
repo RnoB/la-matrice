@@ -95,7 +95,7 @@ function initSky(turbidity = 10,
 
     var uniforms = sky.material.uniforms;
     uniforms[ "turbidity" ].value = turbidity;
-    uniforms[ "rayleigh" ].value = rayleigh;
+
     uniforms[ "mieCoefficient" ].value = mieCoefficient;
     uniforms[ "mieDirectionalG" ].value = mieDirectionalG;
     uniforms[ "luminance" ].value = luminance;
