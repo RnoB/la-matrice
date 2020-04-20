@@ -69,14 +69,6 @@ function newSky() {
     sky.scale.setScalar( 450000 );
     scene.add( sky );
 
-    // Add Sun Helper
-    sunSphere = new THREE.Mesh(
-        new THREE.SphereBufferGeometry( 20000, 16, 8 ),
-        new THREE.MeshBasicMaterial( { color: 0xffffff } )
-    );
-    sunSphere.position.y = - 700000;
-    sunSphere.visible = false;
-    scene.add( sunSphere );
 
     /// GUI
 
