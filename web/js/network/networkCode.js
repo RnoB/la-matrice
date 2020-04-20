@@ -40,6 +40,6 @@ function getNetworkCode(path)
 
 }
 
-export var networkCode = getNetworkCode("networkCode.csv");
-export var objectsType = getNetworkCode("objectType.csv");
+export var networkCode = getNetworkCode("./js/network/networkCode.csv");
+export var objectsType = getNetworkCode("./js/network/objectType.csv");
 	
