@@ -62,74 +62,6 @@ var inputs = new InputKey();
 
 
 
-function newSky() {
-
-    // Add Sky
-    sky = new Sky();
-    sky.scale.setScalar( 450000 );
-    scene.add( sky );
-
-
-    /// GUI
-
-    var effectController = {
-        turbidity: 10,
-        rayleigh: 2,
-        mieCoefficient: 0.005,
-        mieDirectionalG: 0.8,
-        luminance: 1,
-        inclination: 0.49, // elevation / inclination
-        azimuth: 0.25, // Facing front,
-        colorR: 0, // Facing front,
-        colorG: 0, // Facing front,
-        colorB: 0, // Facing front,
-        sun: ! true,
-        colorSky: "#ffffff"
-    };
-
-    var distance = 400000;
-
-   function guiChanged() {
-
-        var uniforms = sky.material.uniforms;
-        uniforms[ "turbidity" ].value = effectController.turbidity;
-        uniforms[ "rayleigh" ].value = effectController.rayleigh;
-        uniforms[ "mieCoefficient" ].value = effectController.mieCoefficient;
-        uniforms[ "mieDirectionalG" ].value = effectController.mieDirectionalG;
-        uniforms[ "luminance" ].value = effectController.luminance;
-        var colorSky = new THREE.Color(effectController.colorSky);
-        console.log(colorSky);
-        uniforms[ "colorR" ].value = colorSky.r;
-        uniforms[ "colorG" ].value = colorSky.g;
-        uniforms[ "colorB" ].value = colorSky.b;
-
-
-
-
-
-
-
-    }
-
-    var gui = new GUI();
-
-    gui.add( effectController, "turbidity", 1.0, 20.0, 0.1 ).onChange( guiChanged );
-    gui.add( effectController, "rayleigh", 0.0, 4, 0.001 ).onChange( guiChanged );
-    gui.add( effectController, "mieCoefficient", 0.0, 0.1, 0.001 ).onChange( guiChanged );
-    gui.add( effectController, "mieDirectionalG", 0.0, 1, 0.001 ).onChange( guiChanged );
-    gui.add( effectController, "luminance", 0.0, 2 ).onChange( guiChanged );
-    gui.add( effectController, "inclination", 0, 1, 0.0001 ).onChange( guiChanged );
-    gui.add( effectController, "azimuth", 0, 1, 0.0001 ).onChange( guiChanged );
-    gui.add( effectController, "sun" ).onChange( guiChanged );
-    gui.add( effectController, "colorR", 0, 5, 0.001 ).onChange( guiChanged );
-    gui.add( effectController, "colorG", 0, 5, 0.001 ).onChange( guiChanged );
-    gui.add( effectController, "colorB", 0, 5, 0.001 ).onChange( guiChanged );
-    gui.addColor(effectController,"colorSky").onChange( guiChanged );
-
-    guiChanged();
-
-}
-
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -155,10 +87,8 @@ function setup()
     scene.add(plane);
 
 
-   // sky = new InitSky();
-    //sky.addToScene(scene);
-    newSky();
-    console.log(scene);
+
+
     controls = new THREE.PointerLockControls( camera, document.body );
     controls.lock = true;
     for (let i = 0; i < 2; ++i) {
@@ -414,6 +344,9 @@ function setUpWorld()
     light2.position.set(0, 50, 50);
     scene.add(light2);
     scene.add(light);
+
+    sky = new InitSky();
+    sky.addToScene(scene);
 }
 
 
