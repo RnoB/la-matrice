@@ -2,12 +2,14 @@
 
 export class InputKey
 {
+    keyMap;
+    speed;
     constructor()
     {
-    document.body.addEventListener('keydown', this.keyPressed);
-    document.body.addEventListener('keyup', this.keyReleased);
-    this.keyMap = {};
-    this.speed = .05;        
+        document.body.addEventListener('keydown', this.keyPressed);
+        document.body.addEventListener('keyup', this.keyReleased);
+        this.keyMap = {};
+        this.speed = .05;        
     }
 
 
