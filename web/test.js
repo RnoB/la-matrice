@@ -91,6 +91,10 @@ function initSky(turbidity = 10,
 
 
 
+    var distance = 400000;
+
+    var uniforms = sky.material.uniforms;
+
 
     uniforms[ "sunPosition" ].value.copy( sunSphere.position );
 
