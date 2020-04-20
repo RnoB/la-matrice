@@ -33,6 +33,7 @@ export class InitSky
     addToScene(scene)
     {
         console.log(scene);
+        console.log(this.sky)
         scene.add(this.sky);
         scene.add(this.sunSphere);
     }
