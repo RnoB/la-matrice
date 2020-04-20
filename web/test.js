@@ -6,6 +6,7 @@ import { GUI } from './jsm/libs/dat.gui.module.js';
 
 
 
+import { Sky } from './jsm/objects/Sky.js';
 import './js/controls/PointerLockControls.js'
 
 import { networkCode,objectsType } from "./js/network/networkCode.js"
@@ -87,7 +88,9 @@ function setup()
     document.body.appendChild(VRButton.createButton(renderer));
     scene.add(plane);
 
-
+    sky = new Sky();
+    sky.scale.setScalar( 450000 );
+    scene.add( sky );
     var sky = new InitSky();
     sky.addToScene(scene);
 
