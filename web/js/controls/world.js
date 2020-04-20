@@ -60,7 +60,7 @@ export class InitSky
         this.sunSphere.position.z = this.distance * Math.sin( phi ) * Math.cos( theta );
 
         this.sunSphere.visible = this.sun;
-        console.log(sunSphere.position);
+        console.log(this.sunSphere.position);
         uniforms[ "sunPosition" ].value.copy( this.sunSphere.position );
         console.log(uniforms);
     }
