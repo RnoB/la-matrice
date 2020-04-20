@@ -57,7 +57,7 @@ def readPosition(message,player):
 
 
     
-def messagePosition(code,player)
+def messagePosition(code,player):
     message = struct.pack('B', networkCode['objectPosition'])
     message += struct.pack('<i', player['id'])
     message += struct.pack('<fff',player['position'][0],\
