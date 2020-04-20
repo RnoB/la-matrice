@@ -89,7 +89,7 @@ function setup()
     scene.add(plane);
 
 
-    var sky = InitSky();
+    var sky = new InitSky();
     sky.addToScene(scene);
 
     controls = new THREE.PointerLockControls( camera, document.body );
