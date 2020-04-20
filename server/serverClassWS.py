@@ -126,7 +126,7 @@ class Server:
                 code = message[0]
 
                 try:
-                    if code == networkCode['playerPosition'] and len(websocket.messages) == 0 and idPlayer == playerIds[nextPlayer] and playerNumber>0:
+                    if code == networkCode['playerPosition'] and len(websocket.messages) == 0 and idPlayer == self.playerIds[self.nextPlayer] and self.playerNumber>0:
                         idx = self.playerIds.index(idPlayer)
                         player = self.playersList[idx]
                         player = tools.readPosition(message,player)
