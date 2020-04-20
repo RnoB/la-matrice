@@ -1,6 +1,6 @@
 
 
-class InputKey
+export class InputKey
 {
     constructor()
     {
