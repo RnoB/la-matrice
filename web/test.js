@@ -15,7 +15,8 @@ var camera, controls, scene, renderer;
 var sky, sunSphere;
 
 //import { WebXRButton } from './js/webxr/webxr-button.js';
-
+var networkCode,objectsType;
+[networkCode,objectsType] = getCodes();
 var scene;
 var camera;
 var renderer = null;
