@@ -76,7 +76,7 @@ export class InitFloor
     {
 
         this.geometryPlane = new THREE.PlaneGeometry( 200, 200, 8,8 );
-        this.materialPlane = new THREE.MeshStandardMaterial( {color: 0xffff00} );
+        this.materialPlane = new THREE.MeshStandardMaterial( {color: 0xff00ff} );
         this.plane = new THREE.Mesh( this.geometryPlane, this.materialPlane );
 
 
