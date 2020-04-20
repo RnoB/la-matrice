@@ -8,15 +8,15 @@ import { Sky } from './jsm/objects/Sky.js';
 
 import './js/controls/PointerLockControls.js'
 
-import { networkCode,objectType } from "./js/network/networkCode.js"
+import "./js/network/networkCode.js"
 import "./js/controls/inputKey.js" 
 var camera, controls, scene, renderer;
 
 var sky, sunSphere;
 
 //import { WebXRButton } from './js/webxr/webxr-button.js';
-//var networkCode,objectsType;
-//[networkCode,objectsType] = getCodes();
+var networkCode,objectsType;
+[networkCode,objectsType] = getCodes();
 var scene;
 var camera;
 var renderer = null;
