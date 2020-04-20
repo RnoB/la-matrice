@@ -40,7 +40,7 @@ export class InitSky
 
     updateShader()
     {
-
+        console.log(uniforms);
         var uniforms = this.sky.material.uniforms;
         uniforms[ "turbidity" ].value = this.turbidity;
         uniforms[ "rayleigh" ].value = this.rayleigh;
@@ -51,6 +51,7 @@ export class InitSky
         uniforms[ "colorG" ].value = this.colorG;
         uniforms[ "colorB" ].value = this.colorB;    
 
+        console.log(uniforms);
         var theta = Math.PI * ( this.inclination - 0.5 );
         var phi = 2 * Math.PI * ( this.azimuth - 0.5 );
 
