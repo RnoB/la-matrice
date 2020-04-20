@@ -6,8 +6,8 @@ export class InputKey
     speed;
     constructor()
     {
-        document.body.addEventListener('keydown', this.keyPressed);
-        document.body.addEventListener('keyup', this.keyReleased);
+        document.body.addEventListener('keydown', this.keyPressed(this));
+        document.body.addEventListener('keyup', this.keyReleased(this));
         this.keyMap = {};
         this.speed = .05;        
     }
