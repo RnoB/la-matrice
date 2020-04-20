@@ -13,7 +13,6 @@ import {InputKey} from "./js/controls/inputKey.js"
 import {InitSky} from "./js/controls/world.js" 
 var camera, controls, scene, renderer;
 
-var sky, sunSphere;
 
 //import { WebXRButton } from './js/webxr/webxr-button.js';
 
