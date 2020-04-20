@@ -87,7 +87,7 @@ class Server:
                 await self.playersSocket[-1].send(dataWorld)
             except Exception as e:
                 print(e)
-            return playerId
+        return self.playerId
 
 
     async def unregister(idPlayer,websocket):
