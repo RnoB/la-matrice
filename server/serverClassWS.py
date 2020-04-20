@@ -14,7 +14,7 @@ import tools
 
 
 networkCode = tools.getNetworkCode()
-objecstType = tools.getOjectsType()
+objecstType = tools.getObjectsType()
 
 
 
