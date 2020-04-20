@@ -112,7 +112,7 @@ function initSky(turbidity = 10,
 
     sunSphere.visible = sun;
 
-
+    uniforms[ "sunPosition" ].value.copy( sunSphere.position );
 
 
 
