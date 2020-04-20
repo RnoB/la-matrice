@@ -78,6 +78,14 @@ function initSky(turbidity = 10,
     sky.scale.setScalar( 450000 );
     scene.add( sky );
 
+    // Add Sun Helper
+    sunSphere = new THREE.Mesh(
+        new THREE.SphereBufferGeometry( 20000, 16, 8 ),
+        new THREE.MeshBasicMaterial( { color: 0xffffff } )
+    );
+    sunSphere.position.y = - 700000;
+    sunSphere.visible = false;
+    scene.add( sunSphere );
 
     /// GUI
 
@@ -95,7 +103,16 @@ function initSky(turbidity = 10,
     uniforms[ "colorG" ].value = colorG;
     uniforms[ "colorB" ].value = colorB;
 
+    var theta = Math.PI * ( inclination - 0.5 );
+    var phi = 2 * Math.PI * ( azimuth - 0.5 );
 
+    sunSphere.position.x = distance * Math.cos( phi );
+    sunSphere.position.y = distance * Math.sin( phi ) * Math.sin( theta );
+    sunSphere.position.z = distance * Math.sin( phi ) * Math.cos( theta );
+
+    sunSphere.visible = sun;
+
+    uniforms[ "sunPosition" ].value.copy( sunSphere.position );
 
 
 
