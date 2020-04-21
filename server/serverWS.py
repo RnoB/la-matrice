@@ -229,10 +229,12 @@ def startServer(port,cert,key):
     server.start()
 
 def startSimulation():
+    k = 0
     while True:
         time.sleep(10)
         print(server)
         server.addObject(2000,[k,1.5,5])
+        k+=1
 
 
 def main():
@@ -250,7 +252,7 @@ def main():
     simuThread.daemon = True
     simuThread.start()
 
-    k = 0
+
     while True:
         time.sleep(60)
         
