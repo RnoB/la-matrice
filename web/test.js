@@ -260,10 +260,10 @@ function receiver(msg)
             "position" : new THREE.Vector3(data.getFloat32(9,true),
                                             data.getFloat32(13,true),
                                             data.getFloat32(17,true)),
-            "rotation" : new THREE.Quaternion(data.getFloat32(9,true),
-                                            data.getFloat32(13,true),
-                                            data.getFloat32(17,true),
-                                            data.getFloat32(17,true) ),
+            "rotation" : new THREE.Quaternion(data.getFloat32(21,true),
+                                            data.getFloat32(25,true),
+                                            data.getFloat32(29,true),
+                                            data.getFloat32(33,true) ),
             "mesh" : new THREE.Mesh(geometry, material)};
 
 

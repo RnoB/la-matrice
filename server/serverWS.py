@@ -233,7 +233,7 @@ def startSimulation():
     while True:
         time.sleep(10)
         print(server)
-        server.addObject(2000,[k,1.5,5])
+        server.addObject(2000,[k,1.5,1])
         k+=1
 
 
