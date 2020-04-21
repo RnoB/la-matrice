@@ -24,29 +24,45 @@ objectsType = tools.getObjectsType()
 
 class Server:
 
-    async def addObject(self,objectType,position0 = [0,0,0],rotation0 = [0,0,0,1]):
+    def addObject(self,objectType,position0 = [0,0,0],rotation0 = [0,0,0,1]):
         self.playerId+=1
-        dataWorld = struct.pack('B', networkCode['newObject'])
-        dataWorld += struct.pack('<ii',self.playerId,objectType)
-        dataWorld += struct.pack('<fffffff',position0[0],position0[1],position0[2],\
-                                    rotation0[0],rotation0[1],rotation0[2],rotation0[3])
-        objectDict = {"id" : self.playerId,"type" : objectType,"position" : position0,"rotation" : rotation0}
-        objectsList.append(objectDict)
-        for player in self.playersSocket:
-            try:
-                await player.send(message)
-            except Exception as e:
-                print(traceback.format_exc())
 
-    async def removeObject(self,objectId):
-        self.playerId+=1
-        idx = self.playerIds.index(objectId)
-        del self.playersList[idx]
-        for player in self.playersSocket:
-            try:
-                await player.send(message)
-            except Exception as e:
-                print(traceback.format_exc())
+        objectDict = {"id" : self.playerId,"type" : objectType,"position" : position0,"rotation" : rotation0}
+        self.objectsNew.append(objectDict)
+
+
+    def removeObject(self,objectId):
+        self.objectsRem.append(objectId)
+        
+
+
+    async def checkObject():
+        for objecte in self.objectsNew:
+            dataWorld = struct.pack('B', networkCode['newObject'])
+            dataWorld += struct.pack('<ii',objecte['id'],objecte['type'])
+            position0 = objecte['position']
+            rotation0 = objecte['rotation']
+            dataWorld += struct.pack('<fffffff',position0[0],position0[1],position0[2],\
+                                    rotation0[0],rotation0[1],rotation0[2],rotation0[3])
+            self.objectsList.append(objecte)
+            self.objectsNew.remove(objecte)
+            self.objectIds.append(objecte['id'])
+            for player in self.playersSocket:
+                try:
+                    await player.send(dataWorld)
+                except Exception as e:
+                    print(traceback.format_exc())
+        for objectId  in self.objectsRem:
+            idx = self.objectIds.index(objectId)
+            del self.objectsList[idx]
+            del self.objectsIds[idx]
+            for player in self.playersSocket:
+                try:
+                    await player.send(message)
+                except Exception as e:
+                    print(traceback.format_exc())
+
+
 
 
     async def send(self,websocket,message):
@@ -58,6 +74,7 @@ class Server:
                     await player.send(message)
                 except Exception as e:
                     print(traceback.format_exc())
+        await checkObject()
 
 
     async def register(self,websocket):
@@ -192,6 +209,11 @@ class Server:
         self.objectsPosition = []
         self.objectsRotation = []
         self.objectsList = []
+
+        self.objectsNew = []
+        self.objectsRem = []
+        self.objectIds = []
+
         self.t0 = time.time()
         self.ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
         self.ssl_context.load_cert_chain(cert,key)
