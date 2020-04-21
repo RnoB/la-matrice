@@ -255,7 +255,7 @@ function receiver(msg)
             }
         case networkCode['newObject']:
             
-            objectInfo = {"id" : data.getInt32(1,true),
+            var objectInfo = {"id" : data.getInt32(1,true),
             "type" : data.getInt32(5,true),
             "position" : new THREE.Vector3(data.getFloat32(9,true),
                                             data.getFloat32(13,true),
