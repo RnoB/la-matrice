@@ -203,6 +203,8 @@ def startServer(port,cert,key):
 
 
 def main():
+    global server
+    print(server)
     port = sys.argv[1]
     cert = sys.argv[2]
     key = sys.argv[3]
