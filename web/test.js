@@ -47,7 +47,7 @@ var controllers = [];
 
 var inputs = new InputKey();
 
-
+var updateFrequency = 50;
 
 
 
@@ -340,7 +340,7 @@ async function sender()
         
         ws.send(msgView.buffer);
         var t2 = new Date().getTime();
-        await sleep(20);
+        await sleep(1000.0/updateFrequency);
         t1=t2;
     }
 }
