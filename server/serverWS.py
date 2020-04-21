@@ -214,8 +214,8 @@ def main():
 
     k = 0
     while True:
-        time.sleep(60)
-        server.addObject(2000,[k,1.5,5])
+        time.sleep(10)
+        await server.addObject(2000,[k,1.5,5])
         k = k+1
 
 
