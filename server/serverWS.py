@@ -171,6 +171,14 @@ class Server:
             await self.unregister(idPlayer,websocket)
             print("unregistered")
 
+    def start():
+        start_server = websockets.serve(
+            self.manager, tools.getLocalIP(), self.port, ssl=self.ssl_context,max_queue = None
+        )
+
+        asyncio.get_event_loop().run_until_complete(start_server)
+        asyncio.get_event_loop().run_forever()
+
 
     def __init__(self,port = 6799,cert ="cert.pem",key = "privkey.pem"):
         self.playersSocket = []
@@ -185,15 +193,10 @@ class Server:
         self.objectsRotation = []
         self.objectsList = []
         self.t0 = time.time()
-        ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
-        ssl_context.load_cert_chain(cert,key)
+        self.ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+        self.ssl_context.load_cert_chain(cert,key)
+        self.port = port
 
-        start_server = websockets.serve(
-            self.manager, tools.getLocalIP(), port, ssl=ssl_context,max_queue = None
-        )
-
-        asyncio.get_event_loop().run_until_complete(start_server)
-        asyncio.get_event_loop().run_forever()
 
 
 def startServer(port,cert,key):
@@ -201,6 +204,7 @@ def startServer(port,cert,key):
     asyncio.set_event_loop(asyncio.new_event_loop())
     server = Server(port = port,cert = cert,key = key)
     print(server)
+    server.start()
 
 def main():
 
