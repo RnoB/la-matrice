@@ -269,6 +269,7 @@ function receiver(msg)
 
             console.log(objectInfo.position);
             console.log(objectInfo.rotation);
+            listObjects.add(objectInfo);
             listObjects[listObjects.length-1].mesh.scale.set(.2,.2,.2);
             scene.add(listObjects[listObjects.length-1].mesh);
             console.log(scene);
