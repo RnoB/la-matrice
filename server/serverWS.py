@@ -228,11 +228,11 @@ def startServer(port,cert,key):
     print(server)
     server.start()
 
-async def startSimulation():
+def startSimulation():
     while True:
         time.sleep(10)
         print(server)
-        await server.addObject(2000,[k,1.5,5])
+        server.addObject(2000,[k,1.5,5])
 
 
 def main():
