@@ -231,7 +231,7 @@ def startServer(port,cert,key):
 def startSimulation():
     k = 0
     while True:
-        time.sleep(10)
+        time.sleep(1)
         print(server)
         server.addObject(2000,[k,1.5,1])
         k+=1
