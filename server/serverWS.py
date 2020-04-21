@@ -74,7 +74,7 @@ class Server:
                     await player.send(message)
                 except Exception as e:
                     print(traceback.format_exc())
-        await checkObject()
+        await self.checkObject()
 
 
     async def register(self,websocket):
