@@ -206,7 +206,7 @@ def startServer(port,cert,key):
     print(server)
     server.start()
 
-async def startSimulation():
+def startSimulation():
     while True:
         time.sleep(10)
         print(server)
