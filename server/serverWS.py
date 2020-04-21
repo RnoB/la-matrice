@@ -16,7 +16,7 @@ import traceback
 networkCode = tools.getNetworkCode()
 objectsType = tools.getObjectsType()
 
-server = []
+
 
 #logger = logging.getLogger('websockets')
 #logger.setLevel(logging.INFO)
@@ -197,13 +197,14 @@ class Server:
 
 
 def startServer(port,cert,key,server):
+    global server
     asyncio.set_event_loop(asyncio.new_event_loop())
     server = Server(port = port,cert = cert,key = key)
 
 
 def main():
-    global server
-    print(server)
+
+
     port = sys.argv[1]
     cert = sys.argv[2]
     key = sys.argv[3]
