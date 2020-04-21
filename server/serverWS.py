@@ -225,15 +225,16 @@ def startServer(port,cert,key):
     global server
     asyncio.set_event_loop(asyncio.new_event_loop())
     server = Server(port = port,cert = cert,key = key)
-    print(server)
+
     server.start()
 
 def startSimulation():
     k = 0
     while True:
         time.sleep(1)
-        print(server)
-        server.addObject(2000,[k,1.5,1])
+        if len(server.objectsList)>10:
+            server.removeObject(server.objectIds[0])
+        server.addObject(2000,[k/3.0,1.5,1])
         k+=1
 
 
