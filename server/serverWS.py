@@ -36,7 +36,7 @@ class Server:
         
 
 
-    async def checkObject():
+    async def checkObject(self):
         for objecte in self.objectsNew:
             dataWorld = struct.pack('B', networkCode['newObject'])
             dataWorld += struct.pack('<ii',objecte['id'],objecte['type'])
