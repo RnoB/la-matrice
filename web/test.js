@@ -267,7 +267,7 @@ function receiver(msg)
             "mesh" : new THREE.Mesh(geometry, material)};
 
 
-
+            console.log(objectInfo);
             listObjects.push(objectInfo);
             listObjects[listObjects.length-1].mesh.scale.set(.3,.3,.3);
             scene.add(listObjects[listObjects.length-1].mesh);
