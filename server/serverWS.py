@@ -16,7 +16,7 @@ import traceback
 networkCode = tools.getNetworkCode()
 objectsType = tools.getObjectsType()
 
-
+server = []
 
 #logger = logging.getLogger('websockets')
 #logger.setLevel(logging.INFO)
@@ -197,6 +197,7 @@ class Server:
 
 
 def startServer(port,cert,key):
+    global server
     server = Server(port = port,cert = cert,key = key)
 
 
@@ -209,6 +210,12 @@ def main():
     serverThread = threading.Thread(target=startServer, args=(port, cert,key))
     serverThread.daemon = True
     serverThread.start()
+
+    k = 0
+    while True:
+        time.sleep(60)
+        server.addObject(2000,[k,1.5,5])
+        k = k+1
 
 
 
