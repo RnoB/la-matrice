@@ -266,13 +266,18 @@ function receiver(msg)
                                             data.getFloat32(33,true) ),
             "mesh" : new THREE.Mesh(geometry, material)};
 
+            objectInfo.mesh.position.set(objectInfo.position.x,
+                                        objectInfo.position.y,
+                                        objectInfo.position.z)
+            objectInfo.mesh.quaternion.set(objectInfo.rotation._x,
+                                        objectInfo.rotation._y,
+                                        objectInfo.rotation._z,
+                                        objectInfo.rotation._w)
+            objectInfo.mesh.scale.set(.2,.2,.2);
+            scene.add(objectInfo.mesh);
 
-            console.log(objectInfo.position);
-            console.log(objectInfo.rotation);
             listObjects.push(objectInfo);
-            listObjects[listObjects.length-1].mesh.scale.set(.2,.2,.2);
-            scene.add(listObjects[listObjects.length-1].mesh);
-            console.log(scene);
+
             break;
         case networkCode["removeObject"]:
             var remObject = data.getInt32(1,true);
