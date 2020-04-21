@@ -267,11 +267,11 @@ function receiver(msg)
             "mesh" : new THREE.Mesh(geometry, material)};
 
 
-            console.log(objectInfo);
+            console.log(objectInfo.mesh);
             listObjects.push(objectInfo);
-            listObjects[listObjects.length-1].mesh.scale.set(.3,.3,.3);
+            listObjects[listObjects.length-1].mesh.scale.set(.2,.2,.2);
             scene.add(listObjects[listObjects.length-1].mesh);
-
+            console.log(scene);
             break;
         case networkCode["removeObject"]:
             var remObject = data.getInt32(1,true);
