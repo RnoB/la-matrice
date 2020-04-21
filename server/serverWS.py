@@ -171,7 +171,7 @@ class Server:
             await self.unregister(idPlayer,websocket)
             print("unregistered")
 
-    def start():
+    def start(self):
         start_server = websockets.serve(
             self.manager, tools.getLocalIP(), self.port, ssl=self.ssl_context,max_queue = None
         )
