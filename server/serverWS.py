@@ -206,6 +206,13 @@ def startServer(port,cert,key):
     print(server)
     server.start()
 
+async def startSimulation():
+    while True:
+        time.sleep(10)
+        print(server)
+        await server.addObject(2000,[k,1.5,5])
+
+
 def main():
 
 
@@ -217,13 +224,14 @@ def main():
     serverThread = threading.Thread(target=startServer, args=(port, cert,key))
     serverThread.daemon = True
     serverThread.start()
+    simuThread = threading.Thread(target=startSimulation)
+    simuThread.daemon = True
+    simuThread.start()
 
     k = 0
     while True:
-        time.sleep(10)
-        print(server)
-        server.addObject(2000,[k,1.5,5])
-        k = k+1
+        time.sleep(60)
+        
 
 
 
