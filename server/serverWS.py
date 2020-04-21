@@ -196,8 +196,7 @@ class Server:
         asyncio.get_event_loop().run_forever()
 
 
-def startServer(port,cert,key):
-    global server
+def startServer(port,cert,key,server):
     asyncio.set_event_loop(asyncio.new_event_loop())
     server = Server(port = port,cert = cert,key = key)
 
@@ -210,7 +209,7 @@ def main():
     key = sys.argv[3]
     
 
-    serverThread = threading.Thread(target=startServer, args=(port, cert,key))
+    serverThread = threading.Thread(target=startServer, args=(port, cert,key,server))
     serverThread.daemon = True
     serverThread.start()
 
