@@ -195,12 +195,12 @@ class Server:
         asyncio.get_event_loop().run_until_complete(start_server)
         asyncio.get_event_loop().run_forever()
 
-
+server = 0
 def startServer(port,cert,key,server):
     global server
     asyncio.set_event_loop(asyncio.new_event_loop())
     server = Server(port = port,cert = cert,key = key)
-
+    print(server)
 
 def main():
 
