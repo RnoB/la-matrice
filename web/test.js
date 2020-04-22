@@ -277,6 +277,7 @@ function receiver(msg)
             scene.add(objectInfo.mesh);
 
             listObjects.push(objectInfo);
+            console.log(listObjects);
 
             break;
         case networkCode["removeObject"]:
