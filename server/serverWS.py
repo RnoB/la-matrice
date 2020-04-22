@@ -235,7 +235,7 @@ def startSimulation():
     k = 0
     while True:
         time.sleep(1)
-        print(server.objectsList)
+        print(len(server.objectsList))
         if len(server.objectsList)>10:
 
             server.removeObject(server.objectsIds[0])
