@@ -69,8 +69,8 @@ function setUpWorld()
     sky = new InitSky();
     sky.addToScene(scene);    
     floor = new InitFloor();
-    floor.addToScene(scene);
     floor.receiveShadow = true;
+    floor.addToScene(scene);
     for (let i = 0; i < 2; ++i) {
         const controller = renderer.xr.getController(i);
         var controllerMesh = new THREE.Mesh( geometry, material );
