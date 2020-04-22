@@ -125,7 +125,7 @@ class Server:
             self.playersList.append(playerDict)
 
             self.playerNumber+=1
-            for objecte in self.objectsNew:
+            for objecte in self.objectsList:
                 dataWorld += struct.pack('<ii',objecte['id'],objecte['type'])
                 position0 = objecte['position']
                 rotation0 = objecte['rotation']
