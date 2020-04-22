@@ -265,7 +265,7 @@ function receiver(msg)
                                             data.getFloat32(29,true),
                                             data.getFloat32(33,true) ),
             "mesh" : new THREE.Mesh(geometry, material)};
-
+            console.log(objectInfo.id);
             objectInfo.mesh.position.set(objectInfo.position.x,
                                         objectInfo.position.y,
                                         objectInfo.position.z)
