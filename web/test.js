@@ -289,7 +289,7 @@ function receiver(msg)
 
                 scene.remove(listObjects[idx].mesh);
 
-                //listObjects.splice(idx);
+                listObjects.splice(idx,1);
 
 
             }
