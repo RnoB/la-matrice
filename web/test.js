@@ -69,7 +69,8 @@ function setUpWorld()
     //light2.castShadow=true;
     //scene.add(light2);
     scene.add(light);
-
+      let helper = new THREE.CameraHelper ( light.shadow.camera );
+  scene.add( helper );
     sky = new InitSky();
     sky.addToScene(scene);    
     floor = new InitFloor();
@@ -110,6 +111,8 @@ function setup()
     document.body.appendChild(VRButton.createButton(renderer));
 
     setUpWorld()
+
+
 }
 
 
