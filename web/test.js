@@ -294,6 +294,9 @@ function receiver(msg)
                                             data.getFloat32(25,true),
                                             data.getFloat32(29,true),
                                             data.getFloat32(33,true) ),
+            "scale" : new THREE.Vector3(data.getFloat32(37,true),
+                                            data.getFloat32(41,true),
+                                            data.getFloat32(45,true)),
             "mesh" : new THREE.Mesh(geometry, material)};
 
             objectInfo.mesh.position.set(objectInfo.position.x,
@@ -303,7 +306,9 @@ function receiver(msg)
                                         objectInfo.rotation._y,
                                         objectInfo.rotation._z,
                                         objectInfo.rotation._w)
-            objectInfo.mesh.scale.set(.2,.2,.2);
+            objectInfo.mesh.scale.set(objectInfo.scale.x,
+                                        objectInfo.scale.y,
+                                        objectInfo.scale.z)
             scene.add(objectInfo.mesh);
 
             listObjects.push(objectInfo);

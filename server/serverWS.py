@@ -24,10 +24,10 @@ objectsType = tools.getObjectsType()
 
 class Server:
 
-    def addObject(self,objectType,position0 = [0,0,0],rotation0 = [0,0,0,1]):
+    def addObject(self,objectType,position0 = [0,0,0],rotation0 = [0,0,0,1],scale0= [1,1,1]):
         self.playerId+=1
 
-        objectDict = {"id" : self.playerId,"type" : objectType,"position" : position0,"rotation" : rotation0}
+        objectDict = {"id" : self.playerId,"type" : objectType,"position" : position0,"rotation" : rotation0,"scale" : scale0}
         self.objectsNew.append(objectDict)
 
 
@@ -42,8 +42,10 @@ class Server:
             dataWorld += struct.pack('<ii',objecte['id'],objecte['type'])
             position0 = objecte['position']
             rotation0 = objecte['rotation']
-            dataWorld += struct.pack('<fffffff',position0[0],position0[1],position0[2],\
-                                    rotation0[0],rotation0[1],rotation0[2],rotation0[3])
+            scale0 = objecte['scale']
+            dataWorld += struct.pack('<ffffffffff',position0[0],position0[1],position0[2],\
+                                    rotation0[0],rotation0[1],rotation0[2],rotation0[3],\
+                                    scale0[0],scale0[1],scale0[2])
             self.objectsList.append(objecte)
             self.objectsNew.remove(objecte)
             self.objectsIds.append(objecte['id'])
@@ -246,7 +248,7 @@ def startSimulation():
         if len(server.objectsList)>10:
 
             server.removeObject(server.objectsIds[0])
-        server.addObject(2000,[k/3.0,1.5,-2])
+        server.addObject(2000,position = [k/3.0,1.5,-2],scale= [1,.2,10])
         k+=1
 
 
