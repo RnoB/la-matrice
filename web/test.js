@@ -57,7 +57,7 @@ var world = 0;
 function setUpWorld()
 {
     console.log("Setting up World")
-    var light = new THREE.DirectionalLight(0xab0000, 5);
+    var light = new THREE.DirectionalLight(0xab00bc, 5);
     light.position.set(50, 50, 50);
     light.castShadow = true;
     light.shadow.mapSize.width = 512;  // default   
