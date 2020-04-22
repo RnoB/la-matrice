@@ -24,10 +24,10 @@ objectsType = tools.getObjectsType()
 
 class Server:
 
-    def addObject(self,objectType,position0 = [0,0,0],rotation0 = [0,0,0,1],scale0= [1,1,1]):
+    def addObject(self,objectType,position = [0,0,0],rotation = [0,0,0,1],scale= [1,1,1]):
         self.playerId+=1
 
-        objectDict = {"id" : self.playerId,"type" : objectType,"position" : position0,"rotation" : rotation0,"scale" : scale0}
+        objectDict = {"id" : self.playerId,"type" : objectType,"position" : position,"rotation" : rotation,"scale" : scale}
         self.objectsNew.append(objectDict)
 
 
