@@ -280,6 +280,7 @@ function receiver(msg)
 
             break;
         case networkCode["removeObject"]:
+            console.log(code);
             var remObject = data.getInt32(1,true);
             var idx = listObjects.findIndex(x => x.id == remObject);
 
