@@ -57,17 +57,17 @@ var world = 0;
 function setUpWorld()
 {
     console.log("Setting up World")
-    var light = new THREE.DirectionalLight(0xab0000, 100);
+    var light = new THREE.DirectionalLight(0xab0000, 5);
     light.position.set(50, 50, 50);
     light.castShadow = true;
     light.shadow.mapSize.width = 512;  // default   
     light.shadow.mapSize.height = 512; // default
     light.shadow.camera.near = 0.5;    // default
     light.shadow.camera.far = 500;     // default
-    var light2 = new THREE.PointLight(0x00ff, 1, 1000);
-    light2.position.set(0, 50, 50);
-    light2.castShadow=true;
-    scene.add(light2);
+    //var light2 = new THREE.PointLight(0x00ff, 1, 1000);
+    //light2.position.set(0, 50, 50);
+    //light2.castShadow=true;
+    //scene.add(light2);
     scene.add(light);
 
     sky = new InitSky();
