@@ -53,6 +53,7 @@ class Server:
                 except Exception as e:
                     print(traceback.format_exc())
         for objectId  in self.objectsRem:
+            print(self.objectIds)
             idx = self.objectsIds.index(objectId)
             del self.objectsList[idx]
             del self.objectsIds[idx]
@@ -233,8 +234,7 @@ def startSimulation():
     while True:
         time.sleep(1)
         if len(server.objectsList)>10:
-            print("here")
-            print(dir(server))
+
             server.removeObject(server.objectsIds[0])
         server.addObject(2000,[k/3.0,1.5,1])
         k+=1
