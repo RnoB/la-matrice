@@ -243,7 +243,7 @@ function receiver(msg)
             objectInfo.mesh.scale.set(objectInfo.scale.x,
                                         objectInfo.scale.y,
                                         objectInfo.scale.z)
-            objectInfo.mesh.scale.set(.2,.2,.2);
+
             scene.add(objectInfo.mesh);
 
             listObjects.push(objectInfo);
