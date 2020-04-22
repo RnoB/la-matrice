@@ -296,7 +296,7 @@ function receiver(msg)
 
 
             }
-
+            console.log(listObjects);
 
 
 
