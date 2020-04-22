@@ -68,11 +68,12 @@ class Server:
                         await player.send(dataWorld)
                     except Exception as e:
                         print(traceback.format_exc())
-            except:
+            except Exception as e:
+                print(traceback.format_exc())
                 try:
                     self.objectsRem.remove(objectId)
-                except:
-                    pass
+                except Exception as e:
+                    print(traceback.format_exc())
 
 
 
