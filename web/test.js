@@ -321,7 +321,7 @@ function receiver(msg)
             objectInfo.mesh.scale.set(objectInfo.scale.x,
                                         objectInfo.scale.y,
                                         objectInfo.scale.z)
-            objectInfo.meshlistPlayers[listPlayers.length-1].mesh
+            objectInfo.mesh.mesh.castShadow = true;
             scene.add(objectInfo.mesh);
 
             listObjects.push(objectInfo);
