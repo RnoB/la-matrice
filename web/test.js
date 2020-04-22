@@ -82,6 +82,7 @@ function setUpWorld()
     sky.addToScene(scene);    
     floor = new InitFloor();
     floor.receiveShadow = true;
+    floor.castShadow = true;
     floor.addToScene(scene);
     for (let i = 0; i < 2; ++i) {
         const controller = renderer.xr.getController(i);
