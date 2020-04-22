@@ -64,24 +64,22 @@ function setUpWorld()
     light.shadow.mapSize.height = 512; // default
     light.shadow.camera.near = 0.5;    // default
     light.shadow.camera.far = 500;     // default
-    //var light2 = new THREE.PointLight(0x00ff, 1, 1000);
-    //light2.position.set(0, 50, 50);
-    //light2.castShadow=true;
-    //scene.add(light2);
+    var light2 = new THREE.PointLight(0x00ff, 1, 1000);
+    light2.position.set(0, 50, 50);
+    
+    scene.add(light2);
     light.shadow.bias = 0.0001
 
     //light.shadow.camera.top = 1000;
     //light.shadow.camera.bottom = 1000;
-    var ambientLight = new THREE.AmbientLight( 0xaa00ff, 0.1 );
+    var ambientLight = new THREE.AmbientLight( 0xaa00ff, 0.3 );
     scene.add( ambientLight );
     scene.add(light);  
-    let helper = new THREE.CameraHelper ( light.shadow.camera );
-    scene.add( helper );
+//    let helper = new THREE.CameraHelper ( light.shadow.camera );
+//    scene.add( helper );
     sky = new InitSky();
     sky.addToScene(scene);    
     floor = new InitFloor();
-    floor.receiveShadow = true;
-    floor.castShadow = true;
     floor.addToScene(scene);
     for (let i = 0; i < 2; ++i) {
         const controller = renderer.xr.getController(i);
