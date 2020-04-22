@@ -220,15 +220,15 @@ function receiver(msg)
             for (let j = 0; j < Nobjects; ++j) 
             {
 
-                var objectInfo = {"id" : data.getInt32(45+6*Nplayers+j*36,true),
-                            "type" : data.getInt32(49+6*Nplayers+j*36,true),
-                            "position" : new THREE.Vector3(data.getFloat32(53+6*Nplayers+j*36,true),
-                                            data.getFloat32(57+6*Nplayers+j*36,true),
-                                            data.getFloat32(61+6*Nplayers+j*36,true)),
-                            "rotation" : new THREE.Quaternion(data.getFloat32(65+6*Nplayers+j*36,true),
-                                            data.getFloat32(69+6*Nplayers+j*36,true),
-                                            data.getFloat32(73+6*Nplayers+j*36,true),
-                                            data.getFloat32(77+6*Nplayers+j*36,true) ),
+                var objectInfo = {"id" : data.getInt32(45+5*Nplayers+j*36,true),
+                            "type" : data.getInt32(49+5*Nplayers+j*36,true),
+                            "position" : new THREE.Vector3(data.getFloat32(53+5*Nplayers+j*36,true),
+                                            data.getFloat32(57+5*Nplayers+j*36,true),
+                                            data.getFloat32(61+5*Nplayers+j*36,true)),
+                            "rotation" : new THREE.Quaternion(data.getFloat32(65+5*Nplayers+j*36,true),
+                                            data.getFloat32(69+5*Nplayers+j*36,true),
+                                            data.getFloat32(73+5*Nplayers+j*36,true),
+                                            data.getFloat32(77+5*Nplayers+j*36,true) ),
                             "mesh" : new THREE.Mesh(geometry, material)};
             objectInfo.mesh.position.set(objectInfo.position.x,
                                         objectInfo.position.y,
