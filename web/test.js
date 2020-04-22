@@ -175,11 +175,13 @@ function receiver(msg)
             }
             break;
         case networkCode['world']:
-        console.log(data.byteLength);
+            console.log(data.byteLength);
             id = data.getInt32(1,true);
             world = data.getInt32(5,true);
             var Nplayers = data.getInt32(9,true);
             var Nobjects = data.getInt32(13,true);
+
+            print("world : "+world.toString()+" id : "+id.toString()+" Nplayers : "+Nplayers.toString()+" Nobjects : "+Nobjects.toString());
             camera.position.set(data.getFloat32(17,true),
                                 data.getFloat32(21,true),
                                 data.getFloat32(25,true));
@@ -187,8 +189,7 @@ function receiver(msg)
                                     data.getFloat32(33,true),
                                     data.getFloat32(37,true),
                                     data.getFloat32(41,true));
-            console.log(camera.rotation);
-            console.log(camera.position);
+
             
 
             for (let j = 0; j < Nplayers; ++j) 
@@ -293,7 +294,7 @@ function receiver(msg)
                                             data.getFloat32(29,true),
                                             data.getFloat32(33,true) ),
             "mesh" : new THREE.Mesh(geometry, material)};
-            console.log(objectInfo.id);
+
             objectInfo.mesh.position.set(objectInfo.position.x,
                                         objectInfo.position.y,
                                         objectInfo.position.z)
