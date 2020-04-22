@@ -24,8 +24,6 @@ objectsType = tools.getObjectsType()
 
 class Server:
 
-    objectsIds = []
-
     def addObject(self,objectType,position0 = [0,0,0],rotation0 = [0,0,0,1]):
         self.playerId+=1
 
@@ -214,7 +212,7 @@ class Server:
 
         self.objectsNew = []
         self.objectsRem = []
-
+        self.objectsIds = []
 
         self.t0 = time.time()
         self.ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
@@ -235,6 +233,7 @@ def startSimulation():
     while True:
         time.sleep(1)
         if len(server.objectsList)>10:
+            print(dir(server))
             server.removeObject(server.objectsIds[0])
         server.addObject(2000,[k/3.0,1.5,1])
         k+=1
