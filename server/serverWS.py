@@ -107,7 +107,7 @@ class Server:
                         
             self.playersSocket.append(websocket)
             dataWorld = struct.pack('B', networkCode['world'])
-            dataWorld += struct.pack('<i',self.playerId)
+            dataWorld += struct.pack('<iiii',self.world,self.playerId,self.playerNumber,len(self.objectsList))
             dataWorld += struct.pack('<fffffff',position0[0],position0[1],position0[2],\
                                         rotation0[0],rotation0[1],rotation0[2],rotation0[3])
 
@@ -125,7 +125,13 @@ class Server:
             self.playersList.append(playerDict)
 
             self.playerNumber+=1
-            
+            for objecte in self.objectsNew:
+                dataWorld += struct.pack('<ii',objecte['id'],objecte['type'])
+                position0 = objecte['position']
+                rotation0 = objecte['rotation']
+                dataWorld += struct.pack('<fffffff',position0[0],position0[1],position0[2],\
+                                        rotation0[0],rotation0[1],rotation0[2],rotation0[3])
+                
             try:
                 await self.playersSocket[-1].send(dataWorld)
             except Exception as e:
@@ -206,6 +212,7 @@ class Server:
         self.playerId = 0
         self.playerNumber = 0
         self.nextPlayer = 0
+        self.world = 0
         self.playersPosition = []
         self.playersRotation = []
         self.playersList = []

@@ -49,7 +49,7 @@ var inputs = new InputKey();
 
 var updateFrequency = 50;
 
-
+var world = 0;
 
 
 
@@ -177,22 +177,25 @@ function receiver(msg)
         case networkCode['world']:
         console.log(data.byteLength);
             id = data.getInt32(1,true);
-            camera.position.set(data.getFloat32(5,true),
-                                data.getFloat32(9,true),
-                                data.getFloat32(13,true));
-            camera.quaternion.set(data.getFloat32(17,true),
-                                    data.getFloat32(21,true),
-                                    data.getFloat32(25,true),
-                                    data.getFloat32(29,true));
+            world = data.getInt32(5,true);
+            var Nplayers = data.getInt32(9,true);
+            var Nobjects = data.getInt32(13,true);
+            camera.position.set(data.getFloat32(17,true),
+                                data.getFloat32(21,true),
+                                data.getFloat32(25,true));
+            camera.quaternion.set(data.getFloat32(29,true),
+                                    data.getFloat32(33,true),
+                                    data.getFloat32(37,true),
+                                    data.getFloat32(41,true));
             console.log(camera.rotation);
             console.log(camera.position);
-            var Nplayers = (data.byteLength-33)/5.0;
+            
 
             for (let j = 0; j < Nplayers; ++j) 
             {
 
-                var contrlers = data.getUint8(28+5*(2+j)-1,true);
-                var playerInfo = {"id" : data.getInt32(28+5*(1+j),true),
+                var contrlers = data.getUint8(45+5*(1+j)-1,true);
+                var playerInfo = {"id" : data.getInt32(45+5*(j),true),
                 "position" : new THREE.Vector3(),
                 "rotation" : new THREE.Quaternion(),
                 "mesh" : new THREE.Mesh(geometry, material),
@@ -212,6 +215,31 @@ function receiver(msg)
                 listPlayers[listPlayers.length-1].mesh.scale.set(.3,.3,.3);
                 
                 scene.add(listPlayers[listPlayers.length-1].mesh);
+            }
+            for (let j = 0; j < Nobjects; ++j) 
+            {
+
+                var objectInfo = {"id" : data.getInt32(45+6*Nplayers+j*36,true),
+                            "type" : data.getInt32(49+6*Nplayers+j*36,true),
+                            "position" : new THREE.Vector3(data.getFloat32(53+6*Nplayers+j*36,true),
+                                            data.getFloat32(57+6*Nplayers+j*36,true),
+                                            data.getFloat32(61+6*Nplayers+j*36,true)),
+                            "rotation" : new THREE.Quaternion(data.getFloat32(65+6*Nplayers+j*36,true),
+                                            data.getFloat32(69+6*Nplayers+j*36,true),
+                                            data.getFloat32(73+6*Nplayers+j*36,true),
+                                            data.getFloat32(77+6*Nplayers+j*36,true) ),
+                            "mesh" : new THREE.Mesh(geometry, material)};
+            objectInfo.mesh.position.set(objectInfo.position.x,
+                                        objectInfo.position.y,
+                                        objectInfo.position.z)
+            objectInfo.mesh.quaternion.set(objectInfo.rotation._x,
+                                        objectInfo.rotation._y,
+                                        objectInfo.rotation._z,
+                                        objectInfo.rotation._w)
+            objectInfo.mesh.scale.set(.2,.2,.2);
+            scene.add(objectInfo.mesh);
+
+            listObjects.push(objectInfo);
             }
             break;
         case networkCode['newPlayer']:
@@ -249,7 +277,7 @@ function receiver(msg)
                 {
                     scene.remove(listPlayers[idx]["controller"+k.toString()+"Mesh"]);
                 }
-                listPlayers.splice(idx);
+                listPlayers.splice(idx,1);
 
 
             }
@@ -277,7 +305,7 @@ function receiver(msg)
             scene.add(objectInfo.mesh);
 
             listObjects.push(objectInfo);
-            console.log(listObjects);
+
 
             break;
         case networkCode["removeObject"]:
