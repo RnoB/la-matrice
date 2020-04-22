@@ -246,7 +246,7 @@ def startSimulation():
         if len(server.objectsList)>10:
 
             server.removeObject(server.objectsIds[0])
-        server.addObject(2000,[k/3.0,1.5,10])
+        server.addObject(2000,[k/3.0,1.5,-10])
         k+=1
 
 
