@@ -243,7 +243,7 @@ function receiver(msg)
             objectInfo.mesh.scale.set(objectInfo.scale.x,
                                         objectInfo.scale.y,
                                         objectInfo.scale.z)
-            console.log(objectInfo.scale);
+
             scene.add(objectInfo.mesh);
 
             listObjects.push(objectInfo);

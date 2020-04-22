@@ -131,7 +131,7 @@ class Server:
                 dataWorld += struct.pack('<ii',objecte['id'],objecte['type'])
                 position0 = objecte['position']
                 rotation0 = objecte['rotation']
-                scale0 = objecte['position']
+                scale0 = objecte['scale']
                 dataWorld += struct.pack('<ffffffffff',position0[0],position0[1],position0[2],\
                                         rotation0[0],rotation0[1],rotation0[2],rotation0[3],
                                         scale0[0],scale0[1],scale0[2])
