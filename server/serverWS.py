@@ -57,7 +57,8 @@ class Server:
         for objectId  in self.objectsRem:
             dataWorld = struct.pack('B', networkCode['removeObject'])
             dataWorld += struct.pack('<i',objectId)
-            print("List : "+str(self.objectsList)+" id :"+str(id))
+            print("List : "+str(self.objectsList))
+            print(" object : "+str(objectId))
             idx = self.objectsIds.index(objectId)
             del self.objectsList[idx]
             del self.objectsIds[idx]
