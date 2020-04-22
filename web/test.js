@@ -282,6 +282,7 @@ function receiver(msg)
 
 
             }
+            break;
         case networkCode['newObject']:
             console.log(data.byteLength);
             var objectInfo = {"id" : data.getInt32(1,true),
