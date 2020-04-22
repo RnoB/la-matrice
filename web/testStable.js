@@ -107,7 +107,7 @@ function setup()
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.xr.enabled = true;
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.shadowMap.enabled = true;
+    renderer.shadowMapEnabled = true;
     renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
     document.body.appendChild(renderer.domElement);
@@ -136,7 +136,7 @@ function network()
 
 function connect()
 {
-    ws = new WebSocket('wss://matricematrice.xyz:6799'); 
+    ws = new WebSocket('wss://matricematrice.xyz:6785'); 
     ws.binaryType = "arraybuffer";
     connected = true;
 
@@ -193,8 +193,8 @@ function receiver(msg)
             break;
         case networkCode['world']:
             
-            id = data.getInt32(1,true);
-            world = data.getInt32(5,true);
+            id = data.getInt32(5,true);
+            world = data.getInt32(1,true);
             var Nplayers = data.getInt32(9,true);
             var Nobjects = data.getInt32(13,true);
 

@@ -193,8 +193,8 @@ function receiver(msg)
             break;
         case networkCode['world']:
             
-            id = data.getInt32(1,true);
-            world = data.getInt32(5,true);
+            id = data.getInt32(5,true);
+            world = data.getInt32(1,true);
             var Nplayers = data.getInt32(9,true);
             var Nobjects = data.getInt32(13,true);
 
