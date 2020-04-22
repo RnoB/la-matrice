@@ -1,17 +1,15 @@
 import "./js/three.min.js";
 import { VRButton } from './js/webxr/VRButton.js';
 
+import { networkCode,objectsType } from "./js/network/networkCode.js"
+import {InputKey} from "./js/controls/inputKey.js" 
+import {sleep,InitSky,InitFloor} from "./js/controls/world.js" 
 
-import { GUI } from './jsm/libs/dat.gui.module.js';
 
-import { Sky } from './jsm/objects/Sky.js';
-
-import './js/controls/PointerLockControls.js'
 var camera, controls, scene, renderer;
 
-var sky, sunSphere;
+var sky, floor;
 
-//import { WebXRButton } from './js/webxr/webxr-button.js';
 
 var scene;
 var camera;
@@ -29,6 +27,7 @@ var id = -1;
 var connected = false;
 
 var listPlayers = [];
+var listObjects = [];
 
 var frame = 0
 
@@ -38,13 +37,6 @@ var geometry = new THREE.BoxGeometry();
 var material = new THREE.MeshStandardMaterial();
 var cameraBox = new THREE.Mesh(geometry, material);
 
-var geometryPlane = new THREE.PlaneGeometry( 200, 200, 8,8 );
-var materialPlane = new THREE.MeshStandardMaterial( {color: 0xff00ff} );
-var plane = new THREE.Mesh( geometryPlane, materialPlane );
-
-
-
-plane.rotateX(-Math.PI/2.0);
 
 
 var simuTime = 0;
@@ -52,119 +44,44 @@ var simuTime = 0;
 
 var controllers = [];
 
-var networkCode;
+
+var inputs = new InputKey();
+
+var updateFrequency = 50;
+
+var world = 0;
 
 
-function getNetworkCode()
+
+/* Setup World */
+function setUpWorld()
 {
-    var allText
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", "./js/network/networkCode.csv", false);
-    rawFile.onreadystatechange = function ()
-    {
-        if(rawFile.readyState === 4)
-        {
-            if(rawFile.status === 200 || rawFile.status == 0)
-            {
-                allText = rawFile.responseText;
-                
-            }
-        }
-    }
-    rawFile.send(null);
+    console.log("Setting up World")
+    var light = new THREE.DirectionalLight(0xab0000, 1, 1000);
+    light.position.set(50, 50, 50);
+    light.castShadow = true;
+    var light2 = new THREE.PointLight(0x00ff, 1, 1000);
+    light2.position.set(0, 50, 50);
+    scene.add(light2);
+    scene.add(light);
 
+    sky = new InitSky();
+    sky.addToScene(scene);    
+    floor = new InitFloor();
+    floor.addToScene(scene);
 
-
-    var networkCode = {};
-
-    var lines = allText.split("\n");
-    for (var line of lines)
-    {   
-        var elements = line.split(",");
-
-        if(elements[0].length !==0)
-        {
-
-            networkCode[elements[0]] = parseInt(elements[1]);
-        }
+    for (let i = 0; i < 2; ++i) {
+        const controller = renderer.xr.getController(i);
+        var controllerMesh = new THREE.Mesh( geometry, material );
+        controllerMesh.scale.set(.01,.1,.1);
+        controller.add( controllerMesh);
+        scene.add(controller);
+        controllers.push(controller);
 
     }
-
-    return networkCode
-
+    
 }
 
-var networkCode = getNetworkCode();
-
-
-
-function initSky(turbidity = 10,
-        rayleigh = 2,
-        mieCoefficient = 0.005,
-        mieDirectionalG = 0.8,
-        luminance = 1,
-        inclination = 0.49, // elevation / inclination
-        azimuth = 0.25, // Facing front,
-        colorR = 0, // Facing front,
-        colorG = 0, // Facing front,
-        colorB = 0, // Facing front,
-        sun =  ! true) {
-
-    // Add Sky
-    sky = new Sky();
-    sky.scale.setScalar( 450000 );
-    scene.add( sky );
-
-    // Add Sun Helper
-    sunSphere = new THREE.Mesh(
-        new THREE.SphereBufferGeometry( 20000, 16, 8 ),
-        new THREE.MeshBasicMaterial( { color: 0xffffff } )
-    );
-    sunSphere.position.y = - 700000;
-    sunSphere.visible = false;
-    scene.add( sunSphere );
-
-    /// GUI
-
-
-
-    var distance = 400000;
-
-    var uniforms = sky.material.uniforms;
-    uniforms[ "turbidity" ].value = turbidity;
-    uniforms[ "rayleigh" ].value = rayleigh;
-    uniforms[ "mieCoefficient" ].value = mieCoefficient;
-    uniforms[ "mieDirectionalG" ].value = mieDirectionalG;
-    uniforms[ "luminance" ].value = luminance;
-    uniforms[ "colorR" ].value = colorR;
-    uniforms[ "colorG" ].value = colorG;
-    uniforms[ "colorB" ].value = colorB;
-
-    var theta = Math.PI * ( inclination - 0.5 );
-    var phi = 2 * Math.PI * ( azimuth - 0.5 );
-
-    sunSphere.position.x = distance * Math.cos( phi );
-    sunSphere.position.y = distance * Math.sin( phi ) * Math.sin( theta );
-    sunSphere.position.z = distance * Math.sin( phi ) * Math.cos( theta );
-
-    sunSphere.visible = sun;
-
-    uniforms[ "sunPosition" ].value.copy( sunSphere.position );
-
-
-
-
-
-
-
-}
-
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-var controls
 function setup()
 {
     scene = new THREE.Scene();
@@ -182,47 +99,23 @@ function setup()
 
 
     document.body.appendChild(VRButton.createButton(renderer));
-    scene.add(plane);
 
-
-    var turbidity = 10;
-    var rayleigh = 2;
-    var mieCoefficient = 0.005;
-    var mieDirectionalG = 0.8;
-    var luminance = 1;
-    var inclination = 0.49; // elevation / inclination
-    var azimuth = 0.25; // Facing front;
-    var colorR = 5; // Facing front;
-    var colorG = 0.098; // Facing front;
-    var colorB = 4.81; // Facing front;
-    var sun =  ! true;
-
-    initSky(turbidity,rayleigh,
-        mieCoefficient,
-        mieDirectionalG ,
-        luminance,
-        inclination , // elevation / inclination
-        azimuth , // Facing front,
-        colorR , // Facing front,
-        colorG , // Facing front,
-        colorB, // Facing front,
-        sun )
-
-    controls = new THREE.PointerLockControls( camera, document.body );
-    controls.lock = true;
-    for (let i = 0; i < 2; ++i) {
-        const controller = renderer.xr.getController(i);
-        var controllerMesh = new THREE.Mesh( geometry, material );
-        controllerMesh.scale.set(.01,.1,.1);
-        controller.add( controllerMesh);
-        scene.add(controller);
-        controllers.push(controller);
-
-    }
     setUpWorld()
 }
 
 
+
+
+
+/* Network */
+
+function network()
+{
+    connect();
+    ws.onmessage = function (event) {receiver(event.data);}
+    ws.onopen =  function(event){sender(); }
+    
+}
 
 function connect()
 {
@@ -234,8 +127,6 @@ function connect()
 
 
 
-var tOld = new Array(12).fill(0);
-var tNew = new Array(12).fill(0);
 
 function receiver(msg)
 {   
@@ -255,10 +146,7 @@ function receiver(msg)
 
            
             var objectId = data.getInt32(1,true);
-            tNew[objectId] = t1
-            //console.log("code : "+code.toString()+" id : "+objectId.toString()+" t : "+(1000.0/(tNew[objectId]-tOld[objectId])).toString());
-            tOld[objectId] = tNew[objectId];
-            
+
             var idx = listPlayers.findIndex(x => x.id == objectId);
             if (idx>-1)
             {
@@ -287,24 +175,28 @@ function receiver(msg)
             }
             break;
         case networkCode['world']:
-        console.log(data.byteLength);
+            
             id = data.getInt32(1,true);
-            camera.position.set(data.getFloat32(5,true),
-                                data.getFloat32(9,true),
-                                data.getFloat32(13,true));
-            camera.quaternion.set(data.getFloat32(17,true),
-                                    data.getFloat32(21,true),
-                                    data.getFloat32(25,true),
-                                    data.getFloat32(29,true));
-            console.log(camera.rotation);
-            console.log(camera.position);
-            var Nplayers = (data.byteLength-33)/5.0;
+            world = data.getInt32(5,true);
+            var Nplayers = data.getInt32(9,true);
+            var Nobjects = data.getInt32(13,true);
+
+            console.log("world : "+world.toString()+" id : "+id.toString()+" Nplayers : "+Nplayers.toString()+" Nobjects : "+Nobjects.toString());
+            camera.position.set(data.getFloat32(17,true),
+                                data.getFloat32(21,true),
+                                data.getFloat32(25,true));
+            camera.quaternion.set(data.getFloat32(29,true),
+                                    data.getFloat32(33,true),
+                                    data.getFloat32(37,true),
+                                    data.getFloat32(41,true));
+
+            
 
             for (let j = 0; j < Nplayers; ++j) 
             {
 
-                var contrlers = data.getUint8(28+5*(2+j)-1,true);
-                var playerInfo = {"id" : data.getInt32(28+5*(1+j),true),
+                var contrlers = data.getUint8(45+5*(1+j)-1,true);
+                var playerInfo = {"id" : data.getInt32(45+5*(j),true),
                 "position" : new THREE.Vector3(),
                 "rotation" : new THREE.Quaternion(),
                 "mesh" : new THREE.Mesh(geometry, material),
@@ -324,6 +216,37 @@ function receiver(msg)
                 listPlayers[listPlayers.length-1].mesh.scale.set(.3,.3,.3);
                 
                 scene.add(listPlayers[listPlayers.length-1].mesh);
+            }
+            for (let j = 0; j < Nobjects; ++j) 
+            {
+
+                var objectInfo = {"id" : data.getInt32(45+5*Nplayers+j*48,true),
+                            "type" : data.getInt32(49+5*Nplayers+j*48,true),
+                            "position" : new THREE.Vector3(data.getFloat32(53+5*Nplayers+j*48,true),
+                                            data.getFloat32(57+5*Nplayers+j*48,true),
+                                            data.getFloat32(61+5*Nplayers+j*48,true)),
+                            "rotation" : new THREE.Quaternion(data.getFloat32(65+5*Nplayers+j*48,true),
+                                            data.getFloat32(69+5*Nplayers+j*48,true),
+                                            data.getFloat32(73+5*Nplayers+j*48,true),
+                                            data.getFloat32(77+5*Nplayers+j*48,true) ),
+                            "scale" : new THREE.Vector3(data.getFloat32(81+5*Nplayers+j*48,true),
+                                            data.getFloat32(85+5*Nplayers+j*48,true),
+                                            data.getFloat32(89+5*Nplayers+j*48,true)),
+                            "mesh" : new THREE.Mesh(geometry, material)};
+            objectInfo.mesh.position.set(objectInfo.position.x,
+                                        objectInfo.position.y,
+                                        objectInfo.position.z)
+            objectInfo.mesh.quaternion.set(objectInfo.rotation._x,
+                                        objectInfo.rotation._y,
+                                        objectInfo.rotation._z,
+                                        objectInfo.rotation._w)
+            objectInfo.mesh.scale.set(objectInfo.scale.x,
+                                        objectInfo.scale.y,
+                                        objectInfo.scale.z)
+
+            scene.add(objectInfo.mesh);
+
+            listObjects.push(objectInfo);
             }
             break;
         case networkCode['newPlayer']:
@@ -361,12 +284,58 @@ function receiver(msg)
                 {
                     scene.remove(listPlayers[idx]["controller"+k.toString()+"Mesh"]);
                 }
-                listPlayers.splice(idx);
+                listPlayers.splice(idx,1);
 
 
             }
+            break;
+        case networkCode['newObject']:
+            console.log(data.byteLength);
+            var objectInfo = {"id" : data.getInt32(1,true),
+            "type" : data.getInt32(5,true),
+            "position" : new THREE.Vector3(data.getFloat32(9,true),
+                                            data.getFloat32(13,true),
+                                            data.getFloat32(17,true)),
+            "rotation" : new THREE.Quaternion(data.getFloat32(21,true),
+                                            data.getFloat32(25,true),
+                                            data.getFloat32(29,true),
+                                            data.getFloat32(33,true) ),
+            "scale" : new THREE.Vector3(data.getFloat32(37,true),
+                                            data.getFloat32(41,true),
+                                            data.getFloat32(45,true)),
+            "mesh" : new THREE.Mesh(geometry, material)};
+
+            objectInfo.mesh.position.set(objectInfo.position.x,
+                                        objectInfo.position.y,
+                                        objectInfo.position.z)
+            objectInfo.mesh.quaternion.set(objectInfo.rotation._x,
+                                        objectInfo.rotation._y,
+                                        objectInfo.rotation._z,
+                                        objectInfo.rotation._w)
+            objectInfo.mesh.scale.set(objectInfo.scale.x,
+                                        objectInfo.scale.y,
+                                        objectInfo.scale.z)
+            scene.add(objectInfo.mesh);
+
+            listObjects.push(objectInfo);
 
 
+            break;
+        case networkCode["removeObject"]:
+            
+            var remObject = data.getInt32(1,true);
+            var idx = listObjects.findIndex(x => x.id == remObject);
+            if (idx>-1)
+            {
+
+                scene.remove(listObjects[idx].mesh);
+
+                listObjects.splice(idx,1);
+
+
+            }
+            
+            break;
 
     }
 
@@ -415,113 +384,25 @@ async function sender()
         
         ws.send(msgView.buffer);
         var t2 = new Date().getTime();
-        await sleep(20);
+        await sleep(1000.0/updateFrequency);
         t1=t2;
     }
 }
 
 
 
-function setUpWorld()
-{
-    console.log("Setting up World")
-    var light = new THREE.PointLight(0xab0000, 1, 1000);
-    light.position.set(50, 50, 50);
-    var light2 = new THREE.PointLight(0x00ff, 1, 1000);
-    light2.position.set(0, 50, 50);
-    scene.add(light2);
-    scene.add(light);
-}
-
-
-var xSpeed = 0.1;
-var ySpeed = 0.1;
-
-document.body.addEventListener('keydown', keyPressed);
-document.body.addEventListener('keyup', keyReleased);
-var keyMap = {};
-function keyPressed(e)
-{
-
-    keyMap[e.key] = 'keydown';
-    
-    e.preventDefault();
-}
-
-function keyReleased(e)
-{
-    
-  delete keyMap[e.key];
-  e.preventDefault();
-
-}
-
-function network()
-{
-    connect();
-    ws.onmessage = function (event) {receiver(event.data);}
-    ws.onopen =  function(event){sender(); }
-    
-}
-
-
-
-
-
-
-
-
-var speed = .05;
-function inputPlayer()
-{
-
-
-    for (var key in keyMap)
-    {
-        switch(key)
-        {
-            case "ArrowUp":
-            camera.translateY(speed);
-            break;
-            case "ArrowDown":
-            camera.translateY(-speed);
-            break;
-            case "ArrowLeft":
-            camera.rotateY(speed);
-            break;
-            case "ArrowRight":
-            camera.rotateY(-speed);
-            break;
-            case "z":
-            case "w":
-            camera.translateZ(-speed);
-            break;
-            case "s":
-            camera.translateZ(+speed);
-            break;
-            case "a":
-            case "q":
-            camera.translateX(-speed);
-            break;
-            case "d":
-            camera.translateX(+speed);
-            break;
-        }
-    }
-
-}
-
-//setup();
+/* rendering */
 
 function animate() {
     renderer.setAnimationLoop(render);    
 }
+
 function render() {
     var t = new Date().getTime();
 
 
 
-    inputPlayer()
+    inputs.inputPlayer(camera);
 
     for (var player of listPlayers)
     {
@@ -553,6 +434,8 @@ function render() {
     frame++;
 }
 
+
+/*Program Start*/
 setup();
 network();
 animate();
