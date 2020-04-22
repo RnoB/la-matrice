@@ -68,6 +68,7 @@ function setUpWorld()
     //light2.position.set(0, 50, 50);
     //light2.castShadow=true;
     //scene.add(light2);
+    light.shadow.bias = 0.0001
         var ambientLight = new THREE.AmbientLight( 0xaa00ff, 0.1 );
     scene.add( ambientLight );
     scene.add(light);
