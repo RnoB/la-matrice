@@ -282,6 +282,8 @@ function receiver(msg)
         case networkCode["removeObject"]:
             console.log(code);
             var remObject = data.getInt32(1,true);
+            console.log(remObject);
+            console.log(listObjects);
             var idx = listObjects.findIndex(x => x.id == remObject);
             console.log(idx);
             if (idx>-1)
