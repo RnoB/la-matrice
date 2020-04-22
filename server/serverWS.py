@@ -252,7 +252,8 @@ def startSimulation():
             server.removeObject(server.objectsIds[0])
         server.addObject(2000,position = [k/3.0,1.5,-2],scale= [.1,10,.1])
         k+=1
-        k=k%10
+        if k>10:
+            k=-10
 
 
 def main():
