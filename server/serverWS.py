@@ -54,10 +54,11 @@ class Server:
                     print(traceback.format_exc())
         for objectId  in self.objectsRem:
             dataWorld = struct.pack('B', networkCode['removeObject'])
-            dataWorld += struct.pack('<i',objecte['id'])
+            dataWorld += struct.pack('<i',objectId)
             idx = self.objectsIds.index(objectId)
             del self.objectsList[idx]
             del self.objectsIds[idx]
+            self.objectsRem.remove(objectId)
             for player in self.playersSocket:
                 try:
                     await player.send(dataWorld)
