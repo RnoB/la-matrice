@@ -181,7 +181,7 @@ function receiver(msg)
             var Nplayers = data.getInt32(9,true);
             var Nobjects = data.getInt32(13,true);
 
-            print("world : "+world.toString()+" id : "+id.toString()+" Nplayers : "+Nplayers.toString()+" Nobjects : "+Nobjects.toString());
+            console.log("world : "+world.toString()+" id : "+id.toString()+" Nplayers : "+Nplayers.toString()+" Nobjects : "+Nobjects.toString());
             camera.position.set(data.getFloat32(17,true),
                                 data.getFloat32(21,true),
                                 data.getFloat32(25,true));
