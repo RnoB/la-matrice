@@ -283,15 +283,12 @@ function receiver(msg)
             console.log(code);
             var remObject = data.getInt32(1,true);
             var idx = listObjects.findIndex(x => x.id == remObject);
-
+            console.log(idx);
             if (idx>-1)
             {
 
                 scene.remove(listObjects[idx].mesh);
-                for (let k = 0; k < listObjects[idx].controllers; ++k) 
-                {
-                    scene.remove(listObjects[idx]["controller"+k.toString()+"Mesh"]);
-                }
+
                 listObjects.splice(idx);
 
 
