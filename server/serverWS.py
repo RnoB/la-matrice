@@ -53,7 +53,7 @@ class Server:
                 except Exception as e:
                     print(traceback.format_exc())
         for objectId  in self.objectsRem:
-            print(self.objectIds)
+            print(self.objectsIds)
             idx = self.objectsIds.index(objectId)
             del self.objectsList[idx]
             del self.objectsIds[idx]
