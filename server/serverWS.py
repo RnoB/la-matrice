@@ -59,15 +59,21 @@ class Server:
             dataWorld += struct.pack('<i',objectId)
             print("List : "+str(self.objectsIds))
             print(" object : "+str(objectId))
-            idx = self.objectsIds.index(objectId)
-            del self.objectsList[idx]
-            del self.objectsIds[idx]
-            self.objectsRem.remove(objectId)
-            for player in self.playersSocket:
+            try:
+                idx = self.objectsIds.index(objectId)
+                del self.objectsList[idx]
+                del self.objectsIds[idx]
+                self.objectsRem.remove(objectId)
+                for player in self.playersSocket:
+                    try:
+                        await player.send(dataWorld)
+                    except Exception as e:
+                        print(traceback.format_exc())
+            except:
                 try:
-                    await player.send(dataWorld)
-                except Exception as e:
-                    print(traceback.format_exc())
+                    self.objectsRem.remove(objectId)
+                except:
+                    pass
 
 
 
