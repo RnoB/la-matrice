@@ -46,7 +46,7 @@ class Server:
                                     rotation0[0],rotation0[1],rotation0[2],rotation0[3])
             self.objectsList.append(objecte)
             self.objectsNew.remove(objecte)
-            self.objectIds.append(objecte['id'])
+            self.objectsIds.append(objecte['id'])
             for player in self.playersSocket:
                 try:
                     await player.send(dataWorld)
