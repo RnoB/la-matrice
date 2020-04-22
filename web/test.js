@@ -240,6 +240,9 @@ function receiver(msg)
                                         objectInfo.rotation._y,
                                         objectInfo.rotation._z,
                                         objectInfo.rotation._w)
+            objectInfo.mesh.scale.set(objectInfo.scale.x,
+                                        objectInfo.scale.y,
+                                        objectInfo.scale.z)
             objectInfo.mesh.scale.set(.2,.2,.2);
             scene.add(objectInfo.mesh);
 
