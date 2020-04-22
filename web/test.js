@@ -74,7 +74,7 @@ function setUpWorld()
         const controller = renderer.xr.getController(i);
         var controllerMesh = new THREE.Mesh( geometry, material );
         controllerMesh.scale.set(.01,.1,.1);
-        controllerMeshlistPlayers[listPlayers.length-1].mesh;
+        controllerMesh.castShadow = true;
         controller.add( controllerMesh);
         scene.add(controller);
         controllers.push(controller);
