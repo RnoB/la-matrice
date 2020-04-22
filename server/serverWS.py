@@ -53,13 +53,14 @@ class Server:
                 except Exception as e:
                     print(traceback.format_exc())
         for objectId  in self.objectsRem:
-            print(self.objectsIds)
+            dataWorld = struct.pack('B', networkCode['removeObject'])
+            dataWorld += struct.pack('<i',objecte['id'])
             idx = self.objectsIds.index(objectId)
             del self.objectsList[idx]
             del self.objectsIds[idx]
             for player in self.playersSocket:
                 try:
-                    await player.send(message)
+                    await player.send(dataWorld)
                 except Exception as e:
                     print(traceback.format_exc())
 
