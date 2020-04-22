@@ -69,15 +69,15 @@ function setUpWorld()
     //light2.castShadow=true;
     //scene.add(light2);
     light.shadow.bias = 0.0001
-                light.shadow.camera.left = 1000;
-            light.shadow.camera.right = 1000;
-            light.shadow.camera.top = 1000;
-            light.shadow.camera.bottom = 1000;
-        var ambientLight = new THREE.AmbientLight( 0xaa00ff, 0.1 );
+    //light.shadow.camera.left = 1000;
+    //light.shadow.camera.right = 1000;
+    //light.shadow.camera.top = 1000;
+    //light.shadow.camera.bottom = 1000;
+    var ambientLight = new THREE.AmbientLight( 0xaa00ff, 0.1 );
     scene.add( ambientLight );
-    scene.add(light);
-      let helper = new THREE.CameraHelper ( light.shadow.camera );
-  scene.add( helper );
+    scene.add(light);  
+    let helper = new THREE.CameraHelper ( light.shadow.camera );
+    scene.add( helper );
     sky = new InitSky();
     sky.addToScene(scene);    
     floor = new InitFloor();
