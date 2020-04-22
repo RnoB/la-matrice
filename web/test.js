@@ -69,11 +69,12 @@ function setUpWorld()
     sky.addToScene(scene);    
     floor = new InitFloor();
     floor.addToScene(scene);
-
+    floot.receiveShadow = true;
     for (let i = 0; i < 2; ++i) {
         const controller = renderer.xr.getController(i);
         var controllerMesh = new THREE.Mesh( geometry, material );
         controllerMesh.scale.set(.01,.1,.1);
+        controllerMeshlistPlayers[listPlayers.length-1].mesh;
         controller.add( controllerMesh);
         scene.add(controller);
         controllers.push(controller);
@@ -95,6 +96,8 @@ function setup()
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.xr.enabled = true;
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.shadowMapEnabled = true;
+
     document.body.appendChild(renderer.domElement);
 
 
@@ -209,12 +212,13 @@ function receiver(msg)
                     playerInfo["controller"+k.toString()+"Position"] = new THREE.Vector3();
                     playerInfo["controller"+k.toString()+"Rotation"] = new THREE.Quaternion();
                     playerInfo["controller"+k.toString()+"Mesh"] = controllerMesh;
+                    controllerMesh.castShadow = true;
                     scene.add(controllerMesh);
                 }
                 
                 listPlayers.push(playerInfo);
                 listPlayers[listPlayers.length-1].mesh.scale.set(.3,.3,.3);
-                
+                listPlayers[listPlayers.length-1].mesh.castShadow = true;
                 scene.add(listPlayers[listPlayers.length-1].mesh);
             }
             for (let j = 0; j < Nobjects; ++j) 
@@ -243,7 +247,7 @@ function receiver(msg)
             objectInfo.mesh.scale.set(objectInfo.scale.x,
                                         objectInfo.scale.y,
                                         objectInfo.scale.z)
-
+            objectInfo.mesh.castShadow = true;
             scene.add(objectInfo.mesh);
 
             listObjects.push(objectInfo);
@@ -264,11 +268,13 @@ function receiver(msg)
                 playerInfo["controller"+k.toString()+"Position"] = new THREE.Vector3();
                 playerInfo["controller"+k.toString()+"Rotation"] = new THREE.Quaternion();
                 playerInfo["controller"+k.toString()+"Mesh"] = controllerMesh;
+                controllerMesh.castShadow = true;
                 scene.add(controllerMesh);
             }
 
             listPlayers.push(playerInfo);
             listPlayers[listPlayers.length-1].mesh.scale.set(.3,.3,.3);
+            listPlayers[listPlayers.length-1].mesh.castShadow = true;
             scene.add(listPlayers[listPlayers.length-1].mesh);
 
             break;
@@ -315,6 +321,7 @@ function receiver(msg)
             objectInfo.mesh.scale.set(objectInfo.scale.x,
                                         objectInfo.scale.y,
                                         objectInfo.scale.z)
+            objectInfo.meshlistPlayers[listPlayers.length-1].mesh
             scene.add(objectInfo.mesh);
 
             listObjects.push(objectInfo);

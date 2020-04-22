@@ -95,6 +95,8 @@ function setup()
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.xr.enabled = true;
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.shadowMapEnabled = true;
+
     document.body.appendChild(renderer.domElement);
 
 
