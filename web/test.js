@@ -175,7 +175,7 @@ function receiver(msg)
             }
             break;
         case networkCode['world']:
-            console.log(data.byteLength);
+            
             id = data.getInt32(1,true);
             world = data.getInt32(5,true);
             var Nplayers = data.getInt32(9,true);
@@ -283,7 +283,7 @@ function receiver(msg)
 
             }
         case networkCode['newObject']:
-            
+            console.log(data.byteLength);
             var objectInfo = {"id" : data.getInt32(1,true),
             "type" : data.getInt32(5,true),
             "position" : new THREE.Vector3(data.getFloat32(9,true),
