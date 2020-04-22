@@ -24,6 +24,8 @@ objectsType = tools.getObjectsType()
 
 class Server:
 
+    objectsIds = []
+
     def addObject(self,objectType,position0 = [0,0,0],rotation0 = [0,0,0,1]):
         self.playerId+=1
 
@@ -212,7 +214,7 @@ class Server:
 
         self.objectsNew = []
         self.objectsRem = []
-        self.objectsIds = []
+
 
         self.t0 = time.time()
         self.ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
