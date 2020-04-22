@@ -62,6 +62,7 @@ function setUpWorld()
     light.castShadow = true;
     var light2 = new THREE.PointLight(0x00ff, 1, 1000);
     light2.position.set(0, 50, 50);
+    light2.castShadow=true;
     scene.add(light2);
     scene.add(light);
 
