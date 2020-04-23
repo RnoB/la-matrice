@@ -47,7 +47,7 @@ var controllers = [];
 
 var inputs = new InputKey();
 
-var updateFrequency = 10;
+var updateFrequency = 20;
 
 var world = 0;
 
