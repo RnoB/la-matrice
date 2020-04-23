@@ -204,7 +204,7 @@ class Server:
 
 
                         await self.send(websocket,messageSend)
-                        
+                        print("player id    : "+str(idPlayer))
                         print('process Time : ' + str(1/(time.time()-t0)))
                     else:
                         self.packetDrop +=1
