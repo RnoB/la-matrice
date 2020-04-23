@@ -189,7 +189,8 @@ class Server:
                 code = message[0]
 
                 try:
-                    if code == networkCode['playerPosition'] and len(websocket.messages) == 0 and idPlayer == self.playerIds[self.nextPlayer] and self.playerNumber>0:
+                    if code == networkCode['playerPosition'] and len(websocket.messages) == 0 and \
+                    self.playerNumber>0:# and idPlayer == self.playerIds[self.nextPlayer]:
                         self.nextPlayer = ((self.nextPlayer+1)%self.playerNumber)
                         print('sending Time : ' + str(1/(time.time()-tSend)))
                         tSend = time.time()
