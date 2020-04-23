@@ -190,6 +190,7 @@ class Server:
 
                 try:
                     if code == networkCode['playerPosition'] and len(websocket.messages) == 0 and idPlayer == self.playerIds[self.nextPlayer] and self.playerNumber>0:
+                        t0 = time.time()
                         idx = self.playerIds.index(idPlayer)
                         player = self.playersList[idx]
                         player = tools.readPosition(message,player)
@@ -200,11 +201,14 @@ class Server:
 
                         await self.send(websocket,messageSend)
                         self.nextPlayer = ((self.nextPlayer+1)%self.playerNumber)
+                        print('process Time : ' + str(time.time()-t0))
+                        print('sending Time : ' + str(time.time()-tSend))
                         tSend = time.time()
+
                 except Exception as e:
                     print(traceback.format_exc())
                     self.nextPlayer = ((self.nextPlayer+1)%self.playerNumber)
-                if time.time()-tSend>0.01:
+                if time.time()-tSend>0.05:
                     self.nextPlayer = ((self.nextPlayer+1)%self.playerNumber)
                     
         finally:
