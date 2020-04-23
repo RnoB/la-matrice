@@ -201,8 +201,8 @@ class Server:
 
                         await self.send(websocket,messageSend)
                         self.nextPlayer = ((self.nextPlayer+1)%self.playerNumber)
-                        print('process Time : ' + str(time.time()-t0))
-                        print('sending Time : ' + str(time.time()-tSend))
+                        print('process Time : ' + str(1/(time.time()-t0)))
+                        print('sending Time : ' + str(1/(time.time()-tSend)))
                         tSend = time.time()
 
                 except Exception as e:
