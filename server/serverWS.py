@@ -181,7 +181,7 @@ class Server:
         
         print("--- New Player enters !! ---")
         idPlayer = await self.register(websocket)
-        tSend=time.time()
+        self.tSend=time.time()
 
         try:
             async for message in websocket:
@@ -192,8 +192,8 @@ class Server:
                     if code == networkCode['playerPosition'] and len(websocket.messages) == 0 and \
                     self.playerNumber>0:# and idPlayer == self.playerIds[self.nextPlayer]:
                         self.nextPlayer = ((self.nextPlayer+1)%self.playerNumber)
-                        print('sending Time : ' + str(1/(time.time()-tSend)))
-                        tSend = time.time()
+                        print('sending Time : ' + str(1/(time.time()-self.tSend)))
+                        self.tSend = time.time()
                         t0 = time.time()
                         idx = self.playerIds.index(idPlayer)
                         player = self.playersList[idx]
@@ -256,6 +256,7 @@ class Server:
         self.lockObject = False
 
         self.packetDrop = 0
+        self.tSend = 0
 
 
 
