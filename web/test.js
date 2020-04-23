@@ -435,7 +435,7 @@ function render() {
             player.mesh.quaternion.set(player.rotation._x,player.rotation._y,player.rotation._z,player.rotation._w);
             for (let k = 0; k < player.controllers; ++k) 
             {
-
+                /*
                 player["controller"+k.toString()+"Mesh"].position.set(player["controller"+k.toString()+"Position"].x,
                                                                     player["controller"+k.toString()+"Position"].y,
                                                                     player["controller"+k.toString()+"Position"].z,);
@@ -443,7 +443,13 @@ function render() {
                                                                     player["controller"+k.toString()+"Rotation"]._y,
                                                                     player["controller"+k.toString()+"Rotation"]._z,
                                                                     player["controller"+k.toString()+"Rotation"]._w);
-
+                */
+                player["controller"+k.toString()+"Mesh"].position.lerp(player["controller"+k.toString()+"Position"],0.5);
+                player["controller"+k.toString()+"Mesh"].quaternion.set(player["controller"+k.toString()+"Rotation"]._x,
+                                                                    player["controller"+k.toString()+"Rotation"]._y,
+                                                                    player["controller"+k.toString()+"Rotation"]._z,
+                                                                    player["controller"+k.toString()+"Rotation"]._w);
+                
             }
             
             

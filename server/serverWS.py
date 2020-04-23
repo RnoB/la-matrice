@@ -192,7 +192,7 @@ class Server:
                     if code == networkCode['playerPosition'] and len(websocket.messages) == 0 and \
                     self.playerNumber>0:# and idPlayer == self.playerIds[self.nextPlayer]:
                         #self.nextPlayer = ((self.nextPlayer+1)%self.playerNumber)
-                        print('sending Time : ' + str(1/(time.time()-self.tSend)))
+                        #print('sending Time : ' + str(1/(time.time()-self.tSend)))
                         self.tSend = time.time()
                         t0 = time.time()
                         idx = self.playerIds.index(idPlayer)
@@ -204,8 +204,8 @@ class Server:
 
 
                         await self.send(websocket,messageSend)
-                        print("player id    : "+str(idPlayer))
-                        print('process Time : ' + str(1/(time.time()-t0)))
+                        #print("player id    : "+str(idPlayer))
+                        #print('process Time : ' + str(1/(time.time()-t0)))
                     else:
                         self.packetDrop +=1
                         print("packetDrop : "+ str(self.packetDrop))
