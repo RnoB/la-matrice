@@ -204,7 +204,7 @@ class Server:
                 except Exception as e:
                     print(traceback.format_exc())
                     self.nextPlayer = ((self.nextPlayer+1)%self.playerNumber)
-                if time.time()-tSend>0.05:
+                if time.time()-tSend>0.01:
                     self.nextPlayer = ((self.nextPlayer+1)%self.playerNumber)
                     
         finally:
