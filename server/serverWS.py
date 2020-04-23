@@ -191,7 +191,7 @@ class Server:
                 try:
                     if code == networkCode['playerPosition'] and len(websocket.messages) == 0 and \
                     self.playerNumber>0:# and idPlayer == self.playerIds[self.nextPlayer]:
-                        self.nextPlayer = ((self.nextPlayer+1)%self.playerNumber)
+                        #self.nextPlayer = ((self.nextPlayer+1)%self.playerNumber)
                         print('sending Time : ' + str(1/(time.time()-self.tSend)))
                         self.tSend = time.time()
                         t0 = time.time()
@@ -213,9 +213,7 @@ class Server:
 
                 except Exception as e:
                     print(traceback.format_exc())
-                    self.nextPlayer = ((self.nextPlayer+1)%self.playerNumber)
-                if time.time()-tSend>0.05:
-                    self.nextPlayer = ((self.nextPlayer+1)%self.playerNumber)
+
                     
         finally:
             await self.unregister(idPlayer,websocket)
