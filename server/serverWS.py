@@ -207,7 +207,7 @@ class Server:
                         print('process Time : ' + str(1/(time.time()-t0)))
                     else:
                         self.packetDrop +=1
-                        print("packetDrop : "+print(packetDrop))
+                        print("packetDrop : "+print(self.packetDrop))
                         
 
                 except Exception as e:
