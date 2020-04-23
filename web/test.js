@@ -431,7 +431,7 @@ function render() {
         if (player.id !== id)
         {
             //console.log(player.mesh.position);
-            player.mesh.position.set(player.position.x,player.position.y,player.position.z);
+            player.mesh.position.lerp(player.position,.5);
             player.mesh.quaternion.set(player.rotation._x,player.rotation._y,player.rotation._z,player.rotation._w);
             for (let k = 0; k < player.controllers; ++k) 
             {
