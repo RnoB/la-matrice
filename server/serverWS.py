@@ -205,6 +205,9 @@ class Server:
                         await self.send(websocket,messageSend)
                         
                         print('process Time : ' + str(1/(time.time()-t0)))
+                    else:
+                        self.packetDrop +=1
+                        print("packetDrop : "+print(packetDrop))
                         
 
                 except Exception as e:
@@ -250,6 +253,8 @@ class Server:
         self.port = port
 
         self.lockObject = False
+
+        self.packetDrop = 0
 
 
 
