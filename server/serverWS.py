@@ -37,6 +37,7 @@ class Server:
 
 
     async def checkObject(self):
+        self.lockObject = True
         for objecte in self.objectsNew:
             dataWorld = struct.pack('B', networkCode['newObject'])
             dataWorld += struct.pack('<ii',objecte['id'],objecte['type'])
@@ -74,7 +75,7 @@ class Server:
                     self.objectsRem.remove(objectId)
                 except Exception as e:
                     print(traceback.format_exc())
-
+        self.lockObject = False
 
 
 
@@ -87,7 +88,8 @@ class Server:
                     await player.send(message)
                 except Exception as e:
                     print(traceback.format_exc())
-        await self.checkObject()
+        if not self.lockObject:
+            await self.checkObject()
 
 
     async def register(self,websocket):
@@ -240,6 +242,8 @@ class Server:
         self.ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
         self.ssl_context.load_cert_chain(cert,key)
         self.port = port
+
+        self.lockObject = False
 
 
 
