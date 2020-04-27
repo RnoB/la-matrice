@@ -29,11 +29,19 @@ class Server:
 
         objectDict = {"id" : self.playerId,"type" : objectType,"position" : position,"rotation" : rotation,"scale" : scale}
         self.objectsNew.append(objectDict)
+        return objectDict['id']
 
 
     def removeObject(self,objectId):
         self.objectsRem.append(objectId)
         
+
+    def MoveObject(self,objectId,position = [0,0,0],rotation = [0,0,0,1],scale= [1,1,1]):
+        self.playerId+=1
+
+        objectDict = {"id" : self.playerId,"position" : position,"rotation" : rotation,"scale" : scale,"controllers" : 0}
+        self.objectsMove.append(objectDict)
+
 
 
     async def checkObject(self):
@@ -73,6 +81,13 @@ class Server:
                 print(traceback.format_exc())
                 try:
                     self.objectsRem.remove(objectId)
+                except Exception as e:
+                    print(traceback.format_exc())
+        for objectPosition in objectsMove:
+            messageSend = tools.messagePosition(networkCode["objectPosition"],objectPosition)
+            for player in self.playersSocket:
+                try:
+                    await player.send(messageSend)
                 except Exception as e:
                     print(traceback.format_exc())
         self.lockObject = False
@@ -245,6 +260,7 @@ class Server:
         self.objectsNew = []
         self.objectsRem = []
         self.objectsIds = []
+        self.objectsMove = []
 
         self.t0 = time.time()
         self.ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
