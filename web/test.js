@@ -164,7 +164,7 @@ function receiver(msg)
             var objectId = data.getInt32(1,true);
 
             var idx = listObjects.findIndex(x => x.id == objectId);
-            console.log(idx);
+            console.log(objectId);
             if (idx>-1)
             {
 
