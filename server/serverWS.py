@@ -46,7 +46,7 @@ class Server:
 
     async def checkObject(self):
         self.lockObject = True
-        print(objectsMove)
+        print(self.objectsMove)
         for objecte in self.objectsNew:
             dataWorld = struct.pack('B', networkCode['newObject'])
             dataWorld += struct.pack('<ii',objecte['id'],objecte['type'])
