@@ -36,7 +36,7 @@ class Server:
         self.objectsRem.append(objectId)
         
 
-    def MoveObject(self,objectId,position = [0,0,0],rotation = [0,0,0,1],scale= [1,1,1]):
+    def moveObject(self,objectId,position = [0,0,0],rotation = [0,0,0,1],scale= [1,1,1]):
         self.playerId+=1
 
         objectDict = {"id" : self.playerId,"position" : position,"rotation" : rotation,"scale" : scale,"controllers" : 0}
@@ -83,7 +83,7 @@ class Server:
                     self.objectsRem.remove(objectId)
                 except Exception as e:
                     print(traceback.format_exc())
-        print('yes')
+
         for objectPosition in self.objectsMove:
             messageSend = tools.messagePosition(networkCode["objectPosition"],objectPosition)
             for player in self.playersSocket:
@@ -284,16 +284,18 @@ def startServer(port,cert,key):
 
 def startSimulation():
     k = 0
+    objectId = server.addObject(2000,position = [k/3.0,1.5,-1],scale= [.5,1,.6])
+        
     while True:
-        time.sleep(1)
+        time.sleep(.1)
+        server.moveObject(objectId,[np.cos(k),0,np.sin(k)])
 
-        if len(server.objectsList)>10:
+        #if len(server.objectsList)>10:
 
-            server.removeObject(server.objectsIds[0])
-        server.addObject(2000,position = [k/3.0,1.5,-1],scale= [.1,10,.1])
-        k+=1
-        if k>10:
-            k=-10
+        #    server.removeObject(server.objectsIds[0])
+        k+=.1
+        #if k>10:
+        #    k=-10
 
 
 def main():
