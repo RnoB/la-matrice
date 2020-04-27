@@ -297,9 +297,9 @@ def startSimulation():
     objectId = server.addObject(2000,position = [k/3.0,1.5,-1],scale= [.5,1,.6])
         
     while True:
-        time.sleep(.1)
+        time.sleep(.5)
 
-        server.moveObject(objectId,[np.cos(k),0,np.sin(k)])
+        server.moveObject(objectId,[5*np.cos(k),0,5*np.sin(k)])
 
         #if len(server.objectsList)>10:
 
