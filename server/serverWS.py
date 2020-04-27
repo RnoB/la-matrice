@@ -304,7 +304,7 @@ def startSimulation():
         #if len(server.objectsList)>10:
 
         #    server.removeObject(server.objectsIds[0])
-        k+=.1
+        k+=.01
         #if k>10:
         #    k=-10
 
