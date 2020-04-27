@@ -471,7 +471,8 @@ function render() {
             
             
         }
-            for (var player of objectInfo)
+    }
+    for (var player of objectInfo)
     {
 
         if (player.id !== id)
@@ -479,8 +480,8 @@ function render() {
             //console.log(player.mesh.position);
             player.mesh.position.lerp(player.position,.5);
             player.mesh.quaternion.slerp(player.rotation,.5);
+        }
     }
-    
     
     renderer.render(scene, camera);
     frame++;
