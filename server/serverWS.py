@@ -37,7 +37,7 @@ class Server:
         
 
     def moveObject(self,objectId,position = [0,0,0],rotation = [0,0,0,1],scale= [1,1,1]):
-        self.playerId+=1
+
 
         objectDict = {"id" : self.playerId,"position" : position,"rotation" : rotation,"scale" : scale,"controllers" : 0}
         self.objectsMove.append(objectDict)
