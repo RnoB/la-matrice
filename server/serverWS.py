@@ -46,6 +46,7 @@ class Server:
 
     async def checkObject(self):
         self.lockObject = True
+        print(objectsMove)
         for objecte in self.objectsNew:
             dataWorld = struct.pack('B', networkCode['newObject'])
             dataWorld += struct.pack('<ii',objecte['id'],objecte['type'])
@@ -296,7 +297,7 @@ def startSimulation():
         
     while True:
         time.sleep(.1)
-        print(objectId)
+
         server.moveObject(objectId,[np.cos(k),0,np.sin(k)])
 
         #if len(server.objectsList)>10:
