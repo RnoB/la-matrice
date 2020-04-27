@@ -285,6 +285,12 @@ def startServer(port,cert,key):
 
 def startSimulation():
     k = 0
+    while not running:
+        try:
+            print(server)
+            running=True
+        except:
+            pass
     objectId = server.addObject(2000,position = [k/3.0,1.5,-1],scale= [.5,1,.6])
         
     while True:
