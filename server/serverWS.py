@@ -279,8 +279,9 @@ def startServer(port,cert,key):
     global server
     asyncio.set_event_loop(asyncio.new_event_loop())
     server = Server(port = port,cert = cert,key = key)
-
+    print(server)
     server.start()
+
 
 def startSimulation():
     k = 0
