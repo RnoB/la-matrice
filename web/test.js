@@ -178,7 +178,7 @@ function receiver(msg)
 
  
             }
-            print(listObjects);
+            console.log(listObjects);
             break;
         case networkCode['playerPosition'] :
 
