@@ -279,7 +279,7 @@ def startServer(port,cert,key):
     global server
     asyncio.set_event_loop(asyncio.new_event_loop())
     server = Server(port = port,cert = cert,key = key)
-    print(server)
+
     server.start()
 
 
@@ -296,6 +296,7 @@ def startSimulation():
         
     while True:
         time.sleep(.1)
+        print(objectId)
         server.moveObject(objectId,[np.cos(k),0,np.sin(k)])
 
         #if len(server.objectsList)>10:
