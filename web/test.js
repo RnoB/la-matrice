@@ -476,7 +476,7 @@ function render() {
     }
     for (var obj of listObjects)
     {
-            console.log(obj.position);
+
             obj.mesh.position.lerp(obj.position,.5);
             obj.mesh.quaternion.slerp(obj.rotation,.5);
 
