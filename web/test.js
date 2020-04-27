@@ -178,7 +178,7 @@ function receiver(msg)
 
  
             }
-
+            console.log(listObjects[idx].position);
             break;
         case networkCode['playerPosition'] :
 
