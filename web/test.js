@@ -472,7 +472,7 @@ function render() {
             
         }
     }
-    for (var player of objectInfo)
+    for (var player of listObjects)
     {
 
         if (player.id !== id)
