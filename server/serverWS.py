@@ -87,7 +87,7 @@ class Server:
 
         for objectPosition in self.objectsMove:
             messageSend = tools.messagePosition(networkCode["objectPosition"],objectPosition)
-            print(messageSend)
+
             for player in self.playersSocket:
                 try:
                     await player.send(messageSend)

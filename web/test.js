@@ -159,6 +159,26 @@ function receiver(msg)
 
     
         case networkCode['objectPosition'] :
+
+           
+            var objectId = data.getInt32(1,true);
+
+            var idx = objectInfo.findIndex(x => x.id == objectId);
+            if (idx>-1)
+            {
+
+                objectInfo[idx].position = new THREE.Vector3(data.getFloat32(5,true),
+                                                        data.getFloat32(9,true),
+                                                        data.getFloat32(13,true));
+                objectInfo[idx].rotation = new THREE.Quaternion(data.getFloat32(17,true),
+                                                            data.getFloat32(21,true),
+                                                            data.getFloat32(25,true),
+                                                            data.getFloat32(29,true));
+
+
+ 
+            }
+            break;
         case networkCode['playerPosition'] :
 
            
@@ -451,6 +471,14 @@ function render() {
             
             
         }
+            for (var player of objectInfo)
+    {
+
+        if (player.id !== id)
+        {
+            //console.log(player.mesh.position);
+            player.mesh.position.lerp(player.position,.5);
+            player.mesh.quaternion.slerp(player.rotation,.5);
     }
     
     
