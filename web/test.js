@@ -475,12 +475,10 @@ function render() {
     for (var player of listObjects)
     {
 
-        if (player.id !== id)
-        {
-            //console.log(player.mesh.position);
+            console.log(player.mesh.position);
             player.mesh.position.lerp(player.position,.5);
             player.mesh.quaternion.slerp(player.rotation,.5);
-        }
+
     }
     
     renderer.render(scene, camera);
