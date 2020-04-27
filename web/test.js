@@ -178,7 +178,7 @@ function receiver(msg)
 
  
             }
-            console.log(listObjects);
+
             break;
         case networkCode['playerPosition'] :
 
@@ -473,11 +473,11 @@ function render() {
             
         }
     }
-    for (var player of listObjects)
+    for (var obj of listObjects)
     {
-
-            player.mesh.position.lerp(player.position,.5);
-            player.mesh.quaternion.slerp(player.rotation,.5);
+            console.log(obj.position);
+            obj.mesh.position.lerp(obj.position,.5);
+            obj.mesh.quaternion.slerp(obj.rotation,.5);
 
     }
     
