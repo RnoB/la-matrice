@@ -163,14 +163,14 @@ function receiver(msg)
            
             var objectId = data.getInt32(1,true);
 
-            var idx = objectInfo.findIndex(x => x.id == objectId);
+            var idx = listObjects.findIndex(x => x.id == objectId);
             if (idx>-1)
             {
 
-                objectInfo[idx].position = new THREE.Vector3(data.getFloat32(5,true),
+                listObjects[idx].position = new THREE.Vector3(data.getFloat32(5,true),
                                                         data.getFloat32(9,true),
                                                         data.getFloat32(13,true));
-                objectInfo[idx].rotation = new THREE.Quaternion(data.getFloat32(17,true),
+                listObjects[idx].rotation = new THREE.Quaternion(data.getFloat32(17,true),
                                                             data.getFloat32(21,true),
                                                             data.getFloat32(25,true),
                                                             data.getFloat32(29,true));
