@@ -46,7 +46,7 @@ class Server:
 
     async def checkObject(self):
         self.lockObject = True
-        print(self.objectsMove)
+
         for objecte in self.objectsNew:
             dataWorld = struct.pack('B', networkCode['newObject'])
             dataWorld += struct.pack('<ii',objecte['id'],objecte['type'])
@@ -87,6 +87,7 @@ class Server:
 
         for objectPosition in self.objectsMove:
             messageSend = tools.messagePosition(networkCode["objectPosition"],objectPosition)
+            print(messageSend)
             for player in self.playersSocket:
                 try:
                     await player.send(messageSend)
