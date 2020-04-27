@@ -83,7 +83,7 @@ class Server:
                     self.objectsRem.remove(objectId)
                 except Exception as e:
                     print(traceback.format_exc())
-        for objectPosition in objectsMove:
+        for objectPosition in self.objectsMove:
             messageSend = tools.messagePosition(networkCode["objectPosition"],objectPosition)
             for player in self.playersSocket:
                 try:
