@@ -50,8 +50,7 @@ var inputs = new InputKey();
 var updateFrequency = 20;
 
 var world = 0;
-
-
+var noRotation = false;
 
 /* Setup World */
 function setUpWorld()

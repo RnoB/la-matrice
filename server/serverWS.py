@@ -246,7 +246,7 @@ class Server:
         asyncio.get_event_loop().run_forever()
 
 
-    def __init__(self,port = 6799,cert ="cert.pem",key = "privkey.pem"):
+    def __init__(self,port = 6799,cert ="cert.pem",key = "privkey.pem",noRotation = False,noControllers = False):
         self.playersSocket = []
         self.playerIds = []
         self.playerId = 0
@@ -275,12 +275,15 @@ class Server:
         self.packetDrop = 0
         self.tSend = 0
 
+        self.noRotation = noRotation
+        self.noControllers = noControllers
 
 
-def startServer(port,cert,key):
+
+def startServer(port,cert,key,noRotation = False,noControllers = False):
     global server
     asyncio.set_event_loop(asyncio.new_event_loop())
-    server = Server(port = port,cert = cert,key = key)
+    server = Server(port = port,cert = cert,key = key,noRotation,noControllers)
 
     server.start()
 
