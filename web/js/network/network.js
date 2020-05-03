@@ -165,7 +165,7 @@ export class Client
                 
             }
             
-            ws.send(msgView.buffer);
+            this.ws.send(msgView.buffer);
             var t2 = new Date().getTime();
             await sleep(1000.0/this.updateFrequency);
             t1=t2;
