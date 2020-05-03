@@ -2,7 +2,7 @@ import { networkCode,objectsType } from "./networkCode.js"
 import {sleep} from "../controls/world.js" 
 
 
-function readPosition(message,player,offset = 0,controllers  = 0)
+function readPosition(data,player,offset = 0,controllers  = 0)
 {
 
     player['position'] = new THREE.Vector3(data.getFloat32(offset,true),
