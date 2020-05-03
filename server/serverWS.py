@@ -288,7 +288,7 @@ class Server:
 def startServer(port,cert,key,noRotation = False,noControllers = False):
     global server
     asyncio.set_event_loop(asyncio.new_event_loop())
-    server = Server(port = port,cert = cert,key = key,noRotation,noControllers)
+    server = Server(port = port,cert = cert,key = key,noRotation = noRotation,noControllers = noControllers)
 
     server.start()
 
