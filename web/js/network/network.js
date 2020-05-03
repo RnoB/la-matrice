@@ -5,24 +5,7 @@ import {sleep} from "../controls/world.js"
 export class Client
 {
 
-    constructor(ip = "matricematrice.xyz",port = 6785,updateFrequency = 20,scene = {},camera = {},controllers = {})
-    {
-        this.ws = new WebSocket('wss://'+ip+':'+port.toString()); 
-        this.ws.onmessage = function (event) {this.receiver(event.data);}
-        this.ws.onopen =  function(event){this.sender(); }
-        this.ws.binaryType = "arraybuffer";
-        this.connected = true;
 
-        this.updateFrequency = updateFrequency;
-        this.camera = camera;
-        this.controllers = controllers;
-        this.controllersNumber = controllers.length;
-        this.scene = scene;
-
-        this.listPlayers = [];
-        this.listObjects = [];
-
-    }
 
 
     async sender()
@@ -294,6 +277,25 @@ export class Client
                 break;
 
         }
+
+    }
+
+    constructor(ip = "matricematrice.xyz",port = 6785,updateFrequency = 20,scene = {},camera = {},controllers = {})
+    {
+        this.ws = new WebSocket('wss://'+ip+':'+port.toString()); 
+        this.ws.onmessage = function (event) {this.receiver(event.data);}
+        this.ws.onopen =  function(event){this.sender(); }
+        this.ws.binaryType = "arraybuffer";
+        this.connected = true;
+
+        this.updateFrequency = updateFrequency;
+        this.camera = camera;
+        this.controllers = controllers;
+        this.controllersNumber = controllers.length;
+        this.scene = scene;
+
+        this.listPlayers = [];
+        this.listObjects = [];
 
     }
 
