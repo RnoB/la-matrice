@@ -48,14 +48,17 @@ class Server:
         self.lockObject = True
 
         for objecte in self.objectsNew:
+
+
+
             dataWorld = struct.pack('B', networkCode['newObject'])
-            dataWorld += struct.pack('<ii',objecte['id'],objecte['type'])
+            dataWorld += struct.pack('<i',objecte['type'])
+            dataWorld += tools.updatePacker(objecte,self.noRotation,self.noControllers,noScale = True)
+
             position0 = objecte['position']
             rotation0 = objecte['rotation']
             scale0 = objecte['scale']
-            dataWorld += struct.pack('<ffffffffff',position0[0],position0[1],position0[2],\
-                                    rotation0[0],rotation0[1],rotation0[2],rotation0[3],\
-                                    scale0[0],scale0[1],scale0[2])
+
             self.objectsList.append(objecte)
             self.objectsNew.remove(objecte)
             self.objectsIds.append(objecte['id'])
@@ -64,6 +67,8 @@ class Server:
                     await player.send(dataWorld)
                 except Exception as e:
                     print(traceback.format_exc())
+
+
         for objectId  in self.objectsRem:
             dataWorld = struct.pack('B', networkCode['removeObject'])
             dataWorld += struct.pack('<i',objectId)
@@ -86,7 +91,7 @@ class Server:
                     print(traceback.format_exc())
 
         for objectPosition in self.objectsMove:
-            messageSend = tools.messagePosition(networkCode["objectPosition"],objectPosition)
+            messageSend = tools.messagePosition(networkCode["objectPosition"],objectPosition,self.noRotation)
             self.objectsMove.remove(objectPosition)
             for player in self.playersSocket:
                 try:
@@ -137,7 +142,7 @@ class Server:
                         
             self.playersSocket.append(websocket)
             dataWorld = struct.pack('B', networkCode['world'])
-            dataWorld += struct.pack('<iiii',self.world,self.playerId,self.playerNumber,len(self.objectsList))
+            dataWorld += struct.pack('<iiii',self.world,self.playerNumber,len(self.objectsList),self.playerId)
             dataWorld += struct.pack('<fffffff',position0[0],position0[1],position0[2],\
                                         rotation0[0],rotation0[1],rotation0[2],rotation0[3])
 
@@ -149,6 +154,8 @@ class Server:
             self.playersPosition.append(position0)
             self.playersRotation.append(rotation0)
             playerDict = {"id" : self.playerId,"controllers" : controllers,"position" : position0,"rotation" : rotation0}
+
+
             for k in range(0,controllers):
                 playerDict["posC"+str(k)] = (0,0,0)
                 playerDict["rotC"+str(k)] = (0,0,0,1)
@@ -156,13 +163,11 @@ class Server:
 
             self.playerNumber+=1
             for objecte in self.objectsList:
-                dataWorld += struct.pack('<ii',objecte['id'],objecte['type'])
+                dataWorld += struct.pack('<i',objecte['type'])
                 position0 = objecte['position']
                 rotation0 = objecte['rotation']
                 scale0 = objecte['scale']
-                dataWorld += struct.pack('<ffffffffff',position0[0],position0[1],position0[2],\
-                                        rotation0[0],rotation0[1],rotation0[2],rotation0[3],
-                                        scale0[0],scale0[1],scale0[2])
+                dataWorld += tools.updatePacker(objecte,self.noRotation,self.noControllers,noScale = True)
                 
             try:
                 await self.playersSocket[-1].send(dataWorld)

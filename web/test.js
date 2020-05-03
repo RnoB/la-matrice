@@ -2,6 +2,7 @@ import "./js/three.min.js";
 import { VRButton } from './js/webxr/VRButton.js';
 
 import { networkCode,objectsType } from "./js/network/networkCode.js"
+import { client } from "./js/network/network.js"
 import {InputKey} from "./js/controls/inputKey.js" 
 import {sleep,InitSky,InitFloor} from "./js/controls/world.js" 
 
@@ -259,8 +260,8 @@ function receiver(msg)
             for (let j = 0; j < Nobjects; ++j) 
             {
 
-                var objectInfo = {"id" : data.getInt32(45+5*Nplayers+j*48,true),
-                            "type" : data.getInt32(49+5*Nplayers+j*48,true),
+                var objectInfo = {"id" : data.getInt32(49+5*Nplayers+j*48,true),
+                            "type" : data.getInt32(45+5*Nplayers+j*48,true),
                             "position" : new THREE.Vector3(data.getFloat32(53+5*Nplayers+j*48,true),
                                             data.getFloat32(57+5*Nplayers+j*48,true),
                                             data.getFloat32(61+5*Nplayers+j*48,true)),

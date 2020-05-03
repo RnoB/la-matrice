@@ -59,28 +59,39 @@ def readPosition(message,player):
 
 
     
-def messagePosition(code,player):
+def messagePosition(code,player,noRotation = False,noControllers = False,noScale = True):
     message = struct.pack('B', code)
-    message += struct.pack('<i', player['id'])
-    message += struct.pack('<fff',player['position'][0],\
-                                    player['position'][1],\
-                                    player['position'][2])
-    message += struct.pack('<ffff',player['rotation'][0],\
-                                    player['rotation'][1],\
-                                    player['rotation'][2],\
-                                    player['rotation'][3])
-
-    for k in range(0,player['controllers']):
-        message += struct.pack('<fff',player["posC"+str(k)][0],\
-                                        player["posC"+str(k)][1],\
-                                        player["posC"+str(k)][2])
-        message += struct.pack('<ffff',player["rotC"+str(k)][0],\
-                                        player["rotC"+str(k)][1],\
-                                        player["rotC"+str(k)][2],\
-                                        player["rotC"+str(k)][3])
+    message += updatePacker(player,noRotation,noControllers,noScale)
 
     return message
 
+def updatePacker(player,noRotation = False,noControllers = False,noScale = True)
+    message = struct.pack('<i', player['id'])
+    message += struct.pack('<fff',player['position'][0],\
+                                    player['position'][1],\
+                                    player['position'][2])
+    if not noRotation:
+        message += struct.pack('<ffff',player['rotation'][0],\
+                                    player['rotation'][1],\
+                                    player['rotation'][2],\
+                                    player['rotation'][3])
+    if not noScale:
+        message += struct.pack('<fff',player['scale'][0],\
+                                    player['scale'][1],\
+                                    player['scale'][2],\
+                                    player['scale'][3])
+    if not noControllers:
+        for k in range(0,player['controllers']):
+            message += struct.pack('<fff',player["posC"+str(k)][0],\
+                                            player["posC"+str(k)][1],\
+                                            player["posC"+str(k)][2])
+            if not noRotation:
+                message += struct.pack('<ffff',player["rotC"+str(k)][0],\
+                                            player["rotC"+str(k)][1],\
+                                            player["rotC"+str(k)][2],\
+                                            player["rotC"+str(k)][3])
+
+    return message
 
 
 
