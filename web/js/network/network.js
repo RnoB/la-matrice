@@ -13,7 +13,7 @@ export class Client
         var direction = new THREE.Vector3();
         var rotation = new THREE.Quaternion();
         var msg = new Uint8Array(2);
-        msg[0] = this.networkCode["connect"];
+        msg[0] = networkCode["connect"];
         msg[1] = this.controllersNumber;
         
         ws.send(msg.buffer);
