@@ -16,7 +16,7 @@ export class Client
         msg[0] = networkCode["connect"];
         msg[1] = this.controllersNumber;
         
-        ws.send(msg.buffer);
+        this.ws.send(msg.buffer);
         var t1 = new Date().getTime();
         while(true)
         {   
