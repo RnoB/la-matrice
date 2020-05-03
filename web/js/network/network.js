@@ -137,7 +137,7 @@ export class Client
         while(true)
         {   
 
-            var msgArray = new ArrayBuffer(1+28*(1+controllers.length));
+            var msgArray = new ArrayBuffer(1+28*(1+ this.controllersNumber));
             //var msgArray = new ArrayBuffer(1+0*(1+controllers.length));
             
             var msgView = new DataView(msgArray);
