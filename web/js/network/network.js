@@ -87,9 +87,9 @@ function newObject(data,scene,offset)
 }
 function readWorld(data,scene)
 {
-    var worldInfo['world'] = data.getInt32(1,true);
-    worldInfo['Nplayers'] = data.getInt32(5,true);
-    worldInfo['Nobjects'] = data.getInt32(9,true);
+    var worldInfo['world'] = {"world" : data.getInt32(1,true),
+                            'Nplayers' : data.getInt32(5,true),
+                            'Nobjects' : data.getInt32(9,true)};
     
     readPosition(data,worldInfo['playerInfo'],13,0);
     
