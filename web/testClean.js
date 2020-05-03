@@ -121,8 +121,8 @@ function setup()
         controllers.push(controller);
 
     }
-    client = new Client(ip = "matricematrice.xyz",port = 6785,controllersNumbers = 0,updateFrequency = 20,
-                            camera = camera.children[0],controllers = controllers,scene = scene)
+    client = new Client("matricematrice.xyz",6785,0,20,
+                            camera.children[0],controllers,scene)
     
     setUpWorld()
 
