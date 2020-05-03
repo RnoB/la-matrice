@@ -1,6 +1,120 @@
-import "../three.min.js";
 import { networkCode,objectsType } from "./networkCode.js"
 import {sleep} from "../controls/world.js" 
+
+
+function readPosition(message,player,offset = 0,controllers  = 0)
+{
+
+    player['position'] = new THREE.Vector3(data.getFloat32(offset,true),
+                                                data.getFloat32(offset+4,true),
+                                                data.getFloat32(offset+8,true))
+    player['rotation'] = new THREE.Quaternion(data.getFloat32(offset+12,true),
+                                                data.getFloat32(offset+16,true),
+                                                data.getFloat32(offset+20,true),
+                                                data.getFloat32(offset+24,true))
+    for k in range(0,controllers):
+        player["posC"+str(k)] = new THREE.Vector3(data.getFloat32(offset+28,true),
+                                                data.getFloat32(offset+32,true),
+                                                data.getFloat32(offset+36,true))
+        player["rotC"+str(k)] = new THREE.Quaternion(data.getFloat32(offset+40,true),
+                                                data.getFloat32(offset+44,true),
+                                                data.getFloat32(offset+48,true),
+                                                data.getFloat32(offset+52,true))
+    return player
+
+}
+
+function readId(data,offset)
+{
+    return  data.getInt32(offset,true);
+}
+
+function newPlayer(data,scene,offset)
+{
+    var playerInfo = {"id" : data.getInt32(offset,true),
+    "position" : new THREE.Vector3(),
+    "rotation" : new THREE.Quaternion(),
+    "mesh" : new THREE.Mesh(geometry, material),
+    "controllers" : data.getUint8(offset+4,true)};
+
+    for (let k = 0; k < playerInfo['controllers']; ++k) 
+    {
+        var controllerMesh = new THREE.Mesh( geometry, material );
+        controllerMesh.scale.set(.01,.1,.1);
+        playerInfo["con"+k.toString()+"Pos"] = new THREE.Vector3();
+        playerInfo["con"+k.toString()+"Rot"] = new THREE.Quaternion();
+        playerInfo["con"+k.toString()+"Mesh"] = controllerMesh;
+        controllerMesh.castShadow = true;
+        scene.add(controllerMesh);
+    }
+    
+    playerInfo.mesh.scale.set(.3,.3,.3);
+    playerInfo.mesh.castShadow = true;
+    scene.add(playerInfo.mesh);
+    return playerInfo;
+}
+
+function newObject(data,scene,offset)
+{
+        var objectInfo = {"id" : data.getInt32(offset+4,true),
+                "type" : data.getInt32(offset,true),
+                "position" : new THREE.Vector3(data.getFloat32(offset+8,true),
+                                data.getFloat32(offset+12,true),
+                                data.getFloat32(offset+16,true)),
+                "rotation" : new THREE.Quaternion(data.getFloat32(offset+20,true),
+                                data.getFloat32(offset+24,true),
+                                data.getFloat32(offset+28,true),
+                                data.getFloat32(offset+32,true) ),
+                "scale" : new THREE.Vector3(data.getFloat32(offset+36,true),
+                                data.getFloat32(offset+40,true),
+                                data.getFloat32(offset+44,true)),
+                "mesh" : new THREE.Mesh(geometry, material)};
+        objectInfo.mesh.position.set(objectInfo.position.x,
+                                    objectInfo.position.y,
+                                    objectInfo.position.z)
+        objectInfo.mesh.quaternion.set(objectInfo.rotation._x,
+                                    objectInfo.rotation._y,
+                                    objectInfo.rotation._z,
+                                    objectInfo.rotation._w)
+        objectInfo.mesh.scale.set(objectInfo.scale.x,
+                                    objectInfo.scale.y,
+                                    objectInfo.scale.z)
+        objectInfo.mesh.castShadow = true;
+        scene.add(objectInfo.mesh);
+        return objectInfo
+}
+function readWorld(data,scene)
+{
+    var worldInfo['world'] = data.getInt32(1,true);
+    worldInfo['Nplayers'] = data.getInt32(5,true);
+    worldInfo['Nobjects'] = data.getInt32(9,true);
+    
+    readPosition(data,worldInfo['playerInfo'],13,0);
+    
+    console.log("world : "+worldInfo['world'].toString()+" id : "+worldInfo['id'].toString()+" Nplayers : "+worldInfo['Nplayers'].toString()+" Nobjects : "+worldInfo['Nobjects'].toString());
+    
+
+    
+    var worldInfo['listPlayers'] = [];
+    for (let j = 0; j < worldInfo['Nplayers']; ++j) 
+    {
+
+
+        var playerInfo = newPlayer(data,scene,45+5*(j));
+        
+        
+        worldInfo['listPlayers'].listPlayers.push(playerInfo);
+    }
+    var worldInfo['listObjects'] = [];
+    for (let j = 0; j < Nobjects; ++j) 
+    {
+
+        var objectInfo = newObject(data,scene,45+5*Nplayers+j*48)
+
+        worldInfo['listObjects'].push(objectInfo);
+    }
+    return worldInfo;
+}
 
 export class Client
 {
@@ -72,119 +186,37 @@ export class Client
             case networkCode['objectPosition'] :
 
 
-                var objectInfo = tools.readPosition(data,1,0);
+                var idx = this.listObjects.findIndex(x => x.id == readId(data,1));
 
-                var idx = this.listObjects.findIndex(x => x.id == objectInfo.id);
 
                 if (idx>-1)
                 {
 
-                    this.listObjects[idx].position = objectInfo.position;
-                    this.listObjects[idx].rotation = objectInfo.rotation;
-
-
-     
+                    readPosition(data,this.listObjects[idx],5);
                 }
 
                 break;
-            case networkCode['playerPosition'] :
+            case networkCode['playerPosition']:
 
                
-                var objectInfo = tools.readPosition(data,1,2);
 
-                var idx = this.listPlayers.findIndex(x => x.id == objectInfo.id);
+                var idx = this.listPlayers.findIndex(x => x.id == readId(data,1));
+
+
                 if (idx>-1)
                 {
 
-                    this.listPlayers[idx].position =  objectInfo.position;
-                    this.listPlayers[idx].rotation =  objectInfo.rotation;
-                    for (let k = 0; k < this.listPlayers[idx].controllers; ++k) 
-                    {
-                        
-                        this.listPlayers[idx]["con"+k.toString()+"Pos"] = objectInfo["con"+k.toString()+"Pos"];
-                        this.listPlayers[idx]["con"+k.toString()+"Rot"] = objectInfo["con"+k.toString()+"Rot"];
-                        
-                    }
-
-     
+                    readPosition(data,this.listPlayers[idx],5,this.listPlayers[idx].controllers);
                 }
                 break;
+
             case networkCode['world']:
                 
-                this.world = data.getInt32(1,true);
-                var Nplayers = data.getInt32(5,true);
-                var Nobjects = data.getInt32(9,true);
-                var objectInfo = tools.readPosition(data,13,0);
-                id = objectInfo.id;
-                console.log("world : "+world.toString()+" id : "+id.toString()+" Nplayers : "+Nplayers.toString()+" Nobjects : "+Nobjects.toString());
-                camera.position.set(objectInfo.position.x,
-                                    objectInfo.position.y,
-                                    objectInfo.position.z);
-                camera.quaternion.set(objectInfo.rotation.x,
-                                        objectInfo.rotation.y,
-                                        objectInfo.rotation.z,
-                                        objectInfo.rotation.w);
+                worldInfo = readWorld(data,scene);
+                id = worldInfo['id']
 
-                
-
-                for (let j = 0; j < Nplayers; ++j) 
-                {
-
-                    var contrlers = data.getUint8(45+5*(1+j)-1,true);
-                    var playerInfo = {"id" : data.getInt32(45+5*(j),true),
-                    "position" : new THREE.Vector3(),
-                    "rotation" : new THREE.Quaternion(),
-                    "mesh" : new THREE.Mesh(geometry, material),
-                    "controllers" : contrlers};
-
-                    for (let k = 0; k < contrlers; ++k) 
-                    {
-                        var controllerMesh = new THREE.Mesh( geometry, material );
-                        controllerMesh.scale.set(.01,.1,.1);
-                        playerInfo["con"+k.toString()+"Pos"] = new THREE.Vector3();
-                        playerInfo["con"+k.toString()+"Rot"] = new THREE.Quaternion();
-                        playerInfo["con"+k.toString()+"Mesh"] = controllerMesh;
-                        controllerMesh.castShadow = true;
-                        scene.add(controllerMesh);
-                    }
-                    
-                    this.listPlayers.push(playerInfo);
-                    this.listPlayers[this.listPlayers.length-1].mesh.scale.set(.3,.3,.3);
-                    this.listPlayers[this.listPlayers.length-1].mesh.castShadow = true;
-                    scene.add(this.listPlayers[this.listPlayers.length-1].mesh);
-                }
-                for (let j = 0; j < Nobjects; ++j) 
-                {
-
-                    var objectInfo = {"id" : data.getInt32(49+5*Nplayers+j*48,true),
-                                "type" : data.getInt32(45+5*Nplayers+j*48,true),
-                                "position" : new THREE.Vector3(data.getFloat32(53+5*Nplayers+j*48,true),
-                                                data.getFloat32(57+5*Nplayers+j*48,true),
-                                                data.getFloat32(61+5*Nplayers+j*48,true)),
-                                "rotation" : new THREE.Quaternion(data.getFloat32(65+5*Nplayers+j*48,true),
-                                                data.getFloat32(69+5*Nplayers+j*48,true),
-                                                data.getFloat32(73+5*Nplayers+j*48,true),
-                                                data.getFloat32(77+5*Nplayers+j*48,true) ),
-                                "scale" : new THREE.Vector3(data.getFloat32(81+5*Nplayers+j*48,true),
-                                                data.getFloat32(85+5*Nplayers+j*48,true),
-                                                data.getFloat32(89+5*Nplayers+j*48,true)),
-                                "mesh" : new THREE.Mesh(geometry, material)};
-                objectInfo.mesh.position.set(objectInfo.position.x,
-                                            objectInfo.position.y,
-                                            objectInfo.position.z)
-                objectInfo.mesh.quaternion.set(objectInfo.rotation._x,
-                                            objectInfo.rotation._y,
-                                            objectInfo.rotation._z,
-                                            objectInfo.rotation._w)
-                objectInfo.mesh.scale.set(objectInfo.scale.x,
-                                            objectInfo.scale.y,
-                                            objectInfo.scale.z)
-                objectInfo.mesh.castShadow = true;
-                scene.add(objectInfo.mesh);
-
-                this.listObjects.push(objectInfo);
-                }
                 break;
+
             case networkCode['newPlayer']:
                 var contrlers = data.getUint8(9,true);
                 playerInfo = {"id" : data.getInt32(5,true),
