@@ -72,7 +72,7 @@ export class Client
             case networkCode['objectPosition'] :
 
 
-                var objectInfo = positionReader(data,1,0);
+                var objectInfo = tools.readPosition(data,1,0);
 
                 var idx = this.listObjects.findIndex(x => x.id == objectInfo.id);
 
@@ -90,7 +90,7 @@ export class Client
             case networkCode['playerPosition'] :
 
                
-                var objectInfo = positionReader(data,1,2);
+                var objectInfo = tools.readPosition(data,1,2);
 
                 var idx = this.listPlayers.findIndex(x => x.id == objectInfo.id);
                 if (idx>-1)
@@ -114,7 +114,7 @@ export class Client
                 this.world = data.getInt32(1,true);
                 var Nplayers = data.getInt32(5,true);
                 var Nobjects = data.getInt32(9,true);
-                var objectInfo = positionReader(data,13,0);
+                var objectInfo = tools.readPosition(data,13,0);
                 id = objectInfo.id;
                 console.log("world : "+world.toString()+" id : "+id.toString()+" Nplayers : "+Nplayers.toString()+" Nobjects : "+Nobjects.toString());
                 camera.position.set(objectInfo.position.x,
