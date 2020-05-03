@@ -53,6 +53,8 @@ var world = 0;
 var noRotation = false;
 var noControllers = false;
 
+var client;
+
 /* Setup World */
 function setUpWorld()
 {
