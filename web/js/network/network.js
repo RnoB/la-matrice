@@ -1,6 +1,6 @@
-import "./js/three.min.js";
-import { networkCode,objectsType } from "./js/network/networkCode.js"
-import {sleep} from "./js/controls/world.js" 
+import "../three.min.js";
+import { networkCode,objectsType } from "./networkCode.js"
+import {sleep} from "../controls/world.js" 
 
 export class Client
 {
