@@ -282,9 +282,10 @@ export class Client
 
     constructor(ip = "matricematrice.xyz",port = 6785,updateFrequency = 20,scene = {},camera = {},controllers = {})
     {
+        var self = this;
         this.ws = new WebSocket('wss://'+ip+':'+port.toString()); 
-        this.ws.onmessage = function (event) {this.receiver(event.data);}
-        this.ws.onopen =  function(event){this.sender(); }
+        this.ws.onmessage = function (event) {self.receiver(event.data);}
+        this.ws.onopen =  function(event){self.sender(); }
         this.ws.binaryType = "arraybuffer";
         this.connected = true;
 
