@@ -97,7 +97,7 @@ function readWorld(data,scene)
     
 
     
-    var worldInfo['listPlayers'] = [];
+    worldInfo['listPlayers'] = [];
     for (let j = 0; j < worldInfo['Nplayers']; ++j) 
     {
 
