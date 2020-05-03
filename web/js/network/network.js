@@ -111,7 +111,7 @@ export class Client
                 break;
             case networkCode['world']:
                 
-                world = data.getInt32(1,true);
+                this.world = data.getInt32(1,true);
                 var Nplayers = data.getInt32(5,true);
                 var Nobjects = data.getInt32(9,true);
                 var objectInfo = positionReader(data,13,0);
@@ -283,6 +283,7 @@ export class Client
     constructor(ip = "matricematrice.xyz",port = 6785,updateFrequency = 20,scene = {},camera = {},controllers = {})
     {
         var self = this;
+        var world = -1;
         this.ws = new WebSocket('wss://'+ip+':'+port.toString()); 
         this.ws.onmessage = function (event) {self.receiver(event.data);}
         this.ws.onopen =  function(event){self.sender(); }
