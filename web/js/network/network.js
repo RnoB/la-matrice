@@ -214,7 +214,7 @@ export class Client
 
             case networkCode['world']:
                 
-                worldInfo = readWorld(data,scene);
+                worldInfo = readWorld(data,this.scene);
                 id = worldInfo['id']
 
                 break;
