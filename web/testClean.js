@@ -88,7 +88,7 @@ function setUpWorld()
     sky.addToScene(scene);    
     floor = new InitFloor();
     floor.addToScene(scene);
-    for (let i = 0; i < 2; ++i) {
+    for (let i = 0; i < controllers.length; ++i) {
         const controller = controllers[i];
         var controllerMesh = new THREE.Mesh( geometry, material );
         controllerMesh.scale.set(.01,.1,.1);
