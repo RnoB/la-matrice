@@ -27,7 +27,7 @@ class Server:
     def addObject(self,objectType,position = [0,0,0],rotation = [0,0,0,1],scale= [1,1,1]):
         self.playerId+=1
 
-        objectDict = {"id" : self.playerId,"type" : objectType,"position" : position,"rotation" : rotation,"scale" : scale}
+        objectDict = {"id" : self.playerId,"type" : objectType,"position" : position,"rotation" : rotation,"scale" : scale,"controllers":0}
         self.objectsNew.append(objectDict)
         return objectDict['id']
 
