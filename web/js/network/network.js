@@ -191,7 +191,7 @@ export class Client
         var code = data.getUint8(0,true);
         var t1 = new Date().getTime();
 
-        console.log(code);
+
 
         switch(code)
         {
@@ -201,7 +201,7 @@ export class Client
 
 
                 var idx = this.listObjects.findIndex(x => x.id == readId(data,1));
-
+                console.log(idx);
 
                 if (idx>-1)
                 {
