@@ -305,12 +305,6 @@ export class Client
 
         var self = this;
         var world = -1;
-        this.ws = new WebSocket('wss://'+ip+':'+port.toString()); 
-        this.ws.onmessage = function (event) {self.receiver(event.data);}
-        this.ws.onopen =  function(event){self.sender(); }
-        this.ws.binaryType = "arraybuffer";
-        this.connected = true;
-
         this.updateFrequency = updateFrequency;
         this.camera = camera;
         this.controllers = controllers;
@@ -322,8 +316,13 @@ export class Client
 
         this.worldInfo = {};
 
-        this.scene = scene;
         console.log("scene : "+this.scene.toString())
+        this.ws = new WebSocket('wss://'+ip+':'+port.toString()); 
+        this.ws.onmessage = function (event) {self.receiver(event.data);}
+        this.ws.onopen =  function(event){self.sender(); }
+        this.ws.binaryType = "arraybuffer";
+        this.connected = true;
+
     }
 
 }
