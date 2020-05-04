@@ -227,8 +227,8 @@ export class Client
             case networkCode['world']:
                 
                 this.worldInfo = readWorld(data,this.scene);
-                this.listObjects = worldInfo["listObjects"];
-                this.listPlayers = worldInfo["listPlayers"];
+                this.listObjects = this.worldInfo["listObjects"];
+                this.listPlayers = this.worldInfo["listPlayers"];
 
                 break;
 
