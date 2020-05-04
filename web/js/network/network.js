@@ -168,6 +168,7 @@ function readWorld(data,scene)
 function sendMessage(camera,controllers,noRotation = false,noScale = false)
 {
     var msgArray = new ArrayBuffer(1+28*(1+ controllers.length));
+    console.log(1+28*(1+ controllers.length));
     //var msgArray = new ArrayBuffer(1+0*(1+controllers.length));
     var direction = new THREE.Vector3();
     var rotation = new THREE.Quaternion();
@@ -330,7 +331,7 @@ export class Client
         this.camera = camera;
         this.cameraPosition = camera.children[0]
         this.controllers = controllers;
-        console.log(controllers);
+
         this.controllersNumber = controllers.length;
         this.scene = scene;
 
