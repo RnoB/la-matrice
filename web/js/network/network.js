@@ -165,7 +165,7 @@ function readWorld(data,scene)
 }
 
 
-function sendMessage(camera,controllers)
+function sendMessage(camera,controllers,noRotation = false,noScale = false)
 {
     var msgArray = new ArrayBuffer(1+28*(1+ controllers.length));
     //var msgArray = new ArrayBuffer(1+0*(1+controllers.length));
@@ -176,24 +176,33 @@ function sendMessage(camera,controllers)
     camera.getWorldQuaternion( rotation );
 
     msgView.setUint8(0, networkCode['playerPosition']);
-
-    msgView.setFloat32(1, direction.x, true);
-    msgView.setFloat32(5, direction.y, true);
-    msgView.setFloat32(9, direction.z, true);
-    msgView.setFloat32(13, rotation._x, true);
-    msgView.setFloat32(17, rotation._y, true);
-    msgView.setFloat32(21, rotation._z, true);
-    msgView.setFloat32(25, rotation._w, true);
-
+    offset = 1;
+    msgView.setFloat32(offset, direction.x, true);
+    msgView.setFloat32(offset+4, direction.y, true);
+    msgView.setFloat32(offset+8, direction.z, true);
+    offset+=12;
+    if (!noRotation)
+    {
+        msgView.setFloat32(offset, rotation._x, true);
+        msgView.setFloat32(offset+4, rotation._y, true);
+        msgView.setFloat32(offset+8, rotation._z, true);
+        msgView.setFloat32(offset+12, rotation._w, true);
+    }
+    offset+=16;
     for (let k = 0; k < controllers.length; ++k) 
     {
-        msgView.setFloat32(29+k*28, controllers[k].position.x, true);
-        msgView.setFloat32(33+k*28, controllers[k].position.y, true);
-        msgView.setFloat32(37+k*28, controllers[k].position.z, true);
-        msgView.setFloat32(41+k*28, controllers[k].quaternion._x, true);
-        msgView.setFloat32(45+k*28, controllers[k].quaternion._y, true);
-        msgView.setFloat32(49+k*28, controllers[k].quaternion._z, true);
-        msgView.setFloat32(53+k*28, controllers[k].quaternion._w, true);
+        msgView.setFloat32(offset, controllers[k].position.x, true);
+        msgView.setFloat32(offset+4, controllers[k].position.y, true);
+        msgView.setFloat32(offset+8, controllers[k].position.z, true);
+        offset+=12;
+        if (!noRotation)
+        {
+            msgView.setFloat32(offset+k*28, controllers[k].quaternion._x, true);
+            msgView.setFloat32(offset+4+k*28, controllers[k].quaternion._y, true);
+            msgView.setFloat32(offset+8+k*28, controllers[k].quaternion._z, true);
+            msgView.setFloat32(offset+12+k*28, controllers[k].quaternion._w, true);
+            offset+=16;
+        }
         
     }
 
