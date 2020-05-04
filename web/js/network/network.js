@@ -67,6 +67,7 @@ function newPlayer(data,scene,offset)
 
 function newObject(data,scene,offset)
 {
+    console.length("size : "+(data.length).toString());
         var objectInfo = {"id" : data.getInt32(offset+4,true),
                 "type" : data.getInt32(offset,true),
                 "position" : new THREE.Vector3(data.getFloat32(offset+8,true),
