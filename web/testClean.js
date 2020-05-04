@@ -17,6 +17,7 @@ var camera;
 var renderer = null;
 if (navigator.xr === 'undefined')
 {
+    console.log("polyfill")
     var polyfill = new WebXRPolyfill();
 }
 var ws;
