@@ -88,16 +88,7 @@ function setUpWorld()
     sky.addToScene(scene);    
     floor = new InitFloor();
     floor.addToScene(scene);
-    for (let i = 0; i < controllers.length; ++i) {
-        const controller = controllers[i];
-        var controllerMesh = new THREE.Mesh( geometry, material );
-        controllerMesh.scale.set(.01,.1,.1);
-        controllerMesh.castShadow = true;
-        controller.add( controllerMesh);
-        scene.add(controller);
 
-
-    }
     
 }
 
@@ -123,7 +114,7 @@ function setup()
     document.body.appendChild(VRButton.createButton(renderer));
     if  ( 'xr' in navigator ) 
     {
-        console.log("h");
+
         navigator.xr.isSessionSupported('immersive-vr').then(
             function(isSupported)
             {
@@ -133,6 +124,11 @@ function setup()
                     for (let i = 0; i < 2; ++i) 
                     {
                         const controller = renderer.xr.getController(i);
+                        var controllerMesh = new THREE.Mesh( geometry, material );
+                        controllerMesh.scale.set(.01,.1,.1);
+                        controllerMesh.castShadow = true;
+                        controller.add( controllerMesh);
+                        scene.add(controller);
                         controllers.push(controller);
                     }
                 }
