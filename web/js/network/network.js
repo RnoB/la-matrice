@@ -217,7 +217,7 @@ export class Client
             case networkCode['world']:
                 
                 this.worldInfo = readWorld(data,this.scene);
-                id = this.worldInfo['id']
+                
 
                 break;
 
