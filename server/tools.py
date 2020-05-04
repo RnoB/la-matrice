@@ -79,8 +79,7 @@ def updatePacker(player,noRotation = False,noControllers = False,noScale = True)
     if not noScale:
         message += struct.pack('<fff',player['scale'][0],\
                                     player['scale'][1],\
-                                    player['scale'][2],\
-                                    player['scale'][3])
+                                    player['scale'][2])
     if not noControllers:
         for k in range(0,player['controllers']):
             message += struct.pack('<fff',player["posC"+str(k)][0],\
