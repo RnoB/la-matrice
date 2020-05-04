@@ -169,7 +169,8 @@ function sendMessage(camera,controllers)
 {
     var msgArray = new ArrayBuffer(1+28*(1+ controllers.length));
     //var msgArray = new ArrayBuffer(1+0*(1+controllers.length));
-    
+    var direction;
+    var rotation;
     var msgView = new DataView(msgArray);
     camera.getWorldPosition( direction );
     camera.getWorldQuaternion( rotation );
