@@ -123,8 +123,8 @@ function setup()
         controllers.push(controller);
 
     }
-    client = new Client("matricematrice.xyz",6785,0,20,
-                            camera.children[0],controllers,scene)
+    client = new Client("matricematrice.xyz",6785,20,scene,
+                            camera.children[0],controllers)
     
     setUpWorld()
 
