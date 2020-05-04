@@ -147,7 +147,7 @@ class Server:
                                         rotation0[0],rotation0[1],rotation0[2],rotation0[3])
 
             for k in range(0,len(self.playerIds)):
-                dataWorld += struct.pack('<i', self.playerIds[k])
+                dataWorld += struct.pack('<ii', self.playerIds[k],self.playerIds[k])
                 dataWorld += struct.pack('B', self.playersList[k]['controllers'])
 
             self.playerIds.append(self.playerId)
