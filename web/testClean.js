@@ -124,7 +124,7 @@ function setup()
 
     }
     client = new Client("matricematrice.xyz",6785,20,scene,
-                            camera.children[0],controllers)
+                            camera,controllers)
     
     setUpWorld()
 

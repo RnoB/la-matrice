@@ -172,8 +172,8 @@ export class Client
             //var msgArray = new ArrayBuffer(1+0*(1+controllers.length));
             
             var msgView = new DataView(msgArray);
-            this.camera.getWorldPosition( direction );
-            this.camera.getWorldQuaternion( rotation );
+            this.cameraPosition.getWorldPosition( direction );
+            this.cameraPosition.getWorldQuaternion( rotation );
             msgView.setUint8(0, networkCode['playerPosition']);
 
             msgView.setFloat32(1, direction.x, true);
@@ -295,6 +295,7 @@ export class Client
         var world = -1;
         this.updateFrequency = updateFrequency;
         this.camera = camera;
+        this.cameraPosition = camera.children[0]
         this.controllers = controllers;
         this.controllersNumber = controllers.length;
         this.scene = scene;
