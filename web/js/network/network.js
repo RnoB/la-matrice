@@ -274,7 +274,7 @@ export class Client
                 }
                 break;
             case networkCode['newObject']:
-                objectInfo = newObject(data,this.scene,1)
+                var objectInfo = newObject(data,this.scene,1)
 
                 this.listObjects.push(objectInfo);
 
