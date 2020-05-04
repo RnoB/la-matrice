@@ -221,7 +221,7 @@ export class Client
         while(true)
         {   
 
-            msgSend = sendMessage(this.cameraPosition,this.controllers)
+            var msgSend = sendMessage(this.cameraPosition,this.controllers)
             
             this.ws.send(msgSend);
             var t2 = new Date().getTime();
