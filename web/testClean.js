@@ -95,7 +95,7 @@ function setUpWorld()
         controllerMesh.castShadow = true;
         controller.add( controllerMesh);
         scene.add(controller);
-        controllers.push(controller);
+
 
     }
     
