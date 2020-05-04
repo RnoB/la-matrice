@@ -247,7 +247,7 @@ export class Client
                 this.worldInfo = readWorld(data,this.scene);
                 this.listObjects = this.worldInfo["listObjects"];
                 this.listPlayers = this.worldInfo["listPlayers"];
-                this.playerInfo = this.worldInfo.playerInfo;
+                var playerInfo = this.worldInfo.playerInfo;
                 this.camera.position.set(playerInfo.position.x,playerInfo.position.y,playerInfo.position.z)
                 this.camera.rotation.set(playerInfo.rotation._x,playerInfo.rotationtion._y,playerInfo.rotation._z,playerInfo.rotation._w)
                 break;
