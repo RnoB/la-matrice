@@ -126,10 +126,13 @@ function setup()
         navigator.xr.isSessionSupported('immersive-vr').then(
             (isSupported) => 
             {
-                for (let i = 0; i < 2; ++i) 
+                if(isSupported)
                 {
-                    const controller = renderer.xr.getController(i);
-                    controllers.push(controller);
+                    for (let i = 0; i < 2; ++i) 
+                    {
+                        const controller = renderer.xr.getController(i);
+                        controllers.push(controller);
+                    }
                 }
             }
         );
