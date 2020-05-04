@@ -92,13 +92,11 @@ function newObject(data,scene,offset)
                                     objectInfo.scale.y,
                                     objectInfo.scale.z)
         objectInfo.mesh.castShadow = true;
-        console.log("scene : "+scene.toString());
         scene.add(objectInfo.mesh);
         return objectInfo
 }
 function readWorld(data,scene)
 {
-    console.log("scene : "+scene.toString());
     var worldInfo = {"world" : data.getInt32(1,true),
                             'Nplayers' : data.getInt32(5,true),
                             'Nobjects' : data.getInt32(9,true),
@@ -227,7 +225,7 @@ export class Client
                 break;
 
             case networkCode['world']:
-                console.log("scene : "+this.scene.toString());
+                
                 this.worldInfo = readWorld(data,this.scene);
                 
 
@@ -325,6 +323,7 @@ export class Client
         this.worldInfo = {};
 
         this.scene = scene;
+        console.log("scene : "+this.scene.toString())
     }
 
 }
