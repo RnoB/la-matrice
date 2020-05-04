@@ -210,7 +210,7 @@ class Server:
             async for message in websocket:
                 
                 code = message[0]
-                print(self.playerNumber)
+
                 try:
                     if code == networkCode['playerPosition'] and len(websocket.messages) == 0 and \
                     self.playerNumber>0:# and idPlayer == self.playerIds[self.nextPlayer]:
@@ -223,7 +223,7 @@ class Server:
                         player = tools.readPosition(message,player)
                         self.playersPosition[idx] = player['position']
                         self.playersRotation[idx] = player['rotation']
-                        messageSend = tools.messagePosition(networkCode['objectPosition'],player)
+                        messageSend = tools.messagePosition(networkCode['playerPosition'],player)
 
 
                         await self.send(websocket,messageSend)
