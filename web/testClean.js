@@ -123,6 +123,7 @@ function setup()
     document.body.appendChild(VRButton.createButton(renderer));
     if  ( 'xr' in navigator ) 
     {
+        console.log("h");
         navigator.xr.isSessionSupported('immersive-vr').then(
             (isSupported) => 
             {
