@@ -176,7 +176,7 @@ function sendMessage(camera,controllers,noRotation = false,noScale = false)
     camera.getWorldQuaternion( rotation );
 
     msgView.setUint8(0, networkCode['playerPosition']);
-    offset = 1;
+    var offset = 1;
     msgView.setFloat32(offset, direction.x, true);
     msgView.setFloat32(offset+4, direction.y, true);
     msgView.setFloat32(offset+8, direction.z, true);
