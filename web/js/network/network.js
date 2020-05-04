@@ -301,6 +301,7 @@ export class Client
 
     constructor(ip = "matricematrice.xyz",port = 6785,updateFrequency = 20,scene = {},camera = {},controllers = {})
     {
+        console.log(scene);
         var self = this;
         var world = -1;
         this.ws = new WebSocket('wss://'+ip+':'+port.toString()); 
