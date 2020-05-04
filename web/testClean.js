@@ -15,7 +15,8 @@ var sky, floor;
 var scene;
 var camera;
 var renderer = null;
-if (navigator.xr === 'undefined')
+console
+if (navigator.xr == null)
 {
     console.log("polyfill")
     var polyfill = new WebXRPolyfill();
