@@ -1,4 +1,3 @@
-import 'https://cdn.jsdelivr.net/npm/webxr-polyfill@latest/build/webxr-polyfill.js'
 import "./js/three.min.js";
 import { VRButton } from './js/webxr/VRButton.js';
 
