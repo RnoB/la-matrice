@@ -330,6 +330,7 @@ export class Client
         this.camera = camera;
         this.cameraPosition = camera.children[0]
         this.controllers = controllers;
+        console.log(controllers);
         this.controllersNumber = controllers.length;
         this.scene = scene;
 
