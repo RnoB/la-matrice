@@ -248,8 +248,13 @@ export class Client
                 this.listObjects = this.worldInfo["listObjects"];
                 this.listPlayers = this.worldInfo["listPlayers"];
                 var playerInfo = this.worldInfo.playerInfo;
-                this.camera.position.set(playerInfo.position.x,playerInfo.position.y,playerInfo.position.z)
-                this.camera.rotation.set(playerInfo.rotation._x,playerInfo.rotation._y,playerInfo.rotation._z,playerInfo.rotation._w)
+                this.camera.position.set(playerInfo.position.x,
+                                        playerInfo.position.y,
+                                        playerInfo.position.z)
+                this.camera.quaternion.set(playerInfo.rotation._x,
+                                        playerInfo.rotation._y,
+                                        playerInfo.rotation._z,
+                                        playerInfo.rotation._w)
                 break;
 
             case networkCode['newPlayer']:
