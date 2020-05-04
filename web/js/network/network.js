@@ -42,11 +42,12 @@ function readId(data,offset)
 
 function newPlayer(data,scene,offset)
 {
-    var playerInfo = {"id" : data.getInt32(offset,true),
+    var playerInfo = {"id" : data.getInt32(offset+4,true),
+    "type" : data.getInt32(offset,true),
     "position" : new THREE.Vector3(),
     "rotation" : new THREE.Quaternion(),
     "mesh" : new THREE.Mesh(geometry, material),
-    "controllers" : data.getUint8(offset+4,true)};
+    "controllers" : data.getUint8(offset+8,true)};
 
     for (let k = 0; k < playerInfo['controllers']; ++k) 
     {
