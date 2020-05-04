@@ -199,7 +199,7 @@ export class Client
         
             case networkCode['objectPosition'] :
 
-                console.log(readId(data,1));
+                console.log("id : "+readId(data,1).toString());
                 var idx = this.listObjects.findIndex(x => x.id == readId(data,1));
                 console.log(idx);
 
