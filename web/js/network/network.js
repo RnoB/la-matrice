@@ -175,7 +175,7 @@ function sendMessage(camera,controllers,noRotation = false,noScale = false)
     {
         var msgArray = new ArrayBuffer(1+28*(1+ controllers.length));
     }
-    console.log(1+28*(1+ controllers.length));
+
     //var msgArray = new ArrayBuffer(1+0*(1+controllers.length));
     var direction = new THREE.Vector3();
     var rotation = new THREE.Quaternion();
@@ -197,10 +197,10 @@ function sendMessage(camera,controllers,noRotation = false,noScale = false)
         msgView.setFloat32(offset+12, rotation._w, true);
     }
     offset+=16;
-    console.log(controllers);
+
     for (let k = 0; k < controllers.length; ++k) 
     {
-        console.log(offset);
+
         msgView.setFloat32(offset, controllers[k].position.x, true);
         msgView.setFloat32(offset+4, controllers[k].position.y, true);
         msgView.setFloat32(offset+8, controllers[k].position.z, true);
