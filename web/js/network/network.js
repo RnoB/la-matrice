@@ -233,28 +233,8 @@ export class Client
                 break;
 
             case networkCode['newPlayer']:
-                var contrlers = data.getUint8(9,true);
-                playerInfo = {"id" : data.getInt32(5,true),
-                "position" : new THREE.Vector3(),
-                "rotation" : new THREE.Quaternion(),
-                "mesh" : new THREE.Mesh(geometry, material),
-                "controllers" : contrlers};
-
-                for (let k = 0; k < contrlers; ++k) 
-                {
-                    var controllerMesh = new THREE.Mesh( geometry, material );
-                    controllerMesh.scale.set(.01,.1,.1);
-                    playerInfo["con"+k.toString()+"Pos"] = new THREE.Vector3();
-                    playerInfo["con"+k.toString()+"Rot"] = new THREE.Quaternion();
-                    playerInfo["con"+k.toString()+"Mesh"] = controllerMesh;
-                    controllerMesh.castShadow = true;
-                    scene.add(controllerMesh);
-                }
-
+                playerInfo = newPlayer(data,this.scene,9)
                 this.listPlayers.push(playerInfo);
-                this.listPlayers[this.listPlayers.length-1].mesh.scale.set(.3,.3,.3);
-                this.listPlayers[this.listPlayers.length-1].mesh.castShadow = true;
-                scene.add(this.listPlayers[this.listPlayers.length-1].mesh);
 
                 break;
             case networkCode["removePlayer"]:
