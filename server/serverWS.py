@@ -128,7 +128,7 @@ class Server:
 
         if playerInfo[0] == networkCode['connect']:
             controllers = playerInfo[1]
-            console.log(playerInfo[1])
+            print(playerInfo[1])
             position0,rotation0 = tools.initialPosition(self.playersPosition)
 
 
