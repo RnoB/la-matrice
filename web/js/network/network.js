@@ -167,7 +167,14 @@ function readWorld(data,scene)
 
 function sendMessage(camera,controllers,noRotation = false,noScale = false)
 {
-    var msgArray = new ArrayBuffer(1+28*(1+ controllers.length));
+    if (noRotation)
+    {
+        var msgArray = new ArrayBuffer(1+12*(1+ controllers.length));
+    }
+    else
+    {
+        var msgArray = new ArrayBuffer(1+28*(1+ controllers.length));
+    }
     console.log(1+28*(1+ controllers.length));
     //var msgArray = new ArrayBuffer(1+0*(1+controllers.length));
     var direction = new THREE.Vector3();
@@ -200,10 +207,10 @@ function sendMessage(camera,controllers,noRotation = false,noScale = false)
         offset+=12;
         if (!noRotation)
         {
-            msgView.setFloat32(offset+k*28, controllers[k].quaternion._x, true);
-            msgView.setFloat32(offset+4+k*28, controllers[k].quaternion._y, true);
-            msgView.setFloat32(offset+8+k*28, controllers[k].quaternion._z, true);
-            msgView.setFloat32(offset+12+k*28, controllers[k].quaternion._w, true);
+            msgView.setFloat32(offset, controllers[k].quaternion._x, true);
+            msgView.setFloat32(offset+4, controllers[k].quaternion._y, true);
+            msgView.setFloat32(offset+8, controllers[k].quaternion._z, true);
+            msgView.setFloat32(offset+12, controllers[k].quaternion._w, true);
             offset+=16;
         }
         
