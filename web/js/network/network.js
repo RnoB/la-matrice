@@ -115,6 +115,21 @@ function newObject(data,scene,offset)
         scene.add(objectInfo.mesh);
         return objectInfo
 }
+
+function removeObject()
+{
+    var remObject = data.getInt32(1,true);
+    var idx = listObjects.findIndex(x => x.id == remObject);
+    if (idx>-1)
+    {
+
+        scene.remove(listObjects[idx].mesh);
+
+        listObjects.splice(idx,1);
+
+
+    }
+}
 function readWorld(data,scene)
 {
     var worldInfo = {"world" : data.getInt32(1,true),
@@ -149,6 +164,42 @@ function readWorld(data,scene)
     return worldInfo;
 }
 
+
+function sendMessage(camera,controllers)
+{
+    var msgArray = new ArrayBuffer(1+28*(1+ controllers.length));
+    //var msgArray = new ArrayBuffer(1+0*(1+controllers.length));
+    
+    var msgView = new DataView(msgArray);
+    camera.getWorldPosition( direction );
+    camera.getWorldQuaternion( rotation );
+    msgView.setUint8(0, networkCode['playerPosition']);
+
+    msgView.setFloat32(1, direction.x, true);
+    msgView.setFloat32(5, direction.y, true);
+    msgView.setFloat32(9, direction.z, true);
+    msgView.setFloat32(13, rotation._x, true);
+    msgView.setFloat32(17, rotation._y, true);
+    msgView.setFloat32(21, rotation._z, true);
+    msgView.setFloat32(25, rotation._w, true);
+
+    for (let k = 0; k < controllers.length; ++k) 
+    {
+        msgView.setFloat32(29+k*28, controllers[k].position.x, true);
+        msgView.setFloat32(33+k*28, controllers[k].position.y, true);
+        msgView.setFloat32(37+k*28, controllers[k].position.z, true);
+        msgView.setFloat32(41+k*28, controllers[k].quaternion._x, true);
+        msgView.setFloat32(45+k*28, controllers[k].quaternion._y, true);
+        msgView.setFloat32(49+k*28, controllers[k].quaternion._z, true);
+        msgView.setFloat32(53+k*28, controllers[k].quaternion._w, true);
+        
+    }
+
+    return msgView.buffer;
+             
+}
+
+
 export class Client
 {
 
@@ -168,35 +219,9 @@ export class Client
         while(true)
         {   
 
-            var msgArray = new ArrayBuffer(1+28*(1+ this.controllersNumber));
-            //var msgArray = new ArrayBuffer(1+0*(1+controllers.length));
+            msgSend = sendMessage(this.cameraPosition,this.controllers)
             
-            var msgView = new DataView(msgArray);
-            this.cameraPosition.getWorldPosition( direction );
-            this.cameraPosition.getWorldQuaternion( rotation );
-            msgView.setUint8(0, networkCode['playerPosition']);
-
-            msgView.setFloat32(1, direction.x, true);
-            msgView.setFloat32(5, direction.y, true);
-            msgView.setFloat32(9, direction.z, true);
-            msgView.setFloat32(13, rotation._x, true);
-            msgView.setFloat32(17, rotation._y, true);
-            msgView.setFloat32(21, rotation._z, true);
-            msgView.setFloat32(25, rotation._w, true);
-
-            for (let k = 0; k < controllers.length; ++k) 
-            {
-                msgView.setFloat32(29+k*28, this.controllers[k].position.x, true);
-                msgView.setFloat32(33+k*28, this.controllers[k].position.y, true);
-                msgView.setFloat32(37+k*28, this.controllers[k].position.z, true);
-                msgView.setFloat32(41+k*28, this.controllers[k].quaternion._x, true);
-                msgView.setFloat32(45+k*28, this.controllers[k].quaternion._y, true);
-                msgView.setFloat32(49+k*28, this.controllers[k].quaternion._z, true);
-                msgView.setFloat32(53+k*28, this.controllers[k].quaternion._w, true);
-                
-            }
-            
-            this.ws.send(msgView.buffer);
+            this.ws.send(msgSend);
             var t2 = new Date().getTime();
             await sleep(1000.0/this.updateFrequency);
             t1=t2;
@@ -274,18 +299,9 @@ export class Client
 
                 break;
             case networkCode["removeObject"]:
+                removeObject(data,this.scene,this.listObjects,1)
+                break;
                 
-                var remObject = data.getInt32(1,true);
-                var idx = this.listObjects.findIndex(x => x.id == remObject);
-                if (idx>-1)
-                {
-
-                    scene.remove(this.listObjects[idx].mesh);
-
-                    this.listObjects.splice(idx,1);
-
-
-                }
                 
                 break;
 
