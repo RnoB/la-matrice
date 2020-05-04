@@ -131,6 +131,7 @@ function setup()
     
     }
   });
+  console.log(controllers)
 }
 
     client = new Client("matricematrice.xyz",6785,20,scene,
