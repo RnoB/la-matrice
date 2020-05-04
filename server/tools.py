@@ -66,7 +66,7 @@ def messagePosition(code,player,noRotation = False,noControllers = False,noScale
     return message
 
 def updatePacker(player,noRotation = False,noControllers = False,noScale = True):
-    print(player)
+
     message = struct.pack('<i', player['id'])
     message += struct.pack('<fff',player['position'][0],\
                                     player['position'][1],\
