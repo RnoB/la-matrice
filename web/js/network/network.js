@@ -233,9 +233,10 @@ export class Client
             case networkCode['playerPosition']:
 
                
-
+            console.log(readId(data,1));
                 var idx = this.listPlayers.findIndex(x => x.id == readId(data,1));
 
+            console.log(idx);
                 if (idx>-1)
                 {
 
