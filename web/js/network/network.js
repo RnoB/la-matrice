@@ -192,7 +192,7 @@ export class Client
         var t1 = new Date().getTime();
 
 
-
+console.log(code);
         switch(code)
         {
 
@@ -215,7 +215,7 @@ export class Client
                
 
                 var idx = this.listPlayers.findIndex(x => x.id == readId(data,1));
-                console.log(idx)
+
 
                 if (idx>-1)
                 {
