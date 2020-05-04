@@ -23,10 +23,10 @@ function readPosition(data,player,offset = 0,controllers  = 0)
                                                 data.getFloat32(offset+24,true));
     for (let k = 0; k < player['controllers']; ++k) 
     {
-        player["posC"+str(k)] = new THREE.Vector3(data.getFloat32(offset+28,true),
+        player["posC"+k.toString()] = new THREE.Vector3(data.getFloat32(offset+28,true),
                                                 data.getFloat32(offset+32,true),
                                                 data.getFloat32(offset+36,true))
-        player["rotC"+str(k)] = new THREE.Quaternion(data.getFloat32(offset+40,true),
+        player["rotC"+k.toString()] = new THREE.Quaternion(data.getFloat32(offset+40,true),
                                                 data.getFloat32(offset+44,true),
                                                 data.getFloat32(offset+48,true),
                                                 data.getFloat32(offset+52,true));
