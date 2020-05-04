@@ -121,8 +121,9 @@ function setup()
 
 
     document.body.appendChild(VRButton.createButton(renderer));
-    if (navigator.xr) {
-      navigator.xr.isSessionSupported('immersive-vr').then(
+    if (navigator.xr) 
+    {
+        navigator.xr.isSessionSupported('immersive-vr').then(
             (isSupported) => 
             {
                 for (let i = 0; i < 2; ++i) 
@@ -133,8 +134,8 @@ function setup()
             }
         );
     }
-  console.log(controllers)
-}
+    console.log(controllers)
+
 
     client = new Client("matricematrice.xyz",6785,20,scene,
                             camera,controllers)
