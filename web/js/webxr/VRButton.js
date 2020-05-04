@@ -123,14 +123,14 @@ var VRButton = {
 			element.style.zIndex = '999';
 
 		}
-		console.log(navigator)
+
 		if ( 'xr' in navigator ) {
 
 			var button = document.createElement( 'button' );
 			button.style.display = 'none';
 
 			stylizeElement( button );
-			console.log(navigator.xr.isSessionSupported('immersive-vr'))
+
 			navigator.xr.isSessionSupported( 'immersive-vr' ).then( function ( supported ) {
 
 				supported ? showEnterVR() : showWebXRNotFound();
