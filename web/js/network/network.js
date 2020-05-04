@@ -233,7 +233,7 @@ export class Client
                 break;
 
             case networkCode['newPlayer']:
-                playerInfo = newPlayer(data,this.scene,1)
+                var playerInfo = newPlayer(data,this.scene,1)
                 this.listPlayers.push(playerInfo);
 
                 break;
