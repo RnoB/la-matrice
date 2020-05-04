@@ -90,9 +90,10 @@ function readWorld(data,scene)
     var worldInfo = {"world" : data.getInt32(1,true),
                             'Nplayers' : data.getInt32(5,true),
                             'Nobjects' : data.getInt32(9,true),
+                            'id' : data.getInt32(13,true),
                             'playerInfo' : {}};
     
-    readPosition(data,worldInfo['playerInfo'],13,0);
+    readPosition(data,worldInfo['playerInfo'],17,0);
     
     console.log("world : "+worldInfo['world'].toString()+" id : "+worldInfo['id'].toString()+" Nplayers : "+worldInfo['Nplayers'].toString()+" Nobjects : "+worldInfo['Nobjects'].toString());
     
