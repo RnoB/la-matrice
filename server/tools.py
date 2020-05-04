@@ -76,7 +76,7 @@ def updatePacker(player,noRotation = False,noControllers = False,noScale = True)
                                     player['rotation'][1],\
                                     player['rotation'][2],\
                                     player['rotation'][3])
-    print(noScale)
+
     if not noScale:
         message += struct.pack('<fff',player['scale'][0],\
                                     player['scale'][1],\
