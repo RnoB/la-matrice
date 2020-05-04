@@ -53,7 +53,7 @@ class Server:
 
             dataWorld = struct.pack('B', networkCode['newObject'])
             dataWorld += struct.pack('<i',objecte['type'])
-            dataWorld += tools.updatePacker(objecte,self.noRotation,self.noControllers,noScale = True)
+            dataWorld += tools.updatePacker(objecte,self.noRotation,self.noControllers,noScale = False)
 
             position0 = objecte['position']
             rotation0 = objecte['rotation']
