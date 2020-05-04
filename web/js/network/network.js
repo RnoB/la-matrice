@@ -54,9 +54,9 @@ function newPlayer(data,scene,offset)
     {
         var controllerMesh = new THREE.Mesh( geometry, material );
         controllerMesh.scale.set(.01,.1,.1);
-        playerInfo["con"+k.toString()+"Pos"] = new THREE.Vector3();
-        playerInfo["con"+k.toString()+"Rot"] = new THREE.Quaternion();
-        playerInfo["con"+k.toString()+"Mesh"] = controllerMesh;
+        playerInfo["posC"+k.toString()] = new THREE.Vector3();
+        playerInfo["rotC"+k.toString()] = new THREE.Quaternion();
+        playerInfo["meshC"+k.toString()] = controllerMesh;
         controllerMesh.castShadow = true;
         scene.add(controllerMesh);
     }
@@ -79,7 +79,7 @@ function removePlayer(data,scene,listPlayers,offset)
         scene.remove(listPlayers[idx].mesh);
         for (let k = 0; k < listPlayers[idx].controllers; ++k) 
         {
-            scene.remove(listPlayers[idx]["con"+k.toString()+"Mesh"]);
+            scene.remove(listPlayers[idx]["meshC"+k.toString()]);
         }
         listPlayers.splice(idx,1);
 

@@ -182,8 +182,8 @@ function render() {
                                                                     player["controller"+k.toString()+"Rotation"]._z,
                                                                     player["controller"+k.toString()+"Rotation"]._w);
                 */
-                player["con"+k.toString()+"Mesh"].position.lerp(player["con"+k.toString()+"Pos"],0.5);
-                player["con"+k.toString()+"Mesh"].quaternion.slerp(player["con"+k.toString()+"Rot"],0.5);
+                player["meshC"+k.toString()].position.lerp(player["posC"+k.toString()],0.5);
+                player["meshC"+k.toString()].quaternion.slerp(player["rotC"+k.toString()],0.5);
                 
             }
             
