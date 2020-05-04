@@ -174,8 +174,7 @@ function sendMessage(camera,controllers)
     var msgView = new DataView(msgArray);
     camera.getWorldPosition( direction );
     camera.getWorldQuaternion( rotation );
-    console.log(camera);
-    console.log(direction);
+
     msgView.setUint8(0, networkCode['playerPosition']);
 
     msgView.setFloat32(1, direction.x, true);
