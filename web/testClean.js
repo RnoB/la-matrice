@@ -122,15 +122,17 @@ function setup()
 
     document.body.appendChild(VRButton.createButton(renderer));
     if (navigator.xr) {
-  navigator.xr.isSessionSupported('immersive-vr')
-  .then((isSupported) => {
-        for (let i = 0; i < 2; ++i) {
-        const controller = renderer.xr.getController(i);
-        controllers.push(controller);
-
-    
+      navigator.xr.isSessionSupported('immersive-vr').then(
+            (isSupported) => 
+            {
+                for (let i = 0; i < 2; ++i) 
+                {
+                    const controller = renderer.xr.getController(i);
+                    controllers.push(controller);
+                }
+            }
+        );
     }
-  });
   console.log(controllers)
 }
 
