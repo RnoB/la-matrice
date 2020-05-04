@@ -247,8 +247,9 @@ export class Client
                 this.worldInfo = readWorld(data,this.scene);
                 this.listObjects = this.worldInfo["listObjects"];
                 this.listPlayers = this.worldInfo["listPlayers"];
-                this.camera.position.set(this.worldInfo.position.x,this.worldInfo.position.y,this.worldInfo.position.z)
-                this.camera.rotation.set(this.worldInfo.rotation._x,this.worldInfo.rotationtion._y,this.worldInfo.rotation._z,this.worldInfo.rotation._w)
+                this.playerInfo = this.worldInfo.playerInfo;
+                this.camera.position.set(playerInfo.position.x,playerInfo.position.y,playerInfo.position.z)
+                this.camera.rotation.set(playerInfo.rotation._x,playerInfo.rotationtion._y,playerInfo.rotation._z,playerInfo.rotation._w)
                 break;
 
             case networkCode['newPlayer']:
