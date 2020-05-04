@@ -2,6 +2,15 @@ import { networkCode,objectsType } from "./networkCode.js"
 import {sleep} from "../controls/world.js" 
 
 
+
+var geometry = new THREE.BoxGeometry();
+var material = new THREE.MeshStandardMaterial();
+
+
+
+
+
+
 function readPosition(data,player,offset = 0,controllers  = 0)
 {
 
@@ -264,33 +273,7 @@ export class Client
                 }
                 break;
             case networkCode['newObject']:
-                console.log(data.byteLength);
-                var objectInfo = {"id" : data.getInt32(1,true),
-                "type" : data.getInt32(5,true),
-                "position" : new THREE.Vector3(data.getFloat32(9,true),
-                                                data.getFloat32(13,true),
-                                                data.getFloat32(17,true)),
-                "rotation" : new THREE.Quaternion(data.getFloat32(21,true),
-                                                data.getFloat32(25,true),
-                                                data.getFloat32(29,true),
-                                                data.getFloat32(33,true) ),
-                "scale" : new THREE.Vector3(data.getFloat32(37,true),
-                                                data.getFloat32(41,true),
-                                                data.getFloat32(45,true)),
-                "mesh" : new THREE.Mesh(geometry, material)};
-
-                objectInfo.mesh.position.set(objectInfo.position.x,
-                                            objectInfo.position.y,
-                                            objectInfo.position.z)
-                objectInfo.mesh.quaternion.set(objectInfo.rotation._x,
-                                            objectInfo.rotation._y,
-                                            objectInfo.rotation._z,
-                                            objectInfo.rotation._w)
-                objectInfo.mesh.scale.set(objectInfo.scale.x,
-                                            objectInfo.scale.y,
-                                            objectInfo.scale.z)
-                objectInfo.mesh.castShadow = true;
-                scene.add(objectInfo.mesh);
+                objectInfo = newObject(data,scene,1)
 
                 this.listObjects.push(objectInfo);
 
