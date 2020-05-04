@@ -216,8 +216,8 @@ export class Client
 
             case networkCode['world']:
                 
-                worldInfo = readWorld(data,this.scene);
-                id = worldInfo['id']
+                this.worldInfo = readWorld(data,this.scene);
+                id = this.worldInfo['id']
 
                 break;
 
@@ -334,6 +334,8 @@ export class Client
 
         this.listPlayers = [];
         this.listObjects = [];
+
+        this.worldInfo = {};
 
     }
 
