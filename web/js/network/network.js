@@ -234,8 +234,7 @@ export class Client
                
 
                 var idx = this.listPlayers.findIndex(x => x.id == readId(data,1));
-                console.log(readId(data,1));
-                console.log(idx);
+
                 if (idx>-1)
                 {
 
@@ -254,6 +253,7 @@ export class Client
             case networkCode['newPlayer']:
                 var playerInfo = newPlayer(data,this.scene,1)
                 this.listPlayers.push(playerInfo);
+                console.log(playerInfo);
 
                 break;
             case networkCode["removePlayer"]:
