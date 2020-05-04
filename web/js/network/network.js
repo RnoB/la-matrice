@@ -227,7 +227,7 @@ export class Client
                 break;
 
             case networkCode['world']:
-                
+                console.log("scene : "+this.scene.toString());
                 this.worldInfo = readWorld(data,this.scene);
                 
 
