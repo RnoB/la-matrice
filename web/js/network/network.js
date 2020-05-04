@@ -65,6 +65,25 @@ function newPlayer(data,scene,offset)
     return playerInfo;
 }
 
+
+function removePlayer(data,scene,listPlayers,offset)
+{
+    var remPlayer = data.getInt32(offset,true);
+    var idx = listPlayers.findIndex(x => x.id == remPlayer);
+ 
+    if (idx>-1)
+    {
+
+        scene.remove(listPlayers[idx].mesh);
+        for (let k = 0; k < listPlayers[idx].controllers; ++k) 
+        {
+            scene.remove(listPlayers[idx]["con"+k.toString()+"Mesh"]);
+        }
+        listPlayers.splice(idx,1);
+
+
+    }
+}
 function newObject(data,scene,offset)
 {
     console.log("size : "+(data.byteLength).toString());
@@ -238,21 +257,7 @@ export class Client
 
                 break;
             case networkCode["removePlayer"]:
-                var remPlayer = data.getInt32(1,true);
-                var idx = this.listPlayers.findIndex(x => x.id == remPlayer);
-
-                if (idx>-1)
-                {
-
-                    scene.remove(this.listPlayers[idx].mesh);
-                    for (let k = 0; k < this.listPlayers[idx].controllers; ++k) 
-                    {
-                        scene.remove(this.listPlayers[idx]["con"+k.toString()+"Mesh"]);
-                    }
-                    this.listPlayers.splice(idx,1);
-
-
-                }
+                removePlayer(data,this.scene,this.listPlayers,1)
                 break;
             case networkCode['newObject']:
                 var objectInfo = newObject(data,this.scene,1)
