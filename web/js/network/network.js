@@ -124,7 +124,7 @@ function readWorld(data,scene)
     {
 
         var objectInfo = newObject(data,scene,45+5*worldInfo['Nplayers']+j*48)
-
+        console.log(objectInfo);
         worldInfo['listObjects'].push(objectInfo);
     }
     return worldInfo;
