@@ -169,8 +169,8 @@ function sendMessage(camera,controllers)
 {
     var msgArray = new ArrayBuffer(1+28*(1+ controllers.length));
     //var msgArray = new ArrayBuffer(1+0*(1+controllers.length));
-    var direction;
-    var rotation;
+    var direction = new THREE.Vector3();
+    var rotation = new THREE.Quaternion();
     var msgView = new DataView(msgArray);
     camera.getWorldPosition( direction );
     camera.getWorldQuaternion( rotation );
@@ -211,8 +211,7 @@ export class Client
 
     async sender()
     {
-        var direction = new THREE.Vector3();
-        var rotation = new THREE.Quaternion();
+
         var msg = new Uint8Array(2);
         msg[0] = networkCode["connect"];
         msg[1] = this.controllersNumber;
