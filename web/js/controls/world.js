@@ -45,7 +45,7 @@ export class InitSky
 
     updateShader()
     {
-        console.log(uniforms);
+
         var uniforms = this.sky.material.uniforms;
         uniforms[ "turbidity" ].value = this.turbidity;
         uniforms[ "rayleigh" ].value = this.rayleigh;
@@ -65,9 +65,9 @@ export class InitSky
         this.sunSphere.position.z = this.distance * Math.sin( phi ) * Math.cos( theta );
 
         this.sunSphere.visible = this.sun;
-        console.log(this.sunSphere.position);
+
         uniforms[ "sunPosition" ].value.copy( this.sunSphere.position );
-        console.log(uniforms);
+
     }
 
 
