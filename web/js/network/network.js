@@ -191,6 +191,7 @@ function sendMessage(camera,controllers,noRotation = false,noScale = false)
     offset+=16;
     for (let k = 0; k < controllers.length; ++k) 
     {
+        console.log(offset);
         msgView.setFloat32(offset, controllers[k].position.x, true);
         msgView.setFloat32(offset+4, controllers[k].position.y, true);
         msgView.setFloat32(offset+8, controllers[k].position.z, true);
