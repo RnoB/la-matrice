@@ -215,7 +215,7 @@ export class Client
                
 
                 var idx = this.listPlayers.findIndex(x => x.id == readId(data,1));
-
+                console.log(idx)
 
                 if (idx>-1)
                 {
