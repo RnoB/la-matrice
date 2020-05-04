@@ -31,6 +31,7 @@ function readPosition(data,player,offset = 0,controllers  = 0)
                                                 data.getFloat32(offset+48,true),
                                                 data.getFloat32(offset+52,true));
     }
+    console.log(player);
     return player
 
 }

@@ -127,9 +127,9 @@ function setup()
         navigator.xr.isSessionSupported('immersive-vr').then(
             function(isSupported)
             {
-                console.log(isSupported);
+
                 if(isSupported)
-                {console.log(isSupported);
+                {
                     for (let i = 0; i < 2; ++i) 
                     {
                         const controller = renderer.xr.getController(i);
