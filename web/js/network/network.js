@@ -92,7 +92,8 @@ function newObject(data,scene,offset)
                                     objectInfo.scale.y,
                                     objectInfo.scale.z)
         objectInfo.mesh.castShadow = true;
-        this.scene.add(objectInfo.mesh);
+        console.log("scene : "+scene.toString());
+        scene.add(objectInfo.mesh);
         return objectInfo
 }
 function readWorld(data,scene)
