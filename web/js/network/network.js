@@ -133,7 +133,7 @@ function readWorld(data,scene)
     {
 
 
-        var playerInfo = newPlayer(data,scene,45+5*(j));
+        var playerInfo = newPlayer(data,scene,45+9*(j));
         
         
         worldInfo['listPlayers'].push(playerInfo);
@@ -142,7 +142,7 @@ function readWorld(data,scene)
     for (let j = 0; j < worldInfo['Nobjects']; ++j) 
     {
 
-        var objectInfo = newObject(data,scene,45+5*worldInfo['Nplayers']+j*48)
+        var objectInfo = newObject(data,scene,45+9*worldInfo['Nplayers']+j*48)
         console.log(objectInfo);
         worldInfo['listObjects'].push(objectInfo);
     }
