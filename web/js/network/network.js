@@ -31,7 +31,7 @@ function readPosition(data,player,offset = 0,controllers  = 0)
                                                 data.getFloat32(offset+48,true),
                                                 data.getFloat32(offset+52,true));
     }
-    console.log(player);
+
     return player
 
 }
@@ -233,7 +233,7 @@ export class Client
 
         var msg = new Uint8Array(2);
         msg[0] = networkCode["connect"];
-        msg[1] = this.controllersNumber;
+        msg[1] = this.controllers.length;
         
         this.ws.send(msg.buffer);
         var t1 = new Date().getTime();
@@ -340,7 +340,7 @@ export class Client
         this.cameraPosition = camera.children[0]
         this.controllers = controllers;
 
-        this.controllersNumber = controllers.length;
+        console.log(controllers);
         this.scene = scene;
 
         this.listPlayers = [];
