@@ -189,7 +189,7 @@ function sendMessage(camera,controllers,noRotation = false,noScale = false)
         msgView.setFloat32(offset+12, rotation._w, true);
     }
     offset+=16;
-    console.log(controllers.length);
+    console.log(controllers);
     for (let k = 0; k < controllers.length; ++k) 
     {
         console.log(offset);
