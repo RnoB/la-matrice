@@ -125,8 +125,7 @@ function readWorld(data,scene)
     
     readPosition(data,worldInfo['playerInfo'],17,0);
     
-    console.log("world : "+worldInfo['world'].toString()+" id : "+worldInfo['id'].toString()+" Nplayers : "+worldInfo['Nplayers'].toString()+" Nobjects : "+worldInfo['Nobjects'].toString());
-    
+    console.log(worldInfo)
 
     
     worldInfo['listPlayers'] = [];
