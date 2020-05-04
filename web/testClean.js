@@ -15,8 +15,10 @@ var sky, floor;
 var scene;
 var camera;
 var renderer = null;
+if (!navigator.xr)
+{
 var polyfill = new WebXRPolyfill();
-
+}
 var ws;
 
 
