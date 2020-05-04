@@ -192,7 +192,7 @@ export class Client
         var t1 = new Date().getTime();
 
 
-console.log(code);
+
         switch(code)
         {
 
