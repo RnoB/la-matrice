@@ -210,7 +210,7 @@ class Server:
             async for message in websocket:
                 
                 code = message[0]
-
+                print(code)
                 try:
                     if code == networkCode['playerPosition'] and len(websocket.messages) == 0 and \
                     self.playerNumber>0:# and idPlayer == self.playerIds[self.nextPlayer]:
