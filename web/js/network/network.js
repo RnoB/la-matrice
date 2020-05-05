@@ -88,7 +88,7 @@ function removePlayer(data,scene,listPlayers,offset)
 }
 function newObject(data,scene,offset)
 {
-    console.log("size : "+(data.byteLength).toString());
+
         var objectInfo = {"id" : data.getInt32(offset+4,true),
                 "type" : data.getInt32(offset,true),
                 "position" : new THREE.Vector3(data.getFloat32(offset+8,true),
@@ -340,7 +340,7 @@ export class Client
         this.cameraPosition = camera.children[0]
         this.controllers = controllers;
 
-        console.log(controllers);
+
         this.scene = scene;
 
         this.listPlayers = [];
@@ -348,7 +348,7 @@ export class Client
 
         this.worldInfo = {};
 
-        console.log("scene : "+this.scene.toString())
+
         this.ws = new WebSocket('wss://'+ip+':'+port.toString()); 
         this.ws.onmessage = function (event) {self.receiver(event.data);}
         this.ws.onopen =  function(event){self.sender(); }

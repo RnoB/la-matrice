@@ -7,6 +7,13 @@ import {InputKey} from "./js/controls/inputKey.js"
 import {sleep,InitSky,InitFloor} from "./js/controls/world.js" 
 
 
+if (navigator.xr == null)
+{
+    var polyfill = new WebXRPolyfill();
+}
+
+
+
 var camera, controls, scene, renderer;
 
 var sky, floor;
@@ -15,12 +22,8 @@ var sky, floor;
 var scene;
 var camera;
 var renderer = null;
-console
-if (navigator.xr == null)
-{
-    console.log("polyfill")
-    var polyfill = new WebXRPolyfill();
-}
+
+
 var ws;
 
 
@@ -62,8 +65,12 @@ var client;
 /* Setup World */
 function setUpWorld()
 {
-
+    while (Object.keys(client.worldInfo).length === 0)
+    {
+        sleep(1);
+    }
     console.log("Setting up World")
+    console.log(client.worldInfo);
     var light = new THREE.DirectionalLight(0xab00ac, 1);
     light.position.set(1, 10, 1);
     light.castShadow = true;
