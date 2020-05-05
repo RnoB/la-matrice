@@ -160,7 +160,7 @@ function render() {
 
                 player["meshC"+k.toString()].position.lerp(player["posC"+k.toString()],0.5);
                 player["meshC"+k.toString()].quaternion.slerp(player["rotC"+k.toString()],0.5);
-                console.logplayer("mesh "+ k.toString() +" : "+player["meshC"+k.toString().position.toString()]);
+                console.logplayer("mesh "+ k.toString() +" : "+player["meshC"+k.toString()].position.toString());
             }
             
             
