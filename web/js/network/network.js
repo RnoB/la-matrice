@@ -3,6 +3,24 @@ import {sleep,worldGeometry} from "../controls/world.js"
 
 
 
+function readVector3(data,offset)
+{
+    var vec = new THREE.Vector3(data.getFloat32(offset,true),
+                                data.getFloat32(offset+4,true),
+                                data.getFloat32(offset+8,true));
+    return vec;
+}
+
+function readQuaternion(data,offset)
+{
+    var quat = new THREE.Quaternion(data.getFloat32(offset,true),
+                                    data.getFloat32(offset+4,true),
+                                    data.getFloat32(offset+8,true),
+                                    data.getFloat32(offset+12,true));
+    return quat;
+    
+}
+
 function readPosition(data,player,offset = 0,controllers  = 0)
 {
 
@@ -13,15 +31,17 @@ function readPosition(data,player,offset = 0,controllers  = 0)
                                                 data.getFloat32(offset+16,true),
                                                 data.getFloat32(offset+20,true),
                                                 data.getFloat32(offset+24,true));
+    
     for (let k = 0; k < player['controllers']; ++k) 
     {
-        player["posC"+k.toString()] = new THREE.Vector3(data.getFloat32(offset+28,true),
-                                                data.getFloat32(offset+32,true),
-                                                data.getFloat32(offset+36,true))
-        player["rotC"+k.toString()] = new THREE.Quaternion(data.getFloat32(offset+40,true),
-                                                data.getFloat32(offset+44,true),
-                                                data.getFloat32(offset+48,true),
-                                                data.getFloat32(offset+52,true));
+        offset+=28;
+        player["posC"+k.toString()] = new THREE.Vector3(data.getFloat32(offset,true),
+                                                data.getFloat32(offset+4,true),
+                                                data.getFloat32(offset+8,true))
+        player["rotC"+k.toString()] = new THREE.Quaternion(data.getFloat32(offset+12,true),
+                                                data.getFloat32(offset+16,true),
+                                                data.getFloat32(offset+20,true),
+                                                data.getFloat32(offset+24,true));
     }
 
     return player
@@ -46,7 +66,6 @@ function newPlayer(data,scene,offset,geometry)
 
     for (let k = 0; k < playerInfo['controllers']; ++k) 
     {
-        console.log('controlles');
         var controllerMesh = new THREE.Mesh( geometry[idx].geometryController, geometry[idx].materialController );
         controllerMesh.scale.set(.01,.1,.1);
         playerInfo["posC"+k.toString()] = new THREE.Vector3();
