@@ -70,7 +70,7 @@ function setUpWorld()
     //    sleep(10000);
         //console.log(client.worldInfo);
     //}
-    console.log(client.worldInfo);
+
     console.log("Setting up World")
     var light = new THREE.DirectionalLight(0xab00ac, 1);
     light.position.set(1, 10, 1);
@@ -196,6 +196,7 @@ function render() {
     
     renderer.render(scene, camera);
     frame++;
+        console.log(client.worldInfo);
 }
 
 
