@@ -65,11 +65,11 @@ var client;
 /* Setup World */
 function setUpWorld()
 {
-    //while (Object.keys(client.worldInfo).length === 0)
-    //{
-    //    sleep(10000);
-        //console.log(client.worldInfo);
-    //}
+    while (Object.keys(client.worldInfo).length === 0)
+    {
+        await sleep(10000);
+        console.log(client.worldInfo);
+    }
 
     console.log("Setting up World")
     var light = new THREE.DirectionalLight(0xab00ac, 1);
