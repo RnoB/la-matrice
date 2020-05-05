@@ -69,7 +69,7 @@ async function setUpWorld()
     while (Object.keys(client.worldInfo).length === 0)
     {
         await sleep(1000);
-        console.log(client.worldInfo);
+
         
     }
 
