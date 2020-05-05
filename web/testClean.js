@@ -16,7 +16,7 @@ if (navigator.xr == null)
 
 var camera, controls, scene, renderer;
 
-var sky, floor;
+
 
 
 var scene;

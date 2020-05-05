@@ -98,6 +98,8 @@ export class InitFloor
 
 export function worldBuilder(world,scene)
 {
+    
+    var sky,floor;
     switch(world)
     {
 
