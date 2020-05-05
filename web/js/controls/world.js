@@ -150,7 +150,7 @@ export function worldBuilder(world,scene)
             scene.add(light);  
         //    let helper = new THREE.CameraHelper ( light.shadow.camera );
         //    scene.add( helper );
-            sky = new InitSky();
+            sky = new InitSky(colorR =.2, colorG =6,colorB = .12);
             sky.addToScene(scene);    
             floor = new InitFloor();
             floor.addToScene(scene);
