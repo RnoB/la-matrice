@@ -67,8 +67,8 @@ function setUpWorld()
 {
     while (Object.keys(client.worldInfo).length === 0)
     {
-        setTimeout(myFunction, 1000);
-        console.log(client.worldInfo);
+        setTimeout(function(){console.log(client.worldInfo);}, 1000);
+        ;
     }
 
     console.log("Setting up World")
