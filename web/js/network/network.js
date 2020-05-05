@@ -43,8 +43,10 @@ function newPlayer(data,scene,offset,geometry)
 
     var idx = geometry.findIndex(x => x.type == playerInfo['type']);
     playerInfo["mesh"] = new THREE.Mesh(geometry[idx].geometry, geometry[idx].material);
+
     for (let k = 0; k < playerInfo['controllers']; ++k) 
     {
+        console.log('controlles');
         var controllerMesh = new THREE.Mesh( geometry[idx].geometryController, geometry[idx].materialController );
         controllerMesh.scale.set(.01,.1,.1);
         playerInfo["posC"+k.toString()] = new THREE.Vector3();

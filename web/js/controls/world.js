@@ -172,6 +172,7 @@ export function worldGeometry(world)
             worldGeometry.push({"type" : 1000, "geometry" : geometry,"material" : material,
                                                 "geometryController" : geometry,"material":material});
             worldGeometry.push({"type" : 2000, "geometry" : geometry,"material" : material});
+            worldGeometry.push({"type" : "controllers", "geometry" : geometry,"material" : material});
         break;
         case 1:
             var geometry = new THREE.SphereGeometry();
@@ -179,6 +180,8 @@ export function worldGeometry(world)
             worldGeometry.push({"type" : 1000, "geometry" : geometry,"material" : material,
                                                 "geometryController" : geometry,"material":material});
             worldGeometry.push({"type" : 2000, "geometry" : geometry,"material" : material});
+            worldGeometry.push({"type" : "controllers", "geometry" : geometry,"material" : material});
+        
         break;
     }
     return worldGeometry;
