@@ -4,7 +4,7 @@ import { VRButton } from './js/webxr/VRButton.js';
 import { networkCode,objectsType } from "./js/network/networkCode.js"
 import { Client } from "./js/network/network.js"
 import {InputKey} from "./js/controls/inputKey.js" 
-import {sleep,InitSky,InitFloor} from "./js/controls/world.js" 
+import {sleep,worldBuilder} from "./js/controls/world.js" 
 
 
 if (navigator.xr == null)
@@ -74,30 +74,8 @@ async function setUpWorld()
     }
 
     console.log("Setting up World")
-    var light = new THREE.DirectionalLight(0xab00ac, 1);
-    light.position.set(1, 10, 1);
-    light.castShadow = true;
-    light.shadow.mapSize.width = 512;  // default   
-    light.shadow.mapSize.height = 512; // default
-    light.shadow.camera.near = 0.5;    // default
-    light.shadow.camera.far = 500;     // default
-    var light2 = new THREE.PointLight(0x00ff, 1, 1000);
-    light2.position.set(0, 50, 50);
-    
-    scene.add(light2);
-    light.shadow.bias = 0.0001
+    worldBuilder(client.worldInfo.world,scene);
 
-    //light.shadow.camera.top = 1000;
-    //light.shadow.camera.bottom = 1000;
-    var ambientLight = new THREE.AmbientLight( 0xaa00ff, 0.3 );
-    scene.add( ambientLight );
-    scene.add(light);  
-//    let helper = new THREE.CameraHelper ( light.shadow.camera );
-//    scene.add( helper );
-    sky = new InitSky();
-    sky.addToScene(scene);    
-    floor = new InitFloor();
-    floor.addToScene(scene);
 
     
 }

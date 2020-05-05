@@ -95,3 +95,63 @@ export class InitFloor
     }
 
 }
+
+export function worldBuilder(world,scene)
+{
+    switch(world)
+    {
+
+        case 0:
+            var light = new THREE.DirectionalLight(0xab00ac, 1);
+            light.position.set(1, 10, 1);
+            light.castShadow = true;
+            light.shadow.mapSize.width = 512;  // default   
+            light.shadow.mapSize.height = 512; // default
+            light.shadow.camera.near = 0.5;    // default
+            light.shadow.camera.far = 500;     // default
+            var light2 = new THREE.PointLight(0x00ff, 1, 1000);
+            light2.position.set(0, 50, 50);
+            
+            scene.add(light2);
+            light.shadow.bias = 0.0001
+
+            //light.shadow.camera.top = 1000;
+            //light.shadow.camera.bottom = 1000;
+            var ambientLight = new THREE.AmbientLight( 0xaa00ff, 0.3 );
+            scene.add( ambientLight );
+            scene.add(light);  
+        //    let helper = new THREE.CameraHelper ( light.shadow.camera );
+        //    scene.add( helper );
+            sky = new InitSky();
+            sky.addToScene(scene);    
+            floor = new InitFloor();
+            floor.addToScene(scene);
+            break;
+        case 1:
+            var light = new THREE.DirectionalLight(0x00cc00, 1);
+            light.position.set(1, 10, 1);
+            light.castShadow = true;
+            light.shadow.mapSize.width = 512;  // default   
+            light.shadow.mapSize.height = 512; // default
+            light.shadow.camera.near = 0.5;    // default
+            light.shadow.camera.far = 500;     // default
+            var light2 = new THREE.PointLight(0x00ff00, 1, 1000);
+            light2.position.set(0, 50, 50);
+            
+            scene.add(light2);
+            light.shadow.bias = 0.0001
+
+            //light.shadow.camera.top = 1000;
+            //light.shadow.camera.bottom = 1000;
+            var ambientLight = new THREE.AmbientLight( 0x00ab00, 0.3 );
+            scene.add( ambientLight );
+            scene.add(light);  
+        //    let helper = new THREE.CameraHelper ( light.shadow.camera );
+        //    scene.add( helper );
+            sky = new InitSky();
+            sky.addToScene(scene);    
+            floor = new InitFloor();
+            floor.addToScene(scene);
+            break;
+    }
+}
