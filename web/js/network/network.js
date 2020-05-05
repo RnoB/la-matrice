@@ -3,14 +3,6 @@ import {sleep} from "../controls/world.js"
 
 
 
-var geometry = new THREE.BoxGeometry();
-var material = new THREE.MeshStandardMaterial();
-
-
-
-
-
-
 function readPosition(data,player,offset = 0,controllers  = 0)
 {
 
@@ -41,18 +33,19 @@ function readId(data,offset)
     return  data.getInt32(offset,true);
 }
 
-function newPlayer(data,scene,offset)
+function newPlayer(data,scene,offset,geometry)
 {
     var playerInfo = {"id" : data.getInt32(offset+4,true),
     "type" : data.getInt32(offset,true),
     "position" : new THREE.Vector3(),
     "rotation" : new THREE.Quaternion(),
-    "mesh" : new THREE.Mesh(geometry, material),
     "controllers" : data.getUint8(offset+8,true)};
 
+    var idx = geometry.findIndex(x => x.type == playerInfo['type']);
+    playerInfo["mesh"] = new THREE.Mesh(geometry[idx].geometry, geometry[idx].material);
     for (let k = 0; k < playerInfo['controllers']; ++k) 
     {
-        var controllerMesh = new THREE.Mesh( geometry, material );
+        var controllerMesh = new THREE.Mesh( geometry[idx].geometryController, geometry[idx].materialController );
         controllerMesh.scale.set(.01,.1,.1);
         playerInfo["posC"+k.toString()] = new THREE.Vector3();
         playerInfo["rotC"+k.toString()] = new THREE.Quaternion();
@@ -100,8 +93,9 @@ function newObject(data,scene,offset)
                                 data.getFloat32(offset+32,true) ),
                 "scale" : new THREE.Vector3(data.getFloat32(offset+36,true),
                                 data.getFloat32(offset+40,true),
-                                data.getFloat32(offset+44,true)),
-                "mesh" : new THREE.Mesh(geometry, material)};
+                                data.getFloat32(offset+44,true))};
+        var idx = geometry.findIndex(x => x.type == objectInfo['type']);
+        objectInfo["mesh"] = new THREE.Mesh(geometry[idx].geometry, geometry[idx].material);
         objectInfo.mesh.position.set(objectInfo.position.x,
                                     objectInfo.position.y,
                                     objectInfo.position.z)
@@ -138,7 +132,7 @@ function readWorld(data,scene)
                             'Nobjects' : data.getInt32(9,true),
                             'id' : data.getInt32(13,true),
                             'playerInfo' : {}};
-    
+    worldInfo['geometry'] = worldGeometry(worldInfo['world']);
     readPosition(data,worldInfo['playerInfo'],17,0);
     
     console.log(worldInfo)
@@ -149,7 +143,7 @@ function readWorld(data,scene)
     {
 
 
-        var playerInfo = newPlayer(data,scene,45+9*(j));
+        var playerInfo = newPlayer(data,scene,45+9*(j),worldinfo['geometry']);
         
         
         worldInfo['listPlayers'].push(playerInfo);
@@ -158,7 +152,7 @@ function readWorld(data,scene)
     for (let j = 0; j < worldInfo['Nobjects']; ++j) 
     {
 
-        var objectInfo = newObject(data,scene,45+9*worldInfo['Nplayers']+j*48)
+        var objectInfo = newObject(data,scene,45+9*worldInfo['Nplayers']+j*48,worldinfo['geometry'])
         console.log(objectInfo);
         worldInfo['listObjects'].push(objectInfo);
     }
@@ -291,6 +285,7 @@ export class Client
             case networkCode['world']:
                 
                 this.worldInfo = readWorld(data,this.scene);
+                this.worldGeometry = worldGeometry(this.worldInfo[]);
                 this.listObjects = this.worldInfo["listObjects"];
                 this.listPlayers = this.worldInfo["listPlayers"];
                 var playerInfo = this.worldInfo.playerInfo;
@@ -347,6 +342,7 @@ export class Client
         this.listObjects = [];
 
         this.worldInfo = {};
+
 
 
         this.ws = new WebSocket('wss://'+ip+':'+port.toString()); 

@@ -130,7 +130,7 @@ export function worldBuilder(world,scene)
             floor.addToScene(scene);
             break;
         case 1:
-            var light = new THREE.DirectionalLight(0x00cc00, 1);
+            var light = new THREE.DirectionalLight(0x00ff00, 1);
             light.position.set(1, 10, 1);
             light.castShadow = true;
             light.shadow.mapSize.width = 512;  // default   
@@ -157,4 +157,27 @@ export function worldBuilder(world,scene)
             floor.addToScene(scene);
             break;
     }
+}
+
+
+export function worldGeometry(world)
+{
+    worldGeometry = []
+    switch(world)
+    {
+        case 0:
+            var geometry = new THREE.BoxGeometry();
+            var material = new THREE.MeshStandardMaterial();
+            worldGeometry.push({"type" : 1000, "geometry" : geometry,"material" : material,
+                                                "geometryController" : geometry,"material":material});
+            worldGeometry.push({"type" : 2000, "geometry" : geometry,"material" : material});
+        break;
+            var geometry = new THREE.SphereGeometry();
+            var material = new THREE.MeshStandardMaterial();
+            worldGeometry.push({"type" : 1000, "geometry" : geometry,"material" : material,
+                                                "geometryController" : geometry,"material":material});
+            worldGeometry.push({"type" : 2000, "geometry" : geometry,"material" : material});
+    }
+    return worldGeometry;
+    
 }
