@@ -63,7 +63,7 @@ var noControllers = false;
 var client;
 
 /* Setup World */
-function setUpWorld()
+async function setUpWorld()
 {
     sleep(10000);
     //while (Object.keys(client.worldInfo).length === 0)
