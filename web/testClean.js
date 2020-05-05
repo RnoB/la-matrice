@@ -65,11 +65,12 @@ var client;
 /* Setup World */
 function setUpWorld()
 {
-    while (Object.keys(client.worldInfo).length === 0)
-    {
-        setTimeout(function(){console.log(client.worldInfo);}, 10);
+    sleep(1000);
+    //while (Object.keys(client.worldInfo).length === 0)
+    //{
+        console.log(client.worldInfo);
         
-    }
+    //}
 
     console.log("Setting up World")
     var light = new THREE.DirectionalLight(0xab00ac, 1);
@@ -143,7 +144,7 @@ function setup()
             }
         );
     }
-    console.log(controllers)
+
 
 
     client = new Client("matricematrice.xyz",6785,20,scene,
