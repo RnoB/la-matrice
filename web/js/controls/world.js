@@ -163,6 +163,7 @@ export function worldBuilder(world,scene)
 export function worldGeometry(world)
 {
     worldGeometry = []
+    console.log(world);
     switch(world)
     {
         case 0:
