@@ -65,7 +65,7 @@ var client;
 /* Setup World */
 async function setUpWorld()
 {
-    sleep(10000);
+    sleep(100000);
     //while (Object.keys(client.worldInfo).length === 0)
     //{
         console.log(client.worldInfo);
