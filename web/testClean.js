@@ -68,9 +68,9 @@ function setUpWorld()
     while (Object.keys(client.worldInfo).length === 0)
     {
         sleep(1);
+    console.log(client.worldInfo);
     }
     console.log("Setting up World")
-    console.log(client.worldInfo);
     var light = new THREE.DirectionalLight(0xab00ac, 1);
     light.position.set(1, 10, 1);
     light.castShadow = true;
