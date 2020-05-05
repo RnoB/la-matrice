@@ -197,7 +197,7 @@ function render() {
     
     renderer.render(scene, camera);
     frame++;
-        console.log(client.worldInfo);
+
 }
 
 
