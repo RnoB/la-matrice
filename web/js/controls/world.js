@@ -178,7 +178,7 @@ export function worldGeometry(world)
             var geometry = new THREE.SphereGeometry();
             var material = new THREE.MeshStandardMaterial();
             worldGeometry.push({"type" : 1000, "geometry" : geometry,"material" : material,
-                                                "geometryController" : geometry,"material":material});
+                                                "geometryController" : geometry,"materialController":material});
             worldGeometry.push({"type" : 2000, "geometry" : geometry,"material" : material});
             worldGeometry.push({"type" : "controllers", "geometry" : geometry,"material" : material});
         
