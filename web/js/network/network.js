@@ -1,5 +1,5 @@
 import { networkCode,objectsType } from "./networkCode.js"
-import {sleep} from "../controls/world.js" 
+import {sleep,worldGeometry} from "../controls/world.js" 
 
 
 
@@ -284,7 +284,7 @@ export class Client
 
             case networkCode['world']:
                 
-                this.worldInfo = readWorld(data,this.scene);
+                this.worldInfo = readWorld(data,this.scene);s
                 this.listObjects = this.worldInfo["listObjects"];
                 this.listPlayers = this.worldInfo["listPlayers"];
                 var playerInfo = this.worldInfo.playerInfo;
