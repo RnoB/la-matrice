@@ -298,7 +298,7 @@ export class Client
                 break;
 
             case networkCode['newPlayer']:
-                var playerInfo = newPlayer(data,this.scene,1,this.worldinfo['geometry'])
+                var playerInfo = newPlayer(data,this.scene,1,this.worldInfo['geometry'])
                 this.listPlayers.push(playerInfo);
                 console.log(playerInfo);
 
@@ -307,7 +307,7 @@ export class Client
                 removePlayer(data,this.scene,this.listPlayers,1)
                 break;
             case networkCode['newObject']:
-                var objectInfo = newObject(data,this.scene,1,this.worldinfo['geometry'])
+                var objectInfo = newObject(data,this.scene,1,this.worldInfo['geometry'])
 
                 this.listObjects.push(objectInfo);
 
