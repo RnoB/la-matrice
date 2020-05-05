@@ -95,7 +95,7 @@ function newObject(data,scene,offset,geometry)
                                 data.getFloat32(offset+40,true),
                                 data.getFloat32(offset+44,true))};
         var idx = geometry.findIndex(x => x.type == objectInfo['type']);
-        console.log(geometry);
+
         objectInfo["mesh"] = new THREE.Mesh(geometry[idx].geometry, geometry[idx].material);
         objectInfo.mesh.position.set(objectInfo.position.x,
                                     objectInfo.position.y,
@@ -144,7 +144,7 @@ function readWorld(data,scene)
     {
 
 
-        var playerInfo = newPlayer(data,scene,45+9*(j),worldinfo['geometry']);
+        var playerInfo = newPlayer(data,scene,45+9*(j),worldInfo['geometry']);
         
         
         worldInfo['listPlayers'].push(playerInfo);
@@ -153,7 +153,7 @@ function readWorld(data,scene)
     for (let j = 0; j < worldInfo['Nobjects']; ++j) 
     {
 
-        var objectInfo = newObject(data,scene,45+9*worldInfo['Nplayers']+j*48,worldinfo['geometry'])
+        var objectInfo = newObject(data,scene,45+9*worldInfo['Nplayers']+j*48,worldInfo['geometry'])
         console.log(objectInfo);
         worldInfo['listObjects'].push(objectInfo);
     }
