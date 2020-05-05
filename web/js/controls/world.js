@@ -163,7 +163,7 @@ export function worldBuilder(world,scene)
 export function worldGeometry(world)
 {
     worldGeometry = []
-    console.log(world);
+
     switch(world)
     {
         case 0:
@@ -173,11 +173,13 @@ export function worldGeometry(world)
                                                 "geometryController" : geometry,"material":material});
             worldGeometry.push({"type" : 2000, "geometry" : geometry,"material" : material});
         break;
+        case 1:
             var geometry = new THREE.SphereGeometry();
             var material = new THREE.MeshStandardMaterial();
             worldGeometry.push({"type" : 1000, "geometry" : geometry,"material" : material,
                                                 "geometryController" : geometry,"material":material});
             worldGeometry.push({"type" : 2000, "geometry" : geometry,"material" : material});
+        break;
     }
     return worldGeometry;
     
