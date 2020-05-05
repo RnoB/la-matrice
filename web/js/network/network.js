@@ -79,7 +79,7 @@ function removePlayer(data,scene,listPlayers,offset)
 
     }
 }
-function newObject(data,scene,offset)
+function newObject(data,scene,offset,geometry)
 {
 
         var objectInfo = {"id" : data.getInt32(offset+4,true),
@@ -298,7 +298,7 @@ export class Client
                 break;
 
             case networkCode['newPlayer']:
-                var playerInfo = newPlayer(data,this.scene,1)
+                var playerInfo = newPlayer(data,this.scene,1,this.worldinfo['geometry'])
                 this.listPlayers.push(playerInfo);
                 console.log(playerInfo);
 
@@ -307,7 +307,7 @@ export class Client
                 removePlayer(data,this.scene,this.listPlayers,1)
                 break;
             case networkCode['newObject']:
-                var objectInfo = newObject(data,this.scene,1)
+                var objectInfo = newObject(data,this.scene,1,this.worldinfo['geometry'])
 
                 this.listObjects.push(objectInfo);
 
