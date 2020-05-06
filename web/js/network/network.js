@@ -336,7 +336,7 @@ export class Client
                 this.noControllers = !!this.worldInfo['noControllers'];
                 if(this.noControllers)
                 {
-                    controllers = [];
+                    this.controllers = [];
                 }
                 this.listObjects = this.worldInfo["listObjects"];
                 this.listPlayers = this.worldInfo["listPlayers"];
