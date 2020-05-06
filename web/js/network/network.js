@@ -153,9 +153,11 @@ function readWorld(data,scene)
                             'Nplayers' : data.getInt32(5,true),
                             'Nobjects' : data.getInt32(9,true),
                             'id' : data.getInt32(13,true),
+                            'noRotation' : data.getIInt8(17,true),
+                            'noControllers' : data.UInt8(18,true),
                             'playerInfo' : {}};
     worldInfo['geometry'] = worldGeometry(worldInfo['world']);
-    var offset = 17;
+    var offset = 19;
     readPosition(data,worldInfo['playerInfo'],offset,0);
     
     console.log(worldInfo)
