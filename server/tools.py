@@ -48,13 +48,15 @@ def initialPosition(playersPosition):
     return position, rotation
 
 
-def readPosition(message,player):
+def readPosition(message,player,noRotation):
 
     player['position'] = struct.unpack('<fff',message[1:13])
-    player['rotation'] = struct.unpack('<ffff',message[13:29])
+    if not noRotation:
+        player['rotation'] = struct.unpack('<ffff',message[13:29])
     for k in range(0,player['controllers']):
         player["posC"+str(k)] = struct.unpack('<fff',message[29+k*28:41+k*28])
-        player["rotC"+str(k)] = struct.unpack('<ffff',message[41+k*28:57+k*28])
+        if not noRotation:
+            player["rotC"+str(k)] = struct.unpack('<ffff',message[41+k*28:57+k*28])
     return player
 
 
