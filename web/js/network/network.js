@@ -30,10 +30,10 @@ function readPosition(data,player,offset = 0,controllers  = 0,noRotation=false,n
     offset += 12;
     if(!noRotation)
     {
-        player['rotation'] = new THREE.Quaternion(data.getFloat32(offset+12,true),
-                                                data.getFloat32(offset+16,true),
-                                                data.getFloat32(offset+20,true),
-                                                data.getFloat32(offset+24,true));
+        player['rotation'] = new THREE.Quaternion(data.getFloat32(offset,true),
+                                                data.getFloat32(offset+4,true),
+                                                data.getFloat32(offset+8,true),
+                                                data.getFloat32(offset+12,true));
         offset += 16;
     }
 
@@ -46,10 +46,10 @@ function readPosition(data,player,offset = 0,controllers  = 0,noRotation=false,n
         offset += 12;
         if(!noRotation)
         {
-            player["rotC"+k.toString()] = new THREE.Quaternion(data.getFloat32(offset+12,true),
-                                                data.getFloat32(offset+16,true),
-                                                data.getFloat32(offset+20,true),
-                                                data.getFloat32(offset+24,true));
+            player["rotC"+k.toString()] = new THREE.Quaternion(data.getFloat32(offset,true),
+                                                data.getFloat32(offset+4,true),
+                                                data.getFloat32(offset+8,true),
+                                                data.getFloat32(offset+12,true));
             offset += 16;
         }
     }
@@ -324,7 +324,7 @@ export class Client
             case networkCode['world']:
                 
                 this.worldInfo = readWorld(data,this.scene);
-                this.noRotation = !!worldInfo['noRotation'];
+                sthis.noRotation = !!worldInfo['noRotation'];
                 this.listObjects = this.worldInfo["listObjects"];
                 this.listPlayers = this.worldInfo["listPlayers"];
                 var playerInfo = this.worldInfo.playerInfo;
