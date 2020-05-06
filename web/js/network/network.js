@@ -110,7 +110,7 @@ function removePlayer(data,scene,listPlayers,offset)
 
     }
 }
-function newObject(data,scene,offset,geometry,noRotation)
+function newObject(data,scene,offset,geometry)
 {
 
         var objectInfo = {"id" : data.getInt32(offset+4,true),
@@ -120,15 +120,13 @@ function newObject(data,scene,offset,geometry,noRotation)
                                 data.getFloat32(offset+16,true))};
         
         offset += 20
-        console.log(noRotation);
-        if (!noRotation)
-        {
-            objectInfo["rotation"] = new THREE.Quaternion(data.getFloat32(offset,true),
-                                data.getFloat32(offset+4,true),
-                                data.getFloat32(offset+8,true),
-                                data.getFloat32(offset+12,true) )
-            offset += 16;
-        }
+
+        objectInfo["rotation"] = new THREE.Quaternion(data.getFloat32(offset,true),
+                            data.getFloat32(offset+4,true),
+                            data.getFloat32(offset+8,true),
+                            data.getFloat32(offset+12,true) )
+        offset += 16;
+
         objectInfo["scale"] = new THREE.Vector3(data.getFloat32(offset,true),
                                 data.getFloat32(offset+4,true),
                                 data.getFloat32(offset+8,true))
@@ -199,7 +197,7 @@ function readWorld(data,scene)
     for (let j = 0; j < worldInfo['Nobjects']; ++j) 
     {
 
-        var objectInfo = newObject(data,scene,offset,worldInfo['geometry'],worldInfo['noRotation'])
+        var objectInfo = newObject(data,scene,offset,worldInfo['geometry'])
         console.log(objectInfo);
         worldInfo['listObjects'].push(objectInfo);
         offset+=48;
@@ -361,7 +359,7 @@ export class Client
                 removePlayer(data,this.scene,this.listPlayers,1)
                 break;
             case networkCode['newObject']:
-                var objectInfo = newObject(data,this.scene,1,this.worldInfo['geometry'],this.noRotation)
+                var objectInfo = newObject(data,this.scene,1,this.worldInfo['geometry'])
 
                 this.listObjects.push(objectInfo);
 
