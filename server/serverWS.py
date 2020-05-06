@@ -306,6 +306,7 @@ def startSimulation():
         except:
             time.sleep(.1)
     objectId = server.addObject(2000,position = [k/3.0,1.5,-1],scale= [.5,1,.6])
+    objectId = server.addObject(2000,position = [k/3.0,1.5,-1],scale= [.5,1,.6])
         
     while True:
         time.sleep(.1)
