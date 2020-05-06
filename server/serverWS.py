@@ -170,7 +170,7 @@ class Server:
                 position0 = objecte['position']
                 rotation0 = objecte['rotation']
                 scale0 = objecte['scale']
-                dataWorld += tools.updatePacker(objecte,noRotation=false,self.noControllers,noScale = False)
+                dataWorld += tools.updatePacker(objecte,noRotation=False,noControllers = True,noScale = False)
                 
             try:
                 await self.playersSocket[-1].send(dataWorld)
