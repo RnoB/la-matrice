@@ -126,7 +126,7 @@ function newObject(data,scene,offset,geometry)
                                 data.getFloat32(offset+40,true),
                                 data.getFloat32(offset+44,true))};
         var idx = geometry.findIndex(x => x.type == objectInfo['type']);
-
+        console.log(idx);
         objectInfo["mesh"] = new THREE.Mesh(geometry[idx].geometry, geometry[idx].material);
         objectInfo.mesh.position.set(objectInfo.position.x,
                                     objectInfo.position.y,
