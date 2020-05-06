@@ -324,7 +324,7 @@ export class Client
             case networkCode['world']:
                 
                 this.worldInfo = readWorld(data,this.scene);
-                this.noRotation = !!worldInfo['noRotation'];
+                this.noRotation = !!this.sworldInfo['noRotation'];
                 this.listObjects = this.worldInfo["listObjects"];
                 this.listPlayers = this.worldInfo["listPlayers"];
                 var playerInfo = this.worldInfo.playerInfo;
