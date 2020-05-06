@@ -312,7 +312,7 @@ export class Client
                 if (idx>-1)
                 {
 
-                    readPosition(data,this.listObjects[idx],5,this.noRotation);
+                    readPosition(data,this.listObjects[idx],5,[],this.noRotation);
                 }
 
                 break;
