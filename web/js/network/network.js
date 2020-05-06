@@ -131,7 +131,7 @@ function newObject(data,scene,offset,geometry,noRotation)
         }
         objectInfo["scale"] = new THREE.Vector3(data.getFloat32(offset,true),
                                 data.getFloat32(offset+4,true),
-                                data.getFloat32(offset+sss8,true))
+                                data.getFloat32(offset+8,true))
         var idx = geometry.findIndex(x => x.type == objectInfo['type']);
         console.log(idx);
         console.log(geometry);
