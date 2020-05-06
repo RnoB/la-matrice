@@ -223,7 +223,7 @@ class Server:
                         t0 = time.time()
                         idx = self.playerIds.index(idPlayer)
                         player = self.playersList[idx]
-                        player = tools.readPosition(message,player)
+                        player = tools.readPosition(message,player,self.noRotation)
                         self.playersPosition[idx] = player['position']
                         self.playersRotation[idx] = player['rotation']
                         messageSend = tools.messagePosition(networkCode['playerPosition'],player)
