@@ -120,6 +120,7 @@ function newObject(data,scene,offset,geometry,noRotation)
                                 data.getFloat32(offset+16,true))};
         
         offset += 20
+        console.log(noRotation);
         if (!noRotation)
         {
             objectInfo["rotation"] = new THREE.Quaternion(data.getFloat32(offset,true),
