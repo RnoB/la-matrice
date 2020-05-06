@@ -288,10 +288,10 @@ class Server:
 
 
 
-def startServer(port,cert,key,noRotation = False,noControllers = False):
+def startServer(port,cert,key,noRotation = False,noControllers = False,world = 0):
     global server
     asyncio.set_event_loop(asyncio.new_event_loop())
-    server = Server(port = port,cert = cert,key = key,noRotation = noRotation,noControllers = noControllers,world=1)
+    server = Server(port = port,cert = cert,key = key,noRotation = noRotation,noControllers = noControllers,world=world)
 
     server.start()
 
@@ -305,7 +305,7 @@ def startSimulation():
             running=True
         except:
             time.sleep(.1)
-    objectId = server.addObject(2000,position = [k/3.0,1.5,-1],scale= [.5,1,.6])
+    objectId = server.addObject(2000,position = [k/3.0,1.5,-1],scale= [.5,1,.6],noRotation = True)
         
     while True:
         time.sleep(.1)
@@ -326,9 +326,10 @@ def main():
     port = sys.argv[1]
     cert = sys.argv[2]
     key = sys.argv[3]
-    
-
-    serverThread = threading.Thread(target=startServer, args=(port, cert,key))
+    noRotation = False
+    noControllers = False
+    world = 0
+    serverThread = threading.Thread(target=startServer, args=(port, cert,key,noRotation,noControllers,world))
     serverThread.daemon = True
     serverThread.start()
     simuThread = threading.Thread(target=startSimulation)
