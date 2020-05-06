@@ -126,7 +126,7 @@ function newObject(data,scene,offset,geometry)
             objectInfo["rotation"] = new THREE.Quaternion(data.getFloat32(offset+20,true),
                                 data.getFloat32(offset+24,true),
                                 data.getFloat32(offset+28,true),
-                                data.getFloat32(offset+32,true) ),
+                                data.getFloat32(offset+32,true) )
         }
         var idx = geometry.findIndex(x => x.type == objectInfo['type']);
         console.log(idx);
