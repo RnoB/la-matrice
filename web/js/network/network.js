@@ -118,13 +118,16 @@ function newObject(data,scene,offset,geometry)
                 "position" : new THREE.Vector3(data.getFloat32(offset+8,true),
                                 data.getFloat32(offset+12,true),
                                 data.getFloat32(offset+16,true)),
-                "rotation" : new THREE.Quaternion(data.getFloat32(offset+20,true),
-                                data.getFloat32(offset+24,true),
-                                data.getFloat32(offset+28,true),
-                                data.getFloat32(offset+32,true) ),
                 "scale" : new THREE.Vector3(data.getFloat32(offset+36,true),
                                 data.getFloat32(offset+40,true),
                                 data.getFloat32(offset+44,true))};
+        if (!this.noRotation)
+        {
+            objectInfo["rotation"] = new THREE.Quaternion(data.getFloat32(offset+20,true),
+                                data.getFloat32(offset+24,true),
+                                data.getFloat32(offset+28,true),
+                                data.getFloat32(offset+32,true) ),
+        }
         var idx = geometry.findIndex(x => x.type == objectInfo['type']);
         console.log(idx);
         console.log(geometry);
