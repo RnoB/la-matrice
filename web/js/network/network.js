@@ -21,27 +21,37 @@ function readQuaternion(data,offset)
     
 }
 
-function readPosition(data,player,offset = 0,controllers  = 0)
+function readPosition(data,player,offset = 0,controllers  = 0,noRotation=false,noControllers = false)
 {
 
     player['position'] = new THREE.Vector3(data.getFloat32(offset,true),
                                                 data.getFloat32(offset+4,true),
                                                 data.getFloat32(offset+8,true));
-    player['rotation'] = new THREE.Quaternion(data.getFloat32(offset+12,true),
+    offset += 12;
+    if(!noRotation)
+    {
+        player['rotation'] = new THREE.Quaternion(data.getFloat32(offset+12,true),
                                                 data.getFloat32(offset+16,true),
                                                 data.getFloat32(offset+20,true),
                                                 data.getFloat32(offset+24,true));
-    
+        offset += 16;
+    }
+
     for (let k = 0; k < player['controllers']; ++k) 
     {
-        offset+=28;
+        
         player["posC"+k.toString()] = new THREE.Vector3(data.getFloat32(offset,true),
                                                 data.getFloat32(offset+4,true),
                                                 data.getFloat32(offset+8,true))
-        player["rotC"+k.toString()] = new THREE.Quaternion(data.getFloat32(offset+12,true),
+        offset += 12;
+        if(!noRotation)
+        {
+            player["rotC"+k.toString()] = new THREE.Quaternion(data.getFloat32(offset+12,true),
                                                 data.getFloat32(offset+16,true),
                                                 data.getFloat32(offset+20,true),
                                                 data.getFloat32(offset+24,true));
+            offset += 16;
+        }
     }
 
     return player
@@ -157,6 +167,7 @@ function readWorld(data,scene)
                             'noControllers' : data.getUint8(18,true),
                             'playerInfo' : {}};
     worldInfo['geometry'] = worldGeometry(worldInfo['world']);
+    this.noRotation = !!worldInfo['noRotation'];
     var offset = 19;
     readPosition(data,worldInfo['playerInfo'],offset,0);
     
@@ -262,7 +273,7 @@ export class Client
         while(true)
         {   
 
-            var msgSend = sendMessage(this.cameraPosition,this.controllers)
+            var msgSend = sendMessage(this.cameraPosition,this.controllers,this.noRotation)
             
             this.ws.send(msgSend);
             var t2 = new Date().getTime();
@@ -293,7 +304,7 @@ export class Client
                 if (idx>-1)
                 {
 
-                    readPosition(data,this.listObjects[idx],5);
+                    readPosition(data,this.listObjects[idx],5,this.noRotation);
                 }
 
                 break;
@@ -306,7 +317,7 @@ export class Client
                 if (idx>-1)
                 {
 
-                    readPosition(data,this.listPlayers[idx],5,this.listPlayers[idx].controllers);
+                    readPosition(data,this.listPlayers[idx],5,this.listPlayers[idx].controllers,this.noRotation);
                 }
                 break;
 
