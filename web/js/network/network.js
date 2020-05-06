@@ -167,7 +167,7 @@ function readWorld(data,scene)
                             'noControllers' : data.getUint8(18,true),
                             'playerInfo' : {}};
     worldInfo['geometry'] = worldGeometry(worldInfo['world']);
-    this.noRotation = !!worldInfo['noRotation'];
+
     var offset = 19;
     readPosition(data,worldInfo['playerInfo'],offset,0);
     
@@ -324,6 +324,7 @@ export class Client
             case networkCode['world']:
                 
                 this.worldInfo = readWorld(data,this.scene);
+                this.noRotation = !!worldInfo['noRotation'];
                 this.listObjects = this.worldInfo["listObjects"];
                 this.listPlayers = this.worldInfo["listPlayers"];
                 var playerInfo = this.worldInfo.playerInfo;
