@@ -192,7 +192,7 @@ function readWorld(data,scene)
     for (let j = 0; j < worldInfo['Nobjects']; ++j) 
     {
 
-        var objectInfo = newObject(data,scene,45+9*worldInfo['Nplayers']+j*48,worldInfo['geometry'])
+        var objectInfo = newObject(data,scene,offset,worldInfo['geometry'])
         console.log(objectInfo);
         worldInfo['listObjects'].push(objectInfo);
         offset+=48;
