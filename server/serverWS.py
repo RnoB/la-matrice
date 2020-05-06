@@ -53,7 +53,7 @@ class Server:
 
             dataWorld = struct.pack('B', networkCode['newObject'])
             dataWorld += struct.pack('<i',objecte['type'])
-            dataWorld += tools.updatePacker(objecte,self.noRotation,self.noControllers,noScale = False)
+            dataWorld += tools.updatePacker(objecte,noRotation = false,self.noControllers,noScale = False)
 
             position0 = objecte['position']
             rotation0 = objecte['rotation']
@@ -170,7 +170,7 @@ class Server:
                 position0 = objecte['position']
                 rotation0 = objecte['rotation']
                 scale0 = objecte['scale']
-                dataWorld += tools.updatePacker(objecte,false,self.noControllers,noScale = False)
+                dataWorld += tools.updatePacker(objecte,noRotation=false,self.noControllers,noScale = False)
                 
             try:
                 await self.playersSocket[-1].send(dataWorld)
