@@ -118,6 +118,7 @@ function newObject(data,scene,offset,geometry)
                 "position" : new THREE.Vector3(data.getFloat32(offset+8,true),
                                 data.getFloat32(offset+12,true),
                                 data.getFloat32(offset+16,true))};
+        
         offset += 20
         if (!this.noRotation)
         {
@@ -129,7 +130,7 @@ function newObject(data,scene,offset,geometry)
         }
         objectInfo["scale"] = new THREE.Vector3(data.getFloat32(offset,true),
                                 data.getFloat32(offset+4,true),
-                                data.getFloat32(offset+8,true))
+                                data.getFloat32(offset+sss8,true))
         var idx = geometry.findIndex(x => x.type == objectInfo['type']);
         console.log(idx);
         console.log(geometry);
