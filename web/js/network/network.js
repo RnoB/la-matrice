@@ -361,7 +361,7 @@ export class Client
                 removePlayer(data,this.scene,this.listPlayers,1)
                 break;
             case networkCode['newObject']:
-                var objectInfo = newObject(data,this.scene,1,this.worldInfo['geometry'])
+                var objectInfo = newObject(data,this.scene,1,this.worldInfo['geometry'],this.noRotation)
 
                 this.listObjects.push(objectInfo);
 
