@@ -155,20 +155,23 @@ function readWorld(data,scene)
                             'id' : data.getInt32(13,true),
                             'playerInfo' : {}};
     worldInfo['geometry'] = worldGeometry(worldInfo['world']);
-    readPosition(data,worldInfo['playerInfo'],17,0);
+    offset = 17;
+    readPosition(data,worldInfo['playerInfo'],offset,0);
     
     console.log(worldInfo)
 
     
     worldInfo['listPlayers'] = [];
+    offset+=28;
     for (let j = 0; j < worldInfo['Nplayers']; ++j) 
     {
 
 
-        var playerInfo = newPlayer(data,scene,45+9*(j),worldInfo['geometry']);
+        var playerInfo = newPlayer(data,scene,offset,worldInfo['geometry']);
         
         
         worldInfo['listPlayers'].push(playerInfo);
+        offset+=9;
     }
     worldInfo['listObjects'] = [];
     for (let j = 0; j < worldInfo['Nobjects']; ++j) 
@@ -177,6 +180,7 @@ function readWorld(data,scene)
         var objectInfo = newObject(data,scene,45+9*worldInfo['Nplayers']+j*48,worldInfo['geometry'])
         console.log(objectInfo);
         worldInfo['listObjects'].push(objectInfo);
+        offset+=48;
     }
     return worldInfo;
 }
