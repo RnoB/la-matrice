@@ -110,7 +110,7 @@ function removePlayer(data,scene,listPlayers,offset)
 
     }
 }
-function newObject(data,scene,offset,geometry)
+function newObject(data,scene,offset,geometry,noRotation)
 {
 
         var objectInfo = {"id" : data.getInt32(offset+4,true),
@@ -120,7 +120,7 @@ function newObject(data,scene,offset,geometry)
                                 data.getFloat32(offset+16,true))};
         
         offset += 20
-        if (!this.noRotation)
+        if (!noRotation)
         {
             objectInfo["rotation"] = new THREE.Quaternion(data.getFloat32(offset,true),
                                 data.getFloat32(offset+4,true),
@@ -198,7 +198,7 @@ function readWorld(data,scene)
     for (let j = 0; j < worldInfo['Nobjects']; ++j) 
     {
 
-        var objectInfo = newObject(data,scene,offset,worldInfo['geometry'])
+        var objectInfo = newObject(data,scene,offset,worldInfo['geometry'],worldInfo['noRotation'])
         console.log(objectInfo);
         worldInfo['listObjects'].push(objectInfo);
         offset+=48;
