@@ -330,8 +330,8 @@ def main():
     port = sys.argv[1]
     cert = sys.argv[2]
     key = sys.argv[3]
-    noRotation = True
-    noControllers = True
+    noRotation = False
+    noControllers = False
     world = 0
     serverThread = threading.Thread(target=startServer, args=(port, cert,key,noRotation,noControllers,world))
     serverThread.daemon = True
