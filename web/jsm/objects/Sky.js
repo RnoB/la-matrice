@@ -92,11 +92,53 @@ Sky.SkyShader = {
 		'uniform float colorB;',
 		'uniform vec3 up;',
 
+		'const vec3 cameraPos = vec3( 0.0, 0.0, 0.0 );',
+
+		// constants for atmospheric scattering
+		'const float pi = 3.141592653589793238462643383279502884197169;',
+
+		'const float n = 1.0003;', // refractive index of air
+		'const float N = 2.545E25;', // number of molecules per unit volume for air at 288.15K and 1013mb (sea level -45 celsius)
+
+		// optical length at zenith for molecules
+		'const float rayleighZenithLength = 8.4E3;',
+		'const float mieZenithLength = 1.25E3;',
+		// 66 arc seconds -> degrees, and the cosine of that
+		'const float sunAngularDiameterCos = 0.999956676946448443553574619906976478926848692873900859324;',
+
+		// 3.0 / ( 16.0 * pi )
+		'const float THREE_OVER_SIXTEENPI = 0.05968310365946075;',
+		// 1.0 / ( 4.0 * pi )
+		'const float ONE_OVER_FOURPI = 0.07957747154594767;',
+
+		'float rayleighPhase( float cosTheta ) {',
+		'	return THREE_OVER_SIXTEENPI * ( 1.0 + pow( cosTheta, 2.0 ) );',
+		'}',
+
+		'float hgPhase( float cosTheta, float g ) {',
+		'	float g2 = pow( g, 2.0 );',
+		'	float inverse = 1.0 / pow( 1.0 - 2.0 * g * cosTheta + g2, 1.5 );',
+		'	return ONE_OVER_FOURPI * ( ( 1.0 - g2 ) * inverse );',
+		'}',
+
+		// Filmic ToneMapping http://filmicgames.com/archives/75
+		'const float A = 0.15;',
+		'const float B = 0.50;',
+		'const float C = 0.10;',
+		'const float D = 0.20;',
+		'const float E = 0.02;',
+		'const float F = 0.30;',
+
+		'const float whiteScale = 1.0748724675633854;', // 1.0 / Uncharted2Tonemap(1000.0)
+
+		'vec3 Uncharted2Tonemap( vec3 x ) {',
+		'	return ( ( x * ( A * x + C * B ) + D * E ) / ( x * ( A * x + B ) + D * F ) ) - E / F;',
+		'}',
 
 
 		'void main() {',
 
-		'	vec3 retColor =vec3(0,255*direction.y,0);',
+		'	vec3 retColor =direction;',
 
 		'	gl_FragColor = vec4( retColor, 1.0 );',
 
