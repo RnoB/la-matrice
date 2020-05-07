@@ -6,6 +6,8 @@ import { GUI } from './jsm/libs/dat.gui.module.js';
 
 import { Sky } from './jsm/objects/Sky.js';
 
+import { OrbitControls } from './jsm/controls/OrbitControls.js';
+
 var camera, controls, scene, renderer;
 
 var sky, sunSphere;
