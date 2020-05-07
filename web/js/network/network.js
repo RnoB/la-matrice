@@ -175,7 +175,7 @@ function readWorld(data,scene)
                             'playerInfo' : {}};
     worldInfo['geometry'] = worldGeometry(worldInfo['world']);
 
-    var offset = 19;
+    var offset = 23;
     readPosition(data,worldInfo['playerInfo'],offset,0);
     
     console.log(worldInfo)
