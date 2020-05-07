@@ -68,18 +68,16 @@ function initSky() {
     /// GUI
 
     var effectController = {
-        turbidity: 10,
-        rayleigh: 2,
-        mieCoefficient: 0.005,
-        mieDirectionalG: 0.8,
-        luminance: 1,
+        SkyExponent1: 1,
+        SkyExponent2: 1,
+        SkyIntensity: 1,
         inclination: 0.49, // elevation / inclination
         azimuth: 0.25, // Facing front,
         SkyColor1: "#ffff00", // Facing front,
         SkyColor2: "#00ff00", // Facing front,
         SkyColor3: "#0011ff", // Facing front,
         sun: ! true,
-        colorSky: "#ffffff"
+        
     };
 
     var distance = 400000;
@@ -114,19 +112,17 @@ function initSky() {
 
     var gui = new GUI();
 
-    gui.add( effectController, "turbidity", 1.0, 20.0, 0.1 ).onChange( guiChanged );
-    gui.add( effectController, "rayleigh", 0.0, 4, 0.001 ).onChange( guiChanged );
-    gui.add( effectController, "mieCoefficient", 0.0, 0.1, 0.001 ).onChange( guiChanged );
-    gui.add( effectController, "mieDirectionalG", 0.0, 1, 0.001 ).onChange( guiChanged );
-    gui.add( effectController, "luminance", 0.0, 2 ).onChange( guiChanged );
+    gui.add( effectController, "SkyIntensity", 0.0, 5.0, 0.01 ).onChange( guiChanged );
+    gui.add( effectController, "SkyExponent1", 0.0, 5.0, 0.01 ).onChange( guiChanged );
+    gui.add( effectController, "SkyExponent2", 0.0, 5.0, 0.001 ).onChange( guiChanged );
+
     gui.add( effectController, "inclination", 0, 1, 0.0001 ).onChange( guiChanged );
     gui.add( effectController, "azimuth", 0, 1, 0.0001 ).onChange( guiChanged );
     gui.add( effectController, "sun" ).onChange( guiChanged );
     gui.addColor( effectController, "SkyColor1").onChange( guiChanged );
     gui.addColor( effectController, "SkyColor2").onChange( guiChanged );
     gui.addColor( effectController, "SkyColor3").onChange( guiChanged );
-    gui.addColor(effectController,"colorSky").onChange( guiChanged );
-
+    
     guiChanged();
 
 }
