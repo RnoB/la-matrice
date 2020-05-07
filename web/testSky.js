@@ -80,7 +80,7 @@ function initSky() {
         SunColor : "#0011ff",
         SunAlpha : 1.0,
         SunBeta : 1.0,
-        SunIntensity :s 1.0
+        SunIntensity : 1.0
         
     };
 
