@@ -42,9 +42,9 @@ Sky.SkyShader = {
 		"luminance": { value: 1 },
 		"turbidity": { value: 2 },
 		"rayleigh": { value: 1 },
-		"colorR": { value: 0 },
-		"colorG": { value: 0 },
-		"colorB": { value: 0 },
+		"SkyColor1": { value: new THREE.Vector3( 1, 1, 0 ) },
+		"SkyColor2": { value: new THREE.Vector3( 0, 1, 0 ) },
+		"SkyColor3": { value: new THREE.Vector3( 0, 1, 1 ) },
 		"mieCoefficient": { value: 0.005 },
 		"mieDirectionalG": { value: 0.8 },
 		"sunPosition": { value: new THREE.Vector3() },
@@ -73,7 +73,9 @@ Sky.SkyShader = {
 		'varying vec3 vWorldPosition;',
 
 
-		'uniform float luminance;',
+		'uniform vec3 SkyColor1;',
+		'uniform vec3 SkyColor2;',
+		'uniform vec3 SkyColor3;',
 		'uniform float mieDirectionalG;',
 		'uniform float colorR;',
 		'uniform float colorG;',
@@ -89,9 +91,7 @@ Sky.SkyShader = {
 		'void main() {',
 
 		'	vec3 direction = normalize( vWorldPosition - cameraPos );',
-		'   vec3 SkyColor1 = vec3(.0,.1,.8);',
-		'   vec3 SkyColor2 = vec3(.3,.1,.8);',
-		'   vec3 SkyColor3 = vec3(.0,.2,.4);',
+
 		'   float SkyExponent1 = 1.0;',
 		'   float SkyExponent2 = 0.2;',
 		'   float SkyIntensity = 1.0;',
