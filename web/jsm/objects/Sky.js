@@ -52,11 +52,7 @@ Sky.SkyShader = {
 	},
 
 	vertexShader: [
-		'uniform vec3 sunPosition;',
-		'uniform float rayleigh;',
-		'uniform float turbidity;',
-		'uniform float mieCoefficient;',
-		'uniform vec3 up;',
+
 
 		'varying vec3 vWorldPosition;',
 
