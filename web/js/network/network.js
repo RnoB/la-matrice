@@ -172,6 +172,7 @@ function readWorld(data,scene)
                             'id' : data.getInt32(13,true),
                             'noRotation' : data.getUint8(17,true),
                             'noControllers' : data.getUint8(18,true),
+                            'scale' : data.getInt32(19,true),
                             'playerInfo' : {}};
     worldInfo['geometry'] = worldGeometry(worldInfo['world']);
 

@@ -145,10 +145,12 @@ class Server:
                 
                         
             self.playersSocket.append(websocket)
+            scale=1
             dataWorld = struct.pack('B', networkCode['world'])
             dataWorld += struct.pack('<iiii',self.world,self.playerNumber,len(self.objectsList),self.playerId)
             dataWorld += struct.pack('B', self.noRotation)
             dataWorld += struct.pack('B', self.noControllers)
+            dataWorld += struct.pack('<i', scale)
             dataWorld += struct.pack('<fffffff',position0[0],position0[1],position0[2],\
                                         rotation0[0],rotation0[1],rotation0[2],rotation0[3])
 
