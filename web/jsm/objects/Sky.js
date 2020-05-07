@@ -114,9 +114,9 @@ Sky.SkyShader = {
 		
 
 		'	float p = direction.y;',
-		'	float p1 = 1 - pow(min(1, 1 - p), SkyExponent1);',
-		'	float p3 = 1 - pow(min(1, 1 + p), SkyExponent2);',
-		'	float p2 = 1 - p1 - p3;',
+		'	float p1 = 1.0 - pow(min(1.0, 1.0 - p), SkyExponent1);',
+		'	float p3 = 1.0 - pow(min(1.0, 1.0 + p), SkyExponent2);',
+		'	float p2 = 1.0 - p1 - p3;',
 
 		'	half3 c_sky = SkyColor1 * p1 + SkyColor2 * p2 + SkyColor3 * p3;',
 		'	half3 c_sun = SunColor * min(pow(max(0, dot(v, SunVector)), SunAlpha) * SunBeta, 1);',
