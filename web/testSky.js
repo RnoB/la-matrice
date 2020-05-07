@@ -81,7 +81,7 @@ function initSky() {
         SunAlpha : 1.0,
         SunBeta : 1.0,
         SunIntensity : .1,
-        distance = 5000;
+        distance : 5000,
         
     };
 
