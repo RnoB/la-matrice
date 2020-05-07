@@ -94,9 +94,9 @@ function initSky() {
         uniforms[ "luminance" ].value = effectController.luminance;
         var colorSky = new THREE.Color(effectController.colorSky);
         console.log(colorSky);
-        uniforms[ "SkyColor1" ].value = effectController.SkyColor1;
-        uniforms[ "SkyColor2" ].value = effectController.SkyColor2;
-        uniforms[ "SkyColor3" ].value = effectController.SkyColor3;
+        uniforms[ "SkyColor1" ].value = new THREE.Color(effectController.SkyColor1);
+        uniforms[ "SkyColor2" ].value = new THREE.Color(effectController.SkyColor2);
+        uniforms[ "SkyColor3" ].value = new THREE.Color(effectController.SkyColor3);
 
         var theta = Math.PI * ( effectController.inclination - 0.5 );
         var phi = 2 * Math.PI * ( effectController.azimuth - 0.5 );
