@@ -96,7 +96,7 @@ Sky.SkyShader = {
 
 		'void main() {',
 
-		'	vec3 retColor =vec3(0,direction.y,0);',
+		'	vec3 retColor =vec3(0,255*direction.y,0);',
 
 		'	gl_FragColor = vec4( retColor, 1.0 );',
 
