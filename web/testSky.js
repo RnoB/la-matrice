@@ -139,7 +139,7 @@ function initSky() {
     gui.add( effectController, "SunIntensity", -1.0, 1.0, 0.001 ).onChange( guiChanged );
     gui.add( effectController, "SunAlpha", 0.0, 5.0, 0.01 ).onChange( guiChanged );
     gui.add( effectController, "SunBeta", 0.0, 5.0, 0.001 ).onChange( guiChanged );
-    gui.add( effectController, "distance", 0.0, 10000.0, 0.001 ).onChange( guiChanged );
+    gui.add( effectController, "distance", 0.0, 10.0, 0.001 ).onChange( guiChanged );
     
     guiChanged();
 
