@@ -184,6 +184,7 @@ function setUpWorld()
     scene.add(light2);
     scene.add(light);
     initSky();
+    var controls = new OrbitControls( camera, renderer.domElement );
 }
 
 
@@ -226,6 +227,7 @@ function render() {
 
 
 
+   controls.update();
 
     for (var player of listPlayers)
     {
@@ -241,6 +243,7 @@ function render() {
     
    renderer.render(scene, camera);
    frame++;
+
 }
 
 
