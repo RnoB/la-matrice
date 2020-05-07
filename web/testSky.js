@@ -86,6 +86,8 @@ function initSky() {
         SunIntensity : .1,
         distance : 1,
         fov : 90,
+        LightColor1 : '#00ff00',
+        LightColor2 : '#00ff36',
         
     };
 
