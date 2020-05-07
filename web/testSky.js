@@ -45,6 +45,7 @@ console.log(plane.rotation);
 
 
 plane.rotateX(-Math.PI/2.0);
+plane.position.y=-2
 console.log(plane.rotation);
 
 var simuTime;
