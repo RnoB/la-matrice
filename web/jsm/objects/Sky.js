@@ -113,7 +113,7 @@ Sky.SkyShader = {
 		'   float SunBeta = 1.0;',
 		
 
-		'	float p = direction.y;',
+		'	float p = float(direction.y);',
 		'	float p1 = 1.0 - pow(min(1.0, 1.0 - p), SkyExponent1);',
 		'	float p3 = 1.0 - pow(min(1.0, 1.0 + p), SkyExponent2);',
 		'	float p2 = 1.0 - p1 - p3;',
