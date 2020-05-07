@@ -46,7 +46,12 @@ Sky.SkyShader = {
 		"up": { value: new THREE.Vector3( 0, 1, 0 ) },
 		"SkyExponent1": { value: 0.8 },
 		"SkyExponent2": { value: 0.2 },
-		"SkyIntensity": { value: 1.0 }
+		"SkyIntensity": { value: 1.0 },
+		'SunColor ={ value: new THREE.Color( 1, 1, 0.2 ) };',
+		'SunVector = { value: new THREE.Vector3( 0, 1, 0 ) };',
+		'SunAlpha = { value: 1.0;}',
+		'SunBeta = { value: 1.0;}',
+		'SunIntensity = { value: 1.0;}',
 
 	},
 
@@ -75,14 +80,20 @@ Sky.SkyShader = {
 		'uniform vec3 SkyColor1;',
 		'uniform vec3 SkyColor2;',
 		'uniform vec3 SkyColor3;',
-		'uniform float mieDirectionalG;',
-		'uniform float colorR;',
-		'uniform float colorG;',
-		'uniform float colorB;',
+
 		'uniform vec3 up;',
 		'uniform float SkyExponent1;',
 		'uniform float SkyExponent2;',
 		'uniform float SkyIntensity;',
+
+		'uniform vec3 SunColor;',
+		'uniform vec3 SunVector;',
+		'uniform float SunAlpha;',
+		'uniform float SunBeta;',
+		'uniform float SunIntensity;',
+
+
+
 
 		'const vec3 cameraPos = vec3( 0.0, 0.0, 0.0 );',
 
@@ -96,11 +107,7 @@ Sky.SkyShader = {
 
 
 		
-		'   vec3 SunColor = vec3(1.0,1.0,0.2);',
-		'   vec3 SunVector = up;',
-		'   float SunAlpha = 1.0;',
-		'   float SunBeta = 1.0;',
-		'   float SunIntensity = 1.0;',
+
 		
 
 		'	float p = direction.y;',

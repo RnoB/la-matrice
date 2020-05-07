@@ -77,6 +77,11 @@ function initSky() {
         SkyColor2: "#00ff00", // Facing front,
         SkyColor3: "#0011ff", // Facing front,
         sun: ! true,
+        SunColor = new THREE.Color( 1, 1, 0.2 ) ;
+        SunVector = new THREE.Vector3( 0, 1, 0 ) ;
+        SunAlpha = 1.0;
+        SunBeta = 1.0;
+        SunIntensity = 1.0;
         
     };
 
@@ -93,6 +98,10 @@ function initSky() {
         uniforms[ "SkyColor2" ].value = new THREE.Color(effectController.SkyColor2);
         uniforms[ "SkyColor3" ].value = new THREE.Color(effectController.SkyColor3);
 
+
+        uniforms[ "SunColor" ].value = new THREE.Color(effectController.sunColor);
+        uniforms[ "SunIntensity" ].value = effectController.SunIntensity;
+
         var theta = Math.PI * ( effectController.inclination - 0.5 );
         var phi = 2 * Math.PI * ( effectController.azimuth - 0.5 );
 
@@ -102,7 +111,7 @@ function initSky() {
 
         sunSphere.visible = effectController.sun;
 
-        uniforms[ "sunPosition" ].value.copy( sunSphere.position );
+        uniforms[ "SunVector" ].value.copy( sunSphere.position );
 
 
 
