@@ -101,7 +101,25 @@ Sky.SkyShader = {
 		'void main() {',
 
 		'	vec3 direction = normalize( vWorldPosition - cameraPos );',
+		'   vec3 SkyColor1 = vec3(.0,.1,.8);',
+		'   vec3 SkyColor2 = vec3(.3,.1,.8);',
+		'   vec3 SkyColor3 = vec3(.0,.2,.4);',
+		'   float SkyExponent1 = 1.0;',
+		'   float SkyExponent2 = 0.2;',
+		
+		'   vec3 SunColor = vec3(1.0,1.0,0.2);',
+		'   vec3 SunVector = up;',
+		'   float SunAlpha = 1.0;',
+		'   float SunBeta = 1.0;',
+		
 
+
+		'	float p1 = 1 - pow(min(1, 1 - p), SkyExponent1);',
+		'	float p3 = 1 - pow(min(1, 1 + p), SkyExponent2);',
+		'	float p2 = 1 - p1 - p3;',
+
+		'	half3 c_sky = SkyColor1 * p1 + SkyColor2 * p2 + SkyColor3 * p3;'
+		'	half3 c_sun = SunColor * min(pow(max(0, dot(v, SunVector)), SunAlpha) * SunBeta, 1);'
 		// optical length
 		// cutoff angle at 90 to avoid singularity in next formula.
 		'	float zenithAngle = acos( max( 0.0, dot( up, direction ) ) );',
