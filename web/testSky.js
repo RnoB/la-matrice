@@ -49,7 +49,7 @@ console.log(plane.rotation);
 
 var simuTime;
 
-
+var controls;
 
 function initSky() {
 
@@ -186,7 +186,7 @@ function setUpWorld()
     scene.add(light2);
     scene.add(light);
     initSky();
-    var controls = new OrbitControls( camera, renderer.domElement );
+    controls = new OrbitControls( camera, renderer.domElement );
 }
 
 
