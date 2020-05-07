@@ -87,13 +87,10 @@ function initSky() {
    function guiChanged() {
 
         var uniforms = sky.material.uniforms;
-        uniforms[ "turbidity" ].value = effectController.turbidity;
-        uniforms[ "rayleigh" ].value = effectController.rayleigh;
-        uniforms[ "mieCoefficient" ].value = effectController.mieCoefficient;
-        uniforms[ "mieDirectionalG" ].value = effectController.mieDirectionalG;
-        uniforms[ "luminance" ].value = effectController.luminance;
-        var colorSky = new THREE.Color(effectController.colorSky);
-        console.log(colorSky);
+        uniforms[ "SkyExponent1" ].value = effectController.SkyExponent1;
+        uniforms[ "SkyExponent2" ].value = effectController.SkyExponent2;
+        uniforms[ "SkyIntensity" ].value = effectController.SkyIntensity;
+
         uniforms[ "SkyColor1" ].value = new THREE.Color(effectController.SkyColor1);
         uniforms[ "SkyColor2" ].value = new THREE.Color(effectController.SkyColor2);
         uniforms[ "SkyColor3" ].value = new THREE.Color(effectController.SkyColor3);

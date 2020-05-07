@@ -81,6 +81,9 @@ Sky.SkyShader = {
 		'uniform float colorG;',
 		'uniform float colorB;',
 		'uniform vec3 up;',
+		'uniform float SkyExponent1;',
+		'uniform float SkyExponent2;',
+		'uniform float SkyIntensity;',
 
 		'const vec3 cameraPos = vec3( 0.0, 0.0, 0.0 );',
 
@@ -92,9 +95,7 @@ Sky.SkyShader = {
 
 		'	vec3 direction = normalize( vWorldPosition - cameraPos );',
 
-		'   float SkyExponent1 = 1.0;',
-		'   float SkyExponent2 = 0.2;',
-		'   float SkyIntensity = 1.0;',
+
 		
 		'   vec3 SunColor = vec3(1.0,1.0,0.2);',
 		'   vec3 SunVector = up;',
