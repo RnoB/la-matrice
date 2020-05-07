@@ -49,9 +49,9 @@ Sky.SkyShader = {
 		"SkyIntensity": { value: 1.0 },
 		"SunColor" :{ value: new THREE.Color( 1, 1, 0.2 ) },
 		"SunVector" : { value: new THREE.Vector3( 0, 1, 0 ) },
-		"SunAlpha" : { value: 1.0;},
-		"SunBeta" : { value: 1.0;},
-		"SunIntensity" : { value: 1.0;},
+		"SunAlpha" : { value: 1.0},
+		"SunBeta" : { value: 1.0},
+		"SunIntensity" : { value: 1.0},
 
 	},
 
