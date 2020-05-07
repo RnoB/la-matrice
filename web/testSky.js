@@ -126,8 +126,8 @@ function initSky() {
         camera.fov = effectController.fov;
         camera.updateProjectionMatrix();
 
-        light.color = new THREE.color(effectController.LightColor1);
-        light2.color = new THREE.color(effectController.LightColor2);
+        light.color = new THREE.Color(effectController.LightColor1);
+        light2.color = new THREE.Color(effectController.LightColor2);
 
 
 
