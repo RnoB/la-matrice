@@ -52,6 +52,13 @@ Sky.SkyShader = {
 	},
 
 	vertexShader: [
+		'uniform vec3 sunPosition;',
+		'uniform float rayleigh;',
+		'uniform float turbidity;',
+		'uniform float mieCoefficient;',
+		'uniform vec3 up;',
+
+		'varying vec3 vWorldPosition;',
 
 
 
@@ -68,11 +75,7 @@ Sky.SkyShader = {
 
 	fragmentShader: [
 		'varying vec3 vWorldPosition;',
-		'varying vec3 vSunDirection;',
-		'varying float vSunfade;',
-		'varying vec3 vBetaR;',
-		'varying vec3 vBetaM;',
-		'varying float vSunE;',
+
 
 		'uniform float luminance;',
 		'uniform float mieDirectionalG;',
