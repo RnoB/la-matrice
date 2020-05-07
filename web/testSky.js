@@ -38,7 +38,7 @@ var geometry = new THREE.BoxGeometry();
 var material = new THREE.MeshStandardMaterial();
 var cameraBox = new THREE.Mesh(geometry, material);
 
-var geometryPlane = new THREE.PlaneGeometry( 200, 200, 8,8 );
+var geometryPlane = new THREE.PlaneGeometry( 20000, 20000, 8,8 );
 var materialPlane = new THREE.MeshStandardMaterial( {color: 0xffff00} );
 var plane = new THREE.Mesh( geometryPlane, materialPlane );
 console.log(plane.rotation);
