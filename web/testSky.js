@@ -125,9 +125,9 @@ function initSky() {
     gui.add( effectController, "inclination", 0, 1, 0.0001 ).onChange( guiChanged );
     gui.add( effectController, "azimuth", 0, 1, 0.0001 ).onChange( guiChanged );
     gui.add( effectController, "sun" ).onChange( guiChanged );
-    gui.add( effectController, "SkyColor1").onChange( guiChanged );
-    gui.add( effectController, "SkyColor2").onChange( guiChanged );
-    gui.add( effectController, "SkyColor3").onChange( guiChanged );
+    gui.addColor( effectController, "SkyColor1").onChange( guiChanged );
+    gui.addColor( effectController, "SkyColor2").onChange( guiChanged );
+    gui.addColor( effectController, "SkyColor3").onChange( guiChanged );
     gui.addColor(effectController,"colorSky").onChange( guiChanged );
 
     guiChanged();
