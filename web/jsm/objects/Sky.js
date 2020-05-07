@@ -177,7 +177,7 @@ Sky.SkyShader = {
 		'	vec3 curr = Uncharted2Tonemap( ( log2( 2.0 / pow( luminance, 4.0 ) ) ) * texColor );',
 		'	vec3 color = curr * whiteScale;',
 
-		'	vec3 retColor =direction;',
+		'	vec3 retColor =direction(0,direction.y,0);',
 
 		'	gl_FragColor = vec4( retColor, 1.0 );',
 
