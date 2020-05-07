@@ -154,7 +154,10 @@ function render() {
         {
             //console.log(player.mesh.position);
             player.mesh.position.lerp(player.position,.5);
-            player.mesh.quaternion.slerp(player.rotation,.5);
+            if (!client.noRotation)
+            {
+                player.mesh.quaternion.slerp(player.rotation,.5);
+            }
             for (let k = 0; k < player.controllers; ++k) 
             {
 

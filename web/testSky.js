@@ -85,6 +85,7 @@ function initSky() {
         SunBeta : 1.0,
         SunIntensity : .1,
         distance : 1,
+        fov : 90,
         
     };
 
@@ -120,6 +121,9 @@ function initSky() {
 
         uniforms[ "SunVector" ].value.copy( sunSphere.position );
 
+        camera.fov = effectController.fov;
+        camera.updateProjectionMatrix();
+
 
 
 
@@ -143,6 +147,7 @@ function initSky() {
     gui.add( effectController, "SunAlpha", 0.0, 500.0, 0.01 ).onChange( guiChanged );
     gui.add( effectController, "SunBeta", 0.0, 10.0, 0.001 ).onChange( guiChanged );
     gui.add( effectController, "distance", 0.0, 10.0, 0.001 ).onChange( guiChanged );
+    gui.add( effectController, "fov", 0.0, 36.0, 0.001 ).onChange( guiChanged );
     
     guiChanged();
 
