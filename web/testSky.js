@@ -84,7 +84,7 @@ function initSky() {
         SunAlpha : 1.0,
         SunBeta : 1.0,
         SunIntensity : .1,
-        distance : 5000,
+        distance : 1,
         
     };
 
@@ -140,8 +140,8 @@ function initSky() {
     gui.addColor( effectController, "SkyColor3").onChange( guiChanged );
     gui.addColor( effectController, "SunColor").onChange( guiChanged );
     gui.add( effectController, "SunIntensity", .0, 1.0, 0.001 ).onChange( guiChanged );
-    gui.add( effectController, "SunAlpha", 0.0, 5.0, 0.01 ).onChange( guiChanged );
-    gui.add( effectController, "SunBeta", 0.0, 5.0, 0.001 ).onChange( guiChanged );
+    gui.add( effectController, "SunAlpha", 0.0, 50.0, 0.01 ).onChange( guiChanged );
+    gui.add( effectController, "SunBeta", 0.0, 50.0, 0.001 ).onChange( guiChanged );
     gui.add( effectController, "distance", 0.0, 10.0, 0.001 ).onChange( guiChanged );
     
     guiChanged();
