@@ -101,6 +101,8 @@ function initSky() {
 
         uniforms[ "SunColor" ].value = new THREE.Color(effectController.sunColor);
         uniforms[ "SunIntensity" ].value = effectController.SunIntensity;
+        uniforms[ "SunAlpha" ].value = effectController.SunAlpha;
+        uniforms[ "SunBeta" ].value = effectController.SunBeta;
 
         var theta = Math.PI * ( effectController.inclination - 0.5 );
         var phi = 2 * Math.PI * ( effectController.azimuth - 0.5 );
@@ -131,6 +133,10 @@ function initSky() {
     gui.addColor( effectController, "SkyColor1").onChange( guiChanged );
     gui.addColor( effectController, "SkyColor2").onChange( guiChanged );
     gui.addColor( effectController, "SkyColor3").onChange( guiChanged );
+    gui.addColor( effectController, "SunColor").onChange( guiChanged );
+    gui.add( effectController, "SunIntensity", 0.0, 5.0, 0.01 ).onChange( guiChanged );
+    gui.add( effectController, "SunAlpha", 0.0, 5.0, 0.01 ).onChange( guiChanged );
+    gui.add( effectController, "SunBeta", 0.0, 5.0, 0.001 ).onChange( guiChanged );
     
     guiChanged();
 
