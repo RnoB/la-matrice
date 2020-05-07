@@ -106,11 +106,13 @@ Sky.SkyShader = {
 		'   vec3 SkyColor3 = vec3(.0,.2,.4);',
 		'   float SkyExponent1 = 1.0;',
 		'   float SkyExponent2 = 0.2;',
+		'   float SkyIntensity = 1.0;',
 		
 		'   vec3 SunColor = vec3(1.0,1.0,0.2);',
 		'   vec3 SunVector = up;',
 		'   float SunAlpha = 1.0;',
 		'   float SunBeta = 1.0;',
+		'   float SunIntensity = 1.0;',
 		
 
 		'	float p = direction.y;',
@@ -125,7 +127,7 @@ Sky.SkyShader = {
 		'	float zenithAngle = acos( max( 0.0, dot( up, direction ) ) );',
 
 
-		'	vec3 retColor =vec3(0,direction.y,0);',
+		'	vec3 retColor =c_sky * SkyIntensity + c_sun * SunIntensity;',
 
 		'	gl_FragColor = vec4( retColor, 1.0 );',
 
