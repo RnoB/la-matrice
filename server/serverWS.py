@@ -116,7 +116,7 @@ class Server:
 
 
     async def register(self,websocket):
-
+        scale=1
         self.playerId+=1
         try:
             playerData = await websocket.recv()
@@ -137,6 +137,7 @@ class Server:
 
             for player in self.playersSocket:
                 dataWorld = struct.pack('<BiiB', networkCode['newPlayer'],objectsType["player"], self.playerId,controllers)
+                dataWorld +=struct.pack('<i',scale)
                 try:
                     await player.send( dataWorld)
                 except Exception as e:
@@ -145,7 +146,7 @@ class Server:
                 
                         
             self.playersSocket.append(websocket)
-            scale=1
+ 
             dataWorld = struct.pack('B', networkCode['world'])
             dataWorld += struct.pack('<iiii',self.world,self.playerNumber,len(self.objectsList),self.playerId)
             dataWorld += struct.pack('B', self.noRotation)
@@ -157,11 +158,12 @@ class Server:
             for k in range(0,len(self.playerIds)):
                 dataWorld += struct.pack('<ii', objectsType["player"],self.playerIds[k])
                 dataWorld += struct.pack('B', self.playersList[k]['controllers'])
+                dataWorld += struct.pack('B', self.playersList[k]['controllers'])
 
             self.playerIds.append(self.playerId)
             self.playersPosition.append(position0)
             self.playersRotation.append(rotation0)
-            playerDict = {"id" : self.playerId,"controllers" : controllers,"position" : position0,"rotation" : rotation0}
+            playerDict = {"id" : self.playerId,"controllers" : controllers,"position" : position0,"rotation" : rotation0,"scale":scale}
 
 
             for k in range(0,controllers):

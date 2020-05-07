@@ -69,7 +69,8 @@ function newPlayer(data,scene,offset,geometry)
     "type" : data.getInt32(offset,true),
     "position" : new THREE.Vector3(),
     "rotation" : new THREE.Quaternion(),
-    "controllers" : data.getUint8(offset+8,true)};
+    "controllers" : data.getUint8(offset+8,true),
+    "scale" : data.getInt32(offset+9,true)};
 
     var idx = geometry.findIndex(x => x.type == playerInfo['type']);
     playerInfo["mesh"] = new THREE.Mesh(geometry[idx].geometry, geometry[idx].material);
