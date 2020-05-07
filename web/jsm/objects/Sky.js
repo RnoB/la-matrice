@@ -138,6 +138,11 @@ Sky.SkyShader = {
 
 		'void main() {',
 
+		'	vec3 direction = normalize( vWorldPosition - cameraPos );',
+
+		// optical length
+		// cutoff angle at 90 to avoid singularity in next formula.
+		'	float zenithAngle = acos( max( 0.0, dot( up, direction ) ) );',
 
 
 		'	vec3 retColor =vec3(0,direction.y,0);',
