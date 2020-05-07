@@ -51,7 +51,7 @@ console.log(plane.rotation);
 var simuTime;
 
 var controls;
-
+var light,light2;
 function initSky() {
 
     // Add Sky
@@ -124,6 +124,9 @@ function initSky() {
         camera.fov = effectController.fov;
         camera.updateProjectionMatrix();
 
+        light.color = new THREE.color(effectController.LightColor1);
+        light2.color = new THREE.color(effectController.LightColor2);
+
 
 
 
@@ -148,6 +151,8 @@ function initSky() {
     gui.add( effectController, "SunBeta", 0.0, 10.0, 0.001 ).onChange( guiChanged );
     gui.add( effectController, "distance", 0.0, 10.0, 0.001 ).onChange( guiChanged );
     gui.add( effectController, "fov", 0.0, 179.0, 0.001 ).onChange( guiChanged );
+    gui.addColor( effectController, "LightColor1").onChange( guiChanged );
+    gui.addColor( effectController, "LightColor2").onChange( guiChanged );
     
     guiChanged();
 
@@ -185,9 +190,9 @@ function setup()
 function setUpWorld()
 {
     console.log("Setting up World")
-    var light = new THREE.PointLight(0x00ff00, 1, 1000);
+    light = new THREE.PointLight(0x00ff00, 1, 1000);
     light.position.set(50, 50, 50);
-    var light2 = new THREE.PointLight(0x00ff, 1, 1000);
+    light2 = new THREE.PointLight(0x00ff, 1, 1000);
     light2.position.set(0, 50, 50);
     scene.add(light2);
     scene.add(light);
