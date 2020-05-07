@@ -102,7 +102,7 @@ function initSky() {
         uniforms[ "SkyColor3" ].value = new THREE.Color(effectController.SkyColor3);
 
 
-        uniforms[ "SunColor" ].value = new THREE.Color(effectController.sunColor);
+        uniforms[ "SunColor" ].value = new THREE.Color(effectController.SunColor);
         uniforms[ "SunIntensity" ].value = effectController.SunIntensity;
         uniforms[ "SunAlpha" ].value = effectController.SunAlpha;
         uniforms[ "SunBeta" ].value = effectController.SunBeta;
