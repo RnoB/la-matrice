@@ -103,6 +103,8 @@ function initSky() {
         uniforms[ "SunAlpha" ].value = effectController.SunAlpha;
         uniforms[ "SunBeta" ].value = effectController.SunBeta;
 
+        distance = effectController.distance;
+
         var theta = Math.PI * ( effectController.inclination - 0.5 );
         var phi = 2 * Math.PI * ( effectController.azimuth - 0.5 );
 
@@ -136,6 +138,7 @@ function initSky() {
     gui.add( effectController, "SunIntensity", -1.0, 1.0, 0.001 ).onChange( guiChanged );
     gui.add( effectController, "SunAlpha", 0.0, 5.0, 0.01 ).onChange( guiChanged );
     gui.add( effectController, "SunBeta", 0.0, 5.0, 0.001 ).onChange( guiChanged );
+    gui.add( effectController, "distance", 0.0, 10000.0, 0.001 ).onChange( guiChanged );
     
     guiChanged();
 
