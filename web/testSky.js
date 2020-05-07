@@ -77,8 +77,7 @@ function initSky() {
         SkyColor2: "#00ff00", // Facing front,
         SkyColor3: "#0011ff", // Facing front,
         sun: ! true,
-        SunColor = new THREE.Color( 1, 1, 0.2 ) ;
-        SunVector = new THREE.Vector3( 0, 1, 0 ) ;
+        SunColor = "#0011ff";
         SunAlpha = 1.0;
         SunBeta = 1.0;
         SunIntensity = 1.0;
