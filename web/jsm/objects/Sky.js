@@ -138,6 +138,45 @@ Sky.SkyShader = {
 
 		'void main() {',
 
+		'	vec3 direction = normalize( vWorldPosition - cameraPos );',
+
+		// optical length
+		// cutoff angle at 90 to avoid singularity in next formula.
+		'	float zenithAngle = acos( max( 0.0, dot( up, direction ) ) );',
+		'	float inverse = 1.0 / ( cos( zenithAngle ) + 0.15 * pow( 93.885 - ( ( zenithAngle * 180.0 ) / pi ), -1.253 ) );',
+		'	float sR = rayleighZenithLength * inverse;',
+		'	float sM = mieZenithLength * inverse;',
+
+		// combined extinction factor
+		'	vec3 Fex = exp( -( vBetaR * sR + vBetaM * sM ) );',
+
+		// in scattering
+		'	float cosTheta = dot( direction, vSunDirection );',
+
+		'	float rPhase = rayleighPhase( cosTheta * 0.5 + 0.5 );',
+		'	vec3 betaRTheta = vBetaR * rPhase;',
+
+		'	float mPhase = hgPhase( cosTheta, mieDirectionalG );',
+		'	vec3 betaMTheta = vBetaM * mPhase;',
+
+		'	vec3 Lin = pow( vSunE * ( ( betaRTheta + betaMTheta ) / ( vBetaR + vBetaM ) ) * ( 1.0 - Fex ), vec3( 1.5 ) );',
+		'	Lin *= mix( vec3( 1.0 ), pow( vSunE * ( ( betaRTheta + betaMTheta ) / ( vBetaR + vBetaM ) ) * Fex, vec3( 1.0 / 2.0 ) ), clamp( pow( 1.0 - dot( up, vSunDirection ), 5.0 ), 0.0, 1.0 ) );',
+
+		// nightsky
+		'	float theta = acos( direction.y ); // elevation --> y-axis, [-pi/2, pi/2]',
+		'	float phi = atan( direction.z, direction.x ); // azimuth --> x-axis [-pi/2, pi/2]',
+		'	vec2 uv = vec2( phi, theta ) / vec2( 2.0 * pi, pi ) + vec2( 0.5, 0.0 );',
+		'	vec3 L0 = vec3( 0.1 ) * Fex;',
+
+		// composition + solar disc
+		'	float sundisk = smoothstep( sunAngularDiameterCos, sunAngularDiameterCos + 0.00002, cosTheta );',
+		'	L0 += ( vSunE * 19000.0 * Fex ) * sundisk;',
+
+		'	vec3 texColor = ( Lin + L0 ) * 0.04 + vec3( 0.0, 0.0003, 0.00075 );',
+
+		'	vec3 curr = Uncharted2Tonemap( ( log2( 2.0 / pow( luminance, 4.0 ) ) ) * texColor );',
+		'	vec3 color = curr * whiteScale;',
+
 		'	vec3 retColor =direction;',
 
 		'	gl_FragColor = vec4( retColor, 1.0 );',
