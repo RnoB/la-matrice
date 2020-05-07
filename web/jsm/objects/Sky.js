@@ -39,16 +39,15 @@ Sky.prototype = Object.create( THREE.Mesh.prototype );
 Sky.SkyShader = {
 
 	uniforms: {
-		"luminance": { value: 1 },
-		"turbidity": { value: 2 },
-		"rayleigh": { value: 1 },
 		"SkyColor1": { value: new THREE.Color( 1, 1, 0 ) },
 		"SkyColor2": { value: new THREE.Color( 0, 1, 0 ) },
 		"SkyColor3": { value: new THREE.Color( 0, 1, 1 ) },
-		"mieCoefficient": { value: 0.005 },
-		"mieDirectionalG": { value: 0.8 },
 		"sunPosition": { value: new THREE.Vector3() },
-		"up": { value: new THREE.Vector3( 0, 1, 0 ) }
+		"up": { value: new THREE.Vector3( 0, 1, 0 ) },
+		"SkyExponent1": { value: 0.8 },
+		"SkyExponent2": { value: 0.2 },
+		"SkyIntensity": { value: 1.0 }
+
 	},
 
 	vertexShader: [
