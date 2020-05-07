@@ -75,9 +75,9 @@ function initSky() {
         luminance: 1,
         inclination: 0.49, // elevation / inclination
         azimuth: 0.25, // Facing front,
-        colorR: 0, // Facing front,
-        colorG: 0, // Facing front,
-        colorB: 0, // Facing front,
+        SkyColor1: "#ffff00", // Facing front,
+        SkyColor2: "#00ff00", // Facing front,
+        SkyColor3: "#0011ff", // Facing front,
         sun: ! true,
         colorSky: "#ffffff"
     };
@@ -94,9 +94,9 @@ function initSky() {
         uniforms[ "luminance" ].value = effectController.luminance;
         var colorSky = new THREE.Color(effectController.colorSky);
         console.log(colorSky);
-        uniforms[ "colorR" ].value = colorSky.r;
-        uniforms[ "colorG" ].value = colorSky.g;
-        uniforms[ "colorB" ].value = colorSky.b;
+        uniforms[ "SkyColor1" ].value = SkyColor1;
+        uniforms[ "SkyColor2" ].value = SkyColor2;
+        uniforms[ "SkyColor3" ].value = SkyColor3;
 
         var theta = Math.PI * ( effectController.inclination - 0.5 );
         var phi = 2 * Math.PI * ( effectController.azimuth - 0.5 );
@@ -125,9 +125,9 @@ function initSky() {
     gui.add( effectController, "inclination", 0, 1, 0.0001 ).onChange( guiChanged );
     gui.add( effectController, "azimuth", 0, 1, 0.0001 ).onChange( guiChanged );
     gui.add( effectController, "sun" ).onChange( guiChanged );
-    gui.add( effectController, "colorR", 0, 5, 0.001 ).onChange( guiChanged );
-    gui.add( effectController, "colorG", 0, 5, 0.001 ).onChange( guiChanged );
-    gui.add( effectController, "colorB", 0, 5, 0.001 ).onChange( guiChanged );
+    gui.add( effectController, "SkyColor1").onChange( guiChanged );
+    gui.add( effectController, "SkyColor2").onChange( guiChanged );
+    gui.add( effectController, "SkyColor3").onChange( guiChanged );
     gui.addColor(effectController,"colorSky").onChange( guiChanged );
 
     guiChanged();
