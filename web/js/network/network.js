@@ -191,7 +191,7 @@ function readWorld(data,scene)
         
         
         worldInfo['listPlayers'].push(playerInfo);
-        offset+=9;
+        offset+=13;
     }
     worldInfo['listObjects'] = [];
     for (let j = 0; j < worldInfo['Nobjects']; ++j) 
