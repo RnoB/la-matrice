@@ -113,13 +113,13 @@ Sky.SkyShader = {
 		'   float SunBeta = 1.0;',
 		
 
-		'	float p = float(direction.y);',
+		'	float p = direction.y;',
 		'	float p1 = 1.0 - pow(min(1.0, 1.0 - p), SkyExponent1);',
 		'	float p3 = 1.0 - pow(min(1.0, 1.0 + p), SkyExponent2);',
 		'	float p2 = 1.0 - p1 - p3;',
 
-		'	float c_sky = SkyColor1 * p1 + SkyColor2 * p2 + SkyColor3 * p3;',
-		'	float c_sun = SunColor * min(pow(max(0.0, dot(v, SunVector)), SunAlpha) * SunBeta, 1.0);',
+		'	vec3 c_sky = SkyColor1 * p1 + SkyColor2 * p2 + SkyColor3 * p3;',
+		'	vec3 c_sun = SunColor * min(pow(max(0.0, dot(v, SunVector)), SunAlpha) * SunBeta, 1.0);',
 		// optical length
 		// cutoff angle at 90 to avoid singularity in next formula.
 		'	float zenithAngle = acos( max( 0.0, dot( up, direction ) ) );',
