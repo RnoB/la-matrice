@@ -160,6 +160,24 @@ function initSky() {
     gui.addColor( effectController, "LightColor1").onChange( guiChanged );
     gui.addColor( effectController, "LightColor2").onChange( guiChanged );
     
+    gui.add( params, 'bloomThreshold', 0.0, 1.0 ).onChange( function ( value ) {
+
+        bloomPass.threshold = Number( value );
+
+    } );
+
+    gui.add( params, 'bloomStrength', 0.0, 3.0 ).onChange( function ( value ) {
+
+        bloomPass.strength = Number( value );
+
+    } );
+
+    gui.add( params, 'bloomRadius', 0.0, 1.0 ).step( 0.01 ).onChange( function ( value ) {
+
+        bloomPass.radius = Number( value );
+
+    } );
+    
     guiChanged();
 
 }
