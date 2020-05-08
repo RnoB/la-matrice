@@ -184,7 +184,7 @@ function initSky() {
 
     } );
     
-    gui.addColor( effectController, 'FogColor').step( 0.01 ).onChange( function ( value ) {
+    gui.addColor( effectController, 'FogColor').onChange( function ( value ) {
 
         scene.fog.color =  value ;
 
