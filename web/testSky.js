@@ -21,7 +21,7 @@ var sky, sunSphere;
 var scene;
 var camera;
 var renderer = null;
-
+var composer ;
 var ws;
 
 
