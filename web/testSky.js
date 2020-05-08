@@ -185,6 +185,15 @@ function setup()
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
+
+
+    var params = {
+        exposure: 1,
+        bloomStrength: 1.5,
+        bloomThreshold: 0,
+        bloomRadius: 0
+    };
+
     var renderScene = new RenderPass( scene, camera );
     var bloomPass = new UnrealBloomPass( new THREE.Vector2( window.innerWidth, window.innerHeight ), 1.5, 0.4, 0.85 );
     bloomPass.threshold = params.bloomThreshold;
