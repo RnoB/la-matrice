@@ -186,17 +186,17 @@ function initSky() {
     
     gui.addColor( effectController, 'FogColor').onChange( function ( value ) {
 
-        scene.fog.color =  value ;
+        scene.fog.color =  new THREE.Color(value) ;
 
     } );
     gui.add( effectController, 'FogNear',0,1000,0.01).onChange( function ( value ) {
 
-        scene.fog.near =  Number(value) ;
+        scene.fog.near =  value ;
 
     } );
     gui.add( effectController, 'FogFar',0,1000,0.01).onChange( function ( value ) {
 
-        scene.fog.far =  Number(value) ;
+        scene.fog.far =  value ;
 
     } );
 
