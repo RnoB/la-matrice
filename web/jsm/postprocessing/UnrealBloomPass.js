@@ -13,7 +13,7 @@ import {
 	Vector2,
 	Vector3,
 	WebGLRenderTarget
-} "../js/three.module.js";
+} "../../js/three.module.js";
 import { Pass } from "../postprocessing/Pass.js";
 import { CopyShader } from "../shaders/CopyShader.js";
 import { LuminosityHighPassShader } from "../shaders/LuminosityHighPassShader.js";
