@@ -95,6 +95,9 @@ function initSky() {
         fov : 90,
         LightColor1 : '#00ff00',
         LightColor2 : '#00ff36',
+        FogColor : '#000000',
+        FogNear : '10',
+        FogFar : '100', 
         
     };
 
@@ -181,6 +184,22 @@ function initSky() {
 
     } );
     
+    gui.addColor( effectController, 'FogColor').step( 0.01 ).onChange( function ( value ) {
+
+        scene.fog.color =  value ;
+
+    } );
+    gui.add( effectController, 'FogNear',0,1000).step( 0.01 ).onChange( function ( value ) {
+
+        scene.fog.near =  Number(value) ;
+
+    } );
+    gui.add( effectController, 'FogFar',0,1000).step( 0.01 ).onChange( function ( value ) {
+
+        scene.fog.far =  Number(value) ;
+
+    } );
+
     guiChanged();
 
 }
@@ -225,7 +244,8 @@ function setup()
     composer.addPass( renderScene );
     composer.addPass( bloomPass );
 
-    scene.add(plane);
+    scene.add(plane); 
+    scene.fog = new THREE.Fog("#000000", 1, 100);
 
 
 }
