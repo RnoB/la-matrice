@@ -128,7 +128,7 @@ function initSky() {
 
         light.color = new THREE.Color(effectController.LightColor1);
         light2.color = new THREE.Color(effectController.LightColor2);
-        light.position = sunSphere.position;
+        light.position.set(sunSphere.position.x,sunSphere.position.y,sunSphere.position.z);
 
 
 
