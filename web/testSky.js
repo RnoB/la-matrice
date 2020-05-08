@@ -8,6 +8,10 @@ import { Sky } from './jsm/objects/Sky.js';
 
 import { OrbitControls } from './jsm/controls/OrbitControls.js';
 
+import { EffectComposer } from './jsm/postprocessing/EffectComposer.js';
+import { UnrealBloomPass } from './jsm/postprocessing/UnrealBloomPass.js';
+import { RenderPass } from './jsm/postprocessing/RenderPass.js';
+
 var camera, controls, scene, renderer;
 
 var sky, sunSphere;
@@ -181,7 +185,15 @@ function setup()
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
 
+    var renderScene = new RenderPass( scene, camera );
+    var bloomPass = new UnrealBloomPass( new THREE.Vector2( window.innerWidth, window.innerHeight ), 1.5, 0.4, 0.85 );
+    bloomPass.threshold = params.bloomThreshold;
+    bloomPass.strength = params.bloomStrength;
+    bloomPass.radius = params.bloomRadius;
 
+    composer = new EffectComposer( renderer );
+    composer.addPass( renderScene );
+    composer.addPass( bloomPass );
 
     scene.add(plane);
 
@@ -256,7 +268,7 @@ function render() {
     }
     
     
-   renderer.render(scene, camera);
+   composer.render(scene, camera);
    frame++;
 
 }
