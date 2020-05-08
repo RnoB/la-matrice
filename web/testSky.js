@@ -56,6 +56,8 @@ var simuTime;
 
 var controls;
 var light,light2;
+var params;
+
 function initSky() {
 
     // Add Sky
@@ -159,7 +161,7 @@ function initSky() {
     gui.add( effectController, "fov", 0.0, 179.0, 0.001 ).onChange( guiChanged );
     gui.addColor( effectController, "LightColor1").onChange( guiChanged );
     gui.addColor( effectController, "LightColor2").onChange( guiChanged );
-    
+
     gui.add( params, 'bloomThreshold', 0.0, 1.0 ).onChange( function ( value ) {
 
         bloomPass.threshold = Number( value );
@@ -205,7 +207,7 @@ function setup()
 
 
 
-    var params = {
+    params = {
         exposure: 1,
         bloomStrength: 1.5,
         bloomThreshold: 0,
