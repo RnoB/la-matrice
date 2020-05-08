@@ -128,7 +128,7 @@ function initSky() {
 
         light.color = new THREE.Color(effectController.LightColor1);
         light2.color = new THREE.Color(effectController.LightColor2);
-
+        light.position = sunSphere.position;
 
 
 
@@ -192,7 +192,7 @@ function setup()
 function setUpWorld()
 {
     console.log("Setting up World")
-    light = new THREE.PointLight(0x00ff00, 1, 1000);
+    light = new THREE.DirectionalLight(0x00ff00, 0.5);
     light.position.set(50, 50, 50);
     light2 = new THREE.PointLight(0x00ff, 1, 1000);
     light2.position.set(0, 50, 50);
