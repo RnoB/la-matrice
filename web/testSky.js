@@ -112,8 +112,8 @@ function initSky() {
 
         distance = effectController.distance;
 
-        var theta = Math.PI * ( effectController.inclination - 0.5 );
-        var phi = 2 * Math.PI * ( effectController.azimuth - 0.5 );
+        var theta = Math.PI * ( effectController.inclination  );
+        var phi = 2 * Math.PI * ( effectController.azimuth );
 
         sunSphere.position.x = distance * Math.cos( phi );
         sunSphere.position.y = distance * Math.sin( phi ) * Math.sin( theta );
