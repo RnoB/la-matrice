@@ -10,7 +10,7 @@ import { OrbitControls } from './jsm/controls/OrbitControls.js';
 
 import { EffectComposer } from './jsm/postprocessing/EffectComposer.js';
 import { UnrealBloomPass } from './jsm/postprocessing/UnrealBloomPass.js';
-import { UnrealBloomPass } from './jsm/postprocessing/FilmPass.js';
+import { FilmPass } from './jsm/postprocessing/FilmPass.js';
 import { RenderPass } from './jsm/postprocessing/RenderPass.js';
 
 var camera, controls, scene, renderer;
