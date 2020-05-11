@@ -223,7 +223,7 @@ function initSky() {
         filmPass.uniforms.amount.value =  value ;
 
     } );
-    gui.add( effectController, 'intensity',0.0,10.0,0.01).onChange( function ( value ) {
+    gui.add( effectController, 'intensity',0.0,1.0,0.01).onChange( function ( value ) {
 
         filmPass.uniforms.intensity.value =  value ;
 
