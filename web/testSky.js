@@ -120,14 +120,13 @@ function initSky() {
         uniforms[ "SunAlpha" ].value = effectController.SunAlpha;
         uniforms[ "SunBeta" ].value = effectController.SunBeta;
 
-        distance = effectController.distance;
 
         var theta = 2 * Math.PI * ( effectController.inclination  );
         var phi = 2 * Math.PI * ( effectController.azimuth );
 
-        sunSphere.position.x = distance * Math.cos( phi ) * Math.cos( theta );
-        sunSphere.position.y = distance * Math.sin( theta );
-        sunSphere.position.z = distance * Math.sin( phi ) * Math.cos( theta );
+        sunSphere.position.x =  Math.cos( phi ) * Math.cos( theta );
+        sunSphere.position.y =  Math.sin( theta );
+        sunSphere.position.z = Math.sin( phi ) * Math.cos( theta );
 
         sunSphere.visible = effectController.sun;
 
@@ -159,8 +158,8 @@ function initSky() {
     gui.addColor( effectController, "SkyColor3").onChange( guiChanged );
     gui.addColor( effectController, "SunColor").onChange( guiChanged );
     gui.add( effectController, "SunIntensity", .0, 1.0, 0.001 ).onChange( guiChanged );
-    gui.add( effectController, "SunAlpha", 0.0, 500.0, 0.01 ).onChange( guiChanged );
-    gui.add( effectController, "SunBeta", 0.0, 10.0, 0.001 ).onChange( guiChanged );
+    gui.add( effectController, "SunAlpha", 0.0, 5000.0, 0.01 ).onChange( guiChanged );
+    gui.add( effectController, "SunBeta", 0.0, 50.0, 0.001 ).onChange( guiChanged );
     gui.add( effectController, "distance", 0.0, 10.0, 0.001 ).onChange( guiChanged );
     gui.add( effectController, "fov", 0.0, 179.0, 0.001 ).onChange( guiChanged );
     gui.addColor( effectController, "LightColor1").onChange( guiChanged );
