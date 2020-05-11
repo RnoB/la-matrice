@@ -201,7 +201,7 @@ function initSky() {
     } );
     gui.addColor( effectController, 'planeColor').onChange( function ( value ) {
 
-        plane.material.color.setHex(value);
+        plane.material.color.set(value);
 
     } );
     guiChanged();
