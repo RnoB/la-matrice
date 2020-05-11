@@ -217,11 +217,7 @@ function initSky() {
         plane.material.color.set(value);
 
     } );
-    gui.add( effectController, 'tDiffuse',0.0,10.0,0.01).onChange( function ( value ) {
 
-        filmPass.uniforms.tDiffuse.value =  value ;
-
-    } );
     gui.add( effectController, 'Amount',0.0,10.0,0.01).onChange( function ( value ) {
 
         filmPass.uniforms.amount.value =  value ;
