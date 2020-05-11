@@ -96,8 +96,8 @@ function initSky() {
         LightColor1 : '#00ff00',
         LightColor2 : '#00ff36',
         FogColor : '#000000',
-        FogNear : '10',
-        FogFar : '100', 
+        FogNear : 10,
+        FogFar : 100, 
         
     };
 
