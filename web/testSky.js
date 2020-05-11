@@ -270,8 +270,7 @@ function setup()
     bloomPass.radius = params.bloomRadius;
 
 
-    var vertShader = document.getElementById('vertexShader').textContent;
-    var fragShader = document.getElementById('fragmentShader').textContent;
+
     var counter = 0.0;
     var myEffect = {
       uniforms: {
