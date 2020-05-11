@@ -104,7 +104,7 @@ function initSky() {
         planeColor : '#ffffff',
         NoiseIntensity : 1.0,
         ScanlinesIntensity : 1.0,
-        ScanlinesCount = 500,
+        ScanlinesCount : 500,
 
     };
 
