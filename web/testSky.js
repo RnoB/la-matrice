@@ -308,7 +308,7 @@ function setup()
 
     filmPass = new ShaderPass(myEffect);
     filmPass.renderToScreen = true;
-    composer.addPass(filmPass);
+
 
     composer = new EffectComposer( renderer );
     composer.addPass( renderScene );
