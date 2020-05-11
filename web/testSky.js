@@ -10,7 +10,7 @@ import { OrbitControls } from './jsm/controls/OrbitControls.js';
 
 import { EffectComposer } from './jsm/postprocessing/EffectComposer.js';
 import { UnrealBloomPass } from './jsm/postprocessing/UnrealBloomPass.js';
-import { FilmPass } from './jsm/postprocessing/FilmPass.js';
+import { ShaderPass } from './jsm/postprocessing/ShaderPass.js';
 import { RenderPass } from './jsm/postprocessing/RenderPass.js';
 
 var camera, controls, scene, renderer;
@@ -306,7 +306,7 @@ function setup()
               ].join( '\n' ),
     }
 
-    filmPass = new THREE.ShaderPass(myEffect);
+    filmPass = new ShaderPass(myEffect);
     filmPass.renderToScreen = true;
     composer.addPass(filmPass);
 
