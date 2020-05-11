@@ -220,17 +220,17 @@ function initSky() {
     } );
     gui.add( effectController, 'NoiseIntensity',0.0,1000.0,0.01).onChange( function ( value ) {
 
-        filmPass.nIntensity.value =  value ;
+        filmPass.uniforms.nIntensity.value =  value ;
 
     } );
     gui.add( effectController, 'ScanlinesIntensity',0.0,1000.0,0.01).onChange( function ( value ) {
 
-        filmPass.sIntensity.value =  value ;
+        filmPass.uniforms.sIntensity.value =  value ;
 
     } );
     gui.add( effectController, 'ScanlinesCount',0.0,1000.0,0.01).onChange( function ( value ) {
 
-        filmPass.sCount.value =  value ;
+        filmPass.uniforms.sCount.value =  value ;
 
     } );
     guiChanged();
