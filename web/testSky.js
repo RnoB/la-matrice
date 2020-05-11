@@ -218,12 +218,12 @@ function initSky() {
         plane.material.color.set(value);
 
     } );
-    gui.add( effectController, 'NoiseIntensity',0.0,1000.0,0.01).onChange( function ( value ) {
+    gui.add( effectController, 'NoiseIntensity',0.0,1.0,0.01).onChange( function ( value ) {
 
         filmPass.uniforms.nIntensity.value =  value ;
 
     } );
-    gui.add( effectController, 'ScanlinesIntensity',0.0,1000.0,0.01).onChange( function ( value ) {
+    gui.add( effectController, 'ScanlinesIntensity',0.0,1.0,0.01).onChange( function ( value ) {
 
         filmPass.uniforms.sIntensity.value =  value ;
 
