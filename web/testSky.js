@@ -102,7 +102,7 @@ function initSky() {
         FogNear : 10,
         FogFar : 100, 
         planeColor : '#ffffff',
-        tDiffuse: 1.0,
+        intensity: 1.0,
         Amount : 1.0,
 
     };
@@ -223,6 +223,11 @@ function initSky() {
         filmPass.uniforms.amount.value =  value ;
 
     } );
+    gui.add( effectController, 'intensity',0.0,10.0,0.01).onChange( function ( value ) {
+
+        filmPass.uniforms.intensity.value =  value ;
+
+    } );
 
     guiChanged();
 
@@ -270,7 +275,8 @@ function setup()
     var myEffect = {
       uniforms: {
         "tDiffuse": { value: null },
-        "amount": { value: counter }
+        "amount": { value: counter },
+        "intensiy": { value: counter }
       },
       vertexShader: [
         'varying vec2 vUv;',
@@ -282,6 +288,7 @@ function setup()
 
       fragmentShader: [
         'uniform float amount;',
+        'uniform float intensity;',
         'uniform sampler2D tDiffuse;',
         'varying vec2 vUv;',
 
@@ -295,7 +302,7 @@ function setup()
         'vec4 color = texture2D( tDiffuse, vUv );',
         'vec2 uvRandom = vUv;',
         'uvRandom.y *= random(vec2(uvRandom.y,amount));',
-        'color.rgb += random(uvRandom)*0.15;',
+        'color.rgb += random(uvRandom)*intensity;',
         'gl_FragColor = vec4( color  );',
       '}',
               ].join( '\n' ),
