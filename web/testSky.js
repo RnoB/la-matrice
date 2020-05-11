@@ -104,7 +104,7 @@ function initSky() {
         planeColor : '#ffffff',
         NoiseIntensity : 1.0,
         ScanlinesIntensity : 1.0,
-        ScanlinesCount : 500,
+        ScanlinesCount :s 500,
 
     };
 
@@ -230,7 +230,7 @@ function initSky() {
     } );
     gui.add( effectController, 'scanlinesCount',0.0,1000.0,0.01).onChange( function ( value ) {
 
-        filmPass.sCount.value = =  value ;
+        filmPass.sCount.value =  value ;
 
     } );
     guiChanged();
