@@ -104,6 +104,9 @@ function initSky() {
         planeColor : '#ffffff',
         intensity: 1.0,
         Amount : 1.0,
+        metalness:0.0,
+        roughness : 0.0,
+
 
     };
 
@@ -226,6 +229,18 @@ function initSky() {
     gui.add( effectController, 'intensity',0.0,1.0,0.01).onChange( function ( value ) {
 
         filmPass.uniforms.intensity.value =  value ;
+
+    } );
+
+
+    gui.add( effectController, 'metalness',0.0,1.0,0.01).onChange( function ( value ) {
+
+        materialPlane.metalness =  value ;
+
+    } );
+    gui.add( effectController, 'roughness',0.0,1.0,0.01).onChange( function ( value ) {
+
+        materialPlane.roughness =  value ;
 
     } );
 
