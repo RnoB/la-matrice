@@ -91,8 +91,8 @@ function initSky() {
         SunAlpha : 1.0,
         SunBeta : 1.0,
         SunIntensity : .1,
-        LightIntensity1 : .1,
-        LightIntensity2 : .1,
+        LightIntensity1 : 1,
+        LightIntensity2 : 1,
         distance : 1,
         fov : 90,
         LightColor1 : '#00ff00',
@@ -165,13 +165,13 @@ function initSky() {
     gui.add( effectController, "SunBeta", 0.0, 50.0, 0.001 ).onChange( guiChanged );
     gui.add( effectController, "fov", 0.0, 179.0, 0.001 ).onChange( guiChanged );
     gui.addColor( effectController, "LightColor1").onChange( guiChanged );
-    gui.addColor( effectController, "LightIntensity1", 0.0, 5.0 ).onChange( function ( value ) {
+    gui.adds( effectController, "LightIntensity1", 0.0, 5.0 ).onChange( function ( value ) {
 
         light.intensity = Number( value );
 
     } );
     gui.addColor( effectController, "LightColor2").onChange( guiChanged );
-    gui.addColor( effectController, "LightIntensity2", 0.0, 5.0 ).onChange( function ( value ) {
+    gui.add( effectController, "LightIntensity2", 0.0, 5.0 ).onChange( function ( value ) {
 
         light2.intensity = Number( value );
 
