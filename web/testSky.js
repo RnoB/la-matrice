@@ -165,7 +165,7 @@ function initSky() {
     gui.add( effectController, "SunBeta", 0.0, 50.0, 0.001 ).onChange( guiChanged );
     gui.add( effectController, "fov", 0.0, 179.0, 0.001 ).onChange( guiChanged );
     gui.addColor( effectController, "LightColor1").onChange( guiChanged );
-    gui.adds( effectController, "LightIntensity1", 0.0, 5.0 ).onChange( function ( value ) {
+    gui.add( effectController, "LightIntensity1", 0.0, 5.0 ).onChange( function ( value ) {
 
         light.intensity = Number( value );
 
