@@ -228,7 +228,7 @@ function initSky() {
         filmPass.sIntensity.value =  value ;
 
     } );
-    gui.add( effectController, 'scanlinesCount',0.0,1000.0,0.01).onChange( function ( value ) {
+    gui.add( effectController, 'ScanlinesCount',0.0,1000.0,0.01).onChange( function ( value ) {
 
         filmPass.sCount.value =  value ;
 
