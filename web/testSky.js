@@ -218,21 +218,17 @@ function initSky() {
         plane.material.color.set(value);
 
     } );
-    gui.add( effectController, 'NoiseIntensity',0.0,1.0,0.01).onChange( function ( value ) {
+    gui.add( effectController, 'tDiffuse',0.0,1.0,0.01).onChange( function ( value ) {
 
         filmPass.uniforms.nIntensity.value =  value ;
 
     } );
-    gui.add( effectController, 'ScanlinesIntensity',0.0,1.0,0.01).onChange( function ( value ) {
+    gui.add( effectController, 'amount',0.0,1.0,0.01).onChange( function ( value ) {
 
         filmPass.uniforms.sIntensity.value =  value ;
 
     } );
-    gui.add( effectController, 'ScanlinesCount',0.0,1000.0,0.01).onChange( function ( value ) {
 
-        filmPass.uniforms.sCount.value =  value ;
-
-    } );
     guiChanged();
 
 }
@@ -273,8 +269,48 @@ function setup()
     bloomPass.strength = params.bloomStrength;
     bloomPass.radius = params.bloomRadius;
 
-    filmPass = new FilmPass(0.35,0.025,648,false);
+
+    var vertShader = document.getElementById('vertexShader').textContent;
+    var fragShader = document.getElementById('fragmentShader').textContent;
+    var counter = 0.0;
+    var myEffect = {
+      uniforms: {
+        "tDiffuse": { value: null },
+        "amount": { value: counter }
+      },
+      vertexShader: [
+        'varying vec2 vUv;',
+        'void main() {',
+            'vUv = uv;',
+            'gl_Position = projectionMatrix* modelViewMatrix* vec4( position, 1.0 );',
+        '}',
+        ].join( '\n' ),
+
+      fragmentShader: [
+        'uniform float amount;',
+        'uniform sampler2D tDiffuse;',
+        'varying vec2 vUv;',
+
+        'float random( vec2 p ) {',
+            'vec2 K1 = vec2(23.14069263277926, 2.665144142690225 );',
+            'return fract( cos( dot(p,K1) ) * 12345.6789 );',
+        '}',
+
+      'void main() {',
+
+        'vec4 color = texture2D( tDiffuse, vUv );',
+        'vec2 uvRandom = vUv;',
+        'uvRandom.y *= random(vec2(uvRandom.y,amount));',
+        'color.rgb += random(uvRandom)*0.15;',
+        'gl_FragColor = vec4( color  );'
+      '}',
+              ].join( '\n' ),
+    }
+
+    filmPass = new THREE.ShaderPass(myEffect);
     filmPass.renderToScreen = true;
+    composer.addPass(filmPass);
+
     composer = new EffectComposer( renderer );
     composer.addPass( renderScene );
     composer.addPass( bloomPass );
