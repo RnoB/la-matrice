@@ -91,6 +91,8 @@ function initSky() {
         SunAlpha : 1.0,
         SunBeta : 1.0,
         SunIntensity : .1,
+        LightIntensity1 : .1,
+        LightIntensity2 : .1,
         distance : 1,
         fov : 90,
         LightColor1 : '#00ff00',
@@ -161,11 +163,19 @@ function initSky() {
     gui.add( effectController, "SunIntensity", .0, 1.0, 0.001 ).onChange( guiChanged );
     gui.add( effectController, "SunAlpha", 0.0, 1000.0, 0.01 ).onChange( guiChanged );
     gui.add( effectController, "SunBeta", 0.0, 50.0, 0.001 ).onChange( guiChanged );
-    gui.add( effectController, "distance", 0.0, 10.0, 0.001 ).onChange( guiChanged );
     gui.add( effectController, "fov", 0.0, 179.0, 0.001 ).onChange( guiChanged );
     gui.addColor( effectController, "LightColor1").onChange( guiChanged );
-    gui.addColor( effectController, "LightColor2").onChange( guiChanged );
+    gui.addColor( effectController, "Lightintensity1", 0.0, 5.0 ).onChange( function ( value ) {
 
+        light.intensity = Number( value );
+
+    } );
+    gui.addColor( effectController, "LightColor2").onChange( guiChanged );
+    gui.addColor( effectController, "Lightintensity2", 0.0, 5.0 ).onChange( function ( value ) {
+
+        light2.intensity = Number( value );
+
+    } );
     gui.add( params, 'bloomThreshold', 0.0, 1.0 ).onChange( function ( value ) {
 
         bloomPass.threshold = Number( value );
