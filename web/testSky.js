@@ -102,7 +102,10 @@ function initSky() {
         FogNear : 10,
         FogFar : 100, 
         planeColor : '#ffffff',
-        
+        NoiseIntensity : 1.0,
+        ScanlinesIntensity : 1.0,
+        ScanlinesCount = 500,
+
     };
 
     var distance = 400000;
@@ -213,6 +216,21 @@ function initSky() {
     gui.addColor( effectController, 'planeColor').onChange( function ( value ) {
 
         plane.material.color.set(value);
+
+    } );
+    gui.add( effectController, 'NoiseIntensity',0.0,1000.0,0.01).onChange( function ( value ) {
+
+        filmPass.nIntensity.value =  value ;
+
+    } );
+    gui.add( effectController, 'ScanlinesIntensity',0.0,1000.0,0.01).onChange( function ( value ) {
+
+        filmPass.sIntensity.value =  value ;
+
+    } );
+    gui.add( effectController, 'scanlinesCount',0.0,1000.0,0.01).onChange( function ( value ) {
+
+        filmPass.sCount.value = =  value ;
 
     } );
     guiChanged();
