@@ -102,9 +102,8 @@ function initSky() {
         FogNear : 10,
         FogFar : 100, 
         planeColor : '#ffffff',
-        NoiseIntensity : 1.0,
-        ScanlinesIntensity : 1.0,
-        ScanlinesCount : 500,
+        tDiffuse: 1.0,
+        Amount : 1.0,
 
     };
 
@@ -223,7 +222,7 @@ function initSky() {
         filmPass.uniforms.nIntensity.value =  value ;
 
     } );
-    gui.add( effectController, 'amount',0.0,1.0,0.01).onChange( function ( value ) {
+    gui.add( effectController, 'Amount',0.0,1.0,0.01).onChange( function ( value ) {
 
         filmPass.uniforms.sIntensity.value =  value ;
 
