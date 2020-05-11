@@ -272,6 +272,7 @@ function setup()
 
 
     var counter = 0.0;
+
     var myEffect = {
       uniforms: {
         "tDiffuse": { value: null },
@@ -297,8 +298,10 @@ function setup()
             'return fract( cos( dot(p,K1) ) * 12345.6789 );',
         '}',
 
-      'void main() {',
 
+
+      'void main() {',
+        'amount+=.1;'
         'vec4 color = texture2D( tDiffuse, vUv );',
         'vec2 uvRandom = vUv;',
         'uvRandom.y *= random(vec2(uvRandom.y,amount));',
