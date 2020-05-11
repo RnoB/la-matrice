@@ -58,7 +58,7 @@ var simuTime;
 var controls;
 var light,light2;
 var params;
-var bloomPass;
+var bloomPass,filmPass;
 
 function initSky() {
 
@@ -273,7 +273,7 @@ function setup()
     bloomPass.strength = params.bloomStrength;
     bloomPass.radius = params.bloomRadius;
 
-    var filmPass = new FilmPass(0.35,0.025,648,false);
+    filmPass = new FilmPass(0.35,0.025,648,false);
     filmPass.renderToScreen = true;
     composer = new EffectComposer( renderer );
     composer.addPass( renderScene );
