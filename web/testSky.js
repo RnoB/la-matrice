@@ -98,6 +98,7 @@ function initSky() {
         FogColor : '#000000',
         FogNear : 10,
         FogFar : 100, 
+        planeColor : '#ffffff',
         
     };
 
@@ -198,7 +199,11 @@ function initSky() {
         scene.fog.far =  value ;
 
     } );
+    gui.addColor( effectController, 'planeColor').onChange( function ( value ) {
 
+        plane.material.color.setHex(value);
+
+    } );
     guiChanged();
 
 }
