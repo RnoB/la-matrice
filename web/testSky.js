@@ -86,7 +86,7 @@ function initSky() {
         SkyColor1: "#ffff00", // Facing front,
         SkyColor2: "#00ff00", // Facing front,
         SkyColor3: "#0011ff", // Facing front,
-        sun: ! true,
+        plane: ! true,
         SunColor : "#0011ff",
         SunAlpha : 1.0,
         SunBeta : 1.0,
@@ -128,7 +128,7 @@ function initSky() {
         sunSphere.position.y =  Math.sin( theta );
         sunSphere.position.z = Math.sin( phi ) * Math.cos( theta );
 
-        sunSphere.visible = effectController.sun;
+        plane.visible = effectController.plane;
 
         uniforms[ "SunVector" ].value.copy( sunSphere.position );
 
@@ -152,7 +152,7 @@ function initSky() {
 
     gui.add( effectController, "inclination", 0, 1, 0.0001 ).onChange( guiChanged );
     gui.add( effectController, "azimuth", 0, 1, 0.0001 ).onChange( guiChanged );
-    gui.add( effectController, "sun" ).onChange( guiChanged );
+    gui.add( effectController, "plane" ).onChange( guiChanged );
     gui.addColor( effectController, "SkyColor1").onChange( guiChanged );
     gui.addColor( effectController, "SkyColor2").onChange( guiChanged );
     gui.addColor( effectController, "SkyColor3").onChange( guiChanged );
