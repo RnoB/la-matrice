@@ -119,7 +119,7 @@ Sky.SkyShader = {
 		'	vec3 c_sun = SunColor * min(pow(max(0.0, dot(direction, SunVector)), SunAlpha) * SunBeta, 1.0);',
 		// optical length
 		// cutoff angle at 90 to avoid singularity in next formula.
-		'	float zenithAngle = acos( max( 0.0, dot( up, direction ) ) );',
+
 
 
 		'	vec3 retColor =c_sky * SkyIntensity + c_sun * SunIntensity;',
