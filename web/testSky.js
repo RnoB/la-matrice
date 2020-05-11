@@ -255,7 +255,7 @@ function setup()
     bloomPass.strength = params.bloomStrength;
     bloomPass.radius = params.bloomRadius;
 
-    var filmPass = new THREE.FilmPass(0.35,0.025,648,false);
+    var filmPass = new FilmPass(0.35,0.025,648,false);
     filmPass.renderToScreen = true;
     composer = new EffectComposer( renderer );
     composer.addPass( renderScene );
