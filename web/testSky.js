@@ -10,6 +10,7 @@ import { OrbitControls } from './jsm/controls/OrbitControls.js';
 
 import { EffectComposer } from './jsm/postprocessing/EffectComposer.js';
 import { UnrealBloomPass } from './jsm/postprocessing/UnrealBloomPass.js';
+import { UnrealBloomPass } from './jsm/postprocessing/FilmPass.js';
 import { RenderPass } from './jsm/postprocessing/RenderPass.js';
 
 var camera, controls, scene, renderer;
@@ -254,9 +255,12 @@ function setup()
     bloomPass.strength = params.bloomStrength;
     bloomPass.radius = params.bloomRadius;
 
+    var filmPass = new THREE.FilmPass(0.35,0.025,648,false);
+    filmPass.renderToScreen = true;
     composer = new EffectComposer( renderer );
     composer.addPass( renderScene );
     composer.addPass( bloomPass );
+    composer.addPass( filmPass );
 
     scene.add(plane); 
     scene.fog = new THREE.Fog("#000000", 1, 100);
