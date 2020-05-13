@@ -13,6 +13,7 @@ import { UnrealBloomPass } from './jsm/postprocessing/UnrealBloomPass.js';
 import { BloomPass } from './jsm/postprocessing/BloomPass.js';
 import { ShaderPass } from './jsm/postprocessing/ShaderPass.js';
 import { RenderPass } from './jsm/postprocessing/RenderPass.js';
+import { CopyShader } from './jsm/shaders/CopyShader.js';
 
 var camera, controls, scene, renderer;
 
@@ -353,7 +354,7 @@ function setup()
               ].join( '\n' ),
     }
 
-    var effectCopy = new THREE.ShaderPass(THREE.CopyShader);
+    var effectCopy = new ShaderPass(CopyShader);
     effectCopy.renderToScreen = true;
     filmPass = new ShaderPass(myEffect);
     filmPass.renderToScreen = true;
