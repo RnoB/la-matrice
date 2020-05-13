@@ -8,7 +8,7 @@
 
 import {
 	Vector2
-} from "../../../build/three.module.js";
+} from "../../js/three.module.js";
 
 var ConvolutionShader = {
 
