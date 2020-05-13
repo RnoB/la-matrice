@@ -9,14 +9,14 @@ export function sleep(ms) {
 export class InitSky
 {
 
-    constructor(SkyExponent1=1.0,SkyExponent2=1.0,SkyExponent3 = 1.0,
+    constructor(SkyExponent1=1.0,SkyExponent2=1.0,SkyIntensity = 1.0,
                 SkyColor1 = "#00ff00" ,SkyColor2 = "#ffff00",SkyColor3 = "#ff0000",
                 SunColor = "#ff1100", SunIntensity =1,SunAlpha = 1.0, SunBeta = 1.0,
                 SunVector = new THREE.Vector3(0,1,0))
     {
         this.SkyExponent1 = SkyExponent1;
         this.SkyExponent2 = SkyExponent2;
-        this.SkyExponent3 = SkyExponent3;
+        this.SkyIntensity = SkyIntensity;
         this.SkyColor1 = SkyColor1;
         this.SkyColor2 = SkyColor2;
         this.SkyColor3 = SkyColor3;
