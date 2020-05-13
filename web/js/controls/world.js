@@ -53,7 +53,7 @@ export class InitSky
         this.SunVector.x =  Math.cos( phi ) * Math.cos( theta );
         this.SunVector.y =  Math.sin( theta );
         this.SunVector.z = Math.sin( phi ) * Math.cos( theta ); 
-        uniforms[ "SunVector" ].value.copy( this.SunVector );    
+        this.sky.material.uniforms[ "SunVector" ].value.copy( this.SunVector );    
     }
 
     updateShader()
