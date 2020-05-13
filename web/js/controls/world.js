@@ -210,7 +210,7 @@ export function worldBuilder(world,scene)
              
             planeColor = '#9600ab';
             metalness=0.6;
-            roughness = 0.74;
+            roughness = 0.84;
             break;
         case 1:
             ambientColor ="#00ff00";
