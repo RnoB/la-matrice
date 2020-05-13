@@ -8,6 +8,7 @@ import {sleep,worldBuilder} from "./js/controls/world.js"
 import { EffectComposer } from './jsm/postprocessing/EffectComposer.js';
 import { ShaderPass } from './jsm/postprocessing/ShaderPass.js';
 import { RenderPass } from './jsm/postprocessing/RenderPass.js';
+import { FilmPass } from './jsm/postprocessing/FilmPass.js';
 
 if (navigator.xr == null)
 {
@@ -172,8 +173,9 @@ function setup()
               ].join( '\n' ),
     }
 
-    filmPass = new ShaderPass(myEffect);
-    filmPass.renderToScreen = true;
+    //filmPass = new ShaderPass(myEffect);
+    var filmPass = new FilmPass( 0.35, 0.025, 648, false );
+    //filmPass.renderToScreen = true;
     composer = new EffectComposer( renderer );
     renderer.setRenderTarget( composer.readBuffer );
 
