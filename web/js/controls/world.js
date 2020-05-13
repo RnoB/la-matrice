@@ -59,11 +59,11 @@ export class InitSky
         uniforms[ "SkyColor3" ].value = new THREE.Color(this.SkyColor3);
 
 
-/*        uniforms[ "SunColor" ].value = new THREE.Color(this.SunColor);
+        uniforms[ "SunColor" ].value = new THREE.Color(this.SunColor);
         uniforms[ "SunIntensity" ].value = this.SunIntensity;
         uniforms[ "SunAlpha" ].value = this.SunAlpha;
         uniforms[ "SunBeta" ].value = this.SunBeta;
-
+/*
         uniforms[ "SunVector" ].value.copy( this.sunVector );*/
 
     }
