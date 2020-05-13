@@ -151,19 +151,110 @@ function worlder(scene,ambientColor ="#00ff00",ambientIntensity = .3,
 
 export function worldBuilder(world,scene)
 {
-    
+    var ambientColor;
+    var ambientIntensity;
+    var SkyExponent1;
+    var SkyExponent2;
+    var SkyIntensity;
+    var inclination;
+    var azimuth;
+    var SkyColor;
+    var SkyColor;
+    var SkyColor;
+    var SunColor;
+    var SunAlpha;
+    var SunBeta;
+    var SunIntensity;
+    var LightIntensity1;
+    var LightIntensity2;
+    var LightColor1;
+    var LightColor2;
+    var FogColor;
+    var FogNear;
+    var FogFar;
+    var planeColor;
+    var metalness;
+    var roughness;
     var sky,floor;
     switch(world)
     {
 
         case 0:
-
+            ambientColor ="#00ff00";
+            ambientIntensity = .3;
+            
+            SkyExponent1= 1;
+            SkyExponent2= 1;
+            SkyIntensity= 1;
+            inclination= 0.49;
+            azimuth= 0.25;
+             
+            SkyColor1= "#ffff00";
+            SkyColor2= "#00ff00";
+            SkyColor3= "#0011ff";
+             
+            SunColor = "#0011ff";
+            SunAlpha = 1.0;
+            SunBeta = 1.0;
+            SunIntensity = .1;
+            
+            LightIntensity1 = 1.0;
+            LightIntensity2 = 1.0;
+            
+            LightColor1 = '#00ff00';
+            LightColor2 = '#00ff36';
+            
+            FogColor = '#000000';
+            FogNear = 10;
+            FogFar = 100;
+             
+            planeColor = '#ffffff';
+            metalness=0.0;
+            roughness = 0.0;
             break;
         case 1:
+            ambientColor ="#00ff00";
+            ambientIntensity = .3;
+            
+            SkyExponent1= 1;
+            SkyExponent2= 1;
+            SkyIntensity= 1;
+            inclination= 0.49;
+            azimuth= 0.25;
+             
+            SkyColor1= "#ffff00";
+            SkyColor2= "#00ff00";
+            SkyColor3= "#0011ff";
+             
+            SunColor = "#0011ff";
+            SunAlpha = 1.0;
+            SunBeta = 1.0;
+            SunIntensity = .1;
+            
+            LightIntensity1 = 1.0;
+            LightIntensity2 = 1.0;
+            
+            LightColor1 = '#00ff00';
+            LightColor2 = '#00ff36';
+            
+            FogColor = '#000000';
+            FogNear = 10;
+            FogFar = 100;
+             
+            planeColor = '#ffffff';
+            metalness=0.0;
+            roughness = 0.0;
 
             break;
     }
-    worlder(scene);
+    worlder(scene,ambientColor,ambientIntensity,
+        SkyExponent1,SkyExponent2,SkyIntensity,inclination,azimuth, 
+        SkyColor1,SkyColor2,SkyColor3, 
+        SunColor,SunAlpha,SunBeta,SunIntensity,
+        LightIntensity1,LightIntensity2,
+        LightColor1,LightColor2,
+        FogColor,FogNear,FogFar, 
+        planeColor,metalness,roughness);
 }
 
 
