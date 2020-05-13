@@ -67,7 +67,7 @@ export class InitSky
 
 
 
-        uniforms[ "SunVector" ].value.copy( sunVector );
+        uniforms[ "SunVector" ].value.copy( this.sunVector );
 
     }
 
