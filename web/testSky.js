@@ -247,12 +247,12 @@ function initSky() {
 
     gui.add( effectController, 'Amount',0.0,10.0,0.01).onChange( function ( value ) {
 
-        filmPass.uniforms.amount.value =  value ;
+        filmPass.noiseIntensity =  value ;
 
     } );
     gui.add( effectController, 'intensity',0.0,1.0,0.01).onChange( function ( value ) {
 
-        filmPass.uniforms.intensity.value =  value ;
+        filmPass.scanLinesIntensity =  value ;
 
     } );
 
@@ -425,7 +425,7 @@ function render() {
 
 
 
-    filmPass.uniforms.amount.value +=.1;
+    //filmPass.uniforms.amount.value +=.1;
    controls.update();
 
     for (var player of listPlayers)
