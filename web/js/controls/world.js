@@ -37,7 +37,7 @@ export class InitSky
 
     updateShader()
     {
-
+        var uniforms = this.sky.material.uniforms;
         uniforms[ "SkyExponent1" ].value = this.SkyExponent1;
         uniforms[ "SkyExponent2" ].value = this.SkyExponent2;
         uniforms[ "SkyIntensity" ].value = this.SkyIntensity;
