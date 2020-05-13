@@ -10,7 +10,7 @@ export class InitSky
 {
 
     constructor(SkyExponent1=1.0,SkyExponent2=1.0,SkyIntensity = 1.0,
-                SkyColor1 = "#00ff00" ,SkyColor2 = "#ffff00",SkyColor3 = "#ff0000",
+                SkyColor1 = "#0000ff" ,SkyColor2 = "#ff00ff",SkyColor3 = "#ff0000",
                 SunColor = "#ff1100", SunIntensity =1,SunAlpha = 1.0, SunBeta = 1.0,
                 SunVector = new THREE.Vector3(0,1,0))
     {
