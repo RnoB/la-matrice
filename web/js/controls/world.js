@@ -26,7 +26,7 @@ export class InitSky
         this.SunBeta = SunBeta;
         this.SunVector = SunVector;
         this.sky = new Sky();
-        //this.updateShader();
+        this.updateShader();
     }
 
 
@@ -39,8 +39,8 @@ export class InitSky
     sunPosition(inclination, azimuth)
     {
 
-        var theta = 2 * Math.PI * ( effectController  );
-        var phi = 2 * Math.PI * ( effectController );
+        var theta = 2 * Math.PI * ( inclination  );
+        var phi = 2 * Math.PI * ( azimuth );
         this.sunVector.x =  Math.cos( phi ) * Math.cos( theta );
         this.sunVector.y =  Math.sin( theta );
         this.sunVector.z = Math.sin( phi ) * Math.cos( theta ); 
@@ -54,7 +54,7 @@ export class InitSky
         uniforms[ "SkyExponent2" ].value = this.SkyExponent2;
         uniforms[ "SkyIntensity" ].value = this.SkyIntensity;
 
-        uniforms[ "SkyColor1" ].value = new THREE.Color(this.SkyColor1);
+/*        uniforms[ "SkyColor1" ].value = new THREE.Color(this.SkyColor1);
         uniforms[ "SkyColor2" ].value = new THREE.Color(this.SkyColor2);
         uniforms[ "SkyColor3" ].value = new THREE.Color(this.SkyColor3);
 
@@ -64,7 +64,7 @@ export class InitSky
         uniforms[ "SunAlpha" ].value = this.SunAlpha;
         uniforms[ "SunBeta" ].value = this.SunBeta;
 
-        uniforms[ "SunVector" ].value.copy( this.sunVector );
+        uniforms[ "SunVector" ].value.copy( this.sunVector );*/
 
     }
 
