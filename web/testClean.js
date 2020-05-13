@@ -174,8 +174,17 @@ function setup()
     filmPass = new ShaderPass(myEffect);
     filmPass.renderToScreen = true;
     composer = new EffectComposer( renderer );
+    renderer.setRenderTarget( composer.readBuffer );
+
     composer.addPass( renderScene );
     composer.addPass( filmPass );
+
+
+    scene.onAfterRender = function () {
+
+        composer.render();
+
+    };
 
 
 }
@@ -224,7 +233,7 @@ function render() {
     }
     
     filmPass.uniforms.amount.value +=.1;
-    composer.render(scene, camera);
+    renderer.render(scene, camera);
     frame++;
 
 }
