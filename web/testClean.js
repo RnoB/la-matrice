@@ -174,7 +174,7 @@ function setup()
     }
 
     //filmPass = new ShaderPass(myEffect);
-    var filmPass = new FilmPass( 0.35, 0.025, 648, false );
+    filmPass = new FilmPass( 0.35, 0.025, 648, false );
     //filmPass.renderToScreen = true;
     composer = new EffectComposer( renderer );
     renderer.setRenderTarget( composer.readBuffer );
