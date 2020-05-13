@@ -204,7 +204,7 @@ export function worldBuilder(world,scene)
             LightColor1 = '#d500ff';
             LightColor2 = '#00ff36';
             
-            FogColor = '#5700ff';
+            FogColor = '#0099cc';
             FogNear = 0;
             FogFar = 200;
              
