@@ -196,7 +196,7 @@ export function worldBuilder(world,scene)
             SunColor = "#0851f4";
             SunAlpha = 292.0;
             SunBeta = 2.165;
-            SunIntensity = .541;
+            SunIntensity = .9;
             
             LightIntensity1 = .9;
             LightIntensity2 = 0.0;
@@ -206,7 +206,7 @@ export function worldBuilder(world,scene)
             
             FogColor = '#5700ff';
             FogNear = 0;
-            FogFar = 390;
+            FogFar = 200;
              
             planeColor = '#9600ab';
             metalness=0.6;
