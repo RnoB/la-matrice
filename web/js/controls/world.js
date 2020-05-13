@@ -158,9 +158,9 @@ export function worldBuilder(world,scene)
     var SkyIntensity;
     var inclination;
     var azimuth;
-    var SkyColor;
-    var SkyColor;
-    var SkyColor;
+    var SkyColor1;
+    var SkyColor2;
+    var SkyColor3;
     var SunColor;
     var SunAlpha;
     var SunBeta;
