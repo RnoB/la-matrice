@@ -176,7 +176,7 @@ function setup()
     composer = new EffectComposer( renderer );
     renderer.setRenderTarget( composer.readBuffer );
 
-    composer.addPass( renderScene );
+    //composer.addPass( renderScene );
     composer.addPass( filmPass );
 
 
