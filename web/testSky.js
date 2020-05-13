@@ -10,8 +10,6 @@ import { OrbitControls } from './jsm/controls/OrbitControls.js';
 
 import { EffectComposer } from './jsm/postprocessing/EffectComposer.js';
 import { UnrealBloomPass } from './jsm/postprocessing/UnrealBloomPass.js';
-import { BloomPass } from './jsm/postprocessing/BloomPass.js';
-import { FilmPass } from './jsm/postprocessing/FilmPass.js';
 import { ShaderPass } from './jsm/postprocessing/ShaderPass.js';
 import { RenderPass } from './jsm/postprocessing/RenderPass.js';
 
@@ -184,7 +182,7 @@ function initSky() {
         light2.intensity = Number( value );
 
     } );
-/*    gui.add( params, 'bloomThreshold', 0.0, 1.0 ).onChange( function ( value ) {
+    gui.add( params, 'bloomThreshold', 0.0, 1.0 ).onChange( function ( value ) {
 
         bloomPass.threshold = Number( value );
 
@@ -199,28 +197,6 @@ function initSky() {
     gui.add( params, 'bloomRadius', 0.0, 1.0 ).step( 0.01 ).onChange( function ( value ) {
 
         bloomPass.radius = Number( value );
-
-    } );*/
-    gui.add( params, 'bloomStrength', 0.0, 10.0,0.01 ).onChange( function ( value ) {
-
-        bloomPass.strength = Number( value );
-
-    } );
-
-    gui.add( params, 'bloomKernelSize', 0.0, 100.0 ,0.01).onChange( function ( value ) {
-
-        bloomPass.kernelSize = Number( value );
-
-    } );
-
-    gui.add( params, 'bloomSigma', 0.0, 100.0 ).step( 0.01 ).onChange( function ( value ) {
-
-        bloomPass.sigma = Number( value );
-
-    } );
-    gui.add( params, 'bloomResolution', 0.0, 100.0 ).step( 0.01 ).onChange( function ( value ) {
-
-        bloomPass.resolution = Number( value );
 
     } );
     
@@ -247,12 +223,12 @@ function initSky() {
 
     gui.add( effectController, 'Amount',0.0,10.0,0.01).onChange( function ( value ) {
 
-        filmPass.noiseIntensity =  value ;
+        filmPass.uniforms.amount.value =  value ;
 
     } );
     gui.add( effectController, 'intensity',0.0,1.0,0.01).onChange( function ( value ) {
 
-        filmPass.scanLinesIntensity =  value ;
+        filmPass.uniforms.intensity.value =  value ;
 
     } );
 
@@ -294,26 +270,19 @@ function setup()
     document.body.appendChild(renderer.domElement);
 
 
-/*
+
     params = {
         exposure: 1,
         bloomStrength: 1.5,
         bloomThreshold: 0,
         bloomRadius: 0
-    };*/
-    params = {
-        bloomStrength: 1,
-        bloomKernelSize: 1.5,
-        bloomSigma: 0,
-        bloomResolution: 256
     };
 
     var renderScene = new RenderPass( scene, camera );
-    //bloomPass = new UnrealBloomPass( new THREE.Vector2( window.innerWidth, window.innerHeight ), 1.5, 0.4, 0.85 );
-    bloomPass = new BloomPass( 1, 25, 5,256);
-    //bloomPass.threshold = params.bloomThreshold;
-    //bloomPass.strength = params.bloomStrength;
-    //bloomPass.radius = params.bloomRadius;
+    bloomPass = new UnrealBloomPass( new THREE.Vector2( window.innerWidth, window.innerHeight ), 1.5, 0.4, 0.85 );
+    bloomPass.threshold = params.bloomThreshold;
+    bloomPass.strength = params.bloomStrength;
+    bloomPass.radius = params.bloomRadius;
 
 
 
@@ -354,9 +323,7 @@ function setup()
               ].join( '\n' ),
     }
 
-
-    //filmPass = new ShaderPass(myEffect);
-    filmPass = new FilmPass(.25,.025,648,false);
+    filmPass = new ShaderPass(myEffect);
     filmPass.renderToScreen = true;
 
 
@@ -364,8 +331,7 @@ function setup()
     composer.addPass( renderScene );
     composer.addPass( bloomPass );
     composer.addPass( filmPass );
-    composer.setSize( window.innerWidth, window.innerHeight );
-    //composer.addPass(effectCopy);
+
     scene.add(plane); 
     scene.fog = new THREE.Fog("#000000", 1, 100);
 
@@ -425,7 +391,7 @@ function render() {
 
 
 
-    //filmPass.uniforms.amount.value +=.1;
+    filmPass.uniforms.amount.value +=.1;
    controls.update();
 
     for (var player of listPlayers)
