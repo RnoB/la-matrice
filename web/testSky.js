@@ -310,10 +310,10 @@ function setup()
 
     var renderScene = new RenderPass( scene, camera );
     //bloomPass = new UnrealBloomPass( new THREE.Vector2( window.innerWidth, window.innerHeight ), 1.5, 0.4, 0.85 );
-    bloomPass = new BloomPass( 1, 25, 5, 256 );
-    bloomPass.threshold = params.bloomThreshold;
-    bloomPass.strength = params.bloomStrength;
-    bloomPass.radius = params.bloomRadius;
+    bloomPass = new BloomPass( 1, 25, 5);
+    //bloomPass.threshold = params.bloomThreshold;
+    //bloomPass.strength = params.bloomStrength;
+    //bloomPass.radius = params.bloomRadius;
 
 
 
