@@ -11,9 +11,9 @@ import { OrbitControls } from './jsm/controls/OrbitControls.js';
 import { EffectComposer } from './jsm/postprocessing/EffectComposer.js';
 import { UnrealBloomPass } from './jsm/postprocessing/UnrealBloomPass.js';
 import { BloomPass } from './jsm/postprocessing/BloomPass.js';
+import { FilmPass } from './jsm/postprocessing/FilmPass.js';
 import { ShaderPass } from './jsm/postprocessing/ShaderPass.js';
 import { RenderPass } from './jsm/postprocessing/RenderPass.js';
-import { CopyShader } from './jsm/shaders/CopyShader.js';
 
 var camera, controls, scene, renderer;
 
@@ -310,7 +310,7 @@ function setup()
 
     var renderScene = new RenderPass( scene, camera );
     //bloomPass = new UnrealBloomPass( new THREE.Vector2( window.innerWidth, window.innerHeight ), 1.5, 0.4, 0.85 );
-    bloomPass = new BloomPass( 1, 25, 5);
+    bloomPass = new BloomPass( 1, 25, 5,256);
     //bloomPass.threshold = params.bloomThreshold;
     //bloomPass.strength = params.bloomStrength;
     //bloomPass.radius = params.bloomRadius;
@@ -354,17 +354,18 @@ function setup()
               ].join( '\n' ),
     }
 
-    var effectCopy = new ShaderPass(CopyShader);
-    effectCopy.renderToScreen = true;
-    filmPass = new ShaderPass(myEffect);
+
+    //filmPass = new ShaderPass(myEffect);
+    filmPass = new FilmPass(.25,.025,648,false);
     filmPass.renderToScreen = true;
 
 
     composer = new EffectComposer( renderer );
     composer.addPass( renderScene );
     composer.addPass( bloomPass );
-    //composer.addPass( filmPass );
-    composer.addPass(effectCopy);
+    composer.addPass( filmPass );
+    composer.setSize( window.innerWidth, window.innerHeight );
+    //composer.addPass(effectCopy);
     scene.add(plane); 
     scene.fog = new THREE.Fog("#000000", 1, 100);
 
