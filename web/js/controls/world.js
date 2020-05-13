@@ -180,7 +180,7 @@ export function worldBuilder(world,scene)
     {
 
         case 0:
-            ambientColor ="#00ff00";
+            ambientColor ="#bb00ac";
             ambientIntensity = .3;
             
             SkyExponent1= 0.87;
