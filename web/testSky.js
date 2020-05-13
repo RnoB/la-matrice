@@ -363,7 +363,7 @@ function setup()
     composer = new EffectComposer( renderer );
     composer.addPass( renderScene );
     composer.addPass( bloomPass );
-    composer.addPass( filmPass );
+    //composer.addPass( filmPass );
     composer.addPass(effectCopy);
     scene.add(plane); 
     scene.fog = new THREE.Fog("#000000", 1, 100);
