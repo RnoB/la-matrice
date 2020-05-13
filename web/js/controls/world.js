@@ -122,8 +122,8 @@ export function worldBuilder(world,scene)
             scene.add(light);  
         //    let helper = new THREE.CameraHelper ( light.shadow.camera );
         //    scene.add( helper );
-            sky = new InitSky();
-            sky.addToScene(scene);    
+            //sky = new InitSky();
+            //sky.addToScene(scene);    
             floor = new InitFloor();
             floor.addToScene(scene);
             break;
