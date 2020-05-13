@@ -63,8 +63,8 @@ export class InitSky
         uniforms[ "SunIntensity" ].value = this.SunIntensity;
         uniforms[ "SunAlpha" ].value = this.SunAlpha;
         uniforms[ "SunBeta" ].value = this.SunBeta;
-/*
-        uniforms[ "SunVector" ].value.copy( this.sunVector );*/
+
+        uniforms[ "SunVector" ].value.copy( this.sunVector );
 
     }
 
