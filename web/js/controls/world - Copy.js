@@ -9,22 +9,29 @@ export function sleep(ms) {
 export class InitSky
 {
 
-    constructor(SkyExponent1=1.0,SkyExponent2=1.0,SkyExponent3 = 1.0,
-                SkyColor1 = "#00ff00" ,SkyColor2 = "#ffff00",SkyColor3 = "#ff0000",
-                SunColor = "#ff1100", SunIntensity =1,SunAlpha = 1.0, SunBeta = 1.0,
-                SunVector = new THREE.Vector3(0,1,0))
+    constructor(turbidity=10,rayleigh=2,mieCoefficient = 0.005,
+        mieDirectionalG=0.8 ,luminance=1,inclination=0.49 ,azimuth=0.25 ,
+        colorR =5, colorG =0.098,colorB = 4.81, sun = false)
     {
-        this.SkyExponent1 = SkyExponent1;
-        this.SkyExponent2 = SkyExponent2;
-        this.SkyExponent3 = SkyExponent3;
-        this.SkyColor1 = SkyColor1;
-        this.SkyColor2 = SkyColor2;
-        this.SkyColor3 = SkyColor3;
-        this.SunColor = SunColor;
-        this.SunIntensity = SunIntensity;
-        this.SunAlpha = SunAlpha;
-        this.SunBeta = SunBeta;
-        this.SunVector = SunVector;
+        this.turbidity = turbidity;
+        this.rayleigh = rayleigh;
+        this.mieCoefficient = mieCoefficient;
+        this.mieDirectionalG = mieDirectionalG;
+        this.luminance = luminance;
+        this.inclination = inclination;
+        this.azimuth = azimuth;
+        this.colorB = colorB;
+        this.colorG = colorG;
+        this.colorR = colorR;
+        this.sun = sun;
+        this.sky = new Sky();
+        this.sky.scale.setScalar( 450000 );
+        this.sunSphere = new THREE.Mesh(
+            new THREE.SphereBufferGeometry( 20000, 16, 8 ),
+            new THREE.MeshBasicMaterial( { color: 0xffffff } ));
+        this.sunSphere.position.y = - 700000;
+        this.sunSphere.visible = sun;
+        this.distance = 700000;
         this.updateShader();
     }
 
@@ -33,29 +40,33 @@ export class InitSky
     {
 
         scene.add(this.sky);
+        scene.add(this.sunSphere);
     }
 
     updateShader()
     {
 
-        uniforms[ "SkyExponent1" ].value = this.SkyExponent1;
-        uniforms[ "SkyExponent2" ].value = this.SkyExponent2;
-        uniforms[ "SkyIntensity" ].value = this.SkyIntensity;
+        var uniforms = this.sky.material.uniforms;
+        uniforms[ "turbidity" ].value = this.turbidity;
+        uniforms[ "rayleigh" ].value = this.rayleigh;
+        uniforms[ "mieCoefficient" ].value = this.mieCoefficient;
+        uniforms[ "mieDirectionalG" ].value = this.mieDirectionalG;
+        uniforms[ "luminance" ].value = this.luminance;
+        uniforms[ "colorR" ].value = this.colorR;
+        uniforms[ "colorG" ].value = this.colorG;
+        uniforms[ "colorB" ].value = this.colorB;    
 
-        uniforms[ "SkyColor1" ].value = new THREE.Color(this.SkyColor1);
-        uniforms[ "SkyColor2" ].value = new THREE.Color(this.SkyColor2);
-        uniforms[ "SkyColor3" ].value = new THREE.Color(this.SkyColor3);
+        
+        var theta = Math.PI * ( this.inclination - 0.5 );
+        var phi = 2 * Math.PI * ( this.azimuth - 0.5 );
 
+        this.sunSphere.position.x = this.distance * Math.cos( phi );
+        this.sunSphere.position.y = this.distance * Math.sin( phi ) * Math.sin( theta );
+        this.sunSphere.position.z = this.distance * Math.sin( phi ) * Math.cos( theta );
 
-        uniforms[ "SunColor" ].value = new THREE.Color(this.SunColor);
-        uniforms[ "SunIntensity" ].value = this.SunIntensity;
-        uniforms[ "SunAlpha" ].value = this.SunAlpha;
-        uniforms[ "SunBeta" ].value = this.SunBeta;
+        this.sunSphere.visible = this.sun;
 
-
-
-
-        uniforms[ "SunVector" ].value.copy( sunSphere.position );
+        uniforms[ "sunPosition" ].value.copy( this.sunSphere.position );
 
     }
 
@@ -139,7 +150,8 @@ export function worldBuilder(world,scene)
             scene.add(light);  
         //    let helper = new THREE.CameraHelper ( light.shadow.camera );
         //    scene.add( helper );
-            sky = new InitSky();
+            sky = new InitSky(undefined,undefined,undefined,undefined,undefined,undefined,undefined,
+                .2, 6, .12);
             sky.addToScene(scene);    
             floor = new InitFloor();
             floor.addToScene(scene);
