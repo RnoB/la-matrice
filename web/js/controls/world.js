@@ -25,6 +25,7 @@ export class InitSky
         this.SunAlpha = SunAlpha;
         this.SunBeta = SunBeta;
         this.SunVector = SunVector;
+        this.sky = new Sky();
         this.updateShader();
     }
 
