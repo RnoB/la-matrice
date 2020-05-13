@@ -36,6 +36,17 @@ export class InitSky
         scene.add(this.sky);
     }
 
+    sunPosition(inclination, azimuth)
+    {
+
+        var theta = 2 * Math.PI * ( effectController  );
+        var phi = 2 * Math.PI * ( effectController );
+        this.sunVector.x =  Math.cos( phi ) * Math.cos( theta );
+        this.sunVector.y =  Math.sin( theta );
+        this.sunVector.z = Math.sin( phi ) * Math.cos( theta ); 
+        uniforms[ "SunVector" ].value.copy( sunVector );      
+    }
+
     updateShader()
     {
         var uniforms = this.sky.material.uniforms;
@@ -56,7 +67,7 @@ export class InitSky
 
 
 
-        uniforms[ "SunVector" ].value.copy( sunSphere.position );
+        uniforms[ "SunVector" ].value.copy( sunVector );
 
     }
 
