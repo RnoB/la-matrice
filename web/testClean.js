@@ -139,7 +139,7 @@ function setup()
       uniforms: {
         "tDiffuse": { value: null },
         "amount": { value: 0.0 },
-        "intensity": { value: 1.0 }
+        "intensity": { value: .1 }
       },
       vertexShader: [
         'varying vec2 vUv;',
