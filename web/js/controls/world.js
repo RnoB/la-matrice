@@ -209,7 +209,7 @@ export function worldBuilder(world,scene)
             floor.addToScene(scene);
             break;
     }
-    worlder();
+    worlder(scene);
 }
 
 
