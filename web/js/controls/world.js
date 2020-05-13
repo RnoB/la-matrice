@@ -106,7 +106,7 @@ export class InitFloor
 }
 
 
-function worlder(scene,ambientLight ="#00ff00",ambientIntensity = .3,
+function worlder(scene,ambientColor ="#00ff00",ambientIntensity = .3,
         SkyExponent1= 1,SkyExponent2= 1,SkyIntensity= 1,inclination= 0.49,azimuth= 0.25, 
         SkyColor1= "#ffff00",SkyColor2= "#00ff00",SkyColor3= "#0011ff", 
         SunColor = "#0011ff",SunAlpha = 1.0,SunBeta = 1.0,SunIntensity = .1,
