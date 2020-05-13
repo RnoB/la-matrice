@@ -41,10 +41,10 @@ export class InitSky
 
         var theta = 2 * Math.PI * ( inclination  );
         var phi = 2 * Math.PI * ( azimuth );
-        this.sunVector.x =  Math.cos( phi ) * Math.cos( theta );
-        this.sunVector.y =  Math.sin( theta );
-        this.sunVector.z = Math.sin( phi ) * Math.cos( theta ); 
-        uniforms[ "SunVector" ].value.copy( this.sunVector );      
+        this.SunVector.x =  Math.cos( phi ) * Math.cos( theta );
+        this.SunVector.y =  Math.sin( theta );
+        this.SunVector.z = Math.sin( phi ) * Math.cos( theta ); 
+        uniforms[ "SunVector" ].value.copy( this.SunVector );      
     }
 
     updateShader()
@@ -64,7 +64,7 @@ export class InitSky
         uniforms[ "SunAlpha" ].value = this.SunAlpha;
         uniforms[ "SunBeta" ].value = this.SunBeta;
 
-        uniforms[ "SunVector" ].value.copy( this.sunVector );
+        uniforms[ "SunVector" ].value.copy( this.SunVector );
 
     }
 
