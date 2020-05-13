@@ -235,7 +235,7 @@ function render() {
 
     }
     
-    filmPass.uniforms.amount.value +=.1;
+    //filmPass.uniforms.amount.value +=.1;
     renderer.render(scene, camera);
     frame++;
 
