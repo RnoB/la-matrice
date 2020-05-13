@@ -186,7 +186,7 @@ export function worldBuilder(world,scene)
             SkyExponent1= 2.81;
             SkyExponent2= 1;
             SkyIntensity= 1.14;
-            inclination= 0.4113;
+            inclination= 0.4314;
             azimuth= 0.25;
              
             SkyColor1= "#ff00c4";
