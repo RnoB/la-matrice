@@ -53,7 +53,7 @@ export class InitSky
         this.SunVector.x =  Math.cos( phi ) * Math.cos( theta );
         this.SunVector.y =  Math.sin( theta );
         this.SunVector.z = Math.sin( phi ) * Math.cos( theta ); 
-        uniforms[ "SunVector" ].value.copy( this.SunVector );      
+        uniforms[ "SunVector" ].value.copy( this.SunVector );    
     }
 
     updateShader()
@@ -85,11 +85,13 @@ export class InitSky
 
 export class InitFloor
 {
-    constructor()
+    constructor(metalness,roughness)
     {
 
         this.geometryPlane = new THREE.PlaneGeometry( 200, 200, 8,8 );
         this.materialPlane = new THREE.MeshStandardMaterial( {color: 0xff00ff} );
+        this.materialPlane.metalness = metalness;
+        this;materialPlane.roughness = roughness;
         this.plane = new THREE.Mesh( this.geometryPlane, this.materialPlane );
         this.plane.receiveShadow = true;
 
@@ -102,6 +104,50 @@ export class InitFloor
     }
 
 }
+
+
+function worlder(scene,ambientLight ="#00ff00",ambientIntensity = .3,
+        SkyExponent1= 1,SkyExponent2= 1,SkyIntensity= 1,inclination= 0.49,azimuth= 0.25, 
+        SkyColor1= "#ffff00",SkyColor2= "#00ff00",SkyColor3= "#0011ff", 
+        SunColor = "#0011ff",SunAlpha = 1.0,SunBeta = 1.0,SunIntensity = .1
+        LightIntensity1 = 1.0,LightIntensity2 = 1.0,
+        LightColor1 = '#00ff00',LightColor2 = '#00ff36',
+        FogColor = '#000000',FogNear = 10,FogFar = 100, 
+        planeColor = '#ffffff',metalness=0.0,roughness = 0.0)
+{
+    scene.fog = new THREE.Fog(FogColor, FogNear, FogFar);
+    var sky,floor;
+    var light = new THREE.DirectionalLight(LightColor1, 1);
+    
+    light.castShadow = true;
+    light.shadow.mapSize.width = 512;  // default   
+    light.shadow.mapSize.height = 512; // default
+    light.shadow.camera.near = 0.5;    // default
+    light.shadow.camera.far = 500;     // default
+    //var light2 = new THREE.PointLight(0x00ff, 1, 1000);
+    //light2.position.set(0, 50, 50);
+    
+    //scene.add(light2);
+    light.shadow.bias = 0.0001
+
+    //light.shadow.camera.top = 1000;
+    //light.shadow.camera.bottom = 1000;
+    var ambientLight = new THREE.AmbientLight( ambientColor, ambientIntensity );
+    scene.add( ambientLight );
+    scene.add(light);  
+//    let helper = new THREE.CameraHelper ( light.shadow.camera );
+//    scene.add( helper );
+    sky = new InitSky(SkyExponent1,SkyExponent2,SkyIntensity,
+                SkyColor1,SkyColor2,SkyColor3,
+                SunColor, SunIntensity,SunAlpha, SunBeta,
+                new THREE.Vector3(0,1,0));
+    sky.sunPosition(inclination, azimuth);
+    light.position.set(sky.SunVector.x,sky.SunVector.y,sky.SunVector.z);
+    sky.addToScene(scene);    
+    floor = new InitFloor(metalness,roughness);
+    floor.addToScene(scene);
+}
+
 
 export function worldBuilder(world,scene)
 {
@@ -163,6 +209,7 @@ export function worldBuilder(world,scene)
             floor.addToScene(scene);
             break;
     }
+    worlder();
 }
 
 
