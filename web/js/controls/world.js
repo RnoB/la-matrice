@@ -183,34 +183,34 @@ export function worldBuilder(world,scene)
             ambientColor ="#00ff00";
             ambientIntensity = .3;
             
-            SkyExponent1= 1;
+            SkyExponent1= 0.87;
             SkyExponent2= 1;
-            SkyIntensity= 1;
-            inclination= 0.49;
+            SkyIntensity= 1.14;
+            inclination= 0.4113;
             azimuth= 0.25;
              
-            SkyColor1= "#ffff00";
-            SkyColor2= "#00ff00";
+            SkyColor1= "#ff00c4";
+            SkyColor2= "#0035ff";
             SkyColor3= "#0011ff";
              
-            SunColor = "#0011ff";
-            SunAlpha = 1.0;
-            SunBeta = 1.0;
-            SunIntensity = .1;
+            SunColor = "#0851f4";
+            SunAlpha = 292.0;
+            SunBeta = 2.165;
+            SunIntensity = .541;
             
-            LightIntensity1 = 1.0;
-            LightIntensity2 = 1.0;
+            LightIntensity1 = .9;
+            LightIntensity2 = 0.0;
             
-            LightColor1 = '#00ff00';
+            LightColor1 = '#d500ff';
             LightColor2 = '#00ff36';
             
-            FogColor = '#000000';
-            FogNear = 10;
-            FogFar = 100;
+            FogColor = '#5700ff';
+            FogNear = 0;
+            FogFar = 390;
              
-            planeColor = '#ffffff';
-            metalness=0.0;
-            roughness = 0.0;
+            planeColor = '#9600ab';
+            metalness=0.6;
+            roughness = 0.74;
             break;
         case 1:
             ambientColor ="#00ff00";
