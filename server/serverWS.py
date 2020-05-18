@@ -117,14 +117,13 @@ class Server:
 
     async def testLag(self,websocket):
         timeData = await websocket.recv()
-        print(len(timeData))
-        print(timeData)
         playerInfo = struct.unpack('<Bd',timeData)
+        print(timeData[1])
         if playerInfo[0] == networkCode['lagTesting']:
             t0 = time.time()
             dataTime = struct.pack('B', networkCode['lagReturn'])
-            dataTime += struct.pack('d', t0)
-            websocket.send(dataTime)
+            dataTime += struct.pack('<d', t0)
+            await websocket.send(dataTime)
             timeData = await websocket.recv()
             playerInfo = struct.unpack('<Bd',timeData)
             if playerInfo[0] == networkCode['lagTesting']:
