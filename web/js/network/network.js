@@ -299,6 +299,7 @@ export class Client
         this.ws.send(msg.buffer);
         this.testLag();
 
+        var t1 = new Date().getTime() /1000;
         while(true)
         {   
 
