@@ -273,7 +273,7 @@ export class Client
         var msgArray = new ArrayBuffer(9);
         var msgView = new DataView(msgArray);
         msgView.setUint8(0, networkCode['lagTesting']);
-        msgView.setFloat32(1,t0,true);
+        msgView.setFloat64(1,t0,true);
 
         this.ws.send(msgView.buffer);
         while (this.lag<0)
@@ -286,7 +286,7 @@ export class Client
         msgArray = new ArrayBuffer(9);
         msgView = new DataView(msgArray);
         msgView.setUint8(0, networkCode['lagTesting']);
-        msgView.setFloat32(1,t1,true);
+        msgView.setFloat64(1,t1,true);
         this.ws.send(msgView.buffer);
         console.log(this.lag);
 
@@ -304,7 +304,11 @@ export class Client
         this.testLag();
 
         var t1 = new Date().getTime() /1000;
-        while(false)
+        while(Object.keys(this.worldInfo).length === 0)
+        {
+            sleep(100);
+        }
+        while(true)
         {   
 
             var msgSend = sendMessage(this.cameraPosition,this.controllers,this.noRotation)
@@ -376,6 +380,7 @@ export class Client
                                         playerInfo.rotation._y,
                                         playerInfo.rotation._z,
                                         playerInfo.rotation._w)
+
                 break;
 
             case networkCode['newPlayer']:
