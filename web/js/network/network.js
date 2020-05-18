@@ -279,6 +279,7 @@ export class Client
         while (this.lag<0)
         {
             await sleep(10);
+            console.log(this.lag);
         }
         var t1 = new Date().getTime() /1000;
         this.lag = t1-t0;
