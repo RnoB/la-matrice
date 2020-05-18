@@ -270,7 +270,7 @@ export class Client
     async testLag(ws)
     {
         var t0 = new Date().getTime() /1000;
-        var msgArray = new ArrayBuffer(1+8);
+        var msgArray = new ArrayBuffer(9);
         var msgView = new DataView(msgArray);
         msgView.setUint8(0, networkCode['lagTesting']);
         msgView.setFloat64(1,t0,true);
