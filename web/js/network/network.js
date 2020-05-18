@@ -284,7 +284,7 @@ export class Client
         this.lag = t1-t0;
         msgArray = new ArrayBuffer(9);
         msgView = new DataView(msgArray);
-        msgView.setUint8(0, networkCode['lagReturn']);
+        msgView.setUint8(0, networkCode['lagTesting']);
         msgView.setFloat32(1,t1,true);
         this.ws.send(msgView.buffer);
         console.log(this.lag);
