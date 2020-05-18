@@ -274,7 +274,6 @@ export class Client
         var msgView = new DataView(msgArray);
         msgView.setUint8(0, networkCode['lagTesting']);
         msgView.setFloat32(1,t0,true);
-        console.log(this.lag);
 
         this.ws.send(msgView.buffer);
         while (this.lag<0)
@@ -305,7 +304,7 @@ export class Client
         this.testLag();
 
         var t1 = new Date().getTime() /1000;
-        while(true)
+        while(false)
         {   
 
             var msgSend = sendMessage(this.cameraPosition,this.controllers,this.noRotation)
