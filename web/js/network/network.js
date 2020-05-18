@@ -278,8 +278,7 @@ export class Client
         this.ws.send(msgView.buffer);
         while (this.lag<0)
         {
-            await sleep(10);
-            console.log(this.lag);
+            await sleep(1);
         }
         var t1 = new Date().getTime() /1000;
         this.lag = t1-t0;
