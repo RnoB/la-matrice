@@ -282,6 +282,8 @@ export class Client
         }
         var t1 = new Date().getTime() /1000;
         this.lag = t1-t0;
+        msgArray = new ArrayBuffer(9);
+        msgView = new DataView(msgArray);
         msgView.setUint8(0, networkCode['lagReturn']);
         msgView.setFloat64(1,t1,true);
         this.ws.send(msgView.buffer);
