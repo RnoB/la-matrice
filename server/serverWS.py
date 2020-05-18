@@ -121,7 +121,7 @@ class Server:
         if playerInfo[0] == networkCode['lagTesting']:
             t0 = time.time()
             dataTime = struct.pack('B', networkCode['lagReturn'])
-            dataTme += struct.pack('d', t0)
+            dataTime += struct.pack('d', t0)
             websocket.send(dataTime)
             timeData = await websocket.recv()
             playerInfo = struct.unpack('<Bd',timeData)
