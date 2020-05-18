@@ -297,7 +297,7 @@ export class Client
         msg[1] = this.controllers.length;
         
         this.ws.send(msg.buffer);
-        testLag();
+        this.testLag();
 
         while(true)
         {   
