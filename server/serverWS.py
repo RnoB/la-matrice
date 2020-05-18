@@ -128,7 +128,7 @@ class Server:
             print(timeData)
             playerInfo = struct.unpack('<Bd',timeData)
             if playerInfo[0] == networkCode['lagTesting']:
-                t0 = time.time()
+                t1 = time.time()
                 print(t1-t0)
 
 
