@@ -273,7 +273,7 @@ export class Client
         var msgArray = new ArrayBuffer(9);
         var msgView = new DataView(msgArray);
         msgView.setUint8(0, networkCode['lagTesting']);
-        //msgView.setFloat32(1,t0,true);
+        msgView.setFloat32(1,t0,true);
 
         this.ws.send(msgView.buffer);
         while (this.lag<0)
@@ -283,7 +283,7 @@ export class Client
         var t1 = new Date().getTime() /1000;
         this.lag = t1-t0;
         msgView.setUint8(0, networkCode['lagReturn']);
-        msgView.setFloat64(1,seconds,true);
+        msgView.setFloat64(1,t1,true);
         this.ws.send(msgView.buffer);
         console.log(this.lag);
 
