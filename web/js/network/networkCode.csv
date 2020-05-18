@@ -7,3 +7,5 @@ newObject,23
 removeObject,24
 playerPosition,30
 objectPosition,31
+lagTesting,200
+lagReturn,201

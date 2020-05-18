@@ -115,6 +115,22 @@ class Server:
             await self.checkObject()
 
 
+    async def testLag(self,websocket):
+        timeData = await websocket.recv()
+        playerInfo = struct.unpack('<Bd',playerData)
+        if playerInfo[0] == networkCode['lagTesting']:
+            t0 = time.time()
+            dataTime = struct.pack('B', networkCode['lagReturn'])
+            dataTme += struct.pack('d', t0)
+            websocket.send(dataTime)
+            timeData = await websocket.recv()
+            if playerInfo[0] == networkCode['lagTesting']:
+                t0 = time.time()
+                print(t1-t0)
+
+
+
+
     async def register(self,websocket):
         scale=1
         self.playerId+=1
@@ -125,6 +141,8 @@ class Server:
 
         playerInfo = struct.unpack('BB',playerData)
         
+
+        await testLag(websocket)
 
         if playerInfo[0] == networkCode['connect']:
             if self.noControllers:

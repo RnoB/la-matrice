@@ -267,7 +267,27 @@ export class Client
 {
 
 
+    async testLag(ws)
+    {
+        var t0 = new Date().getTime() /1000;
+        var msgArray = new ArrayBuffer(1+8);
+        var msgView = new DataView(msgArray);
+        msgView.setUint8(0, networkCode['lagTesting']);
+        msgView.setFloat64(1,t0,true);
+        this.ws.send(msgView.buffer);
+        while (this.lag<0)
+        {
+            await sleep(10);
+        }
+        var t1 = new Date().getTime() /1000;
+        this.lag = t1-t0;
+        msgView.setUint8(0, networkCode['lagReturn']);
+        msgView.setFloat64(1,seconds,true);
+        this.ws.send(msgView.buffer);
+        console.log(this.lag);
 
+
+    }
 
     async sender()
     {
@@ -277,7 +297,8 @@ export class Client
         msg[1] = this.controllers.length;
         
         this.ws.send(msg.buffer);
-        var t1 = new Date().getTime();
+        testLag();
+
         while(true)
         {   
 
@@ -302,7 +323,9 @@ export class Client
         switch(code)
         {
 
-        
+            case networkCode['lagReturn']:
+                this.lag = data.getFloat64(1,true)
+                break;
             case networkCode['objectPosition'] :
 
 
@@ -382,6 +405,7 @@ export class Client
 
         var self = this;
         var world = -1;
+        this.lag = -1;
         this.updateFrequency = updateFrequency;
         this.camera = camera;
         this.cameraPosition = camera.children[0]
