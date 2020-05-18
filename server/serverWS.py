@@ -142,7 +142,7 @@ class Server:
         playerInfo = struct.unpack('BB',playerData)
         
 
-        await testLag(websocket)
+        await self.testLag(websocket)
 
         if playerInfo[0] == networkCode['connect']:
             if self.noControllers:
