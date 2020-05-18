@@ -306,7 +306,7 @@ export class Client
         var t1 = new Date().getTime() /1000;
         while(Object.keys(this.worldInfo).length === 0)
         {
-            sleep(100);
+            await sleep(100);
         }
         while(true)
         {   
