@@ -12,6 +12,7 @@ import time
 import numpy as np
 import tools
 import traceback
+import uuid
 
 networkCode = tools.getNetworkCode()
 objectsType = tools.getObjectsType()
@@ -27,7 +28,7 @@ class Server:
     def addObject(self,objectType,position = [0,0,0],rotation = [0,0,0,1],scale= [1,1,1]):
         self.playerId+=1
 
-        objectDict = {"id" : self.playerId,"type" : objectType,"position" : position,"rotation" : rotation,"scale" : scale,"controllers":0}
+        objectDict = {"id" : self.playerId,"type" : objectType,"position" : position,"rotation" : rotation,"scale" : scale,"controllers":0,"positionBuffer":[],"rotationBuffer":[],"timeBuffer":[]}
         self.objectsNew.append(objectDict)
         return objectDict['id']
 
@@ -145,7 +146,7 @@ class Server:
         playerInfo = struct.unpack('BB',playerData)
         
 
-        await self.testLag(websocket)
+        lag = await self.testLag(websocket)
 
         if playerInfo[0] == networkCode['connect']:
             if self.noControllers:
@@ -186,12 +187,14 @@ class Server:
             self.playerIds.append(self.playerId)
             self.playersPosition.append(position0)
             self.playersRotation.append(rotation0)
-            playerDict = {"id" : self.playerId,"controllers" : controllers,"position" : position0,"rotation" : rotation0,"scale":scale}
+            playerDict = {"id" : self.playerId,"controllers" : controllers,"position" : position0,"rotation" : rotation0,"scale":scale,"lag":lag,"positionBuffer":[],"rotationBuffer":[],"timeBuffer":[]}
 
 
             for k in range(0,controllers):
                 playerDict["posC"+str(k)] = (0,0,0)
                 playerDict["rotC"+str(k)] = (0,0,0,1)
+                playerDict["posC"+str(k)+"Buffer"] = []
+                playerDict["rotC"+str(k)+"Buffer"] = []
             self.playersList.append(playerDict)
 
             self.playerNumber+=1
@@ -254,6 +257,8 @@ class Server:
                         idx = self.playerIds.index(idPlayer)
                         player = self.playersList[idx]
                         player = tools.readPosition(message,player,self.noRotation)
+                        if self.bufferSize>0:
+                            tools.addtoBuffer(player,t0,self.noRotation)
                         self.playersPosition[idx] = player['position']
                         self.playersRotation[idx] = player['rotation']
                         messageSend = tools.messagePosition(networkCode['playerPosition'],player)
@@ -283,8 +288,20 @@ class Server:
         asyncio.get_event_loop().run_until_complete(start_server)
         asyncio.get_event_loop().run_forever()
 
+    def writeFile(self):
+        while(True):
 
-    def __init__(self,port = 6799,cert ="cert.pem",key = "privkey.pem",noRotation = False,noControllers = False,world = 0):
+            for player in self.playersList:
+
+                if len(player['timeBuffer'])>self.writeBufferSize:
+                    tools.writeBuffer(self.filePath,player,self.expId,self.writeBufferSize,self.bufferSize,self.noRotation)
+
+
+            time.sleep(.1)
+
+
+
+    def __init__(self,port = 6799,cert ="cert.pem",key = "privkey.pem",noRotation = False,noControllers = False,world = 0,bufferSize = 0,writeBufferSize = 0):
         self.playersSocket = []
         self.playerIds = []
         self.playerId = 0
@@ -293,6 +310,8 @@ class Server:
         self.world = world
         self.playersPosition = []
         self.playersRotation = []
+        self.playersPositionBuffer = []
+        self.playersRotationBuffer = []
         self.playersList = []
         self.objectsPosition = []
         self.objectsRotation = []
@@ -302,6 +321,9 @@ class Server:
         self.objectsRem = []
         self.objectsIds = []
         self.objectsMove = []
+        self.writeBufferSize = writeBufferSize
+
+        self.bufferSize = bufferSize
 
         self.t0 = time.time()
         self.ssl_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
@@ -315,6 +337,12 @@ class Server:
 
         self.noRotation = noRotation
         self.noControllers = noControllers
+        self.expId = str(uuid.uuid4())
+        self.path = tools.filePath('/home/ubuntu/data/',self.expId)+'/position.csv'
+        if self.bufferSize>0:
+            fileThread = threading.Thread(target=self.writeFile)
+            fileThread.daemon = True
+            fileThread.start()
 
 
 

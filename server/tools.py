@@ -2,9 +2,15 @@ import numpy as np
 import socket
 import csv
 import struct
+import sqlite3
 homeFolder = "/home/ubuntu/"
 networkCodePath = homeFolder+"la-matrice/web/js/network/networkCode.csv"
 objectTypePath = homeFolder+"la-matrice/web/js/network/objectType.csv"
+
+
+
+
+
 
 def euler_to_quaternion(roll, pitch, yaw):
 
@@ -63,8 +69,55 @@ def readPosition(message,player,noRotation):
             offset+=16
     return player
 
+def addtoBuffer(player,t0,noRotation=false):
+    player['timeBuffer'].append(t0)
+    player['positionBuffer'].append(player['position'])
+    if not noRotation:
+        player['rotationBuffer'].append(player['rotation'])
+        
+    for k in range(0,player['controllers']):
+        player["posC"+str(k)+"Buffer"].append(player["posC"+str(k)+"Buffer"])
+        
+        if not noRotation:
+            player["rotC"+str(k)+"Buffer"].append(player["rotC"+str(k)+"Buffer"])
+            
+    return player
 
-    
+def writeBufffer(path,player,expId,writeBufferSize,bufferSize):
+
+    line = ''
+    for k in range(0,writeBufferSize-bufferSize):
+        line += str(player['id'])
+        line += ','+str(player['timeBuffer'][0])
+        line += ','+str(player['positionBuffer'][0]).strip('[]')
+        del player['timeBuffer'][0]
+        del player['positionBuffer'][0]
+        if not noRotation:
+            line += ','+str(player['rotationBuffer'][0]).strip('[]')
+            del player['rotationBuffer'][0]
+        for k in range(0,player['controllers']):
+            line += ','+str(player['posC'+str(k)+'Buffer'][0]).strip('[]')
+            del player["posC"+str(k)+"Buffer"][0]
+
+            if not noRotation:
+                line += ','+str(player['rotC'+str(k)+'Buffer'][0]).strip('[]')
+                del player["rotC"+str(k)+"Buffer"][0]
+        line +='\n'
+    f = open(path,'a')
+    f.write(line)
+    close(f)
+
+def filePath(path,expId):
+    path = path + str(ids)
+    if not os.path.exists(path):
+        os.makedirs(path)
+    for param in params:
+        path = path + '/' + str(param)
+        if not os.path.exists(path):
+            os.makedirs(path)
+    return path
+
+
 def messagePosition(code,player,noRotation = False,noControllers = False,noScale = True):
     message = struct.pack('B', code)
     message += updatePacker(player,noRotation,noControllers,noScale)
