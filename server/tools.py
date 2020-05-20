@@ -109,7 +109,7 @@ def writeBufffer(path,player,expId,writeBufferSize,bufferSize):
     f.write(line)
     close(f)
 
-def filePath(path,expId):
+def filePath(path,expId,params = []):
     path = path + str(expId)
     if not os.path.exists(path):
         os.makedirs(path)
