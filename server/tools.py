@@ -3,6 +3,8 @@ import socket
 import csv
 import struct
 import sqlite3
+import os
+
 homeFolder = "/home/ubuntu/"
 networkCodePath = homeFolder+"la-matrice/web/js/network/networkCode.csv"
 objectTypePath = homeFolder+"la-matrice/web/js/network/objectType.csv"
