@@ -108,7 +108,7 @@ def writeBufffer(path,player,expId,writeBufferSize,bufferSize):
     close(f)
 
 def filePath(path,expId):
-    path = path + str(ids)
+    path = path + str(expId)
     if not os.path.exists(path):
         os.makedirs(path)
     for param in params:
