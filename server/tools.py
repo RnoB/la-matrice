@@ -69,7 +69,7 @@ def readPosition(message,player,noRotation):
             offset+=16
     return player
 
-def addtoBuffer(player,t0,noRotation=false):
+def addtoBuffer(player,t0,noRotation=False):
     player['timeBuffer'].append(t0)
     player['positionBuffer'].append(player['position'])
     if not noRotation:
