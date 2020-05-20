@@ -144,9 +144,11 @@ class Server:
             print(traceback.format_exc())
 
         playerInfo = struct.unpack('BB',playerData)
-        
-
-        lag = await self.testLag(websocket)
+            
+        try:
+            lag = await self.testLag(websocket)
+        except Exception as e:
+            print(traceback.format_exc())
 
         if playerInfo[0] == networkCode['connect']:
             if self.noControllers:
