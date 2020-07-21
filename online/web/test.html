@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 <link rel="icon" type="image/png" href="./Pictures/icon.png" />
     <head>
@@ -11,12 +11,19 @@
     </head>
 
     <body>
-        <script src='https://cdn.jsdelivr.net/npm/webxr-polyfill@latest/build/webxr-polyfill.js'></script>
-        <script src="./testStable.js" type="module"></script>
-        <script>
+<script>
+    if (navigator.xr == null)
+    {
+document.write('<script src="./js/webxr-polyfill.js"><\/script>')
 
 
-        </script>
+}
+</script>
+        <script src="./testClean.js" type="module"></script>
+        
+
+
+
 
     </body>
 </html>

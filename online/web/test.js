@@ -59,7 +59,7 @@ function setUpWorld()
     console.log("Setting up World")
     var light = new THREE.DirectionalLight(0xab00ac, 1);
     light.position.set(1, 10, 1);
-    light.castShadow = true;
+    light.castShadow = false;
     light.shadow.mapSize.width = 512;  // default   
     light.shadow.mapSize.height = 512; // default
     light.shadow.camera.near = 0.5;    // default

@@ -89,7 +89,7 @@ export class InitFloor
     {
 
         this.geometryPlane = new THREE.PlaneGeometry( 200, 200, 8,8 );
-        this.materialPlane = new THREE.MeshStandardMaterial( {color: 0xff00ff} );
+        this.materialPlane = new THREE.MeshStandardMaterial( {color: 0xffffff} );
         this.materialPlane.metalness = metalness;
         this.materialPlane.roughness = roughness;
         this.plane = new THREE.Mesh( this.geometryPlane, this.materialPlane );
@@ -119,7 +119,7 @@ function worlder(scene,ambientColor ="#00ff00",ambientIntensity = .3,
     var sky,floor;
     var light = new THREE.DirectionalLight(LightColor1, 1);
     
-    light.castShadow = true;
+    light.castShadow = false;
     light.shadow.mapSize.width = 512;  // default   
     light.shadow.mapSize.height = 512; // default
     light.shadow.camera.near = 0.5;    // default
@@ -176,6 +176,7 @@ export function worldBuilder(world,scene)
     var metalness;
     var roughness;
     var sky,floor;
+
     switch(world)
     {
 
@@ -187,7 +188,7 @@ export function worldBuilder(world,scene)
             SkyExponent2= 1;
             SkyIntensity= 0.96;
             inclination= 0.4314;
-            azimuth= 0.25;
+            azimuth= 0.33;
              
             SkyColor1= "#ff00c4";
             SkyColor2= "#9500ff";
@@ -219,31 +220,31 @@ export function worldBuilder(world,scene)
             SkyExponent1= 1;
             SkyExponent2= 1;
             SkyIntensity= 1;
-            inclination= 0.49;
+            inclination= 0.3;
             azimuth= 0.25;
              
             SkyColor1= "#ffff00";
             SkyColor2= "#00ff00";
-            SkyColor3= "#0011ff";
+            SkyColor3= "#0000ff";
              
             SunColor = "#0011ff";
-            SunAlpha = 1.0;
-            SunBeta = 1.0;
+            SunAlpha = 150.0;
+            SunBeta = 35.0;
             SunIntensity = .1;
             
             LightIntensity1 = 1.0;
             LightIntensity2 = 1.0;
             
             LightColor1 = '#00ff00';
-            LightColor2 = '#00ff36';
+            LightColor2 = '#00ff11';
             
             FogColor = '#000000';
-            FogNear = 10;
-            FogFar = 100;
+            FogNear = 0;
+            FogFar = 150;
              
             planeColor = '#ffffff';
-            metalness=0.0;
-            roughness = 0.0;
+            metalness=0.6;
+            roughness = 0.9;
 
             break;
     }
@@ -266,10 +267,14 @@ export function worldGeometry(world)
     {
         case 0:
             var geometry = new THREE.BoxGeometry();
+            var sphere = new THREE.SphereGeometry();
             var material = new THREE.MeshStandardMaterial();
+            var materialBasic = new THREE.MeshBasicMaterial( { wireframe: true, opacity: 0.5,color: "#ff0000" } );
             worldGeometry.push({"type" : 1000, "geometry" : geometry,"material" : material,
                                                 "geometryController" : geometry,"material":material});
             worldGeometry.push({"type" : 2000, "geometry" : geometry,"material" : material});
+            worldGeometry.push({"type" : 2001, "geometry" : sphere,"material" : material});
+            worldGeometry.push({"type" : 2002, "geometry" : sphere,"material" : materialBasic});
             worldGeometry.push({"type" : "controllers", "geometry" : geometry,"material" : material});
         break;
         case 1:

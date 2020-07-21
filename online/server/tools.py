@@ -2,15 +2,26 @@ import numpy as np
 import socket
 import csv
 import struct
-import sqlite3
 import os
+import datetime
+import sqlite3
 
-homeFolder = "/home/ubuntu/"
-networkCodePath = homeFolder+"la-matrice/web/js/network/networkCode.csv"
-objectTypePath = homeFolder+"la-matrice/web/js/network/objectType.csv"
+homeFolder = ""
+networkCodePath = homeFolder+"web/js/network/networkCode.csv"
+objectTypePath = homeFolder+"web/js/network/objectType.csv"
+dbPath = homeFolder+"db/matricematrice.db"
 
 
+def addToDb(expId,project,simulation,variation,frameRate):
+    conn = sqlite3.connect(dbPath)
+    c = conn.cursor()
 
+    today = datetime.date.today().strftime("%y-%m-%d")
+    tStart = datetime.datetime.now().strftime("%H:%M:%S")
+    values = [project,simulation,variation,today,tStart,expId]
+    c.execute("INSERT INTO experiments VALUES (?,?,?,?,?,?)",values)
+    conn.commit()
+    conn.close()
 
 
 
@@ -78,36 +89,69 @@ def addtoBuffer(player,t0,noRotation=False):
         player['rotationBuffer'].append(player['rotation'])
         
     for k in range(0,player['controllers']):
-        player["posC"+str(k)+"Buffer"].append(player["posC"+str(k)+"Buffer"])
+        player["posC"+str(k)+"Buffer"].append(player["posC"+str(k)])
         
         if not noRotation:
-            player["rotC"+str(k)+"Buffer"].append(player["rotC"+str(k)+"Buffer"])
+            player["rotC"+str(k)+"Buffer"].append(player["rotC"+str(k)])
             
     return player
 
-def writeBufffer(path,player,expId,writeBufferSize,bufferSize):
+
+
+def writeBuffer(path,player,expId,writeBufferSize,noRotation):
 
     line = ''
-    for k in range(0,writeBufferSize-bufferSize):
+    for k in range(0,writeBufferSize):
         line += str(player['id'])
+        line += ','+str(player['type'])
         line += ','+str(player['timeBuffer'][0])
-        line += ','+str(player['positionBuffer'][0]).strip('[]')
-        del player['timeBuffer'][0]
+        line += ','+str(player['positionBuffer'][0]).strip('()[]')
+
         del player['positionBuffer'][0]
         if not noRotation:
-            line += ','+str(player['rotationBuffer'][0]).strip('[]')
+            line += ','+str(player['rotationBuffer'][0]).strip('()[]')
             del player['rotationBuffer'][0]
+        line +='\n'
+        
         for k in range(0,player['controllers']):
-            line += ','+str(player['posC'+str(k)+'Buffer'][0]).strip('[]')
+            line += str(player['id'])
+            line += ','+str(player['type']+1+k)
+            line += ','+str(player['timeBuffer'][0])
+            line += ','+str(player['posC'+str(k)+'Buffer'][0]).strip('()[]')
             del player["posC"+str(k)+"Buffer"][0]
 
             if not noRotation:
-                line += ','+str(player['rotC'+str(k)+'Buffer'][0]).strip('[]')
+                line += ','+str(player['rotC'+str(k)+'Buffer'][0]).strip('()[]')
                 del player["rotC"+str(k)+"Buffer"][0]
-        line +='\n'
+            line +='\n'
+        del player['timeBuffer'][0]
     f = open(path,'a')
     f.write(line)
-    close(f)
+    f.close()
+
+def writeObjectBuffer(path,player,writeBufferSize,noRotation):
+
+    line = ''
+    #print(player)
+    for k in range(0,writeBufferSize):
+        line += str(player[0]['id'])
+        try:
+            line += ','+str(player[0]['type'])
+        except:
+            line+=','
+        line += ','+str(player[0]['time'])
+        line += ','+str(player[0]['position']).strip('()[]')
+        #print(player[0]['position'])
+        #print(player[0])
+        if not noRotation:
+            line += ','+str(player[0]['rotation']).strip('()[]')
+        del player[0]
+
+        line +='\n'
+    #print(line)
+    f = open(path,'a')
+    f.write(line)
+    f.close()
 
 def filePath(path,expId,params = []):
     path = path + str(expId)

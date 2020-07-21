@@ -133,7 +133,8 @@ function newObject(data,scene,offset,geometry)
                                 data.getFloat32(offset+8,true))
         var idx = geometry.findIndex(x => x.type == objectInfo['type']);
 
-        objectInfo["mesh"] = new THREE.Mesh(geometry[idx].geometry, geometry[idx].material);
+        objectInfo["mesh"] = new THREE.Object3D();
+        var mesh = new THREE.Mesh(geometry[idx].geometry, geometry[idx].material);
         objectInfo.mesh.position.set(objectInfo.position.x,
                                     objectInfo.position.y,
                                     objectInfo.position.z)
@@ -141,10 +142,11 @@ function newObject(data,scene,offset,geometry)
                                     objectInfo.rotation._y,
                                     objectInfo.rotation._z,
                                     objectInfo.rotation._w)
-        objectInfo.mesh.scale.set(objectInfo.scale.x,
+        mesh.scale.set(objectInfo.scale.x,
                                     objectInfo.scale.y,
                                     objectInfo.scale.z)
-        objectInfo.mesh.castShadow = true;
+        mesh.castShadow = true;
+        objectInfo.mesh.add(mesh);
         scene.add(objectInfo.mesh);
         return objectInfo
 }
